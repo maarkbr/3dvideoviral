@@ -1,0 +1,917 @@
+{
+ "versao": 1,
+ "grupos": [
+  {
+   "id": "editar",
+   "nome": "Editar meus vídeos"
+  },
+  {
+   "id": "sem-rosto",
+   "nome": "Página sem rosto"
+  },
+  {
+   "id": "clientes",
+   "nome": "Para clientes e produtos"
+  },
+  {
+   "id": "criador",
+   "nome": "Para criador de conteúdo"
+  }
+ ],
+ "estilos": [
+  {
+   "id": "video-falado",
+   "nome": "Vídeo falado",
+   "grupo": "editar",
+   "skill": "editor-ia",
+   "modo_skill": "Reels gravado",
+   "resumo": "Você grava falando para a câmera. O Claude tira silêncios e erros, enquadra, põe legenda, ilustrações e som.",
+   "precisa": "Um vídeo seu falando",
+   "previa": null,
+   "amostra": [
+    "Você",
+    "grava.",
+    "O",
+    "Claude",
+    "edita."
+   ],
+   "campos": [
+    {
+     "id": "video",
+     "tipo": "arquivo",
+     "rotulo": "O vídeo gravado",
+     "obrigatorio": true
+    },
+    {
+     "id": "observacao",
+     "tipo": "texto",
+     "rotulo": "Algo que o Claude precisa saber?",
+     "ajuda": "Ex.: corta a parte em que eu falo do preço.",
+     "max": 1000
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "editor-ia"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy",
+     "opencv-python-headless>=4.9,<5"
+    ],
+    "baixa": "Python com Whisper e enquadramento do rosto, efeitos sonoros"
+   }
+  },
+  {
+   "id": "cortes-podcast",
+   "nome": "Cortes de podcast",
+   "grupo": "editar",
+   "skill": "editor-ia",
+   "modo_skill": "melhores cortes",
+   "resumo": "Manda o episódio inteiro. O Claude acha os melhores trechos e entrega cada um editado na vertical.",
+   "precisa": "O episódio gravado",
+   "previa": null,
+   "amostra": [
+    "O",
+    "melhor",
+    "trecho"
+   ],
+   "campos": [
+    {
+     "id": "video",
+     "tipo": "arquivo",
+     "rotulo": "O episódio",
+     "obrigatorio": true
+    },
+    {
+     "id": "quantidade",
+     "tipo": "escolha",
+     "rotulo": "Quantos cortes?",
+     "obrigatorio": true,
+     "padrao": "3",
+     "opcoes": [
+      {
+       "valor": "1",
+       "nome": "1"
+      },
+      {
+       "valor": "3",
+       "nome": "3"
+      },
+      {
+       "valor": "5",
+       "nome": "5"
+      },
+      {
+       "valor": "10",
+       "nome": "10"
+      }
+     ]
+    },
+    {
+     "id": "trecho",
+     "tipo": "texto",
+     "rotulo": "Quer um trecho específico?",
+     "ajuda": "Opcional. Ex.: de 12:30 até 15:10.",
+     "max": 200
+    },
+    {
+     "id": "observacao",
+     "tipo": "texto",
+     "rotulo": "Algo que o Claude precisa saber?",
+     "max": 1000
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "editor-ia"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy",
+     "opencv-python-headless>=4.9,<5"
+    ],
+    "baixa": "Python com Whisper e enquadramento do rosto, efeitos sonoros"
+   }
+  },
+  {
+   "id": "youtube",
+   "nome": "YouTube (estilo Lucas Editor)",
+   "grupo": "editar",
+   "skill": "edicao-youtube",
+   "resumo": "Você grava a aula ou o tutorial (tela + voz). O Claude tira erros, repetições, silêncios, respiração e vícios, faz a intro em motion, enquadra a tela com zoom suave e põe trilha. Entrega pronto ou exporta para o Premiere/CapCut.",
+   "precisa": "A gravação (OBS: tela + voz)",
+   "previa": "previas/youtube",
+   "amostra": [
+    "Gravou?",
+    "O",
+    "Claude",
+    "edita."
+   ],
+   "campos": [
+    {
+     "id": "video",
+     "tipo": "arquivo",
+     "rotulo": "A gravação",
+     "obrigatorio": true
+    },
+    {
+     "id": "intro",
+     "tipo": "texto",
+     "rotulo": "A intro",
+     "ajuda": "Até onde vai a intro (ex.: até eu dizer 'bora começar') e o que mostrar nela (perfis, números, prints). Deixe vazio para só cortar.",
+     "max": 800,
+     "linhas": 3
+    },
+    {
+     "id": "resolucao",
+     "tipo": "escolha",
+     "rotulo": "Resolução",
+     "obrigatorio": true,
+     "padrao": "fullhd",
+     "opcoes": [
+      {
+       "valor": "fullhd",
+       "nome": "Full HD (mais leve)"
+      },
+      {
+       "valor": "2k",
+       "nome": "2K (mais nítido no YouTube)"
+      },
+      {
+       "valor": "4k",
+       "nome": "4K (o mais pesado)"
+      }
+     ]
+    },
+    {
+     "id": "entrega",
+     "tipo": "escolha",
+     "rotulo": "Como quer receber",
+     "obrigatorio": true,
+     "padrao": "pronto",
+     "opcoes": [
+      {
+       "valor": "pronto",
+       "nome": "Pronto aqui (peço ajustes em palavras)"
+      },
+      {
+       "valor": "premiere",
+       "nome": "Exportar para o Premiere"
+      },
+      {
+       "valor": "capcut",
+       "nome": "Exportar para o CapCut"
+      }
+     ]
+    },
+    {
+     "id": "observacao",
+     "tipo": "texto",
+     "rotulo": "Algo que o Claude precisa saber?",
+     "ajuda": "Ex.: no minuto 12 eu espero o render, pode cortar a espera inteira.",
+     "max": 1000
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "edicao-youtube"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy",
+     "opencv-python-headless>=4.9,<5",
+     "pillow"
+    ],
+    "baixa": "Python com Whisper, OpenCV e Pillow, efeitos sonoros"
+   }
+  },
+  {
+   "id": "estilo-bit",
+   "nome": "Estilo Bit",
+   "grupo": "sem-rosto",
+   "skill": "estilo-bit",
+   "resumo": "Um robozinho apresenta o assunto com janelas de código, cartões e legenda. Ninguém aparece.",
+   "precisa": "Só o assunto",
+   "previa": "previas/estilo-bit",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "Sobre o que é o vídeo?",
+     "obrigatorio": true,
+     "ajuda": "Ex.: 3 erros de quem começa a editar no celular.",
+     "max": 300
+    },
+    {
+     "id": "roteiro",
+     "tipo": "texto",
+     "rotulo": "Já tem o roteiro?",
+     "ajuda": "Opcional. Se colar aqui, o Claude usa o seu.",
+     "max": 3000,
+     "linhas": 5
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "editor-ia",
+     "estilo-bit"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros"
+   }
+  },
+  {
+   "id": "video-3d",
+   "nome": "Vídeo 3D",
+   "grupo": "sem-rosto",
+   "skill": "video-3d",
+   "resumo": "Um mundo 3D que se constrói etapa por etapa, com problema e solução, câmera trocando e etiquetas.",
+   "precisa": "Só o tema (ou um viral de referência)",
+   "previa": "previas/video-3d",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "O tema",
+     "ajuda": "Ex.: como se constrói um túnel debaixo d'água. Deixe vazio para o Claude sugerir 3 temas que já viralizaram.",
+     "max": 300
+    },
+    {
+     "id": "referencia",
+     "tipo": "link",
+     "rotulo": "Link de um vídeo de referência",
+     "ajuda": "Opcional. Um viral para o Claude estudar (ele não copia: faz um roteiro novo).",
+     "max": 500
+    },
+    {
+     "id": "duracao",
+     "tipo": "escolha",
+     "rotulo": "Para onde?",
+     "obrigatorio": true,
+     "padrao": "curto",
+     "opcoes": [
+      {
+       "valor": "curto",
+       "nome": "Reels e Shorts (~40 s)"
+      },
+      {
+       "valor": "longo",
+       "nome": "TikTok (mais de 1 min)"
+      }
+     ]
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "video-3d"
+    ],
+    "itens": [
+     "python",
+     "sfx",
+     "pecas"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros, 741 peças 3D"
+   }
+  },
+  {
+   "id": "3d-explicativo",
+   "nome": "3D explicativo",
+   "grupo": "sem-rosto",
+   "skill": "video-3d-explicativo",
+   "resumo": "Uma notícia ou história contada cena por cena num palco 3D: dinheiro em pilha, cortina, linha do tempo, celular, prédios e números, com a câmera sempre voando.",
+   "precisa": "Só o tema (uma notícia, um caso ou um conceito)",
+   "previa": "previas/3d-explicativo",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "O tema",
+     "ajuda": "Ex.: por que o logo novo de um banco custou 3,5 milhões. O Claude pesquisa os fatos (cada um com 2 fontes) e escreve o roteiro.",
+     "max": 300,
+     "obrigatorio": true
+    },
+    {
+     "id": "referencia",
+     "tipo": "link",
+     "rotulo": "Link de uma notícia ou vídeo de referência",
+     "ajuda": "Opcional. O Claude lê para entender o caso; o roteiro é escrito do zero.",
+     "max": 500
+    },
+    {
+     "id": "palavra",
+     "tipo": "texto",
+     "rotulo": "Palavra do \"comenta\"",
+     "ajuda": "Opcional. A palavra que a pessoa comenta no fim para receber o material (ex.: 3D). Vazio: o vídeo fecha sem o comenta.",
+     "max": 30
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "video-3d",
+     "video-3d-explicativo"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy"
+    ],
+    "baixa": "Python com Whisper e efeitos sonoros"
+   }
+  },
+  {
+   "id": "motion",
+   "nome": "Motion de produto",
+   "grupo": "clientes",
+   "skill": "estilo-motion",
+   "resumo": "Anúncio animado na identidade do cliente: frase com destaque, logo, tela do app, números e botão final.",
+   "precisa": "O que vende e a marca",
+   "previa": "previas/motion",
+   "voz": true,
+   "instalar": {
+    "skills": [
+     "estilo-motion"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "scipy"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros"
+   },
+   "campos": [
+    {
+     "id": "produto",
+     "tipo": "texto",
+     "rotulo": "O que você (ou o cliente) vende, e para quem?",
+     "obrigatorio": true,
+     "ajuda": "Ex.: sistema de agendamento para barbearias, que manda lembrete no WhatsApp.",
+     "max": 500,
+     "linhas": 3
+    },
+    {
+     "id": "beneficios",
+     "tipo": "texto",
+     "rotulo": "Os principais benefícios",
+     "ajuda": "De 3 a 5, um por linha. Só o que é verdade: nada de número inventado.",
+     "max": 800,
+     "linhas": 4
+    },
+    {
+     "id": "oferta",
+     "tipo": "texto",
+     "rotulo": "Oferta e chamada final",
+     "ajuda": "Ex.: 7 dias grátis, comenta AGENDA. Fotos, prints do app e o logo: coloque na pasta Bruto.",
+     "max": 300
+    },
+    {
+     "id": "duracao",
+     "tipo": "escolha",
+     "rotulo": "Duração",
+     "obrigatorio": true,
+     "padrao": "curto",
+     "opcoes": [
+      {
+       "valor": "curto",
+       "nome": "Curto (~25 s)"
+      },
+      {
+       "valor": "medio",
+       "nome": "Médio (~40 s)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mapas",
+   "nome": "Mapas e história",
+   "grupo": "sem-rosto",
+   "skill": "estilo-mapas",
+   "resumo": "Globo que gira até o país, países trocando de lugar no tamanho real, fronteiras, rotas e anos, no formato dos Shorts de geografia com milhões de views.",
+   "precisa": "Só o tema, ou deixe o Claude buscar os virais",
+   "previa": "previas/mapas",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "O tema ou a pergunta",
+     "ajuda": "Ex.: por que o Chile é tão comprido. Deixe vazio para o Claude buscar os temas de mapa que estão viralizando lá fora.",
+     "max": 300
+    },
+    {
+     "id": "referencia",
+     "tipo": "link",
+     "rotulo": "Link de um vídeo gringo para adaptar",
+     "ajuda": "Opcional. YouTube ou TikTok. O Claude tira os fatos e escreve um roteiro novo em português (não copia a narração).",
+     "max": 500
+    },
+    {
+     "id": "escolha",
+     "tipo": "escolha",
+     "rotulo": "Por onde começar?",
+     "padrao": "buscar",
+     "opcoes": [
+      {
+       "valor": "buscar",
+       "nome": "Busca os temas em alta pra mim"
+      },
+      {
+       "valor": "meu",
+       "nome": "Eu já tenho o tema ou o link"
+      }
+     ]
+    },
+    {
+     "id": "duracao",
+     "tipo": "escolha",
+     "rotulo": "Duração",
+     "obrigatorio": true,
+     "padrao": "curto",
+     "opcoes": [
+      {
+       "valor": "curto",
+       "nome": "Reels e Shorts (~60 s)"
+      },
+      {
+       "valor": "longo",
+       "nome": "Mais longo (~80 s)"
+      }
+     ]
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "estilo-mapas"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "yt-dlp"
+    ],
+    "baixa": "Python com Whisper e yt-dlp, efeitos sonoros"
+   }
+  },
+  {
+   "id": "palitinho",
+   "nome": "Palitinho",
+   "grupo": "sem-rosto",
+   "skill": "estilo-palitinho",
+   "resumo": "Desenho animado em código: personagens com olhos, expressões e poses num cenário 3D, contando uma história curta ou explicando um assunto, no formato das páginas que fazem milhões de views. Grátis, ou caprichado com o Higgsfield.",
+   "precisa": "Só o tema, ou deixe o Claude buscar",
+   "previa": "previas/palitinho",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "O tema ou a pergunta",
+     "ajuda": "Ex.: quanto tempo leva para gastar 1 milhão a 1 real por segundo. Deixe vazio para o Claude buscar temas que funcionam.",
+     "max": 300
+    },
+    {
+     "id": "escolha",
+     "tipo": "escolha",
+     "rotulo": "Por onde começar?",
+     "padrao": "buscar",
+     "opcoes": [
+      {
+       "valor": "buscar",
+       "nome": "Busca os temas pra mim"
+      },
+      {
+       "valor": "meu",
+       "nome": "Eu já tenho o tema"
+      }
+     ]
+    },
+    {
+     "id": "modo",
+     "tipo": "escolha",
+     "rotulo": "Como fazer o desenho",
+     "obrigatorio": true,
+     "padrao": "animado",
+     "opcoes": [
+      {
+       "valor": "animado",
+       "nome": "Animado: desenho animado em código, grátis"
+      },
+      {
+       "valor": "caprichado",
+       "nome": "Caprichado: Higgsfield desenha e anima (~40 créditos por vídeo)",
+       "pago": "uns 40 créditos do Higgsfield para desenhar e animar as cenas"
+      },
+      {
+       "valor": "simples",
+       "nome": "Palito clássico: bonequinho de traço simples, grátis"
+      }
+     ],
+     "ajuda": "O caprichado fica no nível das páginas virais e usa o Higgsfield conectado no seu Claude (a aula do módulo Capa e título mostra como). Ainda não tem conta?",
+     "link": {
+      "texto": "Criar conta no Higgsfield",
+      "url": "https://higgsfield.ai?fpr=lucas-28cba0"
+     }
+    },
+    {
+     "id": "palavra",
+     "tipo": "texto",
+     "rotulo": "Palavra do comenta",
+     "ajuda": "A palavra que a pessoa comenta no fim do vídeo (ex.: PALITO). Deixe vazio se não quiser o \"comenta\".",
+     "max": 20
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "estilo-palitinho"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros"
+   }
+  },
+  {
+   "id": "cidade",
+   "nome": "Cidade 3D",
+   "grupo": "sem-rosto",
+   "skill": "estilo-cidade",
+   "resumo": "\"Nesta cidade\": uma criança conta a vida numa cidadezinha 3D com uma regra absurda e uma virada no fim, com bonecos cabeçudos de bloco. Tudo em código, sem custo por cena.",
+   "precisa": "Só a regra absurda, ou deixe o Claude dar 10 ideias",
+   "previa": "previas/cidade",
+   "voz": true,
+   "campos": [
+    {
+     "id": "regra",
+     "tipo": "texto",
+     "rotulo": "A regra absurda da cidade",
+     "ajuda": "Ex.: nesta cidade, cada morador só pode falar cem palavras por dia. Deixe vazio para o Claude dar 10 ideias com a virada.",
+     "max": 300
+    },
+    {
+     "id": "duracao",
+     "tipo": "escolha",
+     "rotulo": "Duração",
+     "padrao": "curto",
+     "opcoes": [
+      {
+       "valor": "curto",
+       "nome": "Curto: 30 a 60 s (Reels e Shorts)"
+      },
+      {
+       "valor": "longo",
+       "nome": "Longo: 65 a 90 s (o TikTok paga acima de 1 minuto)"
+      }
+     ]
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "estilo-cidade"
+    ],
+    "itens": [
+     "python"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy"
+    ],
+    "baixa": "Python com Whisper (o HyperFrames e o 3D baixam no 1º vídeo)"
+   }
+  },
+  {
+   "id": "colagem",
+   "nome": "Colagem",
+   "grupo": "sem-rosto",
+   "skill": "estilo-colagem",
+   "resumo": "Explicativo em colagem: fotos coladas com fita, selo com número, carimbo, mapa que se desenha, círculo de caneta e legenda em serifa, cada peça entrando na palavra falada. Para economia, história, notícia e curiosidade.",
+   "precisa": "Só o tema (e as suas fotos, se tiver)",
+   "previa": "previas/colagem",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "O tema",
+     "ajuda": "Ex.: por que o Brasil é o maior produtor de café do mundo. Deixe vazio para o Claude sugerir 3 temas.",
+     "max": 300
+    },
+    {
+     "id": "palavra",
+     "tipo": "texto",
+     "rotulo": "Palavra do comenta",
+     "ajuda": "A palavra que a pessoa comenta no fim do vídeo. Deixe vazio se não quiser o \"comenta\".",
+     "max": 20
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "estilo-colagem"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "Pillow"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros"
+   }
+  },
+  {
+   "id": "documentario",
+   "nome": "Documentário",
+   "grupo": "sem-rosto",
+   "skill": "estilo-documentario",
+   "resumo": "Mini documentário cinematográfico em código: mapa antigo, fotos reais caindo na mesa, documentos, recortes de jornal, carimbo e grão de filme. Em 16:9 e 9:16. Versão 2.0: o Claude escreve só a história e o motor faz sozinho a câmera, a luz e os efeitos, com a sua aprovação em cada etapa.",
+   "precisa": "Só o tema (uma história com datas, pessoas e lugares reais)",
+   "previa": "previas/documentario",
+   "voz": true,
+   "campos": [
+    {
+     "id": "tema",
+     "tipo": "texto",
+     "rotulo": "A história",
+     "ajuda": "Ex.: como a inteligência artificial surgiu. Deixe vazio para o Claude sugerir 3 histórias.",
+     "max": 300
+    },
+    {
+     "id": "formato",
+     "tipo": "escolha",
+     "rotulo": "Formato",
+     "obrigatorio": true,
+     "padrao": "os-dois",
+     "opcoes": [
+      {
+       "valor": "os-dois",
+       "nome": "Os dois: 16:9 e 9:16"
+      },
+      {
+       "valor": "16x9",
+       "nome": "YouTube (16:9)"
+      },
+      {
+       "valor": "9x16",
+       "nome": "Reels, Shorts e TikTok (9:16)"
+      }
+     ]
+    },
+    {
+     "id": "palavra",
+     "tipo": "texto",
+     "rotulo": "Palavra do comenta",
+     "ajuda": "A palavra que a pessoa comenta no fim do vídeo vertical (ex.: DOC). Deixe vazio se não quiser o \"comenta\".",
+     "max": 20
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "estilo-documentario"
+    ],
+    "itens": [
+     "python",
+     "sfx"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "Pillow"
+    ],
+    "baixa": "Python com Whisper, efeitos sonoros"
+   }
+  },
+  {
+   "id": "capa-e-titulo",
+   "nome": "Capa e título",
+   "grupo": "criador",
+   "skill": "capas-com-ia",
+   "resumo": "As 3 capas e os 3 títulos do YouTube para o teste A/B, ou a capa do Reels. Feitas com as suas capas de modelo.",
+   "precisa": "A ideia ou o vídeo",
+   "previa": "previas/capa-e-titulo",
+   "campos": [
+    {
+     "id": "formato",
+     "tipo": "escolha",
+     "rotulo": "Para onde?",
+     "obrigatorio": true,
+     "padrao": "youtube",
+     "opcoes": [
+      {
+       "valor": "youtube",
+       "nome": "YouTube: 3 capas e 3 títulos"
+      },
+      {
+       "valor": "vertical",
+       "nome": "Reels, Shorts ou TikTok: 1 capa"
+      }
+     ]
+    },
+    {
+     "id": "ideia",
+     "tipo": "texto",
+     "rotulo": "Sobre o que é o vídeo?",
+     "obrigatorio": true,
+     "ajuda": "A promessa em uma frase. Ex.: como faço vídeos 3D sem saber animar.",
+     "max": 400
+    },
+    {
+     "id": "video",
+     "tipo": "arquivo",
+     "rotulo": "O vídeo",
+     "ajuda": "Pronto ou bruto. O Claude tira os quadros e os capítulos dele."
+    },
+    {
+     "id": "imagens",
+     "tipo": "arquivo",
+     "rotulo": "Uma foto ou print para aparecer",
+     "ajuda": "Seu rosto, o produto, um print do resultado.",
+     "aceita": "imagem"
+    },
+    {
+     "id": "gerador",
+     "tipo": "escolha",
+     "rotulo": "Como fazer a capa",
+     "obrigatorio": true,
+     "padrao": "higgsfield",
+     "opcoes": [
+      {
+       "valor": "higgsfield",
+       "nome": "Caprichada: Higgsfield (~3 créditos por capa)"
+      },
+      {
+       "valor": "simples",
+       "nome": "Simples: grátis, feita no computador"
+      }
+     ],
+     "ajuda": "A caprichada usa o Higgsfield conectado no seu Claude (a aula do módulo Capa e título mostra como, sem instalar nada). Ainda não tem conta?",
+     "link": {
+      "texto": "Criar conta no Higgsfield",
+      "url": "https://higgsfield.ai?fpr=lucas-28cba0"
+     }
+    }
+   ],
+   "instalar": {
+    "skills": [
+     "capas-com-ia"
+    ],
+    "itens": [
+     "python"
+    ],
+    "pip": [
+     "faster-whisper",
+     "numpy",
+     "pillow",
+     "yt-dlp"
+    ],
+    "baixa": "Python com Whisper, Pillow e yt-dlp"
+   }
+  },
+  {
+   "id": "papel",
+   "nome": "Papel recortado",
+   "grupo": "sem-rosto",
+   "em_breve": true,
+   "resumo": "Narração com cartões de papel, fotos e anotações que entram no ritmo da voz.",
+   "precisa": "Só o assunto",
+   "previa": "previas/papel"
+  }
+ ],
+ "vozes": [
+  {
+   "valor": "propria",
+   "nome": "Minha voz (eu gravo as falas)"
+  },
+  {
+   "valor": "voicestudio",
+   "nome": "Voz de IA grátis (VoiceStudio)"
+  },
+  {
+   "valor": "elevenlabs",
+   "nome": "ElevenLabs (pago)"
+  },
+  {
+   "valor": "higgsfield",
+   "nome": "Higgsfield (créditos)"
+  }
+ ],
+ "modos": [
+  {
+   "valor": "aprovar",
+   "nome": "Me mostra antes de terminar",
+   "ajuda": "O Claude para no roteiro e na prévia para você aprovar."
+  },
+  {
+   "valor": "automatico",
+   "nome": "Faz tudo direto",
+   "ajuda": "Ele só para se algo der errado."
+  }
+ ],
+ "legendas": [
+  {
+   "valor": "anton",
+   "nome": "Condensada"
+  },
+  {
+   "valor": "palavra",
+   "nome": "Uma palavra"
+  },
+  {
+   "valor": "serifa",
+   "nome": "Serifada"
+  },
+  {
+   "valor": "montserrat",
+   "nome": "Discreta"
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .cz-ghost { position: absolute; left: 0; width: 1080px; top: 1500px; text-align: center; font-family: "LT Anton", sans-serif; font-size: 300px;
+          color: rgba(255, 210, 63, 0.07); line-height: 1; white-space: nowrap; }
+        .cz-paper { position: absolute; left: 90px; top: 70px; width: 900px; height: 1150px; background: #f4efe3; border-radius: 26px;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55); overflow: hidden; transform-origin: 50% 60%; }
+        .cz-head { position: absolute; left: 0; top: 0; width: 900px; height: 190px; display: flex; align-items: center; justify-content: center;
+          font-family: "LT Anton", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+        .cz-stripe { position: absolute; left: 0; top: 190px; width: 900px; height: 22px; }
+        .cz-photo { position: absolute; left: 60px; top: 262px; width: 400px; height: 500px; border-radius: 18px; display: flex; align-items: flex-end;
+          justify-content: center; overflow: hidden; }
+        .cz-icon { transform-origin: 50% 100%; margin-bottom: 10px; }
+        .cz-numlabel { position: absolute; left: 510px; top: 268px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 34px; letter-spacing: 0.12em; }
+        .cz-num { position: absolute; left: 510px; top: 320px; display: flex; gap: 20px; }
+        .cz-d { width: 150px; height: 200px; border-radius: 14px; background: #ffffff; display: flex; align-items: center; justify-content: center;
+          font-family: "LT Anton", sans-serif; font-size: 170px; line-height: 1; }
+        .cz-sub { position: absolute; left: 510px; top: 560px; width: 340px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 30px;
+          line-height: 1.3; color: #6b6b6b; letter-spacing: 0.06em; text-transform: uppercase; }
+        .cz-name { position: absolute; left: 50px; width: 800px; top: 790px; text-align: center; font-family: "LT Anton", sans-serif; line-height: 0.95; text-transform: uppercase; }
+        .cz-band { position: absolute; left: 0; top: 1010px; width: 900px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .cz-band small { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: 0.24em; color: #ffd9d6; text-transform: uppercase; }
+        .cz-band b { font-family: "LT Anton", sans-serif; font-weight: 400; color: #ffffff; line-height: 1.05; text-transform: uppercase; white-space: nowrap; }
+        .cz-stampwrap { position: absolute; left: 110px; width: 480px; top: 470px; height: 240px; display: flex; justify-content: center; align-items: center; }
+        .cz-stampwrap .bk-stamp { position: relative; }
+      </style>
+      <div id="root" data-composition-id="b07-santinho" data-width="1080" data-height="1920">
+        <div class="bk-full" id="b07-santinho-bg"></div>
+      </div>
+      <script>
+        (function () {
+          // CARTAZ — um "santinho"/cartaz/ficha em tela cheia: cabeçalho, ícone na foto, número, nome, faixa de destaque e carimbo.
+          // O papel termina em y 1220: a faixa da legenda (1290–1470) continua livre.
+          const ID = "b07-santinho";
+          const P = Object.assign({ dur: 3.8, cabecalho: "VOTE", cor: "#1E3F8F", cor_cabecalho: "#FFD23F", faixa: ["#13A05B", "#FFD23F", "#13A05B"],
+            icone: "garrafa", icone_tam: 440, numero: "00", numero_rotulo: "NÚMERO", sub: "", nome: "Nome", promessa: null, carimbo: null,
+            fantasma: "" }, /*PARAMS*/{"cabecalho": "VOTE", "cor": "#1E3F8F", "icone": "garrafa", "icone_tam": 440, "numero": "00", "numero_rotulo": "CANDIDATO Nº", "sub": "PARA PRESIDENTE", "nome": "bebadozinho de rua", "fantasma": "VOTE 00", "promessa": {"rotulo": "PROMESSA", "texto": "Ypióca pra todo mundo", "em": 2.56}, "carimbo": {"texto": "pode!", "cor": "verde", "em": 3.86, "rot": -10}, "dur": 4.09}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const bg = document.querySelector("#" + ID + "-bg");
+          const cor = BK.cor(P.cor);
+          let ghost = null;
+          if (P.fantasma) ghost = BK.el("div", "cz-ghost", bg, BK.esc(P.fantasma));
+          const paper = BK.el("div", "cz-paper", bg);
+          const head = BK.el("div", "cz-head", paper, BK.esc(P.cabecalho));
+          head.style.background = cor; head.style.color = BK.cor(P.cor_cabecalho);
+          head.style.fontSize = BK.cabe(P.cabecalho, 820, 150) + "px";
+          const f = P.faixa || [];
+          const stripe = BK.el("div", "cz-stripe", paper);
+          stripe.style.background = f.length ? `linear-gradient(90deg, ${f.map((c, i) => `${BK.cor(c)} ${(i * 100) / f.length}% ${((i + 1) * 100) / f.length}%`).join(", ")})` : cor;
+          const photo = BK.el("div", "cz-photo", paper);
+          photo.style.background = "repeating-linear-gradient(135deg, #dfe7f5 0 26px, #cfdaf0 26px 52px)";
+          photo.style.border = "6px solid " + cor;
+          const icon = BK.el("div", "cz-icon", photo, BK.icone(P.icone, P.icone_tam));
+          const nl = BK.el("div", "cz-numlabel", paper, BK.esc(P.numero_rotulo)); nl.style.color = cor;
+          const num = BK.el("div", "cz-num", paper);
+          const digits = String(P.numero || "").slice(0, 2).split("").map((d) => {
+            const e = BK.el("div", "cz-d", num, BK.esc(d)); e.style.border = "6px solid " + cor; e.style.color = cor; return e;
+          });
+          if (P.sub) BK.el("div", "cz-sub", paper, BK.esc(P.sub));
+          const name = BK.el("div", "cz-name", paper, BK.rich(P.nome, "vermelho"));
+          name.style.color = cor; name.style.fontSize = BK.cabe(P.nome, 800, 108) + "px";
+          tl.fromTo(paper, { y: 260, rotation: 6, opacity: 0 }, { y: 0, rotation: -1.5, opacity: 1, duration: 0.42, ease: "power3.out" }, 0);
+          if (ghost) tl.fromTo(ghost, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 0.1);
+          tl.fromTo(icon, { scale: 0.2, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.7)" }, 0.22);
+          if (digits.length) tl.fromTo(digits, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "power3.out", stagger: 0.1 }, 0.35);
+          BK.sobe(tl, name, 0.45);
+          const reps = Math.max(1, Math.floor((P.dur - 0.9) / 0.6) - 1);
+          tl.fromTo(icon, { rotation: 0 }, { rotation: 5, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: reps, immediateRender: false }, 0.7);
+          if (P.promessa && P.promessa.texto) {
+            const band = BK.el("div", "cz-band", paper);
+            band.style.background = BK.cor(P.promessa.cor, "vermelho");
+            if (P.promessa.rotulo) BK.el("small", "", band, BK.esc(P.promessa.rotulo));
+            const b = BK.el("b", "", band, BK.esc(P.promessa.texto));
+            b.style.fontSize = BK.cabe(P.promessa.texto, 840, 70) + "px";
+            const at = P.promessa.em == null ? P.dur * 0.45 : P.promessa.em;
+            tl.fromTo(band, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.32, ease: "power3.out" }, at);
+            tl.fromTo(b, { scale: 0.8 }, { scale: 1, duration: 0.3, ease: "power3.out" }, at + 0.04);
+          }
+          if (P.carimbo && P.carimbo.texto) {
+            const w = BK.el("div", "cz-stampwrap", bg);
+            w.setAttribute("data-layout-allow-overlap", "");
+            const st = BK.stamp(w, P.carimbo.texto, P.carimbo.cor || "verde", BK.cabe(P.carimbo.texto, 460, P.carimbo.tam || 165, "anton", 0.75));
+            BK.stampIn(tl, st, P.carimbo.em == null ? P.dur - 0.8 : P.carimbo.em, P.carimbo.rot == null ? -10 : P.carimbo.rot);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

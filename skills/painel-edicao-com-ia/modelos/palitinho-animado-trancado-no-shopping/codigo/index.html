@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/Pass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/objects/Reflector.js"></script>
+    <script src="personagem.js"></script>
+    <script src="objetos.js"></script>
+    <script src="shopping3d.js"></script>
+    <script src="montagem.js"></script>
+    <script src="audio/palavras.js"></script>
+    <style>
+      :root { --ink: #17121d; --font-display: "Baloo 2", system-ui, sans-serif; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0b0f30; font-family: var(--font-display); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      #tres { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; }
+      #camada2d, #camadaTela, #legendas { position: absolute; inset: 0; }
+      #camada2d { z-index: 1; } #camadaTela { z-index: 2; } #legendas { z-index: 3; }
+      .ator { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+      .legenda {
+        position: absolute; left: 50px; right: 50px; top: 1350px;
+        text-align: center; font-weight: 800; font-size: 82px; line-height: 1.04; color: #fff;
+      }
+      .legenda span {
+        display: inline-block; margin: 0 .11em;
+        -webkit-text-stroke: 17px var(--ink); paint-order: stroke fill;
+        text-shadow: 0 9px 0 var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="43.6" data-width="1080" data-height="1920">
+      <div id="palco" class="clip" data-start="0" data-duration="43.6" data-track-index="0">
+        <canvas id="tres" width="1080" height="1920"></canvas>
+        <svg width="0" height="0" style="position:absolute">
+          <filter id="noite" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="0.84 0 0 0 0  0 0.87 0 0 0.004  0 0 0.97 0 0.03  0 0 0 1 0" />
+          </filter>
+        </svg>
+        <div id="camada2d"></div>
+        <div id="camadaTela"></div>
+        <div id="legendas"></div>
+      </div>
+      <audio id="som" src="audio/mix.wav" data-start="0" data-duration="43.6" data-track-index="1"></audio>
+    </div>
+
+    <script>
+      (function () {
+        // =====================================================================
+        //  TRANCADO NO SHOPPING — cenas presas às palavras da narração
+        //  (roteiro: animado/exemplo/roteiro.md da skill)
+        // =====================================================================
+        const tl = gsap.timeline({ paused: true });
+        const M = Montagem.criar({
+          tl, dur: 43.6, fala: window.PALAVRAS,
+          canvas: '#tres', camada2d: '#camada2d', camadaTela: '#camadaTela', legendas: '#legendas',
+        });
+        const { t, W, B, DUR } = M;
+
+        // ---------- 1. câmera: [tempo, posição da câmera, para onde ela olha] ----------
+        M.camera([
+          [0.0,               [0.02, 1.66, 4.40], [-0.02, -0.23, -4.2]],
+          [B(2) - 0.2,        [0.10, 1.62, 4.00], [0.05, -0.25, -4.1]],
+          [B(2) + 0.8,        [0.30, 1.60, 3.90], [0.25, -0.26, -4.1]],
+          [t('vitrines'),     [0.30, 1.60, 3.90], [0.15, -0.19, -5.0]],
+          [t('café') + 0.3,   [0.25, 1.62, 3.80], [-0.90, 0.25, -9.0]],
+          [t('acesas') + 0.1, [0.40, 1.62, 3.80], [1.30, 0.25, -9.0]],
+          [B(3) + 0.9,        [0.55, 1.60, 4.00], [0.60, -0.25, -4.0]],
+          [B(4) - 0.1,        [0.55, 1.58, 3.80], [0.60, -0.25, -4.0]],
+          [t('porta') + 0.4,  [0.05, 1.62, 4.10], [-0.15, -0.15, -5.0]],
+          [B(5) - 0.1,        [0.05, 1.60, 3.80], [-0.15, -0.13, -5.0]],
+          [t('lanterna'),     [-0.25, 1.55, 4.20], [-0.35, 0.27, -12.0]],
+          [B(6) - 0.15,       [-0.25, 1.55, 3.90], [-0.35, 0.25, -10.0]],
+          [t('para') - 0.1,   [-0.30, 1.70, 4.60], [-0.30, 0.17, -3.4]],
+          [B(7),              [-0.30, 1.70, 4.60], [-0.30, 0.17, -3.4]],
+          [DUR,               [-0.30, 1.68, 4.25], [-0.30, 0.17, -3.4]],
+        ]);
+
+        // ---------- 2. efeito 3D desta história: a lanterna vindo pelo corredor ----------
+        const THREE = M.THREE;
+        const tLant = t('lanterna'), tSeg = t('segurança');
+        const lant = new THREE.Group(); M.cena.scene.add(lant);
+        const texFeixe = (() => {
+          const c = document.createElement('canvas'); c.width = 8; c.height = 256;
+          const g = c.getContext('2d'); const gr = g.createLinearGradient(0, 0, 0, 256);
+          gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(0.75, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,1)');
+          g.fillStyle = gr; g.fillRect(0, 0, 8, 256);
+          return new THREE.CanvasTexture(c);
+        })();
+        const giro = new THREE.Group(); giro.rotation.x = 0.36; lant.add(giro);
+        const cone = new THREE.Mesh(new THREE.ConeGeometry(0.85, 6, 32, 1, true),
+          new THREE.MeshBasicMaterial({ color: new THREE.Color('#fff1c4').multiplyScalar(0.3), map: texFeixe, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }));
+        cone.rotation.x = -Math.PI / 2; cone.position.z = 3.0; giro.add(cone);
+        const lente = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color('#fff6d8').multiplyScalar(3) }));
+        lant.add(lente);
+        const foco = new THREE.SpotLight('#fff1c8', 0, 16, 0.38, 0.6, 1.4);
+        lant.add(foco); foco.target.position.set(0, -1.05, 3.2); lant.add(foco.target);
+        M.aCadaQuadro((tt) => {
+          const k = tt < tLant || tt > tSeg ? 0 : M.suave((tt - tLant) / 0.6) * (1 - M.suave((tt - (tSeg - 0.3)) / 0.3));
+          const e = M.suave((tt - tLant) / (tSeg - tLant));
+          lant.visible = k > 0.001;
+          lant.position.set(-0.5 + Math.sin(tt * 3.2) * 0.05, 1.05 + Math.abs(Math.sin(tt * 3.2)) * 0.05, M.lerp(-24, -5.5, e));
+          lant.rotation.y = Math.sin(tt * 1.6) * 0.12;
+          cone.material.opacity = k;
+          lente.visible = k > 0.001;
+          foco.intensity = 2.6 * k;
+        });
+
+        // ---------- 3. personagens (pés no chão em [x, 0, z]) ----------
+        const menino = M.ator('menino', 'menino', 1.0, () => [0.30, 0, 0.2]);
+        const xSeg = (tt) => (tt < tSeg ? -3.2 : M.lerp(-2.4, -0.95, M.suave((tt - tSeg) / 1.25)));
+        const seguranca = M.ator('seguranca', 'seguranca', 1.08, (tt) => [xSeg(tt), 0, -0.1], { desde: tSeg });
+
+        // ---------- 4. objetos (REGRA: entram na palavra, nunca antes) ----------
+        const cama = M.objeto('cama', -0.75, 0, -3.4, { sombraL: 1.15, sombraP: 0.45 });
+        const relogio = M.objeto('relogio', -0.3, 2.0, -0.8);
+        const geladeira = M.objeto('geladeira', 1.05, 0, -1.6, { sombraL: 0.5, sombraP: 0.3 });
+        const porta = M.objeto('porta', -0.8, 0, -5.5, { sombraL: 0.6, sombraP: 0.18 });
+        const exclamacao = M.objeto('exclamacao', 0.12, 1.97, 0.2);
+        const balao = M.objeto('balao', -0.7, 1.75, -0.1, { texto: 'Tem alguém aí?', lado: 'dir' });
+        const opA = M.naTela('opcao', 540, 300, 0.95, { letra: 'A', texto: 'Esconder na cama', cor: '#FFD93D' });
+        const opB = M.naTela('opcao', 540, 470, 0.95, { letra: 'B', texto: 'Mãos pra cima', cor: '#FF86B7' });
+
+        Objetos.naPalavra(tl, cama, W('cama', 1));
+        Objetos.sair(tl, cama, B(2) - 0.25);
+        Objetos.naPalavra(tl, relogio, W('relógio'));
+        Objetos.sair(tl, relogio, B(3) - 0.3);
+        Objetos.naPalavra(tl, geladeira, W('geladeira'));
+        Objetos.sair(tl, geladeira, B(4) - 0.3);
+        Objetos.naPalavra(tl, porta, W('porta'));
+        Objetos.acao(tl, porta, 'abrir', W('aberta'));
+        Objetos.sair(tl, porta, B(5) - 0.2);
+        Objetos.naPalavra(tl, exclamacao, W('passos'));
+        Objetos.sair(tl, exclamacao, B(6) - 0.3);
+        Objetos.naPalavra(tl, balao, W('tem'));
+        Objetos.sair(tl, balao, B(7) - 0.05);
+        Objetos.naPalavra(tl, opA, W('escondia'));
+        Objetos.naPalavra(tl, opB, W('mãos'));
+        [opA, opB].forEach((o, i) => tl.to(o.dentro, { scale: 1.08, duration: 0.14, yoyo: true, repeat: 1, ease: 'power2.out' }, t('comenta') + i * 0.08));
+
+        // ---------- 5. poses (também presas às palavras) ----------
+        M.pose(menino, 'parado', 0, t('trancado'));
+        tl.to(menino.el, { '--lid': 26, duration: 0.25 }, 0.32);                                    // cochilando...
+        tl.to(menino.el, { '--lid': -64, '--eyeS': 1.12, duration: 0.18, ease: 'back.out(3)' }, t('acordou')); // ...acorda
+        tl.to(menino.el, { '--eyeS': 1, duration: 0.3 }, t('acordou') + 0.2);
+        M.pose(menino, 'assustado', t('trancado'), B(2));
+        M.pose(menino, 'pensando', B(2), t('geladeira'));
+        M.pose(menino, 'apontando', t('geladeira'), t('cheia'));
+        M.pose(menino, 'comemorando', t('cheia'), t('rangido'));
+        M.pose(menino, 'assustado', t('rangido'), t('tem'));
+        M.pose(menino, 'assustado', t('tem'), B(7));
+        M.pose(menino, 'pensando', B(7), t('mãos'));
+        M.pose(menino, 'assustado', t('mãos'), t('comenta'));
+        M.pose(menino, 'acenando', t('comenta'), DUR);
+        M.pose(seguranca, 'correndo', tSeg, t('para'));
+        M.pose(seguranca, 'parado', t('para'), t('aponta'));
+        M.pose(seguranca, 'apontando', t('aponta'), t('comenta'));
+        M.pose(seguranca, 'acenando', t('comenta'), DUR);
+
+        // ---------- 6. legenda (a fala do segurança vai no balão, não na legenda) ----------
+        M.legenda({ pular: (p) => p.bloco === 6 && p.inicio >= t('tem') });
+
+        M.iniciar();
+        window.__timelines = window.__timelines || {};
+        window.__timelines['main'] = tl;
+      })();
+    </script>
+  </body>
+</html>

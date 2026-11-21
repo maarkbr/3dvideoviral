@@ -1,0 +1,6 @@
+# editor-ia — pacotes Python (instale num ambiente virtual NA PASTA DO PROJETO: python -m venv .venv)
+faster-whisper>=1.0
+numpy>=1.26
+scipy>=1.11
+# opcional, mas recomendado: enquadramento automático do rosto (a versão 5 tirou os classificadores Haar)
+opencv-python-headless>=4.9,<5

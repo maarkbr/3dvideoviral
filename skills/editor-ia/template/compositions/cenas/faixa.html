@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .fx-band { position: absolute; left: 40px; width: 1000px; border-radius: 22px; display: flex; align-items: center; gap: 26px; padding: 24px 34px;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45); box-sizing: border-box; }
+        .fx-ico { flex: none; display: flex; align-items: center; justify-content: center; }
+        .fx-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+        .fx-t { font-family: "LT Anton", sans-serif; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.005em; }
+        .fx-s { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="fx-band" id="__ID__-band"></div>
+      </div>
+      <script>
+        (function () {
+          // FAIXA — faixa de título fixa no alto, por cima do vídeo (portfólio: "VOCÊ TEM DUAS OPÇÕES" + ícone). Use no gancho ou como título do corte.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 4, texto: "título do *corte*", sub: "", icone: "", cor: "acento", cor_texto: "preto", y: 150, em: 0.05,
+            saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const band = document.querySelector("#" + ID + "-band");
+          band.style.top = P.y + "px";
+          band.style.background = BK.cor(P.cor);
+          const ink = BK.cor(P.cor_texto);
+          let ico = null;
+          if (P.icone) ico = BK.el("div", "fx-ico", band, BK.icone(P.icone, 110));
+          const col = BK.el("div", "fx-col", band);
+          const t = BK.el("div", "fx-t", col, BK.rich(P.texto, P.enfase || (P.cor === "acento" ? "branco" : "acento")));
+          t.style.color = ink;
+          t.style.fontSize = BK.cabe(P.texto, P.icone ? 790 : 930, 92) + "px";
+          if (P.sub) { const s = BK.el("div", "fx-s", col, BK.esc(P.sub)); s.style.color = ink; }
+          tl.fromTo(band, { clipPath: "inset(0 100% 0 0 round 22px)" }, { clipPath: "inset(0 0% 0 0 round 22px)", duration: 0.35, ease: "power3.out" }, P.em);
+          tl.fromTo(col, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, P.em + 0.12);
+          if (ico) tl.fromTo(ico, { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.36, ease: "back.out(2)" }, P.em + 0.2);
+          const out = P.saida == null ? P.dur - 0.3 : P.saida;
+          tl.to(band, { clipPath: "inset(0 0 0 100% round 22px)", duration: 0.28, ease: "power3.in" }, out);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        #cap-band { position: absolute; left: 60px; width: 960px; top: 1360px; height: 0; }
+        .cap { position: absolute; left: 0; top: -70px; width: 960px; height: 140px; display: flex; align-items: center; justify-content: center;
+          gap: 0 22px; flex-wrap: nowrap; opacity: 0; transform-origin: 50% 60%; }
+        .cw { display: inline-block; line-height: 1; white-space: nowrap; transform-origin: 50% 70%; }
+        .st-anton .cw { font-family: "LT Anton", sans-serif; font-size: 104px; text-transform: uppercase; color: #f5f3ee; letter-spacing: -0.005em;
+          -webkit-text-stroke: 12px #0b0b0d; paint-order: stroke fill; text-shadow: 0 8px 18px rgba(0, 0, 0, 0.55); }
+        .st-palavra .cw { font-family: "LT Anton", sans-serif; font-size: 150px; text-transform: uppercase; letter-spacing: -0.005em;
+          -webkit-text-stroke: 14px #0b0b0d; paint-order: stroke fill; text-shadow: 0 10px 24px rgba(0, 0, 0, 0.6); }
+        .st-serifa .cw { font-family: "LT Garamond", serif; font-weight: 600; font-size: 92px; color: #ffffff; letter-spacing: -0.015em;
+          text-shadow: 0 4px 10px rgba(0, 0, 0, 0.75), 0 10px 30px rgba(0, 0, 0, 0.55); }
+        .st-serifa .cw.key { font-style: italic; }
+        .st-serifa .cap { gap: 0 30px; }
+        .st-topo .cw { font-family: "LT Garamond", serif; font-weight: 500; font-size: 64px; color: #F6F2E9; letter-spacing: -0.01em; text-shadow: 0 3px 10px rgba(0,0,0,.55), 0 10px 30px rgba(0,0,0,.35); }
+        .st-topo .cw.key { font-style: italic; font-weight: 600; }
+        .st-topo .cap { gap: 0 18px; }
+        .st-papel .cw { font-family: "LT Garamond", serif; font-style: italic; font-weight: 500; font-size: 70px; color: #1C1B19; letter-spacing: -0.01em; }
+        .st-papel .cw.key { font-weight: 700; }
+        .st-papel .cap { gap: 0 20px; }
+        .st-montserrat .cw { font-family: "LT Montserrat", sans-serif; font-weight: 800; font-size: 66px; color: #ffffff; letter-spacing: -0.01em;
+          -webkit-text-stroke: 9px #0b0b0d; paint-order: stroke fill; text-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); }
+        #cap-wm { position: absolute; left: -60px; width: 1080px; top: 96px; display: flex; justify-content: center; }
+        #cap-wm span { padding: 4px 14px 3px; border-radius: 10px; background: rgba(11, 11, 13, 0.5); font-family: "JetBrains Mono", monospace;
+          font-weight: 700; font-size: 26px; letter-spacing: 0.12em; color: rgba(245, 243, 238, 0.85); }
+      </style>
+      <div id="root" data-composition-id="legendas" data-width="1080" data-height="1920">
+        <div id="cap-band"></div>
+      </div>
+      <script>
+        (function () {
+          // LEGENDAS — grupos de 1 a 3 palavras sincronizados palavra a palavra (regras asr-keyword-glow + spring-pop-entrance),
+          // palavra-chave na cor do canal, faixa que acompanha o layout (cheio: y0 · dividido: costura y 960).
+          const CFG = Object.assign({ offset: 0, len: 10, y0: 1360, band: [], ocultar: [], estilo: "anton", acento: "#FFB800", handle: "", ativa: 1.08 }, /*CFG*/{}/*/CFG*/);
+          const CAPS = /*CAPS*/[]/*/CAPS*/;
+          const tl = gsap.timeline({ paused: true });
+          const band = document.getElementById("cap-band");
+          band.style.top = CFG.y0 + "px";
+          band.classList.add("st-" + CFG.estilo);
+          let wm = null;
+          if (CFG.handle) { wm = BK.el("div", "", band); wm.id = "cap-wm"; BK.el("span", "", wm, BK.esc(CFG.handle)); }
+          const OCULTA = CFG.ocultar || [];
+          gsap.set(band, { y: 0 });
+          CFG.band.forEach(([t, y, d]) => {
+            const at = t - CFG.offset, dy = y - CFG.y0;
+            if (d > 0) tl.to(band, { y: dy, duration: d, ease: "power3.inOut" }, at);
+            else tl.set(band, { y: dy }, at);
+          });
+          const keyColor = CFG.acento, baseColor = CFG.estilo === "palavra" ? CFG.acento : null;
+          const rows = CAPS.map((g) => {
+            const row = BK.el("div", "cap", band);
+            g.words = g.w.map((w) => {
+              const el = BK.el("span", "cw" + (w.k ? " key" : ""), row, BK.esc(w.x));
+              if (w.k) el.style.color = CFG.estilo === "palavra" ? "#F5F3EE" : keyColor;
+              else if (baseColor) el.style.color = baseColor;
+              if (w.k && CFG.estilo === "serifa") el.style.fontSize = "106px";
+              if (w.k && CFG.estilo === "topo") { el.style.fontSize = "80px"; el.style.color = "#FFFFFF"; }
+              if (w.k && CFG.estilo === "papel") { el.style.fontSize = "84px"; el.style.color = "#8E0A1F"; }
+              return { el, t: w.t };
+            });
+            return row;
+          });
+          const t0s = CAPS.map((g) => g.t0);
+          function activeIndex(t) {
+            let lo = 0, hi = t0s.length - 1, ans = -1;
+            while (lo <= hi) {
+              const mid = (lo + hi) >> 1;
+              if (t0s[mid] <= t) { ans = mid; lo = mid + 1; } else hi = mid - 1;
+            }
+            return ans >= 0 && t < CAPS[ans].t1 ? ans : -1;
+          }
+          const driver = { t: 0 };
+          tl.fromTo(driver, { t: 0 }, { t: CFG.len, duration: CFG.len, ease: "none", onUpdate: () => {
+            const t = driver.t + CFG.offset;
+            if (wm) {
+              const h = OCULTA.some(([a, b]) => t >= a && t < b) ? "0" : "1";
+              if (wm.style.opacity !== h) wm.style.opacity = h;
+            }
+            const k = activeIndex(t);
+            rows.forEach((r, i) => { if (i !== k && r.style.opacity !== "0") r.style.opacity = "0"; });
+            if (k < 0) return;
+            const g = CAPS[k], row = rows[k];
+            const a = Math.min(1, (t - g.t0) / 0.09);
+            const e = 1 - Math.pow(1 - a, 3);
+            row.style.opacity = "1";
+            row.style.transform = `translateY(${((1 - e) * 26).toFixed(2)}px) scale(${(0.84 + 0.16 * e).toFixed(4)})`;
+            g.words.forEach((w, i) => {
+              const next = g.words[i + 1];
+              const on = t >= w.t - 0.03 && (!next || t < next.t - 0.03);
+              w.el.style.transform = on ? `scale(${CFG.ativa})` : "scale(1)";
+            });
+          } }, 0);
+          window.__timelines["legendas"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

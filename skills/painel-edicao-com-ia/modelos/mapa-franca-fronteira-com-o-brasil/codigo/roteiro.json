@@ -1,0 +1,355 @@
+{
+ "titulo": "A maior fronteira da França é com o Brasil",
+ "fontes": "Maior fronteira terrestre da França: 730 km com o Brasil (Senado francês; Wikipedia 'Brazil–France border', 730,4 km). Guiana Francesa é departamento e região da França, usa o euro e faz parte da União Europeia (região ultraperiférica). Cayenne fundada pelos franceses em 1643; presença francesa desde o começo do século XVII. Colônia penal da Ilha do Diabo de 1852 a 1953. Questão do Amapá: ocupação francesa e combate em 15/05/1895; arbitragem do Conselho Federal Suíço, laudo de 01/12/1900 a favor do Brasil, defendido pelo Barão do Rio Branco. Ponte binacional do rio Oiapoque aberta em 2017 (Oiapoque–Saint-Georges).",
+ "blocos": [
+  {
+   "fala": "Qual é o país com quem a França tem a maior fronteira? Não é a Espanha, nem a Bélgica. É o Brasil.",
+   "cena": {
+    "tipo": "abertura",
+    "pais": "France",
+    "cor": "#3E7FD8",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "NÃO É A ESPANHA",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "espanha"
+     },
+     {
+      "tipo": "selo vermelho",
+      "texto": "É O BRASIL",
+      "tela": [
+       540,
+       1080
+      ],
+      "palavra": "brasil"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "A fronteira tem setecentos e trinta quilômetros, aqui no extremo norte, entre o Amapá e a Guiana Francesa.",
+   "cena": {
+    "tipo": "fronteira",
+    "a": "Brazil",
+    "b": "France",
+    "cor": "#F2C200",
+    "cor_a": "#2FA35B",
+    "cor_b": "#3E7FD8",
+    "palavra": "setecentos",
+    "camera": {
+     "lon": -52.4,
+     "lat": 2.6,
+     "zoom": 5200
+    },
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "730 KM",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "setecentos"
+     },
+     {
+      "tipo": "rotulo",
+      "texto": "AMAPÁ",
+      "lon": -51.6,
+      "lat": 1.4,
+      "palavra": "amapá"
+     },
+     {
+      "tipo": "rotulo",
+      "texto": "GUIANA FRANCESA",
+      "lon": -53.1,
+      "lat": 4.4,
+      "palavra": "guiana"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E a Guiana Francesa não é um país vizinho: é a própria França. Lá se paga em euro, e ela faz parte da União Europeia.",
+   "cena": {
+    "tipo": "pais",
+    "pais": "France",
+    "cor": "#3E7FD8",
+    "palavras": [
+     "própria"
+    ],
+    "folga": 1.15,
+    "itens": [
+     {
+      "emoji": "euro_banknote",
+      "lon": -53.1,
+      "lat": 4.0,
+      "palavra": "euro",
+      "tam": 170
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "UNIÃO EUROPEIA",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "europeia"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "A França chegou ali no século dezessete. E por quase cem anos, mandou presos para lá, para a famosa Ilha do Diabo.",
+   "cena": {
+    "tipo": "rota",
+    "de": [
+     2.35,
+     48.85
+    ],
+    "para": [
+     -52.33,
+     4.94
+    ],
+    "cor": "#3E7FD8",
+    "emoji": "ship",
+    "palavra": "chegou",
+    "duracao_movimento": 3.2,
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "SÉCULO 17",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "século"
+     },
+     {
+      "tipo": "selo vermelho",
+      "texto": "ILHA DO DIABO",
+      "lon": -52.58,
+      "lat": 5.29,
+      "palavra": "diabo"
+     },
+     {
+      "emoji": "chains",
+      "lon": -52.58,
+      "lat": 5.29,
+      "palavra": "presos",
+      "tam": 150
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Mas ela queria mais. Em mil oitocentos e noventa e cinco, a França invadiu o Amapá.",
+   "cena": {
+    "tipo": "faixa",
+    "pais": "Brazil",
+    "latN": 4.5,
+    "latS": 1.2,
+    "lonW": -55.2,
+    "lonE": -49.8,
+    "cor": "#D8433B",
+    "palavra": "invadiu",
+    "camera": {
+     "lon": -52.0,
+     "lat": 2.7,
+     "zoom": 7000
+    },
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "1895",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "mil"
+     },
+     {
+      "emoji": "crossed_swords",
+      "lon": -51.5,
+      "lat": 2.8,
+      "palavra": "invadiu",
+      "tam": 170
+     },
+     {
+      "tipo": "rotulo",
+      "texto": "AMAPÁ",
+      "lon": -51.3,
+      "lat": 1.9,
+      "palavra": "amapá"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "O Brasil levou o caso para a Suíça decidir, e quem defendeu o Brasil foi o Barão do Rio Branco.",
+   "cena": {
+    "tipo": "rota",
+    "de": [
+     -43.2,
+     -22.9
+    ],
+    "para": [
+     7.45,
+     46.95
+    ],
+    "cor": "#2FA35B",
+    "emoji": "scroll",
+    "palavra": "levou",
+    "duracao_movimento": 3.0,
+    "itens": [
+     {
+      "tipo": "selo",
+      "texto": "SUÍÇA",
+      "lon": 8.2,
+      "lat": 46.8,
+      "palavra": "suíça"
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "BARÃO DO RIO BRANCO",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "barão"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Finalmente, em mil e novecentos, a Suíça deu razão ao Brasil, e o Amapá ficou brasileiro.",
+   "cena": {
+    "tipo": "faixa",
+    "pais": "Brazil",
+    "latN": 4.5,
+    "latS": 1.2,
+    "lonW": -55.2,
+    "lonE": -49.8,
+    "cor": "#2FA35B",
+    "palavra": "razão",
+    "camera": {
+     "lon": -52.0,
+     "lat": 2.7,
+     "zoom": 7000
+    },
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "1900",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "mil"
+     },
+     {
+      "emoji": "check_mark_button",
+      "lon": -51.5,
+      "lat": 2.8,
+      "palavra": "brasileiro",
+      "tam": 170
+     },
+     {
+      "tipo": "rotulo",
+      "texto": "AMAPÁ",
+      "lon": -51.3,
+      "lat": 1.9,
+      "palavra": "amapá"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Hoje, uma ponte liga o Oiapoque à Guiana: de um lado se paga em real, do outro, em euro.",
+   "cena": {
+    "tipo": "fronteira",
+    "a": "Brazil",
+    "b": "France",
+    "cor": "#F2C200",
+    "cor_a": "#2FA35B",
+    "cor_b": "#3E7FD8",
+    "palavra": "ponte",
+    "camera": {
+     "lon": -51.85,
+     "lat": 3.8,
+     "zoom": 16000
+    },
+    "itens": [
+     {
+      "emoji": "bridge_at_night",
+      "lon": -51.82,
+      "lat": 3.87,
+      "palavra": "ponte",
+      "tam": 170
+     },
+     {
+      "tipo": "selo",
+      "texto": "REAL",
+      "lon": -51.95,
+      "lat": 3.55,
+      "palavra": "real"
+     },
+     {
+      "tipo": "selo",
+      "texto": "EURO",
+      "lon": -51.6,
+      "lat": 4.05,
+      "palavra": "euro"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Esse vídeo foi feito inteiro com inteligência artificial, no Claude. Se você quer criar vídeos assim, comenta mapa que eu te mando a skill.",
+   "cena": {
+    "tipo": "cta",
+    "palavra": "MAPA",
+    "selo": "Feito 100% com IA no Claude",
+    "logo": "claude",
+    "antes": "Comenta",
+    "depois": "que eu te mando a skill"
+   }
+  }
+ ],
+ "destaques": [
+  "França",
+  "fronteira",
+  "Espanha",
+  "Bélgica",
+  "Brasil",
+  "setecentos",
+  "quilômetros",
+  "Amapá",
+  "Guiana",
+  "euro",
+  "Europeia",
+  "dezessete",
+  "presos",
+  "Diabo",
+  "invadiu",
+  "Suíça",
+  "Barão",
+  "Branco",
+  "razão",
+  "brasileiro",
+  "ponte",
+  "Oiapoque",
+  "real",
+  "inteligência",
+  "Claude",
+  "mapa",
+  "skill"
+ ],
+ "trilha": {
+  "arquivo": "../19-mapa-chile/trilhas/01 Genesis - Tristan Barton (320 kbps).mp3",
+  "inicio": 64
+ }
+}

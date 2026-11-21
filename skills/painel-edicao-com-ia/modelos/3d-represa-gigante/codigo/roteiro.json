@@ -1,0 +1,285 @@
+{
+  "tema": "Como construir uma represa gigante",
+  "blocos": [
+    {
+      "fala": "Você vai fechar um rio que vive transbordando com um muro de concreto. Mas se jogar concreto direto na água, a correnteza leva tudo embora.",
+      "etapa": "A deep low poly desert canyon with a fast blue river; a crane drops gray concrete blocks into the water and the current sweeps them downstream.",
+      "etiquetas": [
+        {
+          "txt": "RIO COLORADO",
+          "p": [
+            0,
+            1.2,
+            -14
+          ],
+          "de": 1.0,
+          "ate": 4.5
+        },
+        {
+          "txt": "CORRENTEZA",
+          "p": [
+            0,
+            1.3,
+            17
+          ],
+          "de": 6.5,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Então você tira o rio do caminho: abre quatro túneis de dezessete metros de diâmetro dentro da rocha e desvia a água por eles.",
+      "etapa": "Cutaway of both canyon walls: four round tunnels are bored through the rock, two on each side; the river turns and flows into them, leaving the middle of the canyon.",
+      "etiquetas": [
+        {
+          "txt": "TÚNEIS DE DESVIO",
+          "p": [
+            -9,
+            3.0,
+            -6
+          ],
+          "de": 1.5,
+          "ate": 3.5
+        },
+        {
+          "txt": "17 M",
+          "p": [
+            -8,
+            2.9,
+            -3
+          ],
+          "de": 4.0,
+          "ate": 6.8
+        }
+      ]
+    },
+    {
+      "fala": "Mas a água ainda volta para a obra. Então você ergue duas barragens provisórias de terra e pedra, uma antes e outra depois, e seca o leito.",
+      "etapa": "Water seeps back and floods the work area; then two brown earth-and-rock cofferdams rise upstream and downstream and the riverbed between them drains dry.",
+      "etiquetas": [
+        {
+          "txt": "ENSECADEIRA",
+          "p": [
+            0,
+            3.6,
+            -12
+          ],
+          "de": 3.5,
+          "ate": 7.5
+        },
+        {
+          "txt": "LEITO SECO",
+          "p": [
+            0,
+            0.6,
+            -2
+          ],
+          "de": 8.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Agora o perigo vem de cima: pedra solta despenca dos paredões. Então você pendura homens em cordas, e eles limpam a rocha com britadeira e dinamite.",
+      "etapa": "Loose boulders tumble from the canyon walls onto the dry site; then tiny workers hang on ropes along the cliff, small blasts knock the loose rock away and the walls become clean.",
+      "etiquetas": [
+        {
+          "txt": "PEDRA SOLTA",
+          "p": [
+            -5.6,
+            11,
+            0
+          ],
+          "de": 0.5,
+          "ate": 4.0
+        },
+        {
+          "txt": "ESCALADORES",
+          "p": [
+            -5.7,
+            10.2,
+            0
+          ],
+          "de": 5.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Hora do concreto. Mas, se você despejar tudo de uma vez, ele leva cento e vinte e cinco anos pra esfriar e racha inteiro.",
+      "etapa": "One giant concrete pour fills the canyon, glows orange with heat, then dark cracks spread across the whole wall.",
+      "etiquetas": [
+        {
+          "txt": "125 ANOS PRA ESFRIAR",
+          "p": [
+            0,
+            13.4,
+            1
+          ],
+          "de": 4.0,
+          "ate": 8.0
+        },
+        {
+          "txt": "RACHADURA",
+          "p": [
+            0,
+            6,
+            3.4
+          ],
+          "de": 8.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Então você ergue a represa em duzentos e quinze blocos separados, com canos de aço por dentro, e passa água gelada até o concreto esfriar.",
+      "etapa": "The dam rises as interlocking columns of concrete blocks, layer by layer; a cutaway shows thin steel pipes inside each block with icy blue water flowing through them.",
+      "etiquetas": [
+        {
+          "txt": "215 BLOCOS",
+          "p": [
+            0,
+            13.3,
+            1
+          ],
+          "de": 2.0,
+          "ate": 5.5
+        },
+        {
+          "txt": "ÁGUA GELADA",
+          "p": [
+            0,
+            8.2,
+            1.5
+          ],
+          "de": 6.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Embaixo, a água empurra mais forte. Por isso a base tem duzentos metros de espessura, o topo só catorze, e o muro curva contra o rio.",
+      "etapa": "Side cutaway of the dam: pressure arrows grow bigger toward the bottom; the wedge profile shows the thick base and thin top, then a top view shows the arch curving upstream into the canyon walls.",
+      "etiquetas": [
+        {
+          "txt": "BASE 200 M",
+          "p": [
+            0,
+            0.2,
+            3.6
+          ],
+          "de": 3.0,
+          "ate": 7.4
+        },
+        {
+          "txt": "TOPO 14 M",
+          "p": [
+            0,
+            13.0,
+            -0.4
+          ],
+          "de": 5.0,
+          "ate": 7.4
+        },
+        {
+          "txt": "ARCO",
+          "p": [
+            0,
+            13.4,
+            -1.6
+          ],
+          "de": 8.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "O lago enche, e a água começa a vazar por baixo, pela rocha. Então você injeta cimento no fundo e fura poços para aliviar a pressão.",
+      "etapa": "The lake fills behind the dam; blue water leaks under the dam through cracks in the bedrock; then drills inject a gray grout curtain deep into the rock and vertical relief wells appear downstream.",
+      "etiquetas": [
+        {
+          "txt": "INFILTRAÇÃO",
+          "p": [
+            0.15,
+            -2.8,
+            1.2
+          ],
+          "de": 2.8,
+          "ate": 5.0
+        },
+        {
+          "txt": "CORTINA DE CIMENTO",
+          "p": [
+            0.15,
+            -1.0,
+            0.0
+          ],
+          "de": 5.5,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "E quando vem uma cheia maior do que o lago aguenta? Você abre dois vertedouros, um em cada margem, que jogam a sobra para os túneis antigos.",
+      "etapa": "Storm water raises the lake to the crest and threatens to spill over the top; then two wide channels on each canyon side open and the excess water pours down into the old diversion tunnels.",
+      "etiquetas": [
+        {
+          "txt": "CHEIA",
+          "p": [
+            0,
+            13.8,
+            -6
+          ],
+          "de": 1.0,
+          "ate": 4.5
+        },
+        {
+          "txt": "VERTEDOURO",
+          "p": [
+            -8.5,
+            12.9,
+            -7
+          ],
+          "de": 5.5,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "E a água que passa pelas turbinas gera energia para mais de um milhão de pessoas. Se você quer aprender a fazer vídeos assim, comenta 3D.",
+      "etapa": "Water flows from intake towers through big pipes into the powerhouse at the foot of the dam; turbines spin and power lines light up a small city; final wide shot of the finished dam and lake.",
+      "etiquetas": [
+        {
+          "txt": "TURBINAS",
+          "p": [
+            3.9,
+            2.4,
+            8.1
+          ],
+          "de": 1.5,
+          "ate": 5.0
+        },
+        {
+          "txt": "COMENTA 3D",
+          "p": [
+            0,
+            15,
+            -2
+          ],
+          "de": 7.0,
+          "ate": 10
+        }
+      ]
+    }
+  ],
+  "fontes": [
+    "Bureau of Reclamation, Diversion Tunnels (quatro túneis de 56 pés = 17 m, revestidos para 50 pés; jogam a sobra dos vertedouros): https://www.usbr.gov/lc/hooverdam/history/essays/tunnels.html",
+    "Bureau of Reclamation, Concrete (125 anos para esfriar num despejo só; colunas com canos de aço de 1 polegada e água gelada): https://www.usbr.gov/lc/hooverdam/history/essays/concrete.html",
+    "Bureau of Reclamation, Dam FAQs (cerca de 215 blocos; 582 milhas de cano; 726 pés de altura): https://www.usbr.gov/lc/hooverdam/faqs/damfaqs.html",
+    "Bureau of Reclamation, Tunnels/Spillways FAQs (dois vertedouros, um em cada margem, 200.000 pés³/s cada; saem nos túneis externos): https://www.usbr.gov/lc/hooverdam/faqs/tunlfaqs.html",
+    "Bureau of Reclamation, Power FAQs (cerca de 4 bilhões de kWh por ano, 1,3 milhão de pessoas; 17 turbinas): https://www.usbr.gov/lc/hooverdam/faqs/powerfaq.html",
+    "Wikipedia, Hoover Dam (base de 660 pés = 200 m e topo de 45 pés = 14 m; arco contra o rio; ensecadeiras; escaladores com britadeira e dinamite): https://en.wikipedia.org/wiki/Hoover_Dam",
+    "J. David Rogers (Missouri S&T), Grout Curtain Failure – Hoover Dam (vazamento depois de encher o lago; cortina de cimento ampliada e poços de alívio, 1938–1947): https://web.mst.edu/rogersda/hoover_dam/Grout%20Curtain%20Failure-Hoover%20Dam.pdf",
+    "Referência estudada (só a sequência, nada copiado): TED-Ed, Blood, concrete, and dynamite: Building the Hoover Dam: https://youtu.be/TlyIDlFNVOY"
+  ]
+}

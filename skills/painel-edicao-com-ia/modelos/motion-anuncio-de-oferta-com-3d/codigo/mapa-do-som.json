@@ -1,0 +1,208 @@
+{
+ "leia": "Mapa do som deste modelo (não é para rodar como está): onde cada efeito cai e em que volume. Use os efeitos do pack da pessoa ou do SFX Kit com a mixagem do estilo-motion.",
+ "dur": 32.2,
+ "voz": "voz/voz.wav",
+ "musica": {
+  "arq": "<trilha animada do pack da pessoa ou do SFX Kit>",
+  "vol": -12,
+  "obs": "ducking embaixo da voz"
+ },
+ "efeitos": [
+  {
+   "tipo": "whoosh suave",
+   "t": 1.92,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 5.15,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 12.45,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 14.62,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 21.3,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 22.95,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 25.0,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 26.52,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 27.15,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 28.35,
+   "db": -16
+  },
+  {
+   "tipo": "whoosh suave",
+   "t": 29.38,
+   "db": -16
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 0.05,
+   "db": -13
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 0.4,
+   "db": -13
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 5.62,
+   "db": -13
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 14.95,
+   "db": -13
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 23.22,
+   "db": -9
+  },
+  {
+   "tipo": "impacto de interface",
+   "t": 25.48,
+   "db": -10
+  },
+  {
+   "tipo": "riser",
+   "t": 23.22,
+   "db": -19
+  },
+  {
+   "tipo": "caixa registradora",
+   "t": 23.42,
+   "db": -14
+  },
+  {
+   "tipo": "pop",
+   "t": 1.62,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 3.42,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 4.86,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 13.48,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 18.14,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 24.38,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 29.1,
+   "db": -17
+  },
+  {
+   "tipo": "pop",
+   "t": 30.0,
+   "db": -17
+  },
+  {
+   "tipo": "clique",
+   "t": 6.62,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 7.8,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 8.68,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 9.32,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 9.84,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 10.62,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 11.32,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 11.96,
+   "db": -19
+  },
+  {
+   "tipo": "whoosh grave",
+   "t": 15.86,
+   "db": -19
+  },
+  {
+   "tipo": "whoosh grave",
+   "t": 17.54,
+   "db": -19
+  },
+  {
+   "tipo": "whoosh grave",
+   "t": 19.84,
+   "db": -19
+  },
+  {
+   "tipo": "clique",
+   "t": 30.62,
+   "db": -9
+  }
+ ],
+ "final": "-14 LUFS, -1,5 dBTP"
+}

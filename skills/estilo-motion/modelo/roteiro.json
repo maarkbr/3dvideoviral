@@ -1,0 +1,126 @@
+{
+ "nome": "Edição com IA",
+ "tema": "escuro",
+ "blocos": [
+  {
+   "fala": "Você grava um vídeo e passa horas editando?",
+   "dur": 2.6,
+   "cena": {
+    "tipo": "frase",
+    "texto": "Você grava e passa *horas* editando?"
+   }
+  },
+  {
+   "fala": "E quando termina, o vídeo nem viraliza.",
+   "dur": 2.4,
+   "cena": {
+    "tipo": "frase",
+    "antes": "E quando termina…",
+    "texto": "o vídeo nem *viraliza*."
+   }
+  },
+  {
+   "fala": "Aqui entra o Edição com IA: você grava, e o Claude edita.",
+   "dur": 3.0,
+   "cena": {
+    "tipo": "logo",
+    "nome": "Edição com IA",
+    "sub": "Você grava. O Claude edita.",
+    "transicao": "circulo"
+   }
+  },
+  {
+   "fala": "Tudo num painel só: cortes de podcast, estilo Bit, vídeo 3D e motion.",
+   "dur": 3.4,
+   "cena": {
+    "tipo": "recursos",
+    "centro": "Um painel só",
+    "itens": [
+     {
+      "txt": "Cortes",
+      "icone": "raio",
+      "em": "cortes"
+     },
+     {
+      "txt": "Estilo Bit",
+      "icone": "estrela",
+      "em": "bit"
+     },
+     {
+      "txt": "Vídeo 3D",
+      "icone": "foguete",
+      "em": "3D"
+     },
+     {
+      "txt": "Motion",
+      "icone": "grafico",
+      "em": "motion"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Ele corta os erros, põe legenda e efeitos e entrega pronto para postar.",
+   "dur": 3.4,
+   "cena": {
+    "tipo": "lista",
+    "titulo": "Ele faz *por você*",
+    "itens": [
+     {
+      "txt": "Corta silêncios e erros",
+      "em": "corta"
+     },
+     {
+      "txt": "Põe legenda e efeitos",
+      "em": "legenda"
+     },
+     {
+      "txt": "Entrega pronto",
+      "em": "entrega"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Você só pede, e o vídeo aparece pronto.",
+   "dur": 3.0,
+   "cena": {
+    "tipo": "celular",
+    "titulo": "Você só *pede*",
+    "contato": "Claude",
+    "baloes": [
+     {
+      "de": "eu",
+      "txt": "Edita meu vídeo no estilo Bit"
+     },
+     {
+      "de": "ele",
+      "txt": "Pronto! Está na pasta Prontos."
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E tudo isso por trinta e sete reais.",
+   "dur": 2.6,
+   "cena": {
+    "tipo": "numero",
+    "titulo": "Tudo isso por",
+    "valor": "37",
+    "sub": "reais",
+    "progresso": 0.37
+   }
+  },
+  {
+   "fala": "Comenta MOTION que eu te mando o link.",
+   "dur": 2.8,
+   "cena": {
+    "tipo": "cta",
+    "titulo": "Comece *hoje*",
+    "botao": "Comenta MOTION",
+    "sub": "o link chega no direct",
+    "em": "comenta"
+   }
+  }
+ ]
+}

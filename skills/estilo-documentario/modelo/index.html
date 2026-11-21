@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Documentário 16:9</title>
+<style>
+  @font-face { font-family: "Playfair Display"; font-weight: 400; src: url("assets/fontes/PlayfairDisplay-Regular.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 400; font-style: italic; src: url("assets/fontes/PlayfairDisplay-Italic.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 700; src: url("assets/fontes/PlayfairDisplay-Bold.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 800; src: url("assets/fontes/PlayfairDisplay-ExtraBold.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 900; src: url("assets/fontes/PlayfairDisplay-Black.ttf"); }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  #cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  .pre { position: absolute; left: 0; top: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+  .fontes { position: absolute; left: -9999px; top: 0; font-family: "Playfair Display"; }
+</style>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/d3-array.min.js"></script>
+<script src="assets/d3-geo.min.js"></script>
+<script src="assets/topojson-client.min.js"></script>
+<script src="assets/topo.js"></script>
+<script src="assets/fotos.js"></script>
+<script src="cena.js"></script>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__DUR__" data-width="1920" data-height="1080">
+  <div class="fontes"><b style="font-weight:700">a</b><b style="font-weight:800">a</b><b style="font-weight:900">a</b><i>a</i></div>
+  <canvas id="cv" width="1920" height="1080"></canvas>
+  <img class="pre" id="i-manchas" src="assets/manchas.jpg" alt=""><img class="pre" id="i-fibra" src="assets/fibra.png" alt=""><img class="pre" id="i-ex" src="assets/exemplos.jpg" alt="">
+  <script>
+    // uma <img> para cada foto da cena (o render espera todas carregarem)
+    for (const o of (window.CENA.objetos || [])) if (o.tipo === 'foto' && !document.getElementById('i-' + o.img)) { const im = document.createElement('img'); im.className = 'pre'; im.id = 'i-' + o.img; im.src = 'assets/' + o.img + '-p.jpg'; im.alt = ''; document.currentScript.parentNode.appendChild(im); }
+  </script>
+</div>
+<script src="assets/documentario.js"></script>
+</body>
+</html>

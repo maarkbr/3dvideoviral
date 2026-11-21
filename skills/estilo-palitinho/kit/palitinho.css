@@ -1,0 +1,18 @@
+@font-face{font-family:M;src:url(Montserrat-VF.woff2);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F3EADB;font-family:M,sans-serif}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#F3EADB}
+#palco{position:absolute;inset:0;width:1080px;height:1920px;z-index:1}
+/* legenda: entre y 1240 e 1440 (área segura do Reels e do TikTok) */
+#legenda{position:absolute;z-index:5;left:0;right:0;top:1270px;height:200px}
+.pal{position:absolute;left:90px;right:150px;text-align:center;font-weight:900;font-size:86px;color:#1D1C22;text-transform:uppercase;line-height:1;
+ -webkit-text-stroke:14px #F3EADB;paint-order:stroke fill;opacity:0;transform-origin:center}
+.pal .chave{color:#E4572E}
+#cta{position:absolute;z-index:6;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding-bottom:1180px}
+#cta .linha{font-weight:900;font-size:92px;color:#1D1C22;text-transform:uppercase}
+#cta .teclas{display:flex;gap:18px}
+#cta .ia,#cta .linha,#cta .tecla{opacity:0}
+#cta .tecla{width:var(--tw,136px);height:calc(var(--tw,136px)*1.07);border-radius:22px;background:#fff;color:#1D1C22;font-weight:900;font-size:calc(var(--tw,136px)*.72);border:7px solid #1D1C22;
+ display:flex;align-items:center;justify-content:center;box-shadow:0 12px 0 #1D1C22}
+#cta .ia{display:flex;align-items:center;gap:16px;font-weight:800;font-size:50px;color:#1D1C22;background:#fff;border:5px solid #1D1C22;padding:12px 26px 12px 16px;border-radius:999px}
+#cta .ia img{width:70px;height:70px}

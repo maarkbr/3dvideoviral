@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .al-tape { position: absolute; left: -100px; width: 1280px; height: 92px; background-size: 130px 130px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5); transform-origin: 50% 50%; }
+        .al-sign { position: absolute; left: 400px; top: 230px; width: 280px; height: 250px; transform-origin: 50% 80%; }
+        .al-sign > div { position: absolute; left: 0; top: 0; }
+        .al-best { position: absolute; left: 0; width: 1080px; top: 520px; display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0; }
+        .al-best small { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.22em; color: #a9a6a0; text-transform: uppercase; }
+        .al-best .bk-title { text-align: center; width: 980px; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"></div>
+      </div>
+      <script>
+        (function () {
+          // ALERTA — fitas de perigo + palavra grande + aviso em vermelho; opcional: troca do aviso por outro ícone (regra scale-swap-transition).
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 5, rotulo: "", entrada: "desce", saida: null, fita: true, palavra: { texto: "atenção" }, alerta: null, troca: null },
+            /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          BK.card(tl, card, P);
+          const tapes = [];
+          if (P.fita) {
+            [[120, -4, -110, 0.25], [850, 3, 110, 0.33]].forEach(([top, rot, from, at]) => {
+              const t = BK.el("div", "al-tape", card);
+              t.style.top = top + "px";
+              t.style.backgroundImage = `repeating-linear-gradient(-45deg, ${BK.cor("acento")} 0 46px, #111111 46px 92px)`;
+              t.setAttribute("data-layout-allow-overlap", "");
+              tl.fromTo(t, { xPercent: from, rotation: rot }, { xPercent: 0, rotation: rot, duration: 0.42, ease: "power3.out" }, at);
+              tapes.push(t);
+            });
+            tl.fromTo(tapes, { backgroundPosition: "0px 0px" }, { backgroundPosition: "520px 0px", duration: P.dur, ease: "none" }, 0.3);
+          }
+          BK.rotulo(tl, card, P.rotulo);
+          const sign = BK.el("div", "al-sign", card);
+          const warn = BK.el("div", "", sign, BK.icon.warning(280));
+          const W = P.palavra || {};
+          const word = W.texto ? BK.titulo(card, null, W.texto, { y: 470, tam: BK.cabe(W.texto, 980, W.tam || 176) }) : null;
+          const wAt = W.em == null ? 0.86 : W.em;
+          if (word) tl.fromTo(word, { scale: 1.4, opacity: 0, filter: "blur(14px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "power4.out" }, wAt);
+          const A = P.alerta;
+          const aAt = A && A.em != null ? A.em : wAt + 0.72;
+          let red = null;
+          if (A && A.texto) {
+            red = BK.titulo(card, null, A.texto, { y: 690, tam: BK.cabe(A.texto, 980, A.tam || 110), cor: "vermelho" });
+            BK.sobe(tl, red, aAt + 0.08, { dur: 0.24 });
+          }
+          tl.fromTo(sign, { scale: 0, rotation: -20, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.36, ease: "back.out(2)" }, aAt);
+          tl.fromTo(sign, { rotation: 0 }, { rotation: 6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 5, immediateRender: false }, aAt + 0.42);
+          const T = P.troca;
+          if (T) {
+            const at = T.em == null ? aAt + 1.5 : T.em;
+            const swap = BK.el("div", "", sign, BK.icone(T.icone || "trofeu", 250));
+            swap.style.opacity = 0;
+            tl.to([word, red].filter(Boolean), { opacity: 0, y: -30, duration: 0.2, ease: "power2.in" }, at - 0.22);
+            tl.to(warn, { scale: 0.2, opacity: 0, duration: 0.2, ease: "power2.in" }, at - 0.17);
+            tl.fromTo(swap, { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.36, ease: "back.out(2)" }, at);
+            if (T.titulo || T.sobre) {
+              const best = BK.el("div", "al-best", card);
+              if (T.sobre) BK.el("small", "", best, BK.esc(T.sobre));
+              if (T.titulo) { const t = BK.el("div", "bk-title", best, BK.rich(T.titulo)); t.style.fontSize = BK.cabe(T.titulo, 980, 104) + "px"; }
+              BK.sobe(tl, best, at + 0.08);
+            }
+            if (tapes.length) tl.to(tapes, { opacity: 0.25, duration: 0.3 }, at - 0.12);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

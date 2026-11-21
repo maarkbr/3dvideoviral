@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .ca-box { position: absolute; left: 0; top: 0; width: 1080px; overflow: hidden; }
+        .ca-grid { position: absolute; inset: 0; }
+        .ca-sub { position: absolute; left: 0; width: 1080px; text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px;
+          letter-spacing: 0.22em; text-transform: uppercase; opacity: 0; }
+        .ca-txt { position: absolute; left: 60px; width: 960px; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 0 0.24em; }
+        .ca-w { display: inline-block; font-family: "LT Anton", sans-serif; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.01em; }
+        .ca-w.serifa { font-family: "LT Garamond", serif; text-transform: none; font-weight: 600; letter-spacing: -0.025em; line-height: 1; }
+        .ca-w.serifa.em { font-style: italic; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="ca-box" id="__ID__-box"></div>
+      </div>
+      <script>
+        (function () {
+          // CARTAO — cartão tipográfico (portfólio: branco ou preto com grade e uma palavra serifada; ou vermelho chapado com uma palavra).
+          // layout "cheio" cobre a tela; "dividido" ocupa a metade de cima (o falante continua embaixo).
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 2, texto: "uma *palavra*", sub: "", fundo: "branco", grade: true, estilo: "serifa", layout: "dividido",
+            tam: null, em: 0.1, intervalo: 0.07, entrada: "desce", saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const box = document.querySelector("#" + ID + "-box");
+          const split = P.layout !== "cheio";
+          const H = split ? 960 : 1920;
+          box.style.height = H + "px";
+          const fundos = { branco: ["#F4F1EA", "#0B0B0D", "rgba(0,0,0,0.07)", "vermelho"], preto: ["#0B0B0D", "#F5F3EE", "rgba(255,255,255,0.06)", "acento"],
+            vermelho: ["#D7261E", "#FFFFFF", "rgba(255,255,255,0.09)", "preto"], acento: [BK.cor("acento"), "#0B0B0D", "rgba(0,0,0,0.08)", "branco"] };
+          const F = fundos[P.fundo] || [BK.cor(P.fundo), "#F5F3EE", "rgba(255,255,255,0.07)", "acento"];
+          box.style.background = F[0];
+          if (split) box.style.borderBottom = "8px solid " + BK.cor("acento");
+          if (P.grade) {
+            const g = BK.el("div", "ca-grid", box);
+            g.style.backgroundImage = `linear-gradient(${F[2]} 2px, transparent 2px), linear-gradient(90deg, ${F[2]} 2px, transparent 2px)`;
+            g.style.backgroundSize = "90px 90px";
+            g.style.backgroundPosition = "0 0";
+            tl.fromTo(g, { backgroundPosition: "0px 0px" }, { backgroundPosition: "0px -90px", duration: P.dur, ease: "none" }, 0);
+          }
+          const serif = P.estilo === "serifa";
+          const txt = BK.el("div", "ca-txt", box);
+          const size = P.tam || BK.cabe(P.texto, 960, split ? 190 : 230, serif ? "serifa" : "anton");
+          txt.style.gap = "0 " + Math.round(size * 0.24) + "px";
+          txt.style.top = (split ? 140 : 460) + "px"; txt.style.height = (split ? 680 : 760) + "px";
+          if (P.sub) {
+            const s = BK.el("div", "ca-sub", box, BK.esc(P.sub));
+            s.style.top = (split ? 110 : 420) + "px"; s.style.color = F[1]; s.style.opacity = 0;
+            tl.fromTo(s, { opacity: 0, y: -12 }, { opacity: 0.6, y: 0, duration: 0.3, ease: "power3.out" }, P.em);
+          }
+          const words = [];
+          String(P.texto).split(/\s+/).filter(Boolean).forEach((w) => {
+            const em = /\*/.test(w);
+            const s = BK.el("span", "ca-w" + (serif ? " serifa" : "") + (em ? " em" : ""), txt, BK.esc(w.replace(/\*/g, "")));
+            s.style.fontSize = size + "px";
+            s.style.color = em ? BK.cor(F[3]) : F[1];
+            words.push(s);
+          });
+          if (split) BK.card(tl, box, P);
+          else tl.fromTo(box, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.28, ease: "power3.out" }, 0);
+          words.forEach((s, i) => tl.fromTo(s, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.34, ease: "power3.out" }, P.em + 0.06 + i * P.intervalo));
+          if (!split && P.saida != null) tl.to(box, { clipPath: "inset(100% 0 0% 0)", duration: 0.24, ease: "power3.in" }, P.saida);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

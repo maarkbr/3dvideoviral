@@ -1,0 +1,299 @@
+{
+ "titulo": "Como os EUA compraram metade do país",
+ "fontes": "Compra da Louisiana: tratado de 30/04/1803; cerca de 2,14 milhões de km² (828 mil milhas quadradas) por 15 milhões de dólares, menos de 3 centavos por acre, cerca de 7 centavos por hectare (Wikipedia 'Louisiana Purchase'; Monticello.org). Os enviados tinham autorização para até 10 milhões só por Nova Orleans e arredores. A França perdeu Saint-Domingue (Haiti) na revolução dos escravizados; guerra com a Inglaterra. Do território saíram, inteiros ou em parte, 15 estados (National Archives).",
+ "blocos": [
+  {
+   "fala": "No ano de mil oitocentos e três, os Estados Unidos dobraram de tamanho com uma compra só.",
+   "cena": {
+    "tipo": "abertura",
+    "pais": "United States of America",
+    "cor": "#3E7FD8",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "1803",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "mil"
+     },
+     {
+      "emoji": "money_bag",
+      "tela": [
+       540,
+       1120
+      ],
+      "palavra": "compra",
+      "tam": 170
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Esse pedaço inteiro, do Golfo do México até o Canadá, era da França.",
+   "cena": {
+    "tipo": "louisiana",
+    "cor": "#3E7FD8",
+    "palavra": "pedaço",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "DO GOLFO AO CANADÁ",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "golfo"
+     },
+     {
+      "tipo": "selo",
+      "texto": "ERA DA FRANÇA",
+      "tela": [
+       540,
+       430
+      ],
+      "palavra": "frança"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Os americanos só queriam a cidade de Nova Orleans, por causa do porto no rio Mississippi.",
+   "cena": {
+    "tipo": "faixa",
+    "pais": "United States of America",
+    "latN": 33.0,
+    "latS": 28.8,
+    "lonW": -94.1,
+    "lonE": -88.9,
+    "cor": "#3E7FD8",
+    "palavra": "cidade",
+    "camera": {
+     "lon": -90.4,
+     "lat": 31.0,
+     "zoom": 3000
+    },
+    "itens": [
+     {
+      "tipo": "selo vermelho",
+      "texto": "NOVA ORLEANS",
+      "lon": -90.07,
+      "lat": 29.95,
+      "palavra": "orleans"
+     },
+     {
+      "emoji": "ship",
+      "lon": -89.4,
+      "lat": 29.3,
+      "palavra": "porto",
+      "tam": 160
+     },
+     {
+      "tipo": "rotulo agua",
+      "texto": "RIO MISSISSIPPI",
+      "lon": -91.4,
+      "lat": 32.4,
+      "palavra": "mississippi"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Mas Napoleão ofereceu tudo.",
+   "cena": {
+    "tipo": "louisiana",
+    "cor": "#F2B33D",
+    "palavra": "tudo",
+    "itens": [
+     {
+      "emoji": "crown",
+      "tela": [
+       540,
+       560
+      ],
+      "palavra": "napoleão",
+      "tam": 190
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "NAPOLEÃO",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "napoleão"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Ele tinha acabado de perder o Haiti, a colônia mais rica da França, numa revolução dos escravizados.",
+   "cena": {
+    "tipo": "rota",
+    "de": [
+     2.35,
+     48.85
+    ],
+    "para": [
+     -72.3,
+     18.95
+    ],
+    "cor": "#D8433B",
+    "emoji": "ship",
+    "palavra": "perder",
+    "duracao_movimento": 2.6,
+    "itens": [
+     {
+      "tipo": "selo vermelho",
+      "texto": "HAITI",
+      "lon": -72.3,
+      "lat": 19.0,
+      "palavra": "haiti"
+     },
+     {
+      "emoji": "fire",
+      "lon": -72.3,
+      "lat": 19.0,
+      "palavra": "revolução",
+      "tam": 160
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E precisava de dinheiro para a guerra contra a Inglaterra.",
+   "cena": {
+    "tipo": "pais",
+    "paises": [
+     "France",
+     "United Kingdom"
+    ],
+    "cores": [
+     "#3E7FD8",
+     "#D8433B"
+    ],
+    "palavras": [
+     "precisava",
+     "inglaterra"
+    ],
+    "camera": {
+     "lon": 0.5,
+     "lat": 50.0,
+     "zoom": 2600
+    },
+    "itens": [
+     {
+      "emoji": "crossed_swords",
+      "lon": 0.5,
+      "lat": 50.5,
+      "palavra": "guerra",
+      "tam": 170
+     },
+     {
+      "emoji": "money_with_wings",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "dinheiro",
+      "dy": 0,
+      "tam": 150
+     }
+    ]
+   }
+  },
+  {
+   "fala": "O preço: quinze milhões de dólares. Uns sete centavos de dólar por hectare.",
+   "cena": {
+    "tipo": "louisiana",
+    "cor": "#2FA35B",
+    "palavra": "preço",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "US$ 15 MILHÕES",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "quinze"
+     },
+     {
+      "tipo": "selo",
+      "texto": "7 CENTAVOS POR HECTARE",
+      "tela": [
+       540,
+       430
+      ],
+      "palavra": "sete"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Do território comprado saíram, inteiros ou em parte, quinze estados americanos.",
+   "cena": {
+    "tipo": "louisiana",
+    "cor": "#3E7FD8",
+    "palavra": "território",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "15 ESTADOS",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "quinze"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Esse vídeo foi feito inteiro com inteligência artificial, no Claude. Se você quer criar vídeos assim, comenta mapa que eu te mando a skill.",
+   "cena": {
+    "tipo": "cta",
+    "palavra": "MAPA",
+    "selo": "Feito 100% com IA no Claude",
+    "logo": "claude",
+    "antes": "Comenta",
+    "depois": "que eu te mando a skill"
+   }
+  }
+ ],
+ "destaques": [
+  "mil",
+  "oitocentos",
+  "três",
+  "Estados",
+  "Unidos",
+  "dobraram",
+  "compra",
+  "Golfo",
+  "México",
+  "Canadá",
+  "França",
+  "Nova",
+  "Orleans",
+  "Mississippi",
+  "Napoleão",
+  "tudo",
+  "Haiti",
+  "revolução",
+  "Inglaterra",
+  "quinze",
+  "milhões",
+  "sete",
+  "centavos",
+  "estados",
+  "inteligência",
+  "Claude",
+  "mapa",
+  "skill"
+ ],
+ "trilha": {
+  "arquivo": "../19-mapa-chile/trilhas/01 Genesis - Tristan Barton (320 kbps).mp3",
+  "inicio": 64
+ }
+}

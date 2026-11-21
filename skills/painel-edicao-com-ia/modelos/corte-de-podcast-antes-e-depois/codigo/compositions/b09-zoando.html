@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .ad-stage { position: absolute; inset: 0; }
+        .ad-item { position: absolute; transform-origin: 50% 90%; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55)); }
+        .ad-txt { font-family: "LT Anton", sans-serif; text-transform: uppercase; line-height: 1; white-space: nowrap;
+          -webkit-text-stroke: 8px #0b0b0d; paint-order: stroke fill; }
+        .ad-x { position: absolute; left: 0; top: 0; }
+      </style>
+      <div id="root" data-composition-id="b09-zoando" data-width="1080" data-height="1920"><div id="b09-zoando-stage" class="ad-stage"></div></div>
+      <script>
+        (function () {
+          // ADESIVOS — ícones/palavras que pulam por cima do vídeo (sem card), com balanço e saída rápida.
+          // Posições em px da tela 1080x1920: evite o rosto (centro) e a faixa da legenda (y 1290–1470).
+          const ID = "b09-zoando";
+          const P = Object.assign({ dur: 2.5, itens: [], saida: null }, /*PARAMS*/{"itens": [{"texto": "?!", "x": 760, "y": 110, "tam": 240, "rot": 10, "em": 0.03}], "dur": 1.1}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const root = document.querySelector("#" + ID + "-stage");
+          const out = P.saida == null ? P.dur - 0.25 : P.saida;
+          P.itens.forEach((it, i) => {
+            const el = BK.el("div", "ad-item", root);
+            el.setAttribute("data-layout-allow-overlap", "");
+            el.style.left = (it.x == null ? 60 : it.x) + "px";
+            el.style.top = (it.y == null ? 200 : it.y) + "px";
+            const tam = it.tam || 240;
+            if (it.texto) {
+              const t = BK.el("div", "ad-txt", el, BK.rich(it.texto, it.enfase));
+              t.style.fontSize = tam * 0.4 + "px";
+              t.style.color = BK.cor(it.cor, "acento");
+            } else el.innerHTML = BK.icone(it.icone || "interrogacao", tam, { cor: it.cor, acesa: it.acesa });
+            const rot = it.rot == null ? (i % 2 ? 10 : -12) : it.rot;
+            const at = it.em == null ? 0.08 + i * 0.28 : it.em;
+            tl.fromTo(el, { scale: 0, opacity: 0, rotation: rot - 25 }, { scale: 1, opacity: 1, rotation: rot, duration: 0.36, ease: "back.out(2)" }, at);
+            if (it.balancar !== false) {
+              const half = 0.45;
+              const reps = Math.max(1, Math.floor((out - at - 0.4) / half) - 1);
+              tl.fromTo(el, { y: 0 }, { y: -14, duration: half, ease: "sine.inOut", yoyo: true, repeat: reps, immediateRender: false }, at + 0.36);
+            }
+            if (it.riscar_em != null) {
+              const x = BK.el("div", "ad-x", el, BK.icon.cross(tam * 0.85));
+              x.style.left = tam * 0.0 + "px"; x.style.top = tam * 0.12 + "px";
+              x.setAttribute("data-layout-allow-overlap", "");
+              BK.desenha(tl, x, it.riscar_em, 0.14, 0.1);
+            }
+            tl.to(el, { scale: 0, opacity: 0, duration: 0.16, ease: "power2.in" }, (it.sai_em == null ? out : it.sai_em) + i * 0.04);
+          });
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

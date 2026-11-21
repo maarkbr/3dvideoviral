@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""O "higgsfield" que o Codex do painel enxerga: uma ponte para o painel, que roda o CLI de verdade com a conta da pessoa
+(fora da área isolada) e pede licença no chat antes de gastar crédito. O Codex não lê o login do Higgsfield.
+Usa PAINEL_PORTA, PAINEL_PROJETO e PAINEL_PONTE (um bilhete que só serve para esta ponte)."""
+import json, os, sys, urllib.request
+
+porta, proj, bilhete = os.environ.get("PAINEL_PORTA", ""), os.environ.get("PAINEL_PROJETO", ""), os.environ.get("PAINEL_PONTE", "")
+if not (porta and proj and bilhete):
+    sys.stderr.write("Este higgsfield só funciona dentro do painel do Edição com IA.\n")
+    sys.exit(2)
+corpo = json.dumps({"projeto": proj, "args": sys.argv[1:], "cwd": os.getcwd()}).encode()
+req = urllib.request.Request(f"http://127.0.0.1:{porta}/api/v2/higgsfield", data=corpo, method="POST",
+                             headers={"Content-Type": "application/json", "X-Painel-Ponte": bilhete, "Host": f"127.0.0.1:{porta}"})
+try:
+    r = json.loads(urllib.request.urlopen(req, timeout=75 * 60).read())
+except Exception as e:
+    sys.stderr.write(f"O painel não respondeu ({e.__class__.__name__}). Nada foi gerado.\n")
+    sys.exit(2)
+sys.stdout.write(r.get("saida") or "")
+sys.stderr.write(r.get("erro") or "")
+sys.exit(int(r.get("codigo") or 0))

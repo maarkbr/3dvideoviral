@@ -1,0 +1,89 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" />
+<!-- Notebook 3D (MacBook prata) em CSS, aprovado na intro do vídeo 3D (07/11/2026). Troque assets/tela_claude.jpg pela tela.
+     Tampa com notch e reflexo + base deitada (rotateX 90) com teclado, alto-falantes, trackpad, frente e sombra.
+     Na intro o grupo (#s14-note) fica em rotationX -16, rotationY -24 (dá para ver o teclado de cima).
+     Anime a opacidade no .palco que o contém, nunca no elemento preserve-3d: opacity/filter achatam o 3D.
+     Teste de ângulo: abra com ?rx=-16&ry=-24 -->
+
+<style>
+  @font-face { font-family: "Montserrat"; src: url("assets/fonts/Montserrat-VF.woff2") format("woff2"); font-weight: 100 900; }
+  @font-face { font-family: "Serifa"; src: url("assets/fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; }
+  :root { --preto: #0a0a0b; --branco: #f5f3ee; --amarelo: #ffc400;
+    --glow-branco: 0 0 18px rgba(255,255,255,.35), 0 0 50px rgba(255,196,0,.22); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--preto); font-family: "Montserrat"; color: var(--branco); }
+  section { position: absolute; inset: 0; overflow: hidden; }
+  .grade-escura { position: absolute; inset: 0; background-color: var(--preto);
+    background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 96px 96px; background-position: center; }
+  .vinheta { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.75) 100%); }
+  .brilho { position: absolute; left: 50%; top: 50%; width: 1400px; height: 760px; margin: -380px 0 0 -700px;
+    background: radial-gradient(ellipse at center, rgba(255,196,0,.14), transparent 65%); }
+  .palco { position: absolute; inset: 0; perspective: 1700px; perspective-origin: 50% 45%; }
+  .p3 { position: absolute; transform-style: preserve-3d; will-change: transform; }
+  .rot { font-family: "Serifa", serif; font-style: italic; font-weight: 400; }
+  .gig { font-weight: 900; letter-spacing: -.045em; line-height: .9; }
+  .bw { text-shadow: var(--glow-branco); }
+  .pilula { display: inline-block; background: var(--amarelo); color: #111; font-weight: 800; border-radius: 999px; padding: 10px 30px; }
+  #s14-mais { left: 930px; top: 420px; font-size: 140px; font-weight: 300; color: rgba(255,255,255,.6); }
+  #s14-claude { left: 1100px; top: 380px; font-size: 170px; }
+  #s14-pro { left: 1130px; top: 600px; font-size: 64px; }
+  #s14-rot { left: 1430px; top: 640px; font-size: 80px; }
+
+  /* ===== notebook 3D (estilo MacBook prata) ===== */
+  #s14-note { left: 250px; top: 250px; width: 640px; height: 410px; }
+  .nb-tampa { position: absolute; left: 0; top: 0; width: 640px; height: 410px; transform-origin: 50% 100%; transform: rotateX(14deg);
+    transform-style: preserve-3d; border-radius: 24px 24px 8px 8px; background: #0a0a0c;
+    box-shadow: 0 0 0 3px #b8bcc4, 0 0 0 4px #7e828a, 0 0 80px rgba(160,190,255,.10); }
+  .nb-tela { position: absolute; left: 16px; top: 16px; right: 16px; bottom: 22px; border-radius: 10px; overflow: hidden;
+    background: #1d1d22 url(assets/tela_claude.jpg) center/cover; }
+  .nb-tela::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(118deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 34%, transparent 35%, transparent 100%); }
+  .nb-notch { position: absolute; left: 50%; top: 16px; width: 104px; height: 15px; margin-left: -52px; background: #0a0a0c; border-radius: 0 0 9px 9px; }
+  .nb-notch::after { content: ""; position: absolute; left: 50%; top: 4px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: #1d2433; box-shadow: inset 0 0 2px #4a6080; }
+  .nb-chao { position: absolute; left: 0; top: 410px; width: 640px; height: 440px; transform-origin: 50% 0; transform: rotateX(90deg); transform-style: preserve-3d; }
+  .nb-sombra { position: absolute; left: -90px; top: -40px; right: -90px; bottom: -110px; transform: translateZ(-24px);
+    background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,.85) 0%, rgba(0,0,0,.45) 45%, transparent 70%); filter: blur(14px); }
+  .nb-deck { position: absolute; inset: 0; border-radius: 6px 6px 26px 26px;
+    background: linear-gradient(180deg, #9ea2aa 0%, #c9ccd2 6%, #d6d9de 55%, #c3c6cc 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+  .nb-dobra { position: absolute; left: 70px; right: 70px; top: 0; height: 12px; border-radius: 0 0 8px 8px; background: linear-gradient(#3b3d42, #6b6e75); }
+  .nb-teclado { position: absolute; left: 62px; right: 62px; top: 34px; height: 222px; padding: 10px; border-radius: 10px;
+    background: #b5b8be; display: grid; grid-template-columns: repeat(14, 1fr); grid-template-rows: 0.6fr repeat(5, 1fr); gap: 6px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.25); }
+  .nb-teclado i { display: block; border-radius: 5px; background: linear-gradient(#26272b, #18191c); box-shadow: 0 1px 0 rgba(0,0,0,.4); }
+  .nb-teclado i.esp { grid-column: span 6; }
+  .nb-teclado i.dup { grid-column: span 2; }
+  .nb-som { position: absolute; top: 34px; width: 40px; height: 222px; background-image: radial-gradient(rgba(40,42,46,.55) 1.2px, transparent 1.6px); background-size: 7px 7px; }
+  .nb-som.e { left: 14px; } .nb-som.d { right: 14px; }
+  .nb-track { position: absolute; left: 50%; top: 272px; width: 270px; height: 150px; margin-left: -135px; border-radius: 12px;
+    background: linear-gradient(180deg, #c7cad0, #cdd0d5); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12), inset 0 1px 2px rgba(0,0,0,.18); }
+  .nb-frente { position: absolute; left: 6px; right: 6px; top: 100%; height: 16px; transform-origin: 50% 0; transform: rotateX(-90deg);
+    border-radius: 0 0 12px 12px; background: linear-gradient(#a7abb2, #6f737a); }
+  .nb-frente::after { content: ""; position: absolute; left: 50%; top: 0; width: 130px; height: 7px; margin-left: -65px; border-radius: 0 0 8px 8px; background: #575a60; }
+</style></head>
+<body>
+<section>
+  <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+  <div class="palco"><div id="s14-note" class="p3">
+    <div class="nb-chao"><div class="nb-sombra"></div><div class="nb-deck"><div class="nb-dobra"></div><div class="nb-som e"></div><div class="nb-som d"></div><div class="nb-teclado"></div><div class="nb-track"></div></div><div class="nb-frente"></div></div>
+    <div class="nb-tampa"><div class="nb-tela"></div><div class="nb-notch"></div></div>
+  </div></div>
+  <div id="s14-mais" class="p3">+</div>
+  <div id="s14-claude" class="p3 gig bw">Claude</div>
+  <div id="s14-pro" class="p3"><span class="pilula">plano Pro</span></div>
+  <div id="s14-rot" class="p3 rot">pelo menos</div>
+</section>
+<script>
+  const tec = document.querySelector(".nb-teclado");
+  const linhas = [14, 14, 14, 14, 14, 0];
+  for (let i = 0; i < 14 * 5; i++) tec.appendChild(document.createElement("i"));
+  [["dup"], [], ["esp"], [], []].forEach(() => {});
+  // fileira de baixo: fn ctrl opt cmd [espaço] cmd opt setas
+  ["", "", "dup", "esp", "dup", "", ""].forEach((c) => { const k = document.createElement("i"); if (c) k.className = c; tec.appendChild(k); });
+  const q = new URLSearchParams(location.search);
+  const ry = q.get("ry") ?? -24, rx = q.get("rx") ?? -16;
+  document.getElementById("s14-note").style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+</script>
+</body></html>

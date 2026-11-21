@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .bu-win { position: absolute; left: 70px; top: 140px; width: 940px; height: 560px; border-radius: 28px; background: #121216;
+          border: 3px solid #2a2a30; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55); overflow: hidden; transform-origin: 50% 40%; }
+        .bu-bar { position: absolute; left: 0; top: 0; width: 940px; height: 92px; background: #1b1b21; display: flex; align-items: center; gap: 18px; padding: 0 30px; }
+        .bu-bar b { font-family: "JetBrains Mono", monospace; font-size: 34px; color: #f5f3ee; letter-spacing: 0.08em; }
+        .bu-bar small { margin-left: auto; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 24px; color: #a9a6a0; letter-spacing: 0.12em; }
+        .bu-ico { width: 66px; height: 44px; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .bu-field { position: absolute; left: 40px; top: 130px; width: 860px; height: 230px; border-radius: 20px; background: #1d1d24; border: 3px solid #3a3a44;
+          padding: 30px 34px; font-family: "JetBrains Mono", monospace; font-weight: 700; line-height: 1.3; color: #f5f3ee; }
+        .bu-cursor { display: inline-block; width: 26px; height: 52px; vertical-align: -8px; margin-left: 4px; }
+        .bu-load { position: absolute; left: 40px; top: 400px; width: 860px; height: 22px; border-radius: 11px; background: #26262e; overflow: hidden; }
+        .bu-fill { width: 860px; height: 22px; transform-origin: 0 50%; }
+        .bu-status { position: absolute; left: 40px; top: 450px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 30px; color: #a9a6a0; letter-spacing: 0.1em; }
+        .bu-quote { position: absolute; left: 0; width: 1080px; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; }
+        .bu-quote .bk-title { text-align: center; width: 980px; }
+        .bu-quote small { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.2em; color: #e8c9a0; text-transform: uppercase; }
+        .bu-rev { position: absolute; left: 0; width: 1080px; top: 130px; height: 590px; opacity: 0; }
+        .bu-revicon { position: absolute; left: 0; width: 1080px; top: 0; height: 590px; display: flex; align-items: center; justify-content: center; }
+        .bu-extra { position: absolute; transform-origin: 50% 100%; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"></div>
+      </div>
+      <script>
+        (function () {
+          // BUSCA — janela de IA/buscador: a pergunta é digitada, a barra carrega; depois a resposta (citação) e uma revelação com ícone.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 5.5, rotulo: "", entrada: "desce", saida: null, janela: {}, consulta: "PERGUNTA?", digitar_em: 0.42, cps: 34,
+            status: "PESQUISANDO…", resposta: null, revelacao: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const J = Object.assign({ icone: "lupa", nome: "IA", sub: "BUSCA" }, P.janela || {});
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          BK.card(tl, card, P);
+          BK.rotulo(tl, card, P.rotulo);
+          const win = BK.el("div", "bu-win", card);
+          const bar = BK.el("div", "bu-bar", win);
+          BK.el("div", "bu-ico", bar, BK.icone(J.icone, String(J.icone).startsWith("bandeira") ? 66 : 40));
+          BK.el("b", "", bar, BK.esc(J.nome));
+          BK.el("small", "", bar, BK.esc(J.sub));
+          const field = BK.el("div", "bu-field", win);
+          const Q = String(P.consulta).toUpperCase();
+          field.style.fontSize = (Q.length > 60 ? 38 : 46) + "px";
+          const typed = BK.el("span", "", field);
+          const cur = BK.el("span", "bu-cursor", field);
+          cur.style.background = BK.cor("acento");
+          const load = BK.el("div", "bu-load", win);
+          const fill = BK.el("div", "bu-fill", load);
+          fill.style.background = `linear-gradient(90deg, ${BK.cor("acento")}, #ffd25c)`;
+          const status = BK.el("div", "bu-status", win, BK.esc(P.status));
+          tl.fromTo(win, { scale: 0.8, opacity: 0, y: 30 }, { scale: 1, opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 0.1);
+          // texto digitado (regra discrete-text-sequence: estado lido do tempo da timeline, nada acumulado)
+          const T0 = P.digitar_em, CPS = P.cps, tEnd = T0 + Q.length / CPS;
+          const typer = { t: 0 };
+          tl.fromTo(typer, { t: 0 }, { t: tEnd + 0.6, duration: tEnd + 0.6, ease: "none", onUpdate: () => {
+            const n = Math.max(0, Math.min(Q.length, Math.floor((typer.t - T0) * CPS)));
+            if (typed.textContent.length !== n) typed.textContent = Q.slice(0, n);
+            cur.style.opacity = Math.sin(typer.t * Math.PI * 5) > -0.2 ? 1 : 0;
+          } }, 0);
+          tl.fromTo(status, { opacity: 0 }, { opacity: 1, duration: 0.15 }, tEnd + 0.05);
+          tl.fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, tEnd + 0.1);
+          let next = tEnd + 0.9;
+          const R = P.resposta;
+          if (R && R.texto) {
+            const at = R.em == null ? next : R.em;
+            const qd = BK.el("div", "bu-quote", card);
+            const t = BK.el("div", "bk-title", qd, BK.rich(R.texto, R.enfase || "vermelho"));
+            t.style.fontSize = BK.cabe(R.texto, 980, R.tam || 150) + "px";
+            if (R.autor) BK.el("small", "", qd, BK.esc(R.autor));
+            tl.to(win, { scale: 0.86, opacity: 0, y: -40, duration: 0.24, ease: "power3.in" }, at - 0.08);
+            tl.fromTo(qd, { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.24, ease: "power4.out" }, at);
+            const ate = R.ate == null ? (P.revelacao ? (P.revelacao.em == null ? at + 1.8 : P.revelacao.em) - 0.12 : null) : R.ate;
+            if (ate != null) tl.to(qd, { opacity: 0, y: -30, duration: 0.2, ease: "power2.in" }, ate);
+            next = (ate || at) + 0.14;
+          }
+          const V = P.revelacao;
+          if (V && (V.icone || V.titulo)) {
+            const at = V.em == null ? next : V.em;
+            const rev = BK.el("div", "bu-rev", card);
+            if (!R) tl.to(win, { scale: 0.86, opacity: 0, y: -40, duration: 0.24, ease: "power3.in" }, at - 0.08);
+            if (V.icone) BK.el("div", "bu-revicon", rev, BK.icone(V.icone, V.tam || 620, { label: true }));
+            tl.fromTo(rev, { opacity: 0, scale: 0.7, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.34, ease: "power3.out" }, at);
+            (V.extras || []).forEach((x, i) => {
+              const e = BK.el("div", "bu-extra", rev, BK.icone(x.icone, x.tam || 150));
+              e.style.left = (x.x == null ? 460 : x.x) + "px"; e.style.top = (x.y == null ? 200 : x.y) + "px";
+              e.setAttribute("data-layout-allow-overlap", "");
+              const ex = x.em == null ? at + 0.9 + i * 0.1 : x.em;
+              tl.fromTo(e, { y: -200, rotation: -25, scale: 0, opacity: 0 }, { y: 0, rotation: x.rot || 0, scale: 1, opacity: 1, duration: 0.34, ease: "back.out(1.8)" }, ex);
+            });
+            if (V.titulo) {
+              const tt = BK.titulo(card, null, V.titulo, { y: 730, tam: BK.cabe(V.titulo, 980, V.tam_titulo || 120) });
+              BK.sobe(tl, tt, at + 0.12);
+            }
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

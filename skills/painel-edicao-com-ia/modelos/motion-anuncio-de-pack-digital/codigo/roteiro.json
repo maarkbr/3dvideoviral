@@ -1,0 +1,179 @@
+{
+ "nome": "Pack Edit Pro",
+ "tema": "escuro",
+ "blocos": [
+  {
+   "fala": "Ainda passa horas caçando efeito para editar um vídeo?",
+   "dur": 3.0,
+   "cena": {
+    "tipo": "frase",
+    "texto": "Ainda passa *horas* caçando efeito?"
+   }
+  },
+  {
+   "fala": "E no fim, o vídeo sai com cara de amador.",
+   "dur": 2.6,
+   "cena": {
+    "tipo": "frase",
+    "antes": "E no fim…",
+    "texto": "o vídeo sai com cara de *amador*."
+   }
+  },
+  {
+   "fala": "Conheça o Pack Edit Pro: mais de cem gigas de arquivos premium.",
+   "dur": 3.6,
+   "cena": {
+    "tipo": "logo",
+    "nome": "Pack Edit Pro",
+    "sub": "+100 GB de arquivos premium",
+    "transicao": "circulo"
+   }
+  },
+  {
+   "fala": "Transições, LUTs, overlays e efeitos sonoros num lugar só.",
+   "dur": 3.4,
+   "cena": {
+    "tipo": "recursos",
+    "centro": "Pack Edit Pro",
+    "itens": [
+     {
+      "txt": "Transições",
+      "icone": "raio",
+      "em": "transições"
+     },
+     {
+      "txt": "LUTs",
+      "icone": "estrela",
+      "em": "luts"
+     },
+     {
+      "txt": "Overlays",
+      "icone": "foguete",
+      "em": "overlays"
+     },
+     {
+      "txt": "Efeitos sonoros",
+      "icone": "sino",
+      "em": "efeitos"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E ainda trilhas, centenas de fontes, emojis animados e ícones.",
+   "dur": 3.6,
+   "cena": {
+    "tipo": "lista",
+    "titulo": "E *muito* mais",
+    "itens": [
+     {
+      "txt": "Trilhas sonoras",
+      "em": "trilhas"
+     },
+     {
+      "txt": "Centenas de fontes",
+      "em": "centenas"
+     },
+     {
+      "txt": "Emojis animados",
+      "em": "emojis"
+     },
+     {
+      "txt": "Ícones PNG",
+      "em": "ícones"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Funciona no Premiere, no DaVinci, no CapCut e até no celular.",
+   "dur": 3.6,
+   "cena": {
+    "tipo": "recursos",
+    "centro": "Funciona em qualquer programa",
+    "itens": [
+     {
+      "txt": "Premiere",
+      "logo": "assets/premiere.png",
+      "em": "premiere"
+     },
+     {
+      "txt": "DaVinci",
+      "logo": "assets/davinci.png",
+      "em": "davinci"
+     },
+     {
+      "txt": "CapCut",
+      "logo": "assets/capcut.png",
+      "em": "capcut"
+     },
+     {
+      "txt": "No celular",
+      "icone": "check",
+      "em": "celular"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Você é iniciante? Tem aulas passo a passo e suporte no WhatsApp.",
+   "dur": 3.4,
+   "cena": {
+    "tipo": "lista",
+    "titulo": "Mesmo *iniciante*",
+    "itens": [
+     {
+      "txt": "Aulas passo a passo",
+      "em": "aulas"
+     },
+     {
+      "txt": "Suporte no WhatsApp",
+      "logo": "assets/whatsapp.svg",
+      "em": "suporte"
+     },
+     {
+      "txt": "Atualizações sem custo"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Já são mais de dois mil alunos usando o pack.",
+   "dur": 2.8,
+   "cena": {
+    "tipo": "frase",
+    "texto": "+2.170 *alunos* já usam"
+   }
+  },
+  {
+   "fala": "De noventa e sete por apenas nove e noventa, pagamento único.",
+   "dur": 3.6,
+   "cena": {
+    "tipo": "numero",
+    "titulo": "De R$ 97 por apenas",
+    "valor": "9,90",
+    "sub": "reais · pagamento único",
+    "progresso": 0.1
+   }
+  },
+  {
+   "fala": "Você recebe o acesso na hora e tem sete dias de garantia.",
+   "dur": 3.4,
+   "cena": {
+    "tipo": "frase",
+    "texto": "Acesso na hora e *7* dias de garantia"
+   }
+  },
+  {
+   "fala": "Clique em saiba mais e garanta o seu pack.",
+   "dur": 2.8,
+   "cena": {
+    "tipo": "cta",
+    "titulo": "Garanta o *seu*",
+    "botao": "Saiba mais",
+    "sub": "Pack Edit Pro · R$ 9,90",
+    "em": "clique"
+   }
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+{
+ "titulo": "O jornal do Titanic (teste da skill 2.0, 9:16, ~15 s)",
+ "fontes": "Titanic sai de Southampton em 10/4/1912 rumo a Nova York; bate no iceberg às 23h40 de 14/4/1912 no Atlântico Norte (~600 km ao sul da Terra Nova) e afunda às 2h20 de 15/4 (Encyclopaedia Britannica; Wikipedia 'Sinking of the Titanic'). Manchete real do The New York Times de 16/4/1912: 'Titanic Sinks Four Hours After Hitting Iceberg; 866 Rescued by Carpathia, Probably 1250 Perish' (reproduções em clickamericana.com, historic-newspapers.com, rarenewspapers.com).",
+ "blocos": [
+  {"fala": "Mil novecentos e doze. O Titanic sai de Southampton, rumo a Nova York. Quatro dias depois, bate num iceberg, no Atlântico Norte. E o jornal de Nova York estampa: o Titanic afundou."}
+ ]
+}

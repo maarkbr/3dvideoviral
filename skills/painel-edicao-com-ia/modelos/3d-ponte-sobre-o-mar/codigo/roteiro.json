@@ -1,0 +1,256 @@
+{
+ "tema": "Como se constrói uma ponte no meio do mar (v2, mais clara)",
+ "blocos": [
+  {
+   "fala": "Você já passou por uma ponte enorme no meio do mar e pensou: como alguém constrói isso com a água tão funda?",
+   "etapa": "Câmera aérea: as duas cidades e o mar no meio, ainda sem ponte.",
+   "etiquetas": []
+  },
+  {
+   "fala": "O jeito mais fácil seria encher o mar de pilares. Mas aí os navios grandes não conseguem passar por baixo.",
+   "etapa": "Pilares sobem em fila no meio do mar; o transatlântico chega, bate na laje e os pilares caem.",
+   "etiquetas": [
+    {
+     "txt": "NAVIOS",
+     "p": [
+      0,
+      8.2,
+      -6
+     ],
+     "de": 6.5,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Então a ponte fica em pé sobre só duas torres altas. O meio fica livre, e os navios passam tranquilos.",
+   "etapa": "Duas marcas aparecem na água, uma perto de cada margem; o vão do meio fica livre e um barco passa.",
+   "etiquetas": [
+    {
+     "txt": "SÓ DUAS TORRES",
+     "p": [
+      0,
+      4.5,
+      -4
+     ],
+     "de": 1.5,
+     "ate": 6
+    }
+   ]
+  },
+  {
+   "fala": "Só que cada torre começa lá no fundo do mar, e com a água por cima não dá pra trabalhar direito.",
+   "etapa": "Vista em corte: o fundo do mar, a água em cima e o lugar da torre lá embaixo.",
+   "etiquetas": [
+    {
+     "txt": "FUNDO DO MAR",
+     "p": [
+      -10,
+      -7,
+      2.7
+     ],
+     "de": 2,
+     "ate": 7
+    }
+   ]
+  },
+  {
+   "fala": "Então eles cercam o lugar com uma parede gigante, tipo um balde sem fundo enfiado no mar, e bombas tiram toda a água de dentro.",
+   "etapa": "Corte: as paredes sobem em volta do lugar da torre; a bomba liga e a água de dentro vai baixando.",
+   "etiquetas": [
+    {
+     "txt": "PAREDE GIGANTE",
+     "p": [
+      -10,
+      1.8,
+      2.7
+     ],
+     "de": 2.5,
+     "ate": 6
+    },
+    {
+     "txt": "BOMBA",
+     "p": [
+      -8.8,
+      2.3,
+      -2.5
+     ],
+     "de": 6.5,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Lá embaixo fica um chão seco. Aí dá pra fazer a base da torre como se fosse em terra firme.",
+   "etapa": "Corte: o fundo seco dentro da parede; a base de concreto sobe e as duas torres crescem até o alto.",
+   "etiquetas": [
+    {
+     "txt": "CHÃO SECO",
+     "p": [
+      -10,
+      -7.4,
+      0
+     ],
+     "de": 1,
+     "ate": 4.5
+    }
+   ]
+  },
+  {
+   "fala": "A estrada vai ficar pendurada em dois cabos de aço, como roupa no varal. Mas o cabo é tão pesado que não dá pra levantá-lo inteiro.",
+   "etapa": "O guindaste na balsa tenta erguer o rolo de cabo pronto, entorta e tomba na água.",
+   "etiquetas": [
+    {
+     "txt": "CABO DE AÇO",
+     "p": [
+      5,
+      6.2,
+      7.5
+     ],
+     "de": 2,
+     "ate": 6
+    }
+   ]
+  },
+  {
+   "fala": "Então o cabo é feito ali mesmo, fio por fio. Uma roda vai e volta entre as torres, levando um fio de aço de cada vez.",
+   "etapa": "A roda vermelha corre de uma ponta à outra; a cada passada o cabo fica mais grosso.",
+   "etiquetas": [
+    {
+     "txt": "FIO POR FIO",
+     "p": [
+      -5,
+      15.5,
+      2.6
+     ],
+     "de": 3,
+     "ate": 8
+    }
+   ]
+  },
+  {
+   "fala": "Na ponte Golden Gate, nos Estados Unidos, cada cabo tem mais de vinte e sete mil fios, cada um mais fino que um lápis.",
+   "etapa": "Close no cabo grosso, com a passarela embaixo.",
+   "etiquetas": [
+    {
+     "txt": "27.572 FIOS",
+     "p": [
+      -1,
+      9.5,
+      2.6
+     ],
+     "de": 2,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Esses cabos puxam com tanta força que dobrariam as torres. Por isso, a ponta de cada cabo fica presa num bloco gigante de concreto na margem.",
+   "etapa": "As torres entortam pra dentro e o cabo arranca o chão; depois sobe o bloco de concreto e as torres voltam pro lugar.",
+   "etiquetas": [
+    {
+     "txt": "BLOCO DE CONCRETO",
+     "p": [
+      -27.5,
+      9.4,
+      0
+     ],
+     "de": 6.5,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Na Golden Gate, cada bloco pesa sessenta mil toneladas. É mais ou menos o peso de quarenta mil carros.",
+   "etapa": "O bloco visto de perto, com o cabo entrando nele; carrinhos aparecem ao lado pra dar a escala.",
+   "etiquetas": [
+    {
+     "txt": "60 MIL TONELADAS",
+     "p": [
+      -27.5,
+      9.4,
+      0
+     ],
+     "de": 1,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Aí a pista sobe em pedaços, pendurada nos cabos por fios de aço, começando perto das torres e indo até o meio.",
+   "etapa": "Os pedaços da pista sobem da água e se encaixam, das torres para o meio, presos pelos fios verticais.",
+   "etiquetas": [
+    {
+     "txt": "PEDAÇOS DA PISTA",
+     "p": [
+      3,
+      6.6,
+      2.2
+     ],
+     "de": 2,
+     "ate": 7
+    }
+   ]
+  },
+  {
+   "fala": "Mas ainda falta um inimigo invisível: o vento. Em mil novecentos e quarenta, uma ponte nos Estados Unidos balançou tanto com o vento que caiu.",
+   "etapa": "Linhas de vento passam; a pista ondula e torce cada vez mais.",
+   "etiquetas": [
+    {
+     "txt": "VENTO",
+     "p": [
+      0,
+      10.5,
+      0
+     ],
+     "de": 1,
+     "ate": 5
+    },
+    {
+     "txt": "EUA, 1940",
+     "p": [
+      0,
+      9.5,
+      0
+     ],
+     "de": 5.5,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Por isso, embaixo da pista vai uma grade de aço em triângulos. O vento passa pelos buracos, e a ponte fica firme.",
+   "etapa": "A grade de triângulos aparece embaixo da pista; o vento atravessa e a pista para de balançar.",
+   "etiquetas": [
+    {
+     "txt": "TRIÂNGULOS DE AÇO",
+     "p": [
+      0,
+      3.6,
+      2.2
+     ],
+     "de": 2,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "E é assim que se constrói uma ponte no meio do mar. Se você quer aprender a fazer vídeos assim, comenta 3D.",
+   "etapa": "Carros passando, navio cruzando por baixo e a câmera se afastando pra mostrar a ponte inteira.",
+   "etiquetas": []
+  }
+ ],
+ "fontes": [
+  "https://goldengate.org/exhibits/a-bathtub-for-the-south-tower",
+  "https://trid.trb.org/View/388582",
+  "https://goldengate.org/exhibits/cross-section-of-a-main-cable",
+  "https://www.pbs.org/wgbh/americanexperience/features/goldengate-spinning",
+  "https://www.goldengate.org/bridge/history-research/statistics-data/design-construction-stats/",
+  "https://www.usni.org/magazines/proceedings/1935/april/golden-gate-and-san-francisco-bay-bridges",
+  "https://en.wikipedia.org/wiki/Tacoma_Narrows_Bridge_(1940)",
+  "https://en.wikipedia.org/wiki/Tacoma_Narrows_Bridge_(1950)",
+  "https://www.aps.org/apsnews/2016/11/collapse-of-tacoma-narrows-bridge",
+  "https://www.youtube.com/watch?v=8QMcJC5xYZ4 (referência de clareza, Vital Gyan, 10,5 mi)",
+  "https://www.youtube.com/watch?v=BXDP6ZJ6ams (referência de linguagem, Pacific Learners)"
+ ]
+}

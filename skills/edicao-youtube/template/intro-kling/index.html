@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Intro do vídeo do Kling 4.0 (Lucas Editor). Tempos já na fala acelerada em 1,15x. */
+      @font-face { font-family: "Montserrat"; src: url("assets/fonts/Montserrat-VF.woff2") format("woff2"); font-weight: 100 900; }
+      :root { --preto: #0a0a0b; --branco: #f5f3ee; --amarelo: #ffc400; --card: #16161a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--preto); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", sans-serif; color: var(--branco); }
+      .grade-escura { position: absolute; inset: 0; background-color: var(--preto);
+        background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+        background-size: 96px 96px; background-position: center; }
+      .grade-clara { position: absolute; inset: 0; background-color: #f1f0ec;
+        background-image: linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.07) 1px, transparent 1px);
+        background-size: 96px 96px; background-position: center; }
+      .vinheta { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.75) 100%); }
+      .vinheta-clara { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.18) 100%); }
+      .cheio { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+
+      #s2-30 { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font-size: 300px; font-weight: 900; line-height: 1; color: var(--amarelo); letter-spacing: -.03em; }
+      #s2-1 { position: absolute; left: 0; right: 0; top: 590px; text-align: center; font-size: 84px; font-weight: 800; }
+
+      #s4-tag { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 60px; font-weight: 800; color: #111; letter-spacing: -.02em; }
+      #s4-tag span { background: var(--amarelo); padding: 0 16px; border-radius: 12px; }
+      .kf { position: absolute; top: 350px; width: 400px; height: 225px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.2); background: #000; }
+      .kf img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .kf .num { position: absolute; left: 12px; top: 10px; width: 54px; height: 54px; border-radius: 50%; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; }
+      .kf .anel { position: absolute; inset: 0; border: 7px solid var(--amarelo); border-radius: 16px; }
+      #s4-barra { position: absolute; left: 110px; top: 630px; width: 1678px; height: 10px; border-radius: 6px; background: rgba(0,0,0,.12); overflow: hidden; }
+      #s4-prog { width: 100%; height: 100%; background: var(--amarelo); transform-origin: left center; }
+
+      #s6-nome { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 210px; font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+      #s6-nome b { color: var(--amarelo); }
+      #s6-novo { position: absolute; left: 0; right: 0; top: 590px; display: flex; justify-content: center; }
+      #s6-novo span { background: var(--amarelo); color: #000; font-size: 54px; font-weight: 900; padding: 12px 32px; border-radius: 14px; }
+
+      #s7-esq { position: absolute; left: 130px; top: 300px; width: 660px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      #s7-esq img { width: 100%; height: 182px; object-fit: cover; border-radius: 12px; display: block; }
+      .s7-rot { position: absolute; top: 200px; font-size: 48px; font-weight: 800; color: #111; text-align: center; }
+      #s7-seta { position: absolute; left: 830px; top: 440px; width: 160px; height: 90px; }
+      #v7 { position: absolute; left: 1030px; top: 300px; width: 760px; height: 428px; border-radius: 16px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+
+      #s8-zoom { position: absolute; inset: 0; transform-origin: 1012px 751px; }
+      #s8-anel { position: absolute; left: 530px; top: 352px; width: 868px; height: 412px; border-radius: 44px; border: 4px solid var(--amarelo); }
+      #publi { position: absolute; right: 40px; top: 34px; font-size: 22px; font-weight: 600; color: rgba(255,255,255,.75); }
+
+      .pil { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+      .pil span { font-size: 62px; font-weight: 800; padding: 18px 44px; border-radius: 22px; background: var(--card); border: 2px solid rgba(255,255,255,.2); }
+      .pil.am span { background: var(--amarelo); color: #000; border-color: var(--amarelo); }
+
+      .luz { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; mix-blend-mode: screen; }
+      .leg { position: absolute; left: 0; right: 0; top: 948px; text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -.01em; color: var(--branco); text-shadow: 0 2px 14px rgba(0,0,0,.8); }
+      .leg.escura { color: #111; text-shadow: none; }
+      .leg b { color: var(--amarelo); font-weight: 800; }
+      .leg.escura b { background: var(--amarelo); color: #111; padding: 0 8px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.35" data-width="1920" data-height="1080">
+
+      <!-- S1: o resultado na cara -->
+      <video id="v1" class="cheio" src="assets/curta.mp4" data-start="0" data-duration="1.84" data-media-start="0.5" muted data-track-index="2"></video>
+
+      <!-- S2: 30 segundos, 1 geração -->
+      <section id="s2" class="clip" data-start="1.84" data-duration="1.76" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div id="s2-30">30s</div>
+        <div id="s2-1">uma geração só</div>
+      </section>
+
+      <!-- S3: mesmo personagem em toda cena (cortes secos) -->
+      <video id="v3a" class="cheio" src="assets/curta.mp4" data-start="3.6" data-duration="0.65" data-media-start="1.5" muted data-track-index="2"></video>
+      <video id="v3b" class="cheio" src="assets/curta.mp4" data-start="4.25" data-duration="0.65" data-media-start="15.5" muted data-track-index="2"></video>
+      <video id="v3c" class="cheio" src="assets/curta.mp4" data-start="4.9" data-duration="0.63" data-media-start="27" muted data-track-index="2"></video>
+
+      <!-- S4: o plano, cena por cena -->
+      <section id="s4" class="clip" data-start="5.53" data-duration="4.97" data-track-index="1">
+        <div class="grade-clara"></div><div class="vinheta-clara"></div>
+        <div id="s4-tag">eu planejei <span>todas as cenas</span></div>
+        <div class="kf" id="k1" style="left:110px"><img src="assets/kf/k1.jpg" alt="" /><div class="num">1</div><div class="anel"></div></div>
+        <div class="kf" id="k2" style="left:536px"><img src="assets/kf/k2.jpg" alt="" /><div class="num">2</div><div class="anel"></div></div>
+        <div class="kf" id="k3" style="left:962px"><img src="assets/kf/k3.jpg" alt="" /><div class="num">3</div><div class="anel"></div></div>
+        <div class="kf" id="k4" style="left:1388px"><img src="assets/kf/k4.jpg" alt="" /><div class="num">4</div><div class="anel"></div></div>
+        <div id="s4-barra"><div id="s4-prog"></div></div>
+      </section>
+
+      <!-- S5: resultado de novo -->
+      <video id="v5" class="cheio" src="assets/curta.mp4" data-start="10.5" data-duration="2.7" data-media-start="14" muted data-track-index="2"></video>
+
+      <!-- S6: Kling 4.0 -->
+      <section id="s6" class="clip" data-start="13.2" data-duration="4.19" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div id="s6-nome">KLING <b>4.0</b></div>
+        <div id="s6-novo"><span>a nova IA de vídeo</span></div>
+      </section>
+
+      <!-- S7: storyboard até o vídeo final -->
+      <section id="s7" class="clip" data-start="17.39" data-duration="3.48" data-track-index="1">
+        <div class="grade-clara"></div><div class="vinheta-clara"></div>
+        <div class="s7-rot" id="r1" style="left:130px;width:660px">storyboard</div>
+        <div class="s7-rot" id="r2" style="left:1030px;width:760px">vídeo final</div>
+        <div id="s7-esq">
+          <img src="assets/kf/k1.jpg" alt="" /><img src="assets/kf/k2.jpg" alt="" />
+          <img src="assets/kf/k3.jpg" alt="" /><img src="assets/kf/k4.jpg" alt="" />
+        </div>
+        <svg id="s7-seta" viewBox="0 0 160 90" fill="none" stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M8 45h140M108 12l40 33-40 33"/></svg>
+      </section>
+      <video id="v7" src="assets/curta.mp4" data-start="17.39" data-duration="3.48" data-media-start="24" muted data-track-index="2"></video>
+
+      <!-- S8: Higgsfield -->
+      <div id="s8-zoom">
+        <video id="v8" class="cheio" src="assets/higgsfield_home.mp4" data-start="20.87" data-duration="5.06" data-media-start="4" muted data-track-index="2"></video>
+      </div>
+      <section id="s8" class="clip" data-start="20.87" data-duration="5.06" data-track-index="3">
+        <div id="s8-anel"></div>
+        <div id="publi">#publi</div>
+      </section>
+
+      <!-- S9: onde está o link -->
+      <section id="s9" class="clip" data-start="25.93" data-duration="4.42" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div class="pil am" id="p1" style="top:340px"><span>link na descrição</span></div>
+        <div class="pil" id="p2" style="top:510px"><span>e no comentário fixado</span></div>
+      </section>
+
+      <!-- luzes do pack: tocam com o som delas mesmas -->
+      <video id="luz1" class="luz" src="assets/tr/burn25.mp4" data-start="12.9" data-duration="0.6" data-has-audio="true" data-volume="0.3" data-track-index="5"></video>
+      <video id="luz2" class="luz" src="assets/tr/filmburn3.mp4" data-start="20.6" data-duration="0.67" data-has-audio="true" data-volume="0.3" data-track-index="5"></video>
+      <video id="luz3" class="luz" src="assets/tr/filmburn3.mp4" data-start="29.68" data-duration="0.67" data-has-audio="true" data-volume="0.35" data-track-index="5"></video>
+
+      <!-- legendas -->
+      <div class="leg clip" data-start="0" data-duration="1.84" data-track-index="6">esse vídeo inteiro foi feito com <b>ia</b></div>
+      <div class="leg clip" data-start="1.84" data-duration="1.76" data-track-index="6">30 segundos, uma geração só</div>
+      <div class="leg clip" data-start="3.6" data-duration="1.93" data-track-index="6">e o personagem <b>não muda</b> em nenhuma cena</div>
+      <div class="leg escura clip" data-start="5.53" data-duration="2.3" data-track-index="6">o mais legal: eu planejei todas as cenas antes</div>
+      <div class="leg escura clip" data-start="7.83" data-duration="2.67" data-track-index="6">e a ia teve que passar por todas, <b>na ordem</b></div>
+      <div class="leg clip" data-start="10.5" data-duration="2.7" data-track-index="6">vou te mostrar como criar um vídeo assim, do zero</div>
+      <div class="leg clip" data-start="13.2" data-duration="1.56" data-track-index="6">com o <b>kling 4.0</b></div>
+      <div class="leg clip" data-start="14.76" data-duration="2.63" data-track-index="6">que está todo mundo comentando</div>
+      <div class="leg escura clip" data-start="17.39" data-duration="2.24" data-track-index="6">do storyboard e do planejamento das cenas</div>
+      <div class="leg escura clip" data-start="19.63" data-duration="1.24" data-track-index="6">até o vídeo final pronto</div>
+      <div class="leg clip" data-start="20.87" data-duration="3.35" data-track-index="6">tudo feito na <b>higgsfield</b>, parceira do canal</div>
+      <div class="leg clip" data-start="24.22" data-duration="1.71" data-track-index="6">onde está o <b>kling 4.0</b></div>
+      <div class="leg clip" data-start="25.93" data-duration="1.44" data-track-index="6">se quiser criar sua conta</div>
+      <div class="leg clip" data-start="27.37" data-duration="2.75" data-track-index="6">o link está na descrição e no comentário fixado</div>
+
+      <!-- áudio: narração + efeitos do pack, bem abaixo da voz -->
+      <audio id="narracao" src="assets/narracao.wav" data-start="0" data-duration="30.35" data-volume="1" data-track-index="10"></audio>
+      <audio id="s-30" src="assets/sfx/impact.mp3" data-start="1.82" data-duration="1" data-volume="0.12" data-track-index="11"></audio>
+      <audio id="s-1g" src="assets/sfx/click.mp3" data-start="2.7" data-volume="0.1" data-track-index="12"></audio>
+      <audio id="s-w3" src="assets/sfx/whoosh.mp3" data-start="3.5" data-volume="0.1" data-track-index="13"></audio>
+      <audio id="s-k1" src="assets/sfx/click.mp3" data-start="6.14" data-volume="0.1" data-track-index="12"></audio>
+      <audio id="s-k2" src="assets/sfx/click.mp3" data-start="6.34" data-volume="0.1" data-track-index="14"></audio>
+      <audio id="s-k3" src="assets/sfx/click.mp3" data-start="6.54" data-volume="0.1" data-track-index="12"></audio>
+      <audio id="s-k4" src="assets/sfx/click.mp3" data-start="6.74" data-volume="0.1" data-track-index="14"></audio>
+      <audio id="s-w5" src="assets/sfx/whoosh.mp3" data-start="10.38" data-volume="0.1" data-track-index="13"></audio>
+      <audio id="s-novo" src="assets/sfx/button.mp3" data-start="14.76" data-duration="0.6" data-volume="0.1" data-track-index="12"></audio>
+      <audio id="s-w7" src="assets/sfx/whoosh.mp3" data-start="17.27" data-volume="0.1" data-track-index="13"></audio>
+      <audio id="s-zoom" src="assets/sfx/whoosh.mp3" data-start="24.1" data-volume="0.1" data-track-index="13"></audio>
+      <audio id="s-p1" src="assets/sfx/button.mp3" data-start="27.37" data-duration="0.6" data-volume="0.1" data-track-index="12"></audio>
+      <audio id="s-p2" src="assets/sfx/click.mp3" data-start="28.35" data-volume="0.1" data-track-index="14"></audio>
+      <audio id="s-riser" src="assets/sfx/riser.mp3" data-start="28.5" data-duration="1.85" data-volume="0.12" data-track-index="15"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // S1
+      tl.fromTo("#v1", { scale: 1.08 }, { scale: 1, duration: 1.8, ease: "power2.out" }, 0);
+      // S2
+      tl.fromTo("#s2-30", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "power4.out" }, 1.84);
+      tl.fromTo("#s2-1", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 2.7);
+      // S4: as cenas entram no "planejei" e o destaque passa por elas na ordem, no "passar por todas"
+      ["#k1", "#k2", "#k3", "#k4"].forEach((k, i) => tl.fromTo(k, { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 6.14 + i * 0.2));
+      tl.fromTo("#s4-tag", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 5.6);
+      tl.fromTo("#s4-prog", { scaleX: 0 }, { scaleX: 1, duration: 2.3, ease: "none" }, 7.95);
+      ["#k1 .anel", "#k2 .anel", "#k3 .anel", "#k4 .anel"].forEach((a, i) => {
+        tl.fromTo(a, { opacity: 0 }, { opacity: 1, duration: 0.1 }, 7.95 + i * 0.58);
+        if (i < 3) tl.to(a, { opacity: 0, duration: 0.1 }, 7.95 + (i + 1) * 0.58);
+      });
+      // S5
+      tl.fromTo("#v5", { scale: 1 }, { scale: 1.08, duration: 2.65, ease: "none" }, 10.5);
+      // S6
+      tl.fromTo("#s6-nome", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power4.out" }, 13.3);
+      tl.fromTo("#s6-novo span", { scale: 0.4, opacity: 0, rotation: -5 }, { scale: 1, opacity: 1, rotation: -2, duration: 0.3, ease: "back.out(2.4)" }, 14.76);
+      // S7
+      tl.fromTo("#s7-esq", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 17.45);
+      tl.fromTo("#r1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 17.6);
+      tl.fromTo("#s7-seta", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 19.4);
+      tl.fromTo("#v7", { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 19.63);
+      tl.fromTo("#r2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 19.7);
+      // S8: zoom no card do Kling 4.0, no "onde está o Kling"
+      tl.fromTo("#s8-zoom", { scale: 1, x: 0, y: 0 }, { scale: 2.5, x: -50, y: -190, duration: 0.6, ease: "power3.inOut" }, 24.05);
+      tl.fromTo("#s8-anel", { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, 24.65);
+      tl.fromTo("#publi", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 20.9);
+      // S9
+      tl.fromTo("#p1", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 27.37);
+      tl.fromTo("#p2", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 28.35);
+      // legendas
+      document.querySelectorAll(".leg").forEach((l) => tl.fromTo(l, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.14, ease: "power2.out" }, parseFloat(l.dataset.start)));
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

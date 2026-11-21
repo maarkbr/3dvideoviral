@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .gc-bg { position: absolute; inset: 0; }
+        .gc-glow { position: absolute; left: 140px; top: 420px; width: 800px; height: 800px; border-radius: 50%; }
+        .gc-part { position: absolute; left: 0; top: 0; }
+        .gc-zoom { position: absolute; inset: 0; transform-origin: 50% 42%; }
+        .gc-stack { position: absolute; left: 60px; width: 960px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        .gc-label { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.2em; color: #e8c9a0; text-transform: uppercase; text-align: center; }
+        .gc-icon { filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6)); }
+        .gc-line { font-family: "LT Anton", sans-serif; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; color: #f5f3ee;
+          text-align: center; text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); width: 960px; }
+        .gc-line.serifa { font-family: "LT Garamond", serif; text-transform: none; font-weight: 600; letter-spacing: -0.02em; line-height: 0.98; }
+        .gc-rule { width: 520px; height: 10px; border-radius: 5px; transform-origin: 50% 50%; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="gc-bg" id="__ID__-bg"></div>
+        <div class="gc-glow" id="__ID__-glow"></div>
+        <div id="__ID__-parts"></div>
+        <div class="gc-zoom" id="__ID__-zoom"><div class="gc-stack" id="__ID__-stack"></div></div>
+      </div>
+      <script>
+        (function () {
+          // GANCHO — título de abertura em tela cheia (0–3 s): 2–3 linhas batendo no ritmo, saída "atravessando" para o vídeo.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 3, rotulo: "", icone: "", icone_tam: 210, linhas: [{ texto: "Título do *corte*" }], regua: true,
+            fundo: "vermelho", particulas: "estrelas", estilo: "condensada", batidas: null, saida: null, topo: 470 }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const $ = (k) => document.querySelector("#" + ID + "-" + k);
+          const serif = P.estilo === "serifa";
+          $("bg").style.background = serif ? "#0B0B0D" : BK.fundo(P.fundo, 42);
+          $("glow").style.background = serif ? "none" : `radial-gradient(circle, ${BK.cor("acento")}6B 0%, rgba(215, 38, 30, 0.18) 45%, rgba(0, 0, 0, 0) 70%)`;
+          const stack = $("stack");
+          stack.style.top = P.topo + "px";
+          const label = P.rotulo ? BK.el("div", "gc-label", stack, BK.esc(P.rotulo)) : null;
+          const icon = P.icone ? BK.el("div", "gc-icon", stack, BK.icone(P.icone, P.icone_tam)) : null;
+          const n = P.linhas.length;
+          const step = Math.min(0.68, Math.max(0.3, (P.dur - 0.9) / Math.max(1, n)));
+          const beats = P.batidas || P.linhas.map((_, i) => +(0.1 + i * step).toFixed(2));
+          const lines = P.linhas.map((ln, i) => {
+            const d = BK.el("div", "gc-line" + (serif ? " serifa" : ""), stack, BK.rich(ln.texto, ln.enfase));
+            const base = ln.tam || (n >= 3 && i === n - 1 ? 94 : 150);
+            d.style.fontSize = BK.cabe(ln.texto, 940, base, serif ? "serifa" : "anton") + "px";
+            d.style.color = BK.cor(ln.cor || (i === 1 && !serif ? "acento" : "branco"));
+            return d;
+          });
+          let rule = null;
+          if (P.regua && n >= 2 && !serif) {
+            rule = document.createElement("div");
+            rule.className = "gc-rule";
+            rule.style.background = BK.cor("acento");
+            stack.insertBefore(rule, lines[Math.min(2, n - 1)] && n >= 3 ? lines[2] : null);
+          }
+          // ambiente: partículas derivando + brilho respirando (regras ambient-glow-bloom, sine-wave-loop)
+          if (P.particulas !== "nenhuma" && !serif) {
+            const parts = $("parts");
+            for (let i = 0; i < 9; i++) {
+              const s = BK.el("div", "gc-part", parts, P.particulas === "pontos"
+                ? `<svg viewBox="0 0 100 100" width="40" height="40"><circle cx="50" cy="50" r="46" fill="${BK.cor("acento")}"/></svg>`
+                : `<svg viewBox="0 0 100 100" width="90" height="90"><polygon points="${BK.starPts(50, 50, 46, 0)}" fill="#FFD23F"/></svg>`);
+              const x = 40 + BK.hash(i * 3 + 1) * 940, y = 120 + BK.hash(i * 5 + 2) * 1620, sc = 0.35 + BK.hash(i * 7 + 3) * 0.7;
+              const r0 = BK.hash(i * 13) * 60;
+              gsap.set(s, { x, scale: sc, opacity: 0.1 + BK.hash(i * 11) * 0.18 });
+              tl.fromTo(s, { y, rotation: r0 }, { y: y - 70 - BK.hash(i) * 60, rotation: r0 + 40, duration: P.dur, ease: "none" }, 0);
+            }
+          }
+          tl.fromTo($("glow"), { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }, 0);
+          tl.to($("glow"), { scale: 1.08, duration: Math.max(0.4, (P.dur - 0.6) / 2), ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.6);
+          // batidas: uma entrada diferente por linha (regra kinetic-beat-slam)
+          if (label) tl.fromTo(label, { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.02);
+          if (icon) tl.fromTo(icon, { scale: 0, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.42, ease: "back.out(1.8)" }, 0.06);
+          const ENTRADAS = [
+            [{ scale: 1.6, opacity: 0, filter: "blur(18px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power4.out" }],
+            [{ xPercent: -60, opacity: 0, skewX: -14 }, { xPercent: 0, opacity: 1, skewX: 0, duration: 0.36, ease: "expo.out" }],
+            [{ yPercent: 70, opacity: 0, rotation: 4 }, { yPercent: 0, opacity: 1, rotation: 0, duration: 0.4, ease: "power3.out" }],
+          ];
+          lines.forEach((el, i) => {
+            const [a, b] = ENTRADAS[i % 3];
+            tl.fromTo(el, a, b, beats[i] == null ? 0.1 + i * step : beats[i]);
+          });
+          if (rule) tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, (beats[1] || 0.78) + 0.16);
+          // segura com um respiro finito e sai atravessando para o vídeo
+          const out = P.saida == null ? P.dur - 0.26 : P.saida;
+          const last = (beats[n - 1] || 0) + 0.4;
+          if (out - last > 0.2) tl.fromTo($("zoom"), { scale: 1 }, { scale: 1.035, duration: out - last, ease: "sine.inOut" }, last);
+          tl.to($("zoom"), { scale: 2.6, opacity: 0, duration: 0.26, ease: "power3.in" }, out);
+          tl.to([$("bg"), $("glow"), $("parts")], { opacity: 0, duration: 0.2, ease: "power2.in" }, out + 0.06);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

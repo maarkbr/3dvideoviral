@@ -1,0 +1,14 @@
+{
+ "tema": "Por que o café do mundo é brasileiro",
+ "fontes": [
+  "Revista Cultivar: Brasil responde por cerca de um terço da produção mundial e lidera há 150 anos — https://www.revistacultivar.com.br/noticias/brasil-pais-campeao-do-agronegocio-cafe",
+  "Agência Senado (via eCycle): Brasil tem 37% da produção mundial; maior fornecedor desde 1828 — https://www.ecycle.com.br/simbolo-do-brasil-ha-200-anos-cafe-busca-superar-danos-ambientais/",
+  "Band: o ciclo do café começou no Vale do Paraíba e seguiu para o Oeste Paulista — https://www.band.com.br/nacional/sp/ciclo-do-cafe-conheca-a-historia-do-vale-do-paraiba-na-producao-cafeeira",
+  "Casa da Boia / Prefeitura de Santos: a São Paulo Railway (1867) ligou o interior paulista ao porto de Santos para escoar o café — https://casadaboia.com.br/cultural/a_presenca_do_cafe_na%20formacao_de_sao_paulo.pdf"
+ ],
+ "blocos": [
+  {"fala": "Um em cada três cafés do mundo sai do Brasil."},
+  {"fala": "E não é de hoje: o país lidera há mais de cento e cinquenta anos."},
+  {"fala": "Começou no Vale do Paraíba, ganhou o interior paulista e seguia de trem até o porto de Santos."}
+ ]
+}

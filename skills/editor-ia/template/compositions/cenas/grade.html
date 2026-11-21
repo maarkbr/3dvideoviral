@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .gd-grid { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }
+        .gd-b { position: absolute; }
+        .gd-mark { position: absolute; left: 0; top: 0; opacity: 0; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"></div>
+      </div>
+      <script>
+        (function () {
+          // GRADE — muitos ícones iguais se espalham do centro (regra center-outward-expansion); num tempo todos ganham X (ou check) e um carimbo bate.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 3.9, rotulo: "", entrada: "wipe-dir", saida: null, icone: "cedula", colunas: 11, linhas: 6,
+            marcar: null, carimbo: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          BK.card(tl, card, P);
+          BK.rotulo(tl, card, P.rotulo, 0.12);
+          const grid = BK.el("div", "gd-grid", card);
+          const COLS = Math.max(2, P.colunas), ROWS = Math.max(1, P.linhas);
+          const DX = 900 / (COLS - 1), DY = ROWS > 1 ? Math.min(118, 600 / (ROWS - 1)) : 0;
+          const X0 = 90, Y0 = ROWS > 1 ? 200 : 480, S = Math.round(Math.min(DX, DY || 118) * 0.8);
+          const mk = P.marcar ? (P.marcar.icone === "check" || P.marcar.icone === "certo" ? BK.icon.check : BK.icon.cross) : null;
+          const items = [];
+          for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+            const b = BK.el("div", "gd-b", grid, BK.icone(P.icone, S));
+            const x = X0 + c * DX, y = Y0 + r * DY;
+            b.style.left = x - S / 2 + "px"; b.style.top = y - S / 2 + "px";
+            b.setAttribute("data-layout-allow-overlap", "");
+            let m = null;
+            if (mk) { m = BK.el("div", "gd-mark", b, mk(S * 0.84)); m.style.left = S * 0.08 + "px"; m.style.top = S * 0.15 + "px"; }
+            items.push({ b, m, x, y, d: Math.hypot(x - 540, y - 500) });
+          }
+          items.forEach((it, i) => {
+            const at = 0.15 + (it.d / 620) * 0.55 + BK.hash(i) * 0.06;
+            tl.fromTo(it.b, { x: 540 - it.x, y: 500 - it.y, scale: 0.2, opacity: 0, rotation: (BK.hash(i * 7) - 0.5) * 60 },
+              { x: 0, y: 0, scale: 1, opacity: 1, rotation: (BK.hash(i * 3) - 0.5) * 10, duration: 0.5, ease: "power3.out" }, at);
+          });
+          const HIT = P.marcar && P.marcar.em != null ? P.marcar.em : P.carimbo && P.carimbo.em != null ? P.carimbo.em : P.dur - 0.9;
+          if (mk) items.forEach((it, i) => tl.fromTo(it.m, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power3.in" }, HIT - 0.12 + BK.hash(i * 11) * 0.12));
+          if (P.carimbo && P.carimbo.texto) {
+            const w = BK.el("div", "bk-center", card);
+            w.style.top = "380px"; w.style.height = "240px";
+            w.setAttribute("data-layout-allow-overlap", "");
+            const st = BK.stamp(w, P.carimbo.texto, P.carimbo.cor || "vermelho", BK.cabe(P.carimbo.texto, 900, P.carimbo.tam || 200, "anton", 0.75));
+            BK.stampIn(tl, st, P.carimbo.em == null ? HIT : P.carimbo.em, P.carimbo.rot == null ? -8 : P.carimbo.rot);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .ro-dots { position: absolute; left: -60px; top: 60px; width: 1200px; height: 1180px; opacity: 0.5;
+          background-image: radial-gradient(circle, rgba(170, 190, 230, 0.45) 2.6px, transparent 3.4px); background-size: 34px 34px;
+          -webkit-mask-image: radial-gradient(70% 60% at 50% 50%, #000 40%, transparent 100%); mask-image: radial-gradient(70% 60% at 50% 50%, #000 40%, transparent 100%); }
+        .ro-svg { position: absolute; left: 0; top: 0; }
+        .ro-pin { position: absolute; width: 220px; margin-left: -110px; display: flex; flex-direction: column; align-items: center; gap: 8px; transform-origin: 50% 100%; }
+        .ro-pin b { font-family: "LT Anton", sans-serif; font-weight: 400; font-size: 70px; color: #f5f3ee; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+        .ro-veh { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6)); }
+        .ro-label { position: absolute; left: 0; width: 1080px; top: 64px; text-align: center; }
+      </style>
+      <div id="root" data-composition-id="b17-voo" data-width="1080" data-height="1920">
+        <div class="bk-full" id="b17-voo-bg"></div>
+      </div>
+      <script>
+        (function () {
+          // ROTA — mapa de pontos com origem e destino; a rota se desenha enquanto o veículo segue por ela (regra svg-path-draw).
+          // x, y = ponta do pino (onde a rota começa/termina), em px da tela. Mantenha y < 1250 (legenda livre).
+          const ID = "b17-voo";
+          const P = Object.assign({ dur: 3, rotulo: "", fundo: "azul", veiculo: "aviao", em: 0.4, dur_voo: 2.2,
+            origem: { nome: "A", icone: "pino", cor: "vermelho", x: 800, y: 330 }, destino: { nome: "B", icone: "pino", cor: "verde", x: 250, y: 990 } },
+            /*PARAMS*/{"rotulo": "SAINDO DA CHINA", "fundo": "azul", "veiculo": "aviao", "em": 0.3, "dur_voo": 2.0, "origem": {"nome": "CHINA", "icone": "bandeira-china", "cor": "#D7261E", "x": 790, "y": 345}, "destino": {"nome": "BRASIL", "icone": "bandeira-brasil", "cor": "#13A05B", "x": 225, "y": 1005}, "dur": 3.74}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const bg = document.querySelector("#" + ID + "-bg");
+          bg.style.background = BK.fundo(P.fundo, 35);
+          const dots = BK.el("div", "ro-dots", bg);
+          let label = null;
+          if (P.rotulo) label = BK.el("div", "bk-label ro-label", bg, BK.esc(P.rotulo));
+          const O = Object.assign({ x: 800, y: 330, cor: "vermelho" }, P.origem || {}), D = Object.assign({ x: 250, y: 990, cor: "verde" }, P.destino || {});
+          const dx = D.x - O.x, dy = D.y - O.y;
+          const d = `M ${O.x} ${O.y} C ${O.x + 0.1 * dx} ${O.y + 0.44 * dy}, ${O.x + 0.71 * dx} ${O.y + 0.35 * dy}, ${D.x} ${D.y}`;
+          const NS = "http://www.w3.org/2000/svg";
+          const svg = document.createElementNS(NS, "svg");
+          svg.setAttribute("class", "ro-svg"); svg.setAttribute("width", "1080"); svg.setAttribute("height", "1300"); svg.setAttribute("viewBox", "0 0 1080 1300");
+          bg.appendChild(svg);
+          const mkPath = (o) => { const p = document.createElementNS(NS, "path"); p.setAttribute("d", d); p.setAttribute("fill", "none"); for (const k in o) p.setAttribute(k, o[k]); svg.appendChild(p); return p; };
+          const ac = BK.cor("acento");
+          mkPath({ stroke: ac, "stroke-opacity": "0.35", "stroke-width": "8", "stroke-linecap": "round", "stroke-dasharray": "2 24" });
+          const trail = mkPath({ stroke: ac, "stroke-width": "10", "stroke-linecap": "round" });
+          const mkPin = (S) => {
+            const p = BK.el("div", "ro-pin", bg);
+            const hasFlag = S.icone && S.icone !== "pino";
+            if (hasFlag) BK.el("div", "", p, BK.icone(S.icone, 150));
+            BK.el("div", "", p, BK.icon.pin(70, BK.cor(S.cor)));
+            if (S.nome) BK.el("b", "", p, BK.esc(S.nome));
+            // ponta do pino em (x, y): bandeira ~100 + gap 8 + pino 70
+            p.style.left = S.x + "px";
+            p.style.top = S.y - (hasFlag ? 178 : 70) + "px";
+            return p;
+          };
+          const po = mkPin(O), pd = mkPin(D);
+          const veh = BK.el("div", "ro-veh", bg, BK.icone(P.veiculo, 120));
+          tl.fromTo(dots, { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 0.5, duration: 0.6, ease: "power2.out" }, 0);
+          if (label) tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+          tl.fromTo(po, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(2)" }, 0.08);
+          tl.fromTo(pd, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(2)" }, 0.24);
+          const len = trail.getTotalLength();
+          trail.style.strokeDasharray = `${len}`;
+          trail.style.strokeDashoffset = `${len}`;
+          const prog = { p: 0 };
+          const place = () => {
+            const dd = Math.max(0.001, prog.p) * len;
+            const pt = trail.getPointAtLength(dd), pt2 = trail.getPointAtLength(Math.min(len, dd + 4));
+            const ang = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI + 90;
+            veh.style.transform = `translate(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px) rotate(${ang.toFixed(1)}deg)`;
+            trail.style.strokeDashoffset = (len - dd).toFixed(1);
+          };
+          tl.fromTo(prog, { p: 0 }, { p: 1, duration: P.dur_voo, ease: "power1.inOut", onUpdate: place }, P.em);
+          tl.fromTo(veh, { opacity: 0 }, { opacity: 1, duration: 0.15 }, P.em);
+          tl.to(pd, { scale: 1.15, duration: 0.2, ease: "power2.out", yoyo: true, repeat: 1 }, P.em + P.dur_voo);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+{
+ "titulo": "1 real por segundo: quanto tempo até o milhão? (modo caprichado)",
+ "fontes": "Conta: 1.000.000 s ÷ 86.400 s por dia = 11,57 dias; 1.000.000.000 s ÷ 86.400 ÷ 365,25 = 31,69 anos.",
+ "destaques": [
+  "milhão",
+  "bilhão",
+  "onze",
+  "trinta",
+  "dois",
+  "anos",
+  "dias",
+  "Claude",
+  "palito"
+ ],
+ "blocos": [
+  {
+   "fala": "Se você ganhasse um real por segundo, quanto tempo levaria pra ficar milionário?",
+   "cena": {
+    "tipo": "ilustracao",
+    "imagem": "cenas/b1.jpg",
+    "prompt": "Our character standing on a sunny city sidewalk, looking up with a surprised happy face as shiny gold coins fall from the sky like rain around him, one coin bouncing off his head. Behind him, small buildings, a lamp post, trees. Hanging above him from two ropes, a big wooden sign with hand lettering.",
+    "texto_na_imagem": [
+     "R$ 1 POR SEGUNDO"
+    ],
+    "camera": {
+     "de": {
+      "x": 540,
+      "y": 820,
+      "z": 1.0
+     },
+     "para": {
+      "x": 540,
+      "y": 760,
+      "z": 1.1
+     }
+    },
+    "animar": "gold coins keep falling like rain all over the street, the stick figure man looks up, smiles and waves his raised hand, a coin bounces off his head."
+   }
+  },
+  {
+   "fala": "Imagina: cada segundo que passa, cai uma moeda no seu bolso. Dormindo, comendo, até no banho.",
+   "cena": {
+    "tipo": "ilustracao",
+    "imagem": "cenas/b2.jpg",
+    "prompt": "A comic strip with three horizontal panels stacked vertically, all inside the top 62% of the image, with thick black panel borders and a plain paper area below them. Top panel: our character sleeping in bed at night while gold coins drop into a glass jar on the nightstand. Middle panel: our character eating a plate of rice and beans at a kitchen table while coins drop into his shirt pocket. Bottom panel: our character showering behind a curtain, smiling, with coins falling with the water.",
+    "camera": {
+     "de": {
+      "x": 540,
+      "y": 640,
+      "z": 1.12
+     },
+     "para": {
+      "x": 540,
+      "y": 900,
+      "z": 1.12
+     },
+     "ease": "power1.inOut"
+    },
+    "animar": "in the top panel the man sleeps and breathes while coins drop into the jar; in the middle panel he chews his food while coins drop into his shirt pocket; in the bottom panel water and coins fall in the shower and he smiles. The three panels and their borders stay fixed."
+   }
+  },
+  {
+   "fala": "Pra juntar um milhão, você ia precisar de onze dias e meio. Sem parar.",
+   "cena": {
+    "tipo": "numero",
+    "imagem": "cenas/b3.jpg",
+    "rotulo": "1 MILHÃO =",
+    "valor": 11,
+    "sufixo": " DIAS",
+    "sub": "e meio, sem parar",
+    "em": "onze",
+    "prompt": "The top 38% of the image is a plain light wall (a panel will cover it). Below, between 40% and 62% of the height: our character celebrating with arms up next to a wall calendar with 11 days crossed out with a red marker and the 12th half crossed, and a big pile of money bags at his feet.",
+    "animar": "the stick figure man jumps and celebrates with his arms up, the money bags wobble a little. The calendar stays unchanged."
+   }
+  },
+  {
+   "fala": "Agora o bilhão. Você ia dormir, acordar e dormir de novo, por muito, muito mais tempo.",
+   "cena": {
+    "tipo": "ilustracao",
+    "imagem": "cenas/b4.jpg",
+    "prompt": "A bedroom at night seen from the side: our character asleep in bed under a blanket, a big round clock on the wall with motion lines around its hands, a wall calendar with many pages flying off it through the air, the window showing the moon and stars. Calm, slightly sleepy mood.",
+    "camera": {
+     "de": {
+      "x": 540,
+      "y": 820,
+      "z": 1.0
+     },
+     "para": {
+      "x": 600,
+      "y": 700,
+      "z": 1.12
+     }
+    },
+    "animar": "the man sleeps and breathes slowly under the blanket, the clock hands spin fast, calendar pages keep flying off the wall calendar across the room."
+   }
+  },
+  {
+   "fala": "Um bilhão de segundos dá quase trinta e dois anos.",
+   "cena": {
+    "tipo": "numero",
+    "imagem": "cenas/b5.jpg",
+    "rotulo": "1 BILHÃO =",
+    "valor": 32,
+    "prefixo": "~",
+    "sufixo": " ANOS",
+    "sub": "31 anos e 8 meses",
+    "em": "trinta",
+    "prompt": "The top 38% of the image is a plain sunset sky (a panel will cover it). Below, between 40% and 62% of the height: five versions of our character standing in a row on a long road, from left to right getting older: a young man, a man with a beard, a man with grey hair, an older man with glasses, an old man with white hair and a cane.",
+    "animar": "the five men stand on the road, breathe, blink and shift their weight a little; the old man leans on his cane; the sun sets slowly."
+   }
+  },
+  {
+   "fala": "Parecem vizinhos. Mas um é uma viagem de férias, e o outro é uma vida inteira.",
+   "cena": {
+    "tipo": "ilustracao",
+    "imagem": "cenas/b6.jpg",
+    "prompt": "The image is split vertically into two halves by a hand-drawn line. Left half: our character relaxing in a beach chair under a striped umbrella, a short vacation, with a small wooden sign. Right half: a long winding road of life from a school to a house to a park bench, with our character at different ages along it, and a small wooden sign. At the top, a hand-lettered title over each half.",
+    "texto_na_imagem": [
+     "MILHÃO (title over the left half)",
+     "BILHÃO (title over the right half)",
+     "11 DIAS (sign on the left)",
+     "32 ANOS (sign on the right)"
+    ],
+    "camera": {
+     "de": {
+      "x": 540,
+      "y": 820,
+      "z": 1.0
+     },
+     "para": {
+      "x": 540,
+      "y": 800,
+      "z": 1.06
+     }
+    },
+    "animar": "on the left the man relaxes on the beach chair and the sea waves move; on the right the small figures walk slowly along the winding road. The titles and the signs stay unchanged."
+   }
+  },
+  {
+   "fala": "Esse vídeo foi feito inteiro no Claude. Comenta palito que eu te mando a skill.",
+   "cena": {
+    "tipo": "cta",
+    "imagem": "cenas/b7.jpg",
+    "palavra": "PALITO",
+    "selo": "Feito 100% com IA no Claude",
+    "logo": "claude",
+    "depois": "que eu te mando a skill",
+    "prompt": "Our character in the same cozy living room, standing in the lower part of the frame (feet at about 62% of the height), smiling and pointing up with one finger. The top 45% of the image is a plain light wall with nothing on it (text will go there).",
+    "animar": "the man smiles, blinks and points up, moving his pointing hand up and down a little. The top of the image stays empty."
+   }
+  }
+ ]
+}

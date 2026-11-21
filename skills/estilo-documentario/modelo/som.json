@@ -1,0 +1,8 @@
+{
+ "sfx_pasta": "auto",
+ "auto": true,
+ "trilha": {"arquivo": "", "credito": "", "trechos": []},
+ "teclas": {"sons": ["keyboard/keyboard-letter-firm.wav", "keyboard/keyboard-letter-medium.wav", "keyboard/keyboard-letter-soft.wav"], "ataque": 0.009, "nivel": -29},
+ "sons": {},
+ "efeitos": []
+}

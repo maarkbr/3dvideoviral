@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .ct-field { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+        .ct-drop { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity; }
+        .ct-count { position: absolute; left: 0; width: 1080px; top: 170px; height: 420px; display: flex; justify-content: center; align-items: center; }
+        .ct-num { display: inline-block; font-family: "LT Anton", sans-serif; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap;
+          transform-origin: 50% 60%; text-shadow: 0 20px 50px rgba(0, 0, 0, 0.55); }
+        .ct-label { position: absolute; left: 50px; width: 980px; top: 720px; text-align: center; }
+        .ct-chips { position: absolute; left: 0; width: 1080px; top: 930px; display: flex; flex-direction: column; align-items: center; gap: 26px; }
+        .ct-chip { display: flex; align-items: center; gap: 22px; padding: 18px 34px; border-radius: 22px; background: #f5f3ee; color: #0b0b0d;
+          font-family: "LT Anton", sans-serif; font-size: 80px; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+        .ct-chip.dark { background: #16161a; color: #f5f3ee; border: 3px solid #2a2a30; }
+        .ct-final { position: absolute; left: 0; width: 1080px; top: 230px; height: 560px; display: flex; align-items: center; justify-content: center; opacity: 0; transform-origin: 50% 50%; }
+        .ct-finbox { position: relative; }
+        .ct-scr { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "LT Anton", sans-serif; color: #b7f5c8; }
+        .ct-press { position: absolute; border-radius: 10px; border: 6px solid #ffffff; opacity: 0; }
+        .ct-fintitle { position: absolute; left: 50px; width: 980px; top: 860px; text-align: center; opacity: 0; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-full" id="__ID__-bg"></div>
+      </div>
+      <script>
+        (function () {
+          // CONTADOR — número que conta crescendo (regra counting-dynamic-scale) + rótulo, chuva de ícones (regra particle-burst),
+          // chips de texto e um final opcional (ícone que entra; se for "urna", aperta CONFIRMA e a tela troca).
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 4.8, fundo: "verde", numero: { de: 0, valor: 100, em: 0.22, dur: 0.7, prefixo: "", sufixo: "", cor: "acento", tam: 400 },
+            rotulo: null, chuva: null, chips: [], final: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const N = Object.assign({ de: 0, valor: 100, em: 0.22, dur: 0.7, prefixo: "", sufixo: "", cor: "acento", tam: 400 }, P.numero || {});
+          const tl = gsap.timeline({ paused: true });
+          const bg = document.querySelector("#" + ID + "-bg");
+          bg.style.background = BK.fundo(P.fundo, 36);
+          const field = BK.el("div", "ct-field", bg);
+          field.setAttribute("data-layout-allow-overlap", "");
+          const fmt = (v) => {
+            const s = String(Math.round(v));
+            return N.prefixo + (Math.abs(v) >= 10000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, ".") : s) + N.sufixo;
+          };
+          const count = BK.el("div", "ct-count", bg);
+          const num = BK.el("span", "ct-num", count, BK.esc(fmt(N.de)));
+          num.style.color = BK.cor(N.cor);
+          num.style.fontSize = BK.cabe(fmt(N.valor), 1000, N.tam) + "px";
+          const cnt = { v: N.de };
+          tl.fromTo(cnt, { v: N.de }, { v: N.valor, duration: N.dur, ease: "power3.out", onUpdate: () => { num.textContent = fmt(cnt.v); } }, N.em);
+          tl.fromTo(num, { scale: 0.45, opacity: 0 }, { scale: 1, opacity: 1, duration: N.dur, ease: "power3.out" }, N.em);
+          const hide = [count];
+          if (P.rotulo && P.rotulo.texto) {
+            const l = BK.el("div", "bk-title ct-label", bg, BK.rich(P.rotulo.texto));
+            l.style.fontSize = BK.cabe(P.rotulo.texto, 980, P.rotulo.tam || 140) + "px";
+            tl.fromTo(l, { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }, P.rotulo.em == null ? N.em + N.dur : P.rotulo.em);
+            hide.push(l);
+          }
+          // chuva: um driver linear, posição = fórmula balística do tempo (nunca acumulada)
+          if (P.chuva) {
+            const C = Object.assign({ icone: "dinheiro", qtd: 26, em: 0.9, dur: 3.0 }, P.chuva);
+            const G = 900, drops = [];
+            for (let i = 0; i < C.qtd; i++) {
+              const el = BK.el("div", "ct-drop", field, BK.icone(C.icone, 150 + BK.hash(i * 3) * 70));
+              el.setAttribute("data-layout-allow-overlap", "");
+              drops.push({ el, x0: BK.hash(i * 5 + 1) * 1080 - 80, y0: -260 - BK.hash(i * 7 + 2) * 900, vx: (BK.hash(i * 11 + 3) - 0.5) * 140,
+                vy: 120 + BK.hash(i * 13 + 4) * 160, spin: (BK.hash(i * 17 + 5) - 0.5) * 420, r0: (BK.hash(i * 19) - 0.5) * 80 });
+            }
+            const fall = { T: 0 };
+            tl.fromTo(fall, { T: 0 }, { T: 1, duration: C.dur, ease: "none", onUpdate: () => {
+              const t = fall.T * C.dur;
+              drops.forEach((b) => {
+                const x = b.x0 + b.vx * t, y = b.y0 + b.vy * t + 0.5 * G * t * t;
+                b.el.style.opacity = y > 1980 || fall.T <= 0 ? 0 : 1;
+                b.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${(b.r0 + b.spin * t).toFixed(1)}deg)`;
+              });
+            } }, C.em);
+          }
+          const chips = BK.el("div", "ct-chips", bg);
+          (P.chips || []).forEach((c, i) => {
+            const e = BK.el("div", "ct-chip" + (c.escuro ? " dark" : ""), chips);
+            if (c.icone) BK.el("span", "", e, BK.icone(c.icone, 78));
+            BK.el("span", "", e, BK.rich(c.texto, c.enfase));
+            e.style.fontSize = BK.cabe(c.texto, c.icone ? 760 : 860, 80, "anton", 0.9) + "px";
+            tl.fromTo(e, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, c.em == null ? 2 + i * 0.9 : c.em);
+          });
+          hide.push(chips);
+          const F = P.final;
+          if (F && F.icone) {
+            const at = F.em == null ? P.dur - 1.2 : F.em;
+            tl.to(hide, { opacity: 0, y: -40, duration: 0.22, ease: "power2.in" }, at - 0.07);
+            const fin = BK.el("div", "ct-final", bg);
+            const box = BK.el("div", "ct-finbox", fin);
+            const w = F.tam || (F.icone === "urna" ? 800 : 420);
+            box.innerHTML = BK.icone(F.icone, w);
+            tl.fromTo(fin, { opacity: 0, y: 200, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "power3.out" }, at);
+            if (F.icone === "urna") {
+              const h = w * 0.62;
+              const mkScr = (txt) => { const s = BK.el("div", "ct-scr", box, BK.esc(txt)); Object.assign(s.style, { left: w * 0.08 + "px", top: h * 0.157 + "px", width: w * 0.44 + "px", height: h * 0.577 + "px", fontSize: w * 0.2125 + "px" }); return s; };
+              const s1 = mkScr(F.de == null ? "00" : F.de), s2 = mkScr(F.para == null ? "FIM" : F.para);
+              s2.style.opacity = 0;
+              const press = BK.el("div", "ct-press", box);
+              Object.assign(press.style, { left: w * 0.816 + "px", top: h * 0.704 + "px", width: w * 0.115 + "px", height: h * 0.133 + "px" });
+              const ap = F.apertar_em == null ? at + 0.4 : F.apertar_em;
+              tl.fromTo(press, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.1, ease: "power2.out" }, ap);
+              tl.to(fin, { keyframes: [{ scale: 0.97, duration: 0.07, ease: "power2.in" }, { scale: 1, duration: 0.22, ease: "back.out(3)" }] }, ap + 0.02);
+              tl.set(s1, { opacity: 0 }, ap + 0.08);
+              tl.set(s2, { opacity: 1 }, ap + 0.08);
+              tl.to(press, { opacity: 0, duration: 0.2 }, ap + 0.28);
+            }
+            if (F.titulo) {
+              const ft = BK.el("div", "bk-title ct-fintitle", bg, BK.rich(F.titulo));
+              ft.style.fontSize = BK.cabe(F.titulo, 980, 110) + "px";
+              BK.sobe(tl, ft, at + 0.15);
+            }
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

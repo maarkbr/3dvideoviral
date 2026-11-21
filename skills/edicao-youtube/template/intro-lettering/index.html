@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Intro da aula "Presets no Mac" (Lucas Editor) — v2: corte do "os presets" refeito e textos em lettering
+         (rótulo pequeno + palavra gigante, letra a letra com desfoque, brilho, tracking, serifa itálica).
+         Fala cortada em 1,15x (assets/voz.wav). A trilha entra na mixagem final, com ducking pela voz. */
+      @font-face { font-family: "Montserrat"; src: url("assets/fonts/Montserrat-VF.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Serifa"; src: url("assets/fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; }
+      :root { --preto: #0a0a0b; --branco: #f5f3ee; --amarelo: #ffc400; --card: #16161a;
+        --glow: 0 0 22px rgba(255,196,0,.55), 0 0 60px rgba(255,196,0,.28);
+        --glow-branco: 0 0 18px rgba(255,255,255,.35), 0 0 50px rgba(255,196,0,.22); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--preto); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", sans-serif; color: var(--branco); }
+      .grade-escura { position: absolute; inset: 0; background-color: var(--preto);
+        background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+        background-size: 96px 96px; background-position: center; }
+      .grade-clara { position: absolute; inset: 0; background-color: #f1f0ec;
+        background-image: linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.07) 1px, transparent 1px);
+        background-size: 96px 96px; background-position: center; }
+      .vinheta { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.75) 100%); }
+      .vinheta-clara { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.18) 100%); }
+      .brilho { position: absolute; left: 50%; top: 50%; width: 1400px; height: 760px; margin: -380px 0 0 -700px;
+        background: radial-gradient(ellipse at center, rgba(255,196,0,.14), transparent 65%); }
+      .cheio { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      .centro { position: absolute; left: 0; right: 0; text-align: center; white-space: nowrap; }
+
+      /* kit de lettering */
+      .rot { font-family: "Serifa", serif; font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+      .rot-sans { font-weight: 600; letter-spacing: .02em; }
+      .gig { font-weight: 900; letter-spacing: -.045em; line-height: .9; }
+      .gig-serifa { font-family: "Serifa", serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; line-height: .9; }
+      .am { color: var(--amarelo); text-shadow: var(--glow); }
+      .bw { text-shadow: var(--glow-branco); }
+      .letra, .pal { display: inline-block; will-change: transform, filter, opacity; }
+
+      /* S1 */
+      #s1-rot { top: 300px; font-size: 110px; text-align: left; left: 470px; right: auto; }
+      #s1-gig { top: 400px; font-size: 270px; }
+      /* S2 */
+      #s2-cartao { position: absolute; left: 260px; top: 150px; width: 1400px; height: 788px; border-radius: 28px; overflow: hidden;
+        box-shadow: 0 30px 90px rgba(0,0,0,.7); border: 2px solid rgba(255,255,255,.14); }
+      #s2-cartao video { width: 100%; height: 100%; object-fit: cover; }
+      #s2-tag { position: absolute; left: 200px; top: 70px; }
+      #s2-tag .r { font-size: 70px; display: block; margin-left: 10px; }
+      #s2-tag .g { font-size: 120px; display: block; margin-top: -40px; }
+      /* S3 */
+      #s3-logo { position: absolute; left: 850px; top: 120px; width: 220px; height: 220px; border-radius: 48px; overflow: hidden;
+        box-shadow: 0 0 60px rgba(255,255,255,.12); }
+      #s3-logo img { width: 100%; height: 100%; object-fit: cover; }
+      #s3-rot { top: 390px; font-size: 100px; text-align: left; left: 560px; right: auto; }
+      #s3-gig { top: 470px; font-size: 290px; }
+      /* S4 */
+      #s4-a { top: 70px; font-size: 64px; color: #111; text-align: left; left: 610px; right: auto; }
+      #s4-b { top: 110px; font-size: 230px; color: #111; }
+      #s4-c { top: 260px; font-size: 58px; color: #111; text-align: right; right: 560px; left: auto; }
+      #s4-risco { position: absolute; left: 700px; top: 330px; width: 520px; height: 18px; border-radius: 9px; background: var(--amarelo); transform-origin: left center; }
+      .pr { position: absolute; top: 430px; width: 330px; height: 341px; border-radius: 20px; overflow: hidden; background: #000;
+        box-shadow: 0 14px 34px rgba(0,0,0,.25); }
+      .pr img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .pr .anel { position: absolute; inset: 0; border: 8px solid var(--amarelo); border-radius: 20px; opacity: 0; }
+      #s4-dl { position: absolute; left: 1560px; top: 40px; width: 280px; height: 280px; }
+      #s4-barra { position: absolute; left: 220px; top: 820px; width: 1480px; height: 12px; border-radius: 6px; background: rgba(0,0,0,.12); overflow: hidden; }
+      #s4-prog { width: 100%; height: 100%; background: var(--amarelo); transform-origin: left center; }
+      /* S5 */
+      #s5-caixa { position: absolute; left: 160px; top: 380px; width: 340px; height: 340px; }
+      #s5-a { top: 230px; font-size: 130px; }
+      #s5-no { top: 400px; font-size: 150px; text-align: left; left: 640px; right: auto; }
+      #s5-mac { top: 360px; font-size: 400px; left: 160px; }
+      #s5-pil { position: absolute; left: 0; right: 0; top: 820px; display: flex; justify-content: center; }
+      #s5-pil span { background: var(--amarelo); color: #000; font-size: 54px; font-weight: 900; padding: 12px 34px; border-radius: 14px; transform: rotate(-2deg); }
+      /* S6 */
+      #s6-esc { position: absolute; inset: 0; background: rgba(0,0,0,.66); }
+      #s6-rot { top: 290px; font-size: 130px; text-align: left; left: 430px; right: auto; }
+      #s6-gig { top: 400px; font-size: 280px; }
+      /* S7 */
+      #s7-rot { top: 120px; font-size: 64px; }
+      #s7-gig { top: 175px; font-size: 190px; }
+      .so { position: absolute; top: 520px; width: 600px; height: 250px; border-radius: 30px; display: flex; align-items: center; justify-content: center;
+        font-size: 110px; font-weight: 900; letter-spacing: -.03em; }
+      #s7-win { left: 230px; background: var(--card); border: 2px solid rgba(255,255,255,.2); }
+      #s7-mac { left: 1090px; background: var(--amarelo); color: #000; box-shadow: 0 0 60px rgba(255,196,0,.35); }
+      #s7-ig { position: absolute; left: 860px; top: 555px; width: 200px; text-align: center; font-size: 150px; font-weight: 900; line-height: 1; }
+      /* S8 */
+      #s8-janela { position: absolute; left: 260px; top: 120px; width: 1400px; height: 560px; border-radius: 26px; background: #1c1c21;
+        border: 2px solid rgba(255,255,255,.12); box-shadow: 0 30px 90px rgba(0,0,0,.7); overflow: hidden; }
+      #s8-barra { position: absolute; left: 0; right: 0; top: 0; height: 96px; background: rgba(255,255,255,.06); display: flex; align-items: center;
+        padding-left: 40px; gap: 46px; font-size: 40px; font-weight: 600; }
+      #s8-barra .it { padding: 8px 18px; border-radius: 10px; color: rgba(245,243,238,.85); }
+      #s8-barra .it.maca { font-size: 48px; }
+      #s8-barra .it.finder { font-weight: 800; color: var(--branco); }
+      #s8-menu { position: absolute; left: 820px; top: 110px; width: 560px; padding: 16px; border-radius: 18px; background: #2a2a31;
+        border: 2px solid rgba(255,255,255,.12); box-shadow: 0 20px 50px rgba(0,0,0,.5); font-size: 34px; font-weight: 600; }
+      #s8-menu div { padding: 14px 20px; border-radius: 10px; color: rgba(245,243,238,.6); display: flex; justify-content: space-between; }
+      #s8-menu div.alvo { background: var(--amarelo); color: #000; font-weight: 800; }
+      #s8-rot { top: 690px; font-size: 80px; text-align: left; left: 600px; right: auto; }
+      #s8-gig { top: 735px; font-size: 175px; }
+      /* S9 */
+      #s9-esc { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.2) 55%, rgba(0,0,0,0) 100%); }
+      #s9-rot { top: 70px; font-size: 100px; text-align: left; left: 600px; right: auto; }
+      #s9-gig { top: 140px; font-size: 240px; }
+      #s9-fav { position: absolute; left: 1470px; top: 60px; width: 240px; height: 240px; }
+
+      .luz { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; mix-blend-mode: screen; }
+      .leg { position: absolute; left: 0; right: 0; top: 960px; text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -.01em;
+        color: var(--branco); text-shadow: 0 2px 10px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.9); }
+      .leg.escura { color: #111; text-shadow: none; }
+      .leg b { color: var(--amarelo); font-weight: 800; }
+      .leg.escura b { background: var(--amarelo); color: #111; padding: 0 8px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18.9" data-width="1920" data-height="1080">
+
+      <!-- S1: seja muito / BEM-VINDO -->
+      <section id="s1" class="clip" data-start="0" data-duration="2.18" data-track-index="1">
+        <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+        <div id="s1-rot" class="centro rot palavras">seja muito</div>
+        <div id="s1-gig" class="centro gig am letras">bem-vindo</div>
+      </section>
+
+      <!-- S2: a plataforma num cartão + lettering "mais uma AULA" -->
+      <section id="s2" class="clip" data-start="2.18" data-duration="2.26" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div id="s2-cartao"><video id="v2" src="assets/tela.mp4" data-start="2.18" data-duration="2.26" data-media-start="2.18" muted data-track-index="2"></video></div>
+        <div id="s2-tag"><span class="r rot">mais uma</span><span class="g gig am letras">AULA</span></div>
+      </section>
+
+      <!-- S3: logo + presets para / CapCut -->
+      <section id="s3" class="clip" data-start="4.44" data-duration="1.08" data-track-index="1">
+        <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+        <div id="s3-logo"><img src="assets/capcut-logo.png" /></div>
+        <div id="s3-rot" class="centro rot palavras">presets para</div>
+        <div id="s3-gig" class="centro gig bw letras">CapCut</div>
+      </section>
+
+      <!-- S4: como / instalar / os presets, com os presets da plataforma -->
+      <section id="s4" class="clip" data-start="5.52" data-duration="2.86" data-track-index="1">
+        <div class="grade-clara"></div><div class="vinheta-clara"></div>
+        <div id="s4-a" class="centro rot-sans palavras">como</div>
+        <div id="s4-risco"></div>
+        <div id="s4-b" class="centro gig-serifa letras">instalar</div>
+        <div id="s4-c" class="centro rot-sans palavras">os presets</div>
+        <div class="pr" id="k0" style="left:220px"><img src="assets/preset0.png" /><div class="anel"></div></div>
+        <div class="pr" id="k1" style="left:603px"><img src="assets/preset1.png" /><div class="anel"></div></div>
+        <div class="pr" id="k2" style="left:986px"><img src="assets/preset2.png" /><div class="anel"></div></div>
+        <div class="pr" id="k3" style="left:1370px"><img src="assets/preset3.png" /><div class="anel"></div></div>
+        <div id="s4-barra"><div id="s4-prog"></div></div>
+        <video id="s4-dl" src="assets/094_download.webm" data-start="5.55" data-duration="2.8" muted data-track-index="3"></video>
+      </section>
+
+      <!-- S5: PRESETS / no / Mac -->
+      <section id="s5" class="clip" data-start="8.38" data-duration="2.24" data-track-index="1">
+        <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+        <video id="s5-caixa" src="assets/068_packing_box.webm" data-start="8.38" data-duration="2.24" muted data-track-index="3"></video>
+        <div id="s5-a" class="centro gig bw letras">PRESETS</div>
+        <div id="s5-no" class="centro rot palavras">no</div>
+        <div id="s5-mac" class="centro gig-serifa am letras">Mac</div>
+        <div id="s5-pil"><span>passo a passo</span></div>
+      </section>
+
+      <!-- S6: muito / SIMPLES por cima da tela -->
+      <section id="s6" class="clip" data-start="10.62" data-duration="1.22" data-track-index="1">
+        <video id="v6" class="cheio" src="assets/tela.mp4" data-start="10.62" data-duration="1.22" data-media-start="10.62" muted data-track-index="2"></video>
+        <div id="s6-esc"></div>
+        <div id="s6-rot" class="centro rot palavras">muito</div>
+        <div id="s6-gig" class="centro gig bw letras">simples</div>
+      </section>
+
+      <!-- S7: a mesma / lógica + Windows = Mac -->
+      <section id="s7" class="clip" data-start="11.84" data-duration="2.84" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div id="s7-rot" class="centro rot-sans palavras">segue a mesma</div>
+        <div id="s7-gig" class="centro gig-serifa am letras">lógica</div>
+        <div class="so" id="s7-win">Windows</div>
+        <div id="s7-ig">=</div>
+        <div class="so" id="s7-mac">Mac</div>
+      </section>
+
+      <!-- S8: barra de menus do Mac + menus / diferentes -->
+      <section id="s8" class="clip" data-start="14.68" data-duration="1.88" data-track-index="1">
+        <div class="grade-escura"></div><div class="vinheta"></div>
+        <div id="s8-janela">
+          <div id="s8-barra">
+            <div class="it maca">&#63743;</div><div class="it finder">Finder</div><div class="it" id="m1">Arquivo</div><div class="it" id="m2">Editar</div>
+            <div class="it" id="m3">Visualizar</div><div class="it" id="m4">Ir</div><div class="it" id="m5">Janela</div>
+          </div>
+          <div id="s8-menu"><div>Voltar</div><div>Avançar</div><div>Downloads</div><div class="alvo">Ir para a pasta… <span>⇧⌘G</span></div></div>
+        </div>
+        <div id="s8-rot" class="centro rot palavras">menus</div>
+        <div id="s8-gig" class="centro gig-serifa am letras">diferentes</div>
+      </section>
+
+      <!-- S9: é bem / SIMPLES sobre a tela -->
+      <section id="s9" class="clip" data-start="16.56" data-duration="2.34" data-track-index="1">
+        <video id="v9" class="cheio" src="assets/tela.mp4" data-start="16.56" data-duration="2.34" data-media-start="16.56" muted data-track-index="2"></video>
+        <div id="s9-esc"></div>
+        <div id="s9-rot" class="centro rot palavras">é bem</div>
+        <div id="s9-gig" class="centro gig am letras">simples</div>
+        <video id="s9-fav" src="assets/095_favorite.webm" data-start="16.9" data-duration="2.0" muted data-track-index="3"></video>
+      </section>
+
+      <!-- luzes do pack (film burn) -->
+      <video id="luz1" class="luz" src="assets/burn25.mp4" data-start="8.15" data-duration="0.6" muted data-track-index="5"></video>
+      <video id="luz2" class="luz" src="assets/burn-vintage.mp4" data-start="11.66" data-duration="0.37" muted data-track-index="5"></video>
+      <video id="luz3" class="luz" src="assets/burn25.mp4" data-start="18.3" data-duration="0.6" muted data-track-index="5"></video>
+
+      <!-- legendas -->
+      <div id="l1" class="leg clip" data-start="2.18" data-duration="2.26" data-track-index="6">a mais uma aula aqui da nossa plataforma</div>
+      <div id="l2" class="leg clip" data-start="4.44" data-duration="1.08" data-track-index="6">de presets para <b>capcut</b></div>
+      <div id="l3" class="leg escura clip" data-start="5.52" data-duration="1.66" data-track-index="6">nessa aula eu vou te ensinar</div>
+      <div id="l4" class="leg escura clip" data-start="7.18" data-duration="1.2" data-track-index="6">como <b>instalar</b> os presets</div>
+      <div id="l5" class="leg clip" data-start="8.38" data-duration="2.24" data-track-index="6">no <b>macbook</b>, beleza?</div>
+      <div id="l6" class="leg clip" data-start="10.62" data-duration="1.22" data-track-index="6">e aqui é muito simples</div>
+      <div id="l7" class="leg clip" data-start="11.84" data-duration="2.08" data-track-index="6">segue a mesma lógica do <b>windows</b></div>
+      <div id="l8" class="leg clip" data-start="13.92" data-duration="0.76" data-track-index="6">só que aqui é <b>mac</b></div>
+      <div id="l9" class="leg clip" data-start="14.68" data-duration="1.88" data-track-index="6">então ele tem alguns menus diferentes</div>
+      <div id="l10" class="leg clip" data-start="16.56" data-duration="1.7" data-track-index="6">mas é bem <b>simples</b> mesmo</div>
+
+      <!-- áudio: voz + efeitos de interface do pack (mais baixos). A trilha entra na mixagem final. -->
+      <audio id="voz" src="assets/voz.wav" data-start="0" data-duration="18.24" data-volume="1" data-track-index="10"></audio>
+      <audio id="x1" src="assets/sfx/pop.mp3" data-media-start="1.95" data-start="0.9" data-duration="0.8" data-volume="0.08" data-track-index="11"></audio>
+      <audio id="x2" src="assets/sfx/whoosh-suave.wav" data-start="2.05" data-duration="1" data-volume="0.09" data-track-index="12"></audio>
+      <audio id="x3" src="assets/sfx/click-ui.wav" data-start="2.5" data-duration="0.6" data-volume="0.07" data-track-index="13"></audio>
+      <audio id="x4" src="assets/sfx/whoosh-suave.wav" data-start="4.32" data-duration="1" data-volume="0.09" data-track-index="11"></audio>
+      <audio id="x5" src="assets/sfx/click-ui.wav" data-start="5.9" data-duration="0.5" data-volume="0.06" data-track-index="12"></audio>
+      <audio id="x6" src="assets/sfx/click-ui.wav" data-start="6.15" data-duration="0.5" data-volume="0.06" data-track-index="13"></audio>
+      <audio id="x7" src="assets/sfx/click-ui.wav" data-start="6.4" data-duration="0.5" data-volume="0.06" data-track-index="14"></audio>
+      <audio id="x8" src="assets/sfx/click-ui.wav" data-start="6.65" data-duration="0.5" data-volume="0.06" data-track-index="15"></audio>
+      <audio id="x9" src="assets/sfx/riser.mp3" data-start="7.0" data-duration="1.38" data-volume="0.06" data-track-index="16"></audio>
+      <audio id="x10" src="assets/sfx/impacto.wav" data-start="8.38" data-duration="1.2" data-volume="0.09" data-track-index="11"></audio>
+      <audio id="x11" src="assets/sfx/pop.mp3" data-media-start="1.95" data-start="10.15" data-duration="0.8" data-volume="0.08" data-track-index="12"></audio>
+      <audio id="x12" src="assets/sfx/whoosh-grave.wav" data-start="10.55" data-duration="1" data-volume="0.08" data-track-index="13"></audio>
+      <audio id="x13" src="assets/sfx/whoosh-suave.wav" data-start="11.72" data-duration="1" data-volume="0.09" data-track-index="14"></audio>
+      <audio id="x14" src="assets/sfx/click-interface.mp3" data-start="13.16" data-duration="0.5" data-volume="0.07" data-track-index="15"></audio>
+      <audio id="x15" src="assets/sfx/click-interface.mp3" data-start="14.3" data-duration="0.5" data-volume="0.07" data-track-index="16"></audio>
+      <audio id="x16" src="assets/sfx/whoosh-suave.wav" data-start="14.56" data-duration="1" data-volume="0.09" data-track-index="11"></audio>
+      <audio id="x17" src="assets/sfx/click-ui.wav" data-start="15.6" data-duration="0.5" data-volume="0.07" data-track-index="12"></audio>
+      <audio id="x18" src="assets/sfx/whoosh-suave.wav" data-start="16.44" data-duration="1" data-volume="0.09" data-track-index="13"></audio>
+      <audio id="x19" src="assets/sfx/pop.mp3" data-media-start="1.95" data-start="17.1" data-duration="0.8" data-volume="0.08" data-track-index="14"></audio>
+      <audio id="x20" src="assets/sfx/whoosh-grave.wav" data-start="18.2" data-duration="0.7" data-volume="0.09" data-track-index="15"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      // quebra .letras em letras e .palavras em palavras (para animar cada uma)
+      document.querySelectorAll(".letras").forEach((el) => {
+        el.innerHTML = [...el.textContent].map((c) => c === " " ? " " : `<span class="letra">${c}</span>`).join("");
+      });
+      document.querySelectorAll(".palavras").forEach((el) => {
+        el.innerHTML = el.textContent.split(" ").map((w) => `<span class="pal">${w}</span>`).join(" ");
+      });
+      const tl = gsap.timeline({ paused: true });
+      const L = (sel) => document.querySelectorAll(sel + " .letra");
+      const P = (sel) => document.querySelectorAll(sel + " .pal");
+      // entradas do kit
+      const letrasSobe = (sel, t, st = 0.045) => tl.fromTo(L(sel), { y: 90, opacity: 0, filter: "blur(14px)", scale: 1.25 },
+        { y: 0, opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.42, ease: "power3.out", stagger: st }, t);
+      const letrasDigita = (sel, t, st = 0.05) => tl.fromTo(L(sel), { opacity: 0, x: -24, filter: "blur(10px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.22, ease: "power2.out", stagger: st }, t);
+      const palavrasBlur = (sel, t, st = 0.18) => tl.fromTo(P(sel), { opacity: 0, x: -60, filter: "blur(16px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: st }, t);
+      const deriva = (sel, t, d, s = 1.05) => tl.fromTo(sel, { scale: 1 }, { scale: s, duration: d, ease: "none" }, t);
+
+      // S1: "seja" / "muito" na fala, BEM-VINDO letra a letra com brilho
+      tl.fromTo(P("#s1-rot")[0], { opacity: 0, x: -60, filter: "blur(16px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 0.0);
+      tl.fromTo(P("#s1-rot")[1], { opacity: 0, x: -60, filter: "blur(16px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 0.62);
+      letrasSobe("#s1-gig", 0.92, 0.04);
+      deriva("#s1-gig", 1.35, 0.83, 1.05);
+      // S2
+      tl.fromTo("#s2-cartao", { y: 120, opacity: 0, scale: 0.92, rotationX: 12 }, { y: 0, opacity: 1, scale: 1, rotationX: 0, duration: 0.4, ease: "power3.out" }, 2.18);
+      tl.fromTo("#v2", { scale: 1 }, { scale: 1.12, duration: 2.26, ease: "none" }, 2.18);
+      tl.fromTo("#s2-tag .r", { opacity: 0, x: -50, filter: "blur(14px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 2.25);
+      letrasSobe("#s2-tag .g", 2.45, 0.06);
+      // S3
+      tl.fromTo("#s3-logo", { scale: 0.3, opacity: 0, rotation: -14, filter: "blur(12px)" }, { scale: 1, opacity: 1, rotation: 0, filter: "blur(0px)", duration: 0.32, ease: "back.out(2)" }, 4.44);
+      palavrasBlur("#s3-rot", 4.5, 0.12);
+      letrasSobe("#s3-gig", 4.8, 0.04);
+      // S4
+      palavrasBlur("#s4-a", 5.6);
+      letrasDigita("#s4-b", 7.38, 0.04);
+      tl.fromTo("#s4-risco", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power3.inOut" }, 7.65);
+      palavrasBlur("#s4-c", 7.72, 0.14);
+      ["#k0", "#k1", "#k2", "#k3"].forEach((k, i) => tl.fromTo(k, { y: 60, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 5.9 + i * 0.25));
+      document.querySelectorAll("#s4 .anel").forEach((a, i) => {
+        tl.fromTo(a, { opacity: 0 }, { opacity: 1, duration: 0.08 }, 6.95 + i * 0.3);
+        if (i < 3) tl.to(a, { opacity: 0, duration: 0.08 }, 6.95 + (i + 1) * 0.3);
+      });
+      tl.fromTo("#s4-prog", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "none" }, 6.95);
+      tl.fromTo("#s4-dl", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 5.55);
+      // S5: PRESETS fecha o espaçamento, "no", Mac em serifa com brilho
+      // PRESETS: letras começam espalhadas e se juntam (tracking feito com transform, sem tremer)
+      L("#s5-a").forEach((el, i, all) => tl.fromTo(el, { x: (i - (all.length - 1) / 2) * 70, opacity: 0, filter: "blur(10px)" },
+        { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 8.38));
+      palavrasBlur("#s5-no", 8.74);
+      letrasSobe("#s5-mac", 9.3, 0.07);
+      deriva("#s5-mac", 9.6, 1.0, 1.04);
+      tl.fromTo("#s5-pil span", { scale: 0.4, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: -2, duration: 0.3, ease: "back.out(2.4)" }, 10.15);
+      tl.fromTo("#s5-caixa", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.8)" }, 8.45);
+      // S6
+      tl.fromTo("#v6", { scale: 1.12 }, { scale: 1, duration: 1.22, ease: "power2.out" }, 10.62);
+      palavrasBlur("#s6-rot", 11.15);
+      letrasSobe("#s6-gig", 11.32, 0.035);
+      // S7
+      palavrasBlur("#s7-rot", 11.86, 0.1);
+      letrasDigita("#s7-gig", 12.22, 0.05);
+      tl.fromTo("#s7-win", { x: -120, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 13.12);
+      tl.fromTo("#s7-ig", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2.5)" }, 13.55);
+      tl.fromTo("#s7-mac", { x: 120, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "back.out(1.8)" }, 14.28);
+      // S8
+      tl.fromTo("#s8-janela", { y: 60, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 14.68);
+      ["#m1", "#m2", "#m3", "#m4"].forEach((m, i) => {
+        tl.to(m, { backgroundColor: "rgba(255,255,255,.14)", duration: 0.06 }, 14.95 + i * 0.16);
+        if (i < 3) tl.to(m, { backgroundColor: "rgba(255,255,255,0)", duration: 0.06 }, 14.95 + (i + 1) * 0.16);
+      });
+      tl.to("#m4", { backgroundColor: "#ffc400", color: "#000", duration: 0.08 }, 15.45);
+      tl.fromTo("#s8-menu", { y: -20, opacity: 0, scaleY: 0.6, transformOrigin: "top center" }, { y: 0, opacity: 1, scaleY: 1, duration: 0.22, ease: "power3.out" }, 15.55);
+      palavrasBlur("#s8-rot", 15.4);
+      letrasDigita("#s8-gig", 15.95, 0.04);
+      // S9
+      tl.fromTo("#v9", { scale: 1.15 }, { scale: 1, duration: 2.34, ease: "power2.out" }, 16.56);
+      palavrasBlur("#s9-rot", 16.8, 0.16);
+      letrasSobe("#s9-gig", 17.1, 0.04);
+      tl.fromTo("#s9-fav", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 16.95);
+      tl.to(["#s9-rot", "#s9-gig", "#s9-fav"], { opacity: 0, filter: "blur(12px)", duration: 0.3 }, 18.25);
+      // legendas
+      document.querySelectorAll(".leg").forEach((l) => tl.fromTo(l, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.14, ease: "power2.out" }, parseFloat(l.dataset.start)));
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

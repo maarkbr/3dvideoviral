@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .pw-dim { position: absolute; inset: 0; opacity: 0; }
+        .pw-line { position: absolute; left: 40px; width: 1000px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.22em; }
+        .pw-w { display: inline-block; font-family: "LT Anton", sans-serif; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em;
+          -webkit-text-stroke: 14px #0b0b0d; paint-order: stroke fill; text-shadow: 0 16px 40px rgba(0, 0, 0, 0.6); transform-origin: 50% 70%; }
+        .pw-w.serifa { font-family: "LT Garamond", serif; text-transform: none; font-weight: 700; -webkit-text-stroke: 0; text-shadow: 0 10px 34px rgba(0, 0, 0, 0.85); }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="pw-dim" id="__ID__-dim"></div>
+        <div class="pw-line" id="__ID__-line"></div>
+      </div>
+      <script>
+        (function () {
+          // PALAVRA — a palavra-chave gigante por cima do rosto (estilo do portfólio: "NÃO É BOM"). A legenda some enquanto ela está na tela.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 1.5, texto: "*palavra*", em: 0.04, tam: 230, y: 620, cor: "branco", estilo: "condensada", escurecer: true,
+            intervalo: 0.12, saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const dim = document.querySelector("#" + ID + "-dim");
+          const line = document.querySelector("#" + ID + "-line");
+          line.style.top = P.y + "px";
+          const serif = P.estilo === "serifa";
+          const size = BK.cabe(P.texto, 1000, P.tam, serif ? "serifa" : "anton");
+          line.style.gap = "0 " + Math.round(size * 0.22) + "px";
+          dim.style.background = "radial-gradient(80% 45% at 50% " + Math.round(((P.y + size) / 1920) * 100) + "%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)";
+          // cada palavra vira um span; *ênfase* pinta na cor de destaque
+          const words = [];
+          String(P.texto).split(/\s+/).filter(Boolean).forEach((w) => {
+            const em = /^\*.*\*$/.test(w) || /^\*/.test(w) || /\*$/.test(w);
+            const clean = w.replace(/\*/g, "");
+            const s = BK.el("span", "pw-w" + (serif ? " serifa" : ""), line, BK.esc(clean));
+            s.style.fontSize = size + "px";
+            s.style.color = em ? BK.cor("acento") : BK.cor(P.cor);
+            words.push(s);
+          });
+          if (P.escurecer) tl.fromTo(dim, { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, Math.max(0, P.em - 0.04));
+          words.forEach((s, i) => {
+            tl.fromTo(s, { scale: 1.7, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out" }, P.em + i * P.intervalo);
+          });
+          const out = P.saida == null ? P.dur - 0.18 : P.saida;
+          tl.to(words, { scale: 0.9, opacity: 0, duration: 0.16, ease: "power2.in" }, out);
+          if (P.escurecer) tl.to(dim, { opacity: 0, duration: 0.16, ease: "power2.in" }, out);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+{
+ "source": "../../Bruto/voz.mp4",
+ "transcript": "work/transcricao_small.json",
+ "prompt": "Claude, Claude Code, aba Code, Editor IA, Bruto, Referências, Imagens, skill, Reels, prompt, legenda",
+ "model": "small",
+ "max_gap": 0.22,
+ "keep_gap": 0.04,
+ "tail_gap": 0.12,
+ "crossfade": 0.03,
+ "out": "corte_bruto.mp4",
+ "keep": [
+  {
+   "a": 0,
+   "b": 35,
+   "note": "gancho, cinco passos, salva"
+  },
+  {
+   "a": 36,
+   "b": 48,
+   "note": "passo 1"
+  },
+  {
+   "a": 57,
+   "b": 64,
+   "note": "precisa ser o aplicativo e não o site (2ª tentativa)"
+  },
+  {
+   "a": 77,
+   "b": 85,
+   "note": "passo 2, 3ª tentativa"
+  },
+  {
+   "a": 86,
+   "b": 89,
+   "note": "com três pastas dentro"
+  },
+  {
+   "a": 92,
+   "b": 95,
+   "note": "bruto, referências e imagens (2ª)"
+  },
+  {
+   "a": 104,
+   "b": 110,
+   "note": "passo 3, 2ª tentativa completa: 'passo 3, no Claude abre essa pasta e a partir daí ele enxerga seus arquivos'"
+  },
+  {
+   "a": 111,
+   "b": 119,
+   "note": "passo 4, ele precisa das ferramentas"
+  },
+  {
+   "a": 131,
+   "b": 140,
+   "note": "última tentativa: cortar, legendar e animar"
+  },
+  {
+   "a": 141,
+   "b": 156,
+   "note": "não instala nada na mão; cola um prompt"
+  },
+  {
+   "a": 157,
+   "b": 158,
+   "note": "passo 5"
+  },
+  {
+   "a": 170,
+   "b": 186,
+   "note": "coloca em referências… e em bruto o seu vídeo (2ª)"
+  },
+  {
+   "a": 202,
+   "b": 214,
+   "drop": [
+    208,
+    209
+   ],
+   "note": "aí é só pedir pra ele: edita igual às referências"
+  },
+  {
+   "a": 223,
+   "b": 234,
+   "note": "ele vai tirar o silêncio, legenda e animação; e se não gostar?"
+  },
+  {
+   "a": 255,
+   "b": 265,
+   "note": "é só você falar com ele como falaria com um editor"
+  },
+  {
+   "a": 272,
+   "b": 303,
+   "note": "te passei o passo a passo… pronta pra usar"
+  },
+  {
+   "a": 307,
+   "b": 317,
+   "note": "é só comentar skill que eu te mando no direct"
+  }
+ ],
+ "overrides": {
+  "104": {
+   "in": 59.43
+  }
+ },
+ "audio": "../../Bruto/voz-adobe.wav",
+ "audio_offset": 0.0,
+ "nota": "Lucas pediu (3/11): respirações mais curtas, voz limpa do Adobe Podcast (mesma linha do tempo do original) e 1,2x de velocidade sem mudar a voz depois do corte."
+}

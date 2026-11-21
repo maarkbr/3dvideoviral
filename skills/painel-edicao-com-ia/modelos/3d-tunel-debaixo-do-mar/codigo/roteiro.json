@@ -1,0 +1,255 @@
+{
+  "tema": "Como construir um túnel debaixo do mar",
+  "blocos": [
+    {
+      "fala": "Você vai ligar a Inglaterra à França por baixo do mar: cinquenta quilômetros de túnel. Mas, se cavar na rocha errada, o mar invade tudo.",
+      "etapa": "Wide low poly sea strait between a white cliff (England, left) and a green coast (France, right), ferries on the water. Cutaway of the seabed: a small tunnel is dug in cracked rock and water bursts in and floods it.",
+      "etiquetas": [
+        {
+          "txt": "INGLATERRA",
+          "p": [
+            -24,
+            6.4,
+            -6
+          ],
+          "de": 0.8,
+          "ate": 3.5
+        },
+        {
+          "txt": "FRANÇA",
+          "p": [
+            28,
+            3.4,
+            -6
+          ],
+          "de": 3.9,
+          "ate": 6.2
+        },
+        {
+          "txt": "ROCHA RACHADA",
+          "p": [
+            -12,
+            -4.4,
+            -0.9
+          ],
+          "de": 6.6,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Então você segue uma camada de giz com argila, macia de cavar e quase impermeável, que desce a setenta e cinco metros abaixo do mar.",
+      "etapa": "Cutaway of the rock layers under the sea; one blue-gray band (chalk marl) lights up and a dashed line traces the tunnel route inside it, curving down to its deepest point.",
+      "etiquetas": [
+        {
+          "txt": "GIZ MARGOSO",
+          "p": [
+            -7,
+            -8.4,
+            -0.9
+          ],
+          "de": 1.5,
+          "ate": 5.4
+        },
+        {
+          "txt": "75 M",
+          "p": [
+            0.5,
+            -5,
+            -0.9
+          ],
+          "de": 6.2,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Só que cavar quase quarenta quilômetros na mão levaria décadas. Por isso você põe onze tuneladoras gigantes para cavar das duas pontas ao mesmo tempo.",
+      "etapa": "A tiny worker with a pickaxe barely scratches the rock; then giant yellow tunnel boring machines with spinning cutterheads enter from both coasts and advance toward each other.",
+      "etiquetas": [
+        {
+          "txt": "11 TUNELADORAS",
+          "p": [
+            -33,
+            3.6,
+            -0.3
+          ],
+          "de": 4.8,
+          "ate": 7.1
+        }
+      ]
+    },
+    {
+      "fala": "No lado francês, a rocha é rachada e cheia de água. Então as máquinas trabalham fechadas e vedadas, segurando a pressão do mar lá fora.",
+      "etapa": "On the French side the rock is full of cracks and water jets spray toward the machine; then the machine's front closes into a sealed chamber, blue pressure arrows push back and the leaks stop.",
+      "etiquetas": [
+        {
+          "txt": "ÁGUA SOB PRESSÃO",
+          "p": [
+            19.5,
+            -6.4,
+            -0.9
+          ],
+          "de": 0.8,
+          "ate": 4.3
+        },
+        {
+          "txt": "MODO FECHADO",
+          "p": [
+            13.2,
+            -8.9,
+            -0.3
+          ],
+          "de": 5.6,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Mas atrás da máquina, a rocha recém-cavada começa a ceder. Então ela vai encaixando anéis de concreto e enche de cimento o vão por trás deles.",
+      "etapa": "Close cutaway behind a boring machine: chunks fall from the fresh tunnel ceiling; then gray concrete segments click into full rings one after another and grout fills the gap behind them.",
+      "etiquetas": [
+        {
+          "txt": "ANÉIS DE CONCRETO",
+          "p": [
+            -24,
+            -3.9,
+            -0.3
+          ],
+          "de": 4.2,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "E toda essa rocha cavada? Do lado inglês, quase cinco milhões de metros cúbicos viram um pedaço novo de terra ao pé do penhasco.",
+      "etapa": "Small rail wagons carry chalk spoil out of the English portal; a pile grows into new flat land at the foot of the white cliff, then turns green.",
+      "etiquetas": [
+        {
+          "txt": "5 MILHÕES DE M³",
+          "p": [
+            -15.6,
+            1.4,
+            -6
+          ],
+          "de": 3.6,
+          "ate": 7.1
+        },
+        {
+          "txt": "TERRA NOVA",
+          "p": [
+            -15.6,
+            1.2,
+            -2.5
+          ],
+          "de": 7.3,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "E aqui a maioria erra: as duas pontas precisam se encontrar no meio do mar. Com laser guiando as máquinas, elas erraram menos de quarenta centímetros.",
+      "etapa": "Both machines approach under the middle of the sea, red laser beams guide them; they meet, the last wall of rock breaks and the tunnels line up almost perfectly.",
+      "etiquetas": [
+        {
+          "txt": "LASER",
+          "p": [
+            -4,
+            -9.3,
+            -0.3
+          ],
+          "de": 2.0,
+          "ate": 5.4
+        },
+        {
+          "txt": "MENOS DE 40 CM",
+          "p": [
+            0,
+            -9.2,
+            -0.3
+          ],
+          "de": 7.0,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Só que o trem empurra o ar como um pistão. Então você liga os dois túneis com dutos de dois metros, a cada duzentos e cinquenta.",
+      "etapa": "Cross-section view of the twin rail tunnels: a train pushes a wall of compressed air ahead of it; then curved ducts connect the two tunnels and the air escapes through them.",
+      "etiquetas": [
+        {
+          "txt": "EFEITO PISTÃO",
+          "p": [
+            -2.5,
+            -9.3,
+            -0.6
+          ],
+          "de": 1.2,
+          "ate": 4.5
+        },
+        {
+          "txt": "A CADA 250 M",
+          "p": [
+            0,
+            -9.0,
+            -3.4
+          ],
+          "de": 5.8,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "E se pegar fogo? Entre os dois, um túnel de serviço com ar em pressão maior, e portas a cada trezentos e setenta e cinco metros.",
+      "etapa": "Smoke fills one rail tunnel; a smaller service tunnel in the middle stays clean, fresh air arrows push outward, doors open and tiny people walk into the safe tunnel.",
+      "etiquetas": [
+        {
+          "txt": "TÚNEL DE SERVIÇO",
+          "p": [
+            0,
+            -10.6,
+            -3.4
+          ],
+          "de": 2.0,
+          "ate": 6.0
+        },
+        {
+          "txt": "A CADA 375 M",
+          "p": [
+            3,
+            -10.9,
+            -2.2
+          ],
+          "de": 6.5,
+          "ate": 10
+        }
+      ]
+    },
+    {
+      "fala": "Hoje o trem cruza por baixo do mar em uns trinta e cinco minutos. Se você quer aprender a fazer vídeos assim, comenta 3D.",
+      "etapa": "Wide cutaway of the finished three tunnels under the sea from coast to coast; a lit train races from England to France while ferries float above.",
+      "etiquetas": [
+        {
+          "txt": "35 MINUTOS",
+          "p": [
+            0,
+            0,
+            0
+          ],
+          "de": 1.5,
+          "ate": 5.0
+        }
+      ]
+    }
+  ],
+  "fontes": [
+    "Robbins, The Channel Tunnel (50 km, três túneis paralelos por 39 km debaixo do mar; 11 tuneladoras, 5 do lado francês e 6 do inglês; as máquinas francesas encontraram água logo no começo e passaram a trabalhar no modo fechado): https://www.robbinstbm.com/projects/the-channel-tunnel/",
+    "Geological Society, Channel Tunnel (a rota segue o giz margoso, com argila e quase impermeável; no lado francês, rocha dobrada e fraturada exigiu máquinas que trabalham fechadas): https://www.geolsoc.org.uk/GeositesChannelTunnel",
+    "Discovery UK, How the Channel Tunnel was Built (ponto mais fundo a 75 m abaixo do nível do mar; 11 tuneladoras): https://www.discoveryuk.com/?p=23587015",
+    "Practical Engineering, How the Channel Tunnel Works (dutos de alívio de pistão a cada 250 m, com 2 m de diâmetro; túnel de serviço com ar em pressão maior; passagens a cada 375 m): https://practical.engineering/blog/2024/1/16/how-the-channel-tunnel-works",
+    "Tunnels and Tunnelling (túneis de trem de 7,6 m e túnel de serviço de 4,8 m entre eles; anéis de concreto e cimento injetado atrás deles): https://tunnelsandtunnelling.com/?p=1665",
+    "Shropshire Star (quase cinco milhões de metros cúbicos de giz do lado inglês formaram a Samphire Hoe): https://shropshirestar.com/news/Features/2020/10/29/from-the-tunnel-of-love-to-a-very-messy-divorce",
+    "Everything Everywhere, The Channel Tunnel (encontro do túnel de serviço em 1990 com erro de 35,8 cm na horizontal; guiado por laser): https://everything-everywhere.com/the-channel-tunnel/",
+    "LeShuttle, 35 minutes to destination (travessia planejada de 35 minutos): https://www.leshuttle.com/uk-en/35-minutes-to-destination"
+  ]
+}

@@ -1,0 +1,166 @@
+{
+ "tema": "Como construir um bunker",
+ "blocos": [
+  {
+   "fala": "Você decidiu construir um bunker no quintal. Primeiro, você cava um buraco fundo, grande o bastante pra caber a sua família inteira.",
+   "etapa": "A cute miniature backyard with a small house and a tree; a tiny yellow toy excavator digs a deep rectangular pit in the lawn, dirt piling up beside it.",
+   "etiquetas": [
+    {
+     "txt": "ESCAVAÇÃO",
+     "p": [
+      0,
+      -2,
+      0
+     ],
+     "de": 7.2,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Depois, você ergue paredes e teto de concreto armado, com vergalhão de aço por dentro, pra aguentar o peso da terra por cima.",
+   "etapa": "Inside the pit, a grid of orange steel rebar rises, then smooth gray concrete pours in and forms thick walls and a flat roof, like a cutaway model.",
+   "etiquetas": [
+    {
+     "txt": "VERGALHÃO DE AÇO",
+     "p": [
+      0,
+      -1,
+      1.75
+     ],
+     "de": 1.2,
+     "ate": 3.4
+    },
+    {
+     "txt": "CONCRETO ARMADO",
+     "p": [
+      0,
+      -1.2,
+      1.8
+     ],
+     "de": 4.2,
+     "ate": 6.8
+    },
+    {
+     "txt": "LAJE",
+     "p": [
+      0,
+      -0.8,
+      0
+     ],
+     "de": 8.0,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Em cima do teto, você joga quase um metro de terra. É ela que segura quase toda a radiação lá de fora.",
+   "etapa": "A thick layer of brown soil drops onto the concrete roof and grass grows back on top; glowing green particles fall from the sky and bounce off the soil layer without reaching the room below.",
+   "etiquetas": [
+    {
+     "txt": "QUASE 1 METRO DE TERRA",
+     "p": [
+      0,
+      0.3,
+      2
+     ],
+     "de": 1.6,
+     "ate": 4.2
+    },
+    {
+     "txt": "RADIAÇÃO",
+     "p": [
+      0,
+      3.2,
+      0
+     ],
+     "de": 5.2,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "A entrada faz uma curva de noventa graus antes da porta blindada. Assim, a onda de choque bate na parede, e não em você.",
+   "etapa": "Top-down cutaway of an L-shaped entrance corridor leading to a round heavy steel door; a translucent blue shockwave rushes down the corridor and hits the corner wall, dissipating before the door.",
+   "etiquetas": [
+    {
+     "txt": "CURVA DE 90°",
+     "p": [
+      6,
+      -1.5,
+      0
+     ],
+     "de": 1.6,
+     "ate": 4.2
+    },
+    {
+     "txt": "PORTA BLINDADA",
+     "p": [
+      3.05,
+      -2.2,
+      0
+     ],
+     "de": 2.4,
+     "ate": 4.2
+    },
+    {
+     "txt": "ONDA DE CHOQUE",
+     "p": [
+      6,
+      -1.8,
+      2
+     ],
+     "de": 4.8,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Lá dentro, o ar entra por um duto com filtro, puxado por um ventilador manual que funciona até sem energia elétrica.",
+   "etapa": "Inside the cozy bunker room, a pipe comes down from the surface into a filter box; a hand crank fan spins and tiny visible air swirls flow into the room.",
+   "etiquetas": [
+    {
+     "txt": "DUTO COM FILTRO",
+     "p": [
+      -2.1,
+      -1.3,
+      -1.2
+     ],
+     "de": 0.8,
+     "ate": 4.2
+    },
+    {
+     "txt": "VENTILADOR MANUAL",
+     "p": [
+      -1,
+      -1.4,
+      -1.3
+     ],
+     "de": 4.6,
+     "ate": 10
+    }
+   ]
+  },
+  {
+   "fala": "Por último, você enche as prateleiras de água e comida pra várias semanas. Pronto: agora é só torcer pra nunca precisar usar.",
+   "etapa": "Shelves fill up with water bottles and canned food boxes popping into place; a bunk bed and a small lamp turn on; the camera pulls out to show the whole bunker hidden under the peaceful backyard.",
+   "etiquetas": [
+    {
+     "txt": "ÁGUA E COMIDA",
+     "p": [
+      1.2,
+      -1.6,
+      -1.4
+     ],
+     "de": 1.0,
+     "ate": 4.6
+    }
+   ]
+  }
+ ],
+ "fontes": [
+  "Wikipedia, Blast shelter (porta atrás de corredor com curva de 90°): https://en.wikipedia.org/wiki/Blast_shelter",
+  "Kearny, Nuclear War Survival Skills (cobertura de terra, ~PF 1000; bomba de ar manual): https://www.ki4u.com/free_book/s73p928.htm",
+  "FEMA H-12 Home Fallout Shelter (até 3 pés de terra sobre o abrigo): https://www.scribd.com/document/364160001/FEMA-Fallout-Shelter-H-12-1"
+ ]
+}

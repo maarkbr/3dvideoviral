@@ -1,0 +1,141 @@
+{
+ "titulo": "Por que o Chile é tão comprido e fino",
+ "fontes": "Comprimento 4.270 km e largura média 177 km (Geography of Chile, Wikipedia; GlobalSecurity). Brasil de norte a sul 4.394 km, do Monte Caburaí ao Arroio Chuí (o ponto mais ao norte não é o Oiapoque). Em 1818 o Chile era só o terço do meio do território atual (Big Think, 'How long is Chile'). Guerra do Pacífico 1879-1884 e a perda do litoral boliviano. Tratado de Limites com a Argentina, 1881. Salitre usado em adubo e explosivos.",
+ "blocos": [
+  {
+   "fala": "Por que o Chile é tão comprido e fino? São mais de quatro mil quilômetros de norte a sul, mas, em média, menos de duzentos de largura.",
+   "cena": {
+    "tipo": "globo",
+    "foco": "Chile",
+    "destaque": [
+     "Chile"
+    ],
+    "selo": "4.270 km",
+    "emoji": "straight_ruler"
+   }
+  },
+  {
+   "fala": "Se você colocasse o Chile em cima do Brasil, ele cobriria quase o país inteiro, de norte a sul.",
+   "cena": {
+    "tipo": "comparar",
+    "pais": "Chile",
+    "sobre": "Brazil",
+    "rotulo": "QUASE O BRASIL INTEIRO",
+    "emoji": "exploding_head"
+   }
+  },
+  {
+   "fala": "A primeira culpada é uma parede: a Cordilheira dos Andes, que fecha o país inteiro pelo leste.",
+   "cena": {
+    "tipo": "andes",
+    "rotulo": "ANDES",
+    "emoji": "snow-capped_mountain"
+   }
+  },
+  {
+   "fala": "Do lado oeste, o Oceano Pacífico. O Chile ficou espremido entre a montanha e o mar.",
+   "cena": {
+    "tipo": "pacifico",
+    "rotulo": "OCEANO PACÍFICO"
+   }
+  },
+  {
+   "fala": "E quando ficou independente, em mil oitocentos e dezoito, o Chile era só esse pedaço do meio.",
+   "cena": {
+    "tipo": "independencia",
+    "ano": "1818",
+    "latN": -26.5,
+    "latS": -38.5
+   }
+  },
+  {
+   "fala": "Mas no norte, o deserto do Atacama era da Bolívia e do Peru. E ali tinha um tesouro: o salitre.",
+   "cena": {
+    "tipo": "atacama",
+    "destaque": [
+     "Bolivia",
+     "Peru"
+    ],
+    "emoji": "gem_stone"
+   }
+  },
+  {
+   "fala": "Ele valia muito, porque servia pra fazer adubo e pólvora.",
+   "cena": {
+    "tipo": "atacama",
+    "destaque": [
+     "Bolivia",
+     "Peru"
+    ],
+    "emoji": "money_bag"
+   }
+  },
+  {
+   "fala": "Em mil oitocentos e setenta e nove começou a Guerra do Pacífico. O Chile venceu e ficou com todo esse pedaço. E a Bolívia perdeu a saída para o mar.",
+   "cena": {
+    "tipo": "guerra",
+    "ano": "1879",
+    "emoji": "crossed_swords"
+   }
+  },
+  {
+   "fala": "No sul, em mil oitocentos e oitenta e um, um acordo com a Argentina dividiu a Patagônia pelo alto dos Andes.",
+   "cena": {
+    "tipo": "patagonia",
+    "ano": "1881",
+    "emoji": "scroll"
+   }
+  },
+  {
+   "fala": "Resultado: um país que cresceu pro norte e pro sul, com deserto numa ponta e geleira na outra.",
+   "cena": {
+    "tipo": "final",
+    "emojis": [
+     "cactus",
+     "snowflake"
+    ]
+   }
+  },
+  {
+   "fala": "Esse vídeo foi feito inteiro com inteligência artificial, no Claude. Se você quer criar vídeos assim, comenta mapa que eu te mando a skill.",
+   "cena": {
+    "tipo": "cta",
+    "palavra": "MAPA",
+    "selo": "Feito 100% com IA no Claude",
+    "logo": "claude",
+    "antes": "Comenta",
+    "depois": "que eu te mando a skill"
+   }
+  }
+ ],
+ "destaques": [
+  "Chile",
+  "quilômetros",
+  "Brasil",
+  "Andes",
+  "Pacífico",
+  "Atacama",
+  "Bolívia",
+  "Peru",
+  "salitre",
+  "adubo",
+  "pólvora",
+  "Guerra",
+  "venceu",
+  "mar",
+  "Argentina",
+  "Patagônia",
+  "deserto",
+  "geleira",
+  "mapa",
+  "skill",
+  "1818",
+  "meio",
+  "inteligência",
+  "Claude"
+ ],
+ "trilha": {
+  "arquivo": "Musicas/01 Genesis - Tristan Barton (320 kbps).mp3",
+  "inicio": 64
+ }
+}

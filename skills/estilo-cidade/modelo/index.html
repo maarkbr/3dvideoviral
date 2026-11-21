@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="./assets/gsap.min.js"></script>
+    <script type="importmap">
+      { "imports": { "three": "./assets/three/three.module.js", "three/addons/": "./assets/three/addons/" } }
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; font-weight: 600; src: url("./assets/fontes/fredoka-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Fredoka"; font-weight: 700; src: url("./assets/fontes/fredoka-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Pacifico"; font-weight: 400; src: url("./assets/fontes/pacifico-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("./assets/fontes/inter-latin-800-normal.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #8cc2ef; }
+      #root { position: relative; width: 100%; height: 100%; }
+      #cena { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      #filme {
+        position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23g)' opacity='0.55'/></svg>");
+        box-shadow: inset 0 0 260px 60px rgba(40, 22, 6, 0.75);
+      }
+      #vinheta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 75% 60% at 50% 48%, rgba(0,0,0,0) 55%, rgba(30,15,0,0.3) 100%); }
+      #legenda {
+        position: absolute; left: 0; right: 0; top: 1130px; height: 120px;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-weight: 800; font-size: 92px; letter-spacing: -0.01em;
+        color: #ffffff; -webkit-text-stroke: 14px #141210; paint-order: stroke fill;
+        text-shadow: 0 7px 0 rgba(0, 0, 0, 0.35);
+      }
+      #carregar-fontes { position: absolute; left: -9999px; top: 0; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60.00" data-width="1080" data-height="1920">
+      <canvas id="cena" class="clip" data-start="0" data-duration="60.00" data-track-index="0"></canvas>
+      <div id="filme" class="clip" data-start="0" data-duration="60.00" data-track-index="1"></div>
+      <div id="vinheta" class="clip" data-start="0" data-duration="60.00" data-track-index="2"></div>
+      <div id="legenda" class="clip" data-start="0" data-duration="60.00" data-track-index="3"></div>
+      <audio id="som" src="./assets/audio/mix.wav" data-start="0" data-duration="60.00" data-track-index="4"></audio>
+    </div>
+    <div id="carregar-fontes">
+      <span style="font-family: Fredoka; font-weight: 600">Á</span>
+      <span style="font-family: Fredoka; font-weight: 700">Á</span>
+      <span style="font-family: Pacifico">Á</span>
+      <span style="font-family: Inter; font-weight: 800">Á</span>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 60.00 }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+    <script type="module" src="./cena/episodio.js"></script>
+  </body>
+</html>

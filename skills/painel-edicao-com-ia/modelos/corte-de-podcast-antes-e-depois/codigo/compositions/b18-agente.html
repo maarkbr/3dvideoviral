@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .gl-sub { position: absolute; left: 0; width: 1080px; top: 1130px; text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 700;
+          font-size: 34px; letter-spacing: 0.22em; color: #e8c9a0; opacity: 0; text-transform: uppercase; }
+      </style>
+      <div id="root" data-composition-id="b18-agente" data-width="1080" data-height="1920">
+        <div class="bk-full" id="b18-agente-bg"></div>
+      </div>
+      <script>
+        (function () {
+          // GLITCH — frase de impacto em tela cheia com separação RGB e fatias (0,8–1,2 s). A trilha "cai" junto (o montador faz o drop).
+          const ID = "b18-agente";
+          const P = Object.assign({ dur: 1, linhas: [{ texto: "frase", tam: 170 }, { texto: "de impacto", tam: 300, cor: "acento" }], sub: "",
+            fundo: "vermelho", quente: "#ff2a2a", frio: "#20e3ff", flash: "vermelho", segundo_pulso: 0.56, topo: 560 }, /*PARAMS*/{"linhas": [{"texto": "a gente", "tam": 200}, {"texto": "é maluco", "tam": 260, "cor": "#FFD23F"}], "sub": "— RAUL, SAINDO DA CHINA", "fundo": "verde", "quente": "#13A05B", "frio": "#20e3ff", "flash": "#13A05B", "segundo_pulso": 0.6, "dur": 1.0}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const stage = document.querySelector("#" + ID + "-bg");
+          stage.style.background = BK.fundo(P.fundo, 40);
+          const lines = P.linhas.map((l) => ({ texto: l.texto, tam: BK.cabe(l.texto, 1010, l.tam || 220), cor: l.cor || "branco" }));
+          BK.glitchSlam(tl, stage, lines, { top: P.topo, warm: BK.cor(P.quente), cool: BK.cor(P.frio), flash: P.flash ? BK.cor(P.flash) : null,
+            burst2: Math.min(P.segundo_pulso, P.dur - 0.25) });
+          if (P.sub) {
+            const s = BK.el("div", "gl-sub", stage, BK.esc(P.sub));
+            tl.fromTo(s, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 0.24);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

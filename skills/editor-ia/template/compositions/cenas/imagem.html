@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .im-box { position: absolute; left: 0; top: 0; width: 1080px; overflow: hidden; background: #0b0b0d; }
+        .im-frame { position: absolute; overflow: hidden; border-radius: 26px; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55); background: #16161a; }
+        .im-img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 50% 50%; }
+        .im-chip { position: absolute; left: 60px; width: 960px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+        .im-chip b { display: inline-block; padding: 16px 26px 12px; border-radius: 14px; background: #f5f3ee; color: #0b0b0d; font-family: "LT Anton", sans-serif;
+          font-weight: 400; line-height: 1; text-transform: uppercase; }
+        .im-chip small { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 26px; letter-spacing: 0.14em; color: #a9a6a0; text-transform: uppercase; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="im-box" id="__ID__-box"></div>
+      </div>
+      <script>
+        (function () {
+          // IMAGEM — uma imagem SUA (print de notícia, foto de produto, gráfico, logo) num card com Ken Burns e um título.
+          // O montador copia o arquivo para assets/imagens/. Nunca use imagem de terceiros sem direito de uso.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 3, arquivo: "", layout: "dividido", moldura: true, ajuste: "cover", ken_burns: true, pb: false,
+            titulo: "", fonte: "", em: 0.25, entrada: "desce", saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const box = document.querySelector("#" + ID + "-box");
+          const split = P.layout !== "cheio";
+          const H = split ? 960 : 1920;
+          box.style.height = H + "px";
+          box.style.background = BK.fundo("escuro", 40);
+          if (split) box.style.borderBottom = "8px solid " + BK.cor("acento");
+          const fr = BK.el("div", "im-frame", box);
+          const pad = P.moldura ? 60 : 0;
+          const fh = split ? (P.titulo ? 640 : 780) : 1080;
+          Object.assign(fr.style, { left: pad + "px", top: (P.moldura ? (split ? 70 : 140) : 0) + "px", width: 1080 - 2 * pad + "px", height: (P.moldura ? fh : H) + "px" });
+          if (!P.moldura) fr.style.borderRadius = "0";
+          const img = BK.el("img", "im-img", fr);
+          img.src = P.arquivo;
+          img.alt = "";
+          img.style.objectFit = P.ajuste;
+          if (P.pb) img.style.filter = "grayscale(1) contrast(1.08)";
+          tl.fromTo(fr, { scale: 0.86, opacity: 0, y: 30 }, { scale: 1, opacity: 1, y: 0, duration: 0.38, ease: "power3.out" }, 0.06);
+          if (P.ken_burns) tl.fromTo(img, { scale: 1.0 }, { scale: 1.08, duration: P.dur, ease: "none" }, 0);
+          if (P.titulo || P.fonte) {
+            const c = BK.el("div", "im-chip", box);
+            c.style.top = (P.moldura ? (split ? 70 + fh + 26 : 140 + fh + 40) : H - 260) + "px";
+            if (P.titulo) { const b = BK.el("b", "", c, BK.rich(P.titulo, "vermelho")); b.style.fontSize = BK.cabe(P.titulo, 900, 70, "anton", 0.8) + "px"; }
+            if (P.fonte) BK.el("small", "", c, BK.esc(P.fonte));
+            tl.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, P.em);
+          }
+          if (split) BK.card(tl, box, P);
+          else {
+            tl.fromTo(box, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 0);
+            if (P.saida != null) tl.to(box, { opacity: 0, duration: 0.2, ease: "power2.in" }, P.saida);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

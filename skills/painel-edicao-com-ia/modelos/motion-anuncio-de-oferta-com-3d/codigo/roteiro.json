@@ -1,0 +1,83 @@
+{
+ "nome": "Edição com IA",
+ "tema": "escuro",
+ "blocos": [
+  {
+   "fala": "Este anúncio foi editado pelo Claude.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Este anúncio foi editado pelo Claude."
+   }
+  },
+  {
+   "fala": "No painel do Edição com I.A., você grava e o Claude edita.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "No painel do Edição com I.A., você grava e o Claude edita."
+   }
+  },
+  {
+   "fala": "Já são oito estilos: cortes de podcast, vídeo falado, YouTube,",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Já são oito estilos: cortes de podcast, vídeo falado, YouTube,"
+   }
+  },
+  {
+   "fala": "Bit, três D, mapas, Motion e palitinho.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Bit, três D, mapas, Motion e palitinho."
+   }
+  },
+  {
+   "fala": "Cada um com aula e passo a passo.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Cada um com aula e passo a passo."
+   }
+  },
+  {
+   "fala": "E três bônus: instalação em dez minutos,",
+   "cena": {
+    "tipo": "frase",
+    "texto": "E três bônus: instalação em dez minutos,"
+   }
+  },
+  {
+   "fala": "cinquenta e quatro temas que já viralizaram e como vender edição com I.A.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "cinquenta e quatro temas que já viralizaram e como vender edição com I.A."
+   }
+  },
+  {
+   "fala": "Atualizações para sempre, por trinta e sete reais, pagamento único.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Atualizações para sempre, por trinta e sete reais, pagamento único."
+   }
+  },
+  {
+   "fala": "E sete dias de garantia.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "E sete dias de garantia."
+   }
+  },
+  {
+   "fala": "Precisa de Mac ou Windows e do Claude Pro, pago à parte.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Precisa de Mac ou Windows e do Claude Pro, pago à parte."
+   }
+  },
+  {
+   "fala": "Toque em Saiba mais.",
+   "cena": {
+    "tipo": "frase",
+    "texto": "Toque em Saiba mais."
+   }
+  }
+ ]
+}

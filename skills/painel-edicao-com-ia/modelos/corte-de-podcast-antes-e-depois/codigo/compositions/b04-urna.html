@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .tr-a { position: absolute; left: 0; width: 1080px; top: 170px; height: 460px; display: flex; align-items: center; justify-content: center; transform-origin: 50% 50%; }
+        .tr-aicon { position: relative; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.5)); }
+        .tr-x { position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; margin: -150px 0 0 -150px; }
+        .tr-b { position: absolute; left: 600px; top: 190px; width: 360px; height: 420px; transform-origin: 50% 100%; }
+        .tr-b1 { position: absolute; left: 30px; top: 0; }
+        .tr-b2 { position: absolute; left: 110px; top: 170px; }
+      </style>
+      <div id="root" data-composition-id="b04-urna" data-width="1080" data-height="1920">
+        <div class="bk-top" id="b04-urna-card"></div>
+      </div>
+      <script>
+        (function () {
+          // TROCA — fase A: ícone + frase (opcional: um X se desenha por cima); fase B: A sai de lado e B chega com outra frase.
+          const ID = "b04-urna";
+          const P = Object.assign({ dur: 3.7, rotulo: "", entrada: "desce", saida: null,
+            a: { icone: "urna", tam: 640, titulo: "", riscar_em: null }, b: null }, /*PARAMS*/{"rotulo": "O argumento", "a": {"icone": "urna", "tam": 640, "titulo": "vocês *não* votam", "titulo_em": 0.3, "riscar_em": 0.68}, "b": {"icones": ["coroa", "cadeado"], "titulo": "quem *manda?*", "em": 2.12}, "entrada": "wipe-esq", "saida": 3.42, "dur": 3.72}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          BK.card(tl, card, P);
+          BK.rotulo(tl, card, P.rotulo, 0.15);
+          const A = P.a || {};
+          const aw = BK.el("div", "tr-a", card);
+          const aic = BK.el("div", "tr-aicon", aw, BK.icone(A.icone || "urna", A.tam || 640));
+          tl.fromTo(aw, { scale: 0.6, opacity: 0, y: 40 }, { scale: 1, opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.08);
+          let ta = null;
+          if (A.titulo) {
+            ta = BK.titulo(card, null, A.titulo, { y: 690, tam: BK.cabe(A.titulo, 980, A.tam_titulo || 96), enfase: A.enfase || "vermelho" });
+            BK.sobe(tl, ta, A.titulo_em == null ? 0.6 : A.titulo_em);
+          }
+          if (A.riscar_em != null) {
+            const x = BK.el("div", "tr-x", aic, BK.icon.cross(300));
+            x.setAttribute("data-layout-allow-overlap", "");
+            BK.desenha(tl, x, A.riscar_em, 0.2, 0.12);
+          }
+          const B = P.b;
+          if (B) {
+            const at = B.em == null ? P.dur * 0.55 : B.em;
+            tl.to(aw, { x: -230, scale: 0.72, duration: 0.4, ease: "power3.inOut" }, at - 0.18);
+            if (ta) BK.sai(tl, ta, at - 0.15, { y: -24, dur: 0.18 });
+            const icons = B.icones || (B.icone ? [B.icone] : ["coroa"]);
+            const bw = BK.el("div", "tr-b", card);
+            const b1 = BK.el("div", "tr-b1", bw, BK.icone(icons[0], B.tam || 240));
+            tl.fromTo(bw, { scale: 0, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.42, ease: "back.out(1.7)" }, at);
+            if (icons[1]) {
+              const b2 = BK.el("div", "tr-b2", bw, BK.icone(icons[1], 110));
+              tl.fromTo(b2, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, at + 0.3);
+            }
+            if (B.titulo) {
+              const tb = BK.titulo(card, null, B.titulo, { y: 690, tam: BK.cabe(B.titulo, 980, B.tam_titulo || 96), enfase: B.enfase });
+              BK.sobe(tl, tb, at + 0.05);
+            }
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

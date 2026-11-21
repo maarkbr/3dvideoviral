@@ -1,0 +1,30 @@
+{
+ "titulo": "1 real por segundo: quanto tempo até o milhão?",
+ "fontes": "Conta: 1.000.000 s ÷ 86.400 s por dia = 11,57 dias; 1.000.000.000 s ÷ 86.400 ÷ 365,25 = 31,69 anos.",
+ "destaques": ["milhão", "bilhão", "onze", "trinta", "dois", "anos", "dias", "Claude", "palito"],
+ "blocos": [
+  {"fala": "Se você ganhasse um real por segundo, quanto tempo levaria pra ficar milionário?",
+   "cena": {"tipo": "titulo", "texto": "1 REAL POR SEGUNDO", "sub": "quanto tempo até o milhão?", "pose": "duvida"}},
+  {"fala": "Imagina: cada segundo que passa, cai uma moeda no seu bolso. Dormindo, comendo, até no banho.",
+   "cena": {"tipo": "historia", "fundo": "sala",
+    "bonecos": [{"x": 420, "pose": "parado", "camisa": "#3E7CB1"}],
+    "objetos": [{"nome": "dinheiro", "x": 760, "y": 900, "s": 0.8, "em": "moeda"}, {"nome": "dinheiro", "x": 820, "y": 760, "s": 0.7, "em": "bolso"}, {"nome": "dinheiro", "x": 700, "y": 640, "s": 0.6, "em": "banho"}],
+    "acoes": [{"quem": 0, "cara": "feliz", "pose": "comemora", "em": "bolso"}, {"quem": 0, "pula": true, "em": "banho"}],
+    "camera": {"z": 1, "para": {"z": 1.25, "x": 560, "y": 860}}}},
+  {"fala": "Pra juntar um milhão, você ia precisar de onze dias e meio. Sem parar.",
+   "cena": {"tipo": "numero", "rotulo": "1 MILHÃO =", "valor": 11, "sufixo": " DIAS", "sub": "e meio, sem parar", "em": "onze", "reacao": "comemora", "cara": "feliz"}},
+  {"fala": "Agora o bilhão. Você ia dormir, acordar e dormir de novo, por muito, muito mais tempo.",
+   "cena": {"tipo": "historia", "fundo": "noite",
+    "bonecos": [{"x": 300, "pose": "parado", "camisa": "#3E7CB1"}],
+    "objetos": [{"nome": "relogio", "x": 760, "y": 700, "s": 1, "em": "dormir"}],
+    "acoes": [{"quem": 0, "anda": {"x": 520}, "em": "acordar"}, {"quem": 0, "pose": "triste", "cara": "triste", "em": "muito"}],
+    "camera": {"z": 1.1, "para": {"z": 1, "dur": 2}}}},
+  {"fala": "Um bilhão de segundos dá quase trinta e dois anos.",
+   "cena": {"tipo": "numero", "rotulo": "1 BILHÃO =", "valor": 32, "prefixo": "~", "sufixo": " ANOS", "sub": "31 anos e 8 meses", "em": "trinta", "reacao": "assusta", "cara": "assustado"}},
+  {"fala": "Parecem vizinhos. Mas um é uma viagem de férias, e o outro é uma vida inteira.",
+   "cena": {"tipo": "comparacao", "esquerda": {"titulo": "MILHÃO", "objeto": {"nome": "placa", "texto": "11 DIAS"}, "em": "viagem", "pose": "comemora", "cara": "feliz"},
+    "direita": {"titulo": "BILHÃO", "objeto": {"nome": "placa", "texto": "32 ANOS"}, "em": "outro", "pose": "assusta", "cara": "assustado"}}},
+  {"fala": "Esse vídeo foi feito inteiro no Claude. Comenta palito que eu te mando a skill.",
+   "cena": {"tipo": "cta", "palavra": "PALITO", "selo": "Feito 100% com IA no Claude", "logo": "claude", "depois": "que eu te mando a skill"}}
+ ]
+}

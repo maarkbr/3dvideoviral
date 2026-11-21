@@ -1,0 +1,12 @@
+{
+ "nome": "Mapas: como os EUA compraram metade do país",
+ "categoria": "mapas",
+ "estilo": "mapas",
+ "nicho": "geografia, história, curiosidades",
+ "descricao": "A compra da Louisiana em 1803: o território da França acendendo dentro dos EUA, Nova Orleans e o rio Mississippi, Napoleão vendendo tudo depois de perder o Haiti, o preço de 15 milhões de dólares (uns 7 centavos por hectare) e os 15 estados que saíram dali, com emojis 3D, legenda de 1 a 2 palavras e CTA com teclas. Tem uma cena própria (`codigo/cenas.js`). Roteiro próprio em português, a partir dos fatos.",
+ "duracao": 49.2,
+ "url": "",
+ "origem": "painel",
+ "criado": "2026-11-08",
+ "exemplo_url": "https://midia.lucaseditor.com.br/presets-capcut/materiais/edicao-com-ia/modelos/mapa-louisiana-compra-dos-eua/exemplo-0ccec0083845.mp4"
+}

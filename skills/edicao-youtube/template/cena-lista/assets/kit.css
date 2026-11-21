@@ -1,0 +1,53 @@
+/* Kit visual do canal Lucas Editor (tokens da intro do Kling / vídeo 3D). Usado em todas as cenas do documentário v2. */
+@font-face { font-family: "Montserrat"; src: url("fonts/Montserrat-VF.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Serifa"; src: url("fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; }
+:root { --preto: #0a0a0b; --branco: #f5f3ee; --amarelo: #ffc400; --card: #16161a; --cinza: #9a978f;
+  --glow: 0 0 22px rgba(255,196,0,.55), 0 0 60px rgba(255,196,0,.28);
+  --glow-branco: 0 0 18px rgba(255,255,255,.35), 0 0 50px rgba(255,196,0,.22); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--preto); }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", sans-serif; color: var(--branco); }
+section.clip { position: absolute; inset: 0; overflow: hidden; }
+.grade-escura { position: absolute; inset: 0; background-color: var(--preto);
+  background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 96px 96px; background-position: center; }
+.grade-clara { position: absolute; inset: 0; background-color: #f1f0ec;
+  background-image: linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.07) 1px, transparent 1px);
+  background-size: 96px 96px; background-position: center; }
+.vinheta { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.78) 100%); pointer-events: none; }
+.brilho { position: absolute; left: 50%; top: 50%; width: 1400px; height: 760px; margin: -380px 0 0 -700px;
+  background: radial-gradient(ellipse at center, rgba(255,196,0,.13), transparent 65%); }
+.palco { position: absolute; inset: 0; perspective: 1700px; perspective-origin: 50% 45%; }
+.centro { position: absolute; left: 0; right: 0; text-align: center; white-space: nowrap; }
+.rot { font-family: "Serifa", serif; font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.rot-sans { font-weight: 600; letter-spacing: .02em; }
+.gig { font-weight: 900; letter-spacing: -.045em; line-height: .9; }
+.gig-serifa { font-family: "Serifa", serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; line-height: .9; }
+.am { color: var(--amarelo); text-shadow: var(--glow); }
+.bw { text-shadow: var(--glow-branco); }
+.letra, .pal { display: inline-block; will-change: transform, filter, opacity; }
+.pilula { position: absolute; background: var(--amarelo); color: #111; font-weight: 800; font-size: 44px; padding: 14px 34px;
+  border-radius: 60px; transform: rotate(-2deg); white-space: nowrap; box-shadow: 0 18px 50px rgba(0,0,0,.45); }
+.cartao { position: absolute; background: var(--card); border: 2px solid rgba(255,255,255,.18); border-radius: 26px;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6); overflow: hidden; }
+.foto { position: absolute; background: #f3efe6; padding: 14px 14px 46px; box-shadow: 0 30px 70px rgba(0,0,0,.6); }
+.foto img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.num { display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 50%;
+  background: var(--amarelo); color: #111; font-weight: 900; font-size: 40px; flex: none; }
+.leg { position: absolute; left: 0; right: 0; top: 968px; text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -.01em;
+  color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.9); }
+.leg b { color: var(--amarelo); font-weight: 800; }
+.icone { width: 110px; height: 110px; border-radius: 28px; background: #222228; border: 2px solid rgba(255,255,255,.16);
+  display: flex; align-items: center; justify-content: center; font-size: 60px; }
+/* janela do Claude (simulação da conversa) */
+.janela { position: absolute; background: #1f1e1d; border-radius: 22px; border: 1.5px solid rgba(255,255,255,.12);
+  box-shadow: 0 50px 120px rgba(0,0,0,.7); overflow: hidden; font-family: "Montserrat", sans-serif; }
+.janela .topo { height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 26px; border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #b9b4aa; font-size: 22px; font-weight: 500; }
+.janela .topo i { width: 16px; height: 16px; border-radius: 50%; background: #4a4845; display: inline-block; }
+.janela .topo span { margin-left: 18px; }
+.msg-eu { position: absolute; right: 40px; background: #393735; color: #f1ede6; border-radius: 22px; padding: 26px 32px; font-size: 30px;
+  line-height: 1.42; font-weight: 500; }
+.msg-claude { position: absolute; left: 40px; right: 40px; color: #ece8e1; font-size: 30px; line-height: 1.5; font-weight: 500; }
+.marca { background: rgba(255,196,0,.0); border-radius: 8px; padding: 0 4px; transition: none; }
+.caixa-am { background: var(--amarelo); color: #111; padding: 0 .18em; border-radius: .12em; }

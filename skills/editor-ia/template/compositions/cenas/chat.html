@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .ch-view { position: absolute; left: 60px; top: 140px; width: 960px; height: 790px; overflow: hidden; }
+        .ch-list { position: absolute; left: 0; top: 0; width: 960px; }
+        .ch-row { position: absolute; left: 0; width: 960px; height: 96px; display: flex; align-items: center; gap: 18px; }
+        .ch-row.b { flex-direction: row-reverse; }
+        .ch-av { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex: none; box-shadow: 0 0 0 4px #0b0b0d, 0 0 0 7px #2a2a30;
+          display: flex; align-items: center; justify-content: center; background: #1d1d24; }
+        .ch-av svg { flex: none; }
+        .ch-bub { max-width: 800px; padding: 24px 30px; border-radius: 30px; font-family: "JetBrains Mono", monospace; font-weight: 700;
+          line-height: 1.2; letter-spacing: 0.01em; white-space: nowrap; transform-origin: 0% 50%; }
+        .ch-row.a .ch-bub { border-bottom-left-radius: 8px; }
+        .ch-row.b .ch-bub { border-bottom-right-radius: 8px; transform-origin: 100% 50%; }
+        .ch-dots { position: absolute; left: 82px; display: flex; gap: 12px; padding: 30px 34px; border-radius: 30px; }
+        .ch-dots i { width: 16px; height: 16px; border-radius: 50%; display: block; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"><div class="ch-view"><div class="ch-list" id="__ID__-list"></div></div></div>
+      </div>
+      <script>
+        (function () {
+          // CHAT — conversa em mensagens (lado a pergunta, lado b responde), com "digitando…" antes das mensagens do lado a.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 8, rotulo: "", entrada: "desce", saida: null, digitando: true, maiusculas: true, msgs: [],
+            lados: {} }, /*PARAMS*/{}/*/PARAMS*/);
+          const L = {
+            a: Object.assign({ icone: "interrogacao", cor: "#3B1513", borda: "#D7261E", texto: "#FBE9E7" }, P.lados.a || {}),
+            b: Object.assign({ icone: "check", cor: "#13A05B", borda: "", texto: "#FFFFFF" }, P.lados.b || {}),
+          };
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          const list = document.querySelector("#" + ID + "-list");
+          BK.card(tl, card, P);
+          BK.rotulo(tl, card, P.rotulo);
+          const ROW_H = 118, VIS = 6;
+          P.msgs.forEach((m, i) => {
+            const side = m.lado === "b" ? "b" : "a", S = L[side];
+            const at = m.t == null ? 0.3 + i * 1.2 : m.t;
+            const row = BK.el("div", "ch-row " + side, list);
+            row.style.top = i * ROW_H + "px";
+            const av = BK.el("div", "ch-av", row, BK.icone(S.icone, S.icone.startsWith("bandeira") ? 96 : 46));
+            const txt = P.maiusculas ? String(m.texto).toUpperCase() : String(m.texto);
+            const bub = BK.el("div", "ch-bub", row, BK.esc(txt));
+            bub.style.fontSize = (txt.length > 38 ? 30 : txt.length > 30 ? 34 : 40) + "px";
+            bub.style.background = BK.cor(S.cor);
+            bub.style.color = BK.cor(S.texto);
+            if (S.borda) bub.style.border = "3px solid " + BK.cor(S.borda);
+            if (i >= VIS) tl.to(list, { y: -(i - VIS + 1) * ROW_H, duration: 0.25, ease: "power2.out" }, at - 0.3);
+            if (side === "a" && P.digitando) {
+              const dots = BK.el("div", "ch-dots", row, "<i></i><i></i><i></i>");
+              dots.style.background = BK.cor(S.cor);
+              if (S.borda) dots.style.border = "3px solid " + BK.cor(S.borda);
+              [...dots.children].forEach((d) => (d.style.background = BK.cor(S.texto)));
+              const t0 = Math.max(0.12, at - 0.42);
+              tl.fromTo(av, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "power3.out" }, t0);
+              tl.fromTo(dots, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.16, ease: "power3.out" }, t0);
+              [...dots.children].forEach((d, k) => {
+                tl.fromTo(d, { y: 0 }, { y: -10, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, t0 + 0.08 + k * 0.07);
+              });
+              tl.set(dots, { opacity: 0 }, at);
+            } else tl.fromTo(av, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "power3.out" }, at - 0.04);
+            tl.fromTo(bub, { scale: 0.4, opacity: 0, x: side === "a" ? -30 : 30 }, { scale: 1, opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, at);
+          });
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

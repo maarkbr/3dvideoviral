@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>Edição com IA</title>
+<link rel="preload" href="fonts/Montserrat-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="central.css">
+</head>
+<body class="central">
+<header class="c-topo">
+  <a class="c-logo" href="#/" aria-label="Início"><img src="logo.png" alt="Edição com IA" width="158" height="28"></a>
+  <nav class="c-nav" aria-label="Seções do painel">
+    <a href="#/" data-tela="inicio">Início</a>
+    <a href="#/projetos" data-tela="projetos">Projetos</a>
+    <a href="#/modelos" data-tela="modelos">Modelos</a>
+    <a href="#/entregas" data-tela="entregas">Entregas</a>
+  </nav>
+  <div class="c-topo-dir">
+    <button class="btn chip c-topo-atualizar" type="button" id="topo-atualizar" hidden></button>
+    <span class="c-conta t-peq" id="conta" role="status" aria-live="polite"></span>
+  </div>
+</header>
+
+<div id="app" hidden>
+
+  <!-- Início -->
+  <section class="c-tela c-pagina" id="tela-inicio" hidden aria-labelledby="t-inicio">
+    <div class="c-cab-pag"><div><h1 id="t-inicio">Início</h1><p class="t-peq" id="ini-sub"></p></div></div>
+    <div class="c-faixa" id="ini-atualizacao" hidden role="status" aria-live="polite"></div>
+    <section class="c-primeiros" id="ini-primeiros" hidden aria-labelledby="t-primeiros">
+      <div class="c-primeiros-cab">
+        <div><h2 id="t-primeiros">Seu primeiro vídeo</h2><p class="t-peq" id="ini-primeiros-sub"></p></div>
+        <button class="c-link" type="button" id="ini-primeiros-esconde">Esconder</button>
+      </div>
+      <div class="c-prog" role="progressbar" aria-labelledby="t-primeiros" id="ini-primeiros-prog"><i></i></div>
+      <ol class="c-passos-ini" id="ini-primeiros-lista"></ol>
+    </section>
+    <div class="c-numeros" id="ini-numeros"></div>
+    <section class="c-bloco" id="ini-painel" aria-labelledby="t-painel">
+      <div class="c-sec-cab"><h2 id="t-painel">Entregas</h2><a href="#/entregas">Ver todas</a></div>
+      <div class="c-periodo" id="ini-periodo" role="group" aria-label="Período dos gráficos"></div>
+      <div class="c-graficos" id="ini-graficos"></div>
+    </section>
+    <section class="c-bloco" id="ini-agora" hidden>
+      <div class="c-sec-cab"><h2>Agora</h2></div>
+      <div class="c-agora" id="ini-agora-lista"></div>
+    </section>
+    <section class="c-bloco">
+      <div class="c-sec-cab"><h2>Projetos</h2><a href="#/projetos">Ver todos</a></div>
+      <div class="c-cards" id="ini-projetos"></div>
+    </section>
+    <section class="c-bloco">
+      <div class="c-sec-cab"><h2>Últimas entregas</h2><a href="#/entregas">Ver todas</a></div>
+      <div class="c-galeria-grade c-fileira" id="ini-entregas"></div>
+    </section>
+    <section class="c-bloco">
+      <div class="c-sec-cab"><h2>Modelos por categoria</h2><a href="#/modelos">Ver todos</a></div>
+      <div class="c-cats-grade" id="ini-cats"></div>
+    </section>
+  </section>
+
+  <!-- Projetos -->
+  <section class="c-tela c-pagina" id="tela-projetos" hidden aria-labelledby="t-projetos">
+    <div class="c-cab-pag"><div><h1 id="t-projetos">Projetos</h1><p class="t-peq">Um projeto por cliente ou canal. Cada um tem a própria marca, o próprio chat e os próprios vídeos.</p></div>
+      <button class="btn btn-principal" type="button" data-novo>Novo projeto</button></div>
+    <div class="c-cards" id="lista-projetos"></div>
+  </section>
+
+  <!-- Modelos -->
+  <section class="c-tela c-pagina" id="tela-modelos" hidden aria-labelledby="t-modelos">
+    <div class="c-cab-pag"><div><h1 id="t-modelos">Modelos</h1><p class="t-peq">Vídeos de referência com ficha e código. Escolha um, e o Claude repete a estrutura, o ritmo e a técnica com a sua marca e o seu conteúdo.</p></div></div>
+    <div class="c-cats-grade" id="mod-cats" role="group" aria-label="Categoria"></div>
+    <div class="c-sec-cab c-sec-mod"><h2 id="mod-titulo">Todos os modelos</h2><span class="t-peq" id="mod-conta"></span></div>
+    <div class="c-galeria-grade" id="galeria"></div>
+    <p class="t-peq c-rodape-dica">Para adicionar modelos seus, coloque os vídeos numa pasta e peça ao Claude, no chat de um projeto: "importa os modelos da pasta X".</p>
+  </section>
+
+  <!-- Entregas -->
+  <section class="c-tela c-pagina" id="tela-entregas" hidden aria-labelledby="t-entregas">
+    <div class="c-cab-pag"><div><h1 id="t-entregas">Entregas</h1><p class="t-peq" id="numeros"></p></div></div>
+    <div class="filtros" id="filtro-entregas" role="group" aria-label="Projeto"></div>
+    <div class="c-galeria-grade" id="entregas"></div>
+  </section>
+
+  <!-- Projeto (chat) -->
+  <section class="c-tela c-grade" id="tela-projeto" hidden aria-labelledby="titulo-projeto">
+    <aside class="c-lateral" id="lateral" aria-label="Vídeos, modelos e estilos">
+      <div class="c-lateral-cab c-so-cel"><button class="btn chip" type="button" id="fecha-lateral">← Voltar ao chat</button></div>
+      <section>
+        <div class="c-sec-cab"><h2>Vídeos deste projeto</h2><a class="t-peq" id="proj-videos-todos" href="#/entregas" hidden>Ver todos</a></div>
+        <ul class="c-modelos" id="proj-videos"></ul>
+      </section>
+      <section>
+        <div class="c-sec-cab"><h2>Modelos</h2><a class="t-peq" href="#/modelos">Ver galeria</a></div>
+        <div class="filtros c-cats" id="cats" role="group" aria-label="Categoria"></div>
+        <ul class="c-modelos" id="modelos"></ul>
+      </section>
+      <section>
+        <div class="c-sec-cab"><h2>Estilos</h2></div>
+        <p class="t-peq c-dica">Toque num estilo para usar no pedido.</p>
+        <ul class="c-estilos" id="estilos"></ul>
+      </section>
+    </aside>
+
+    <main class="c-chat">
+      <div class="c-chat-cab">
+        <div class="c-proj-id">
+          <span class="c-marca-cor" id="marca-cor" aria-hidden="true"></span>
+          <div class="c-proj-txt"><h1 id="titulo-projeto">Projeto</h1><span class="t-peq" id="sub-projeto"></span></div>
+        </div>
+        <div class="c-chat-acoes">
+          <button class="btn chip" type="button" id="abre-video">Novo vídeo</button>
+          <button class="btn chip" type="button" id="abre-marca">Marca</button>
+          <button class="btn chip" type="button" id="abre-excluir">Excluir</button>
+          <button class="btn chip c-so-cel" type="button" id="abre-lateral" aria-controls="lateral" aria-expanded="false">Mais</button>
+        </div>
+      </div>
+      <div class="c-msgs" id="msgs" aria-live="polite" aria-label="Conversa com o Claude"></div>
+      <div class="c-status" id="status" hidden>
+        <span class="c-girando" aria-hidden="true"></span>
+        <span class="t-nome" id="status-txt">Claude trabalhando</span>
+        <span class="t-peq" id="status-tempo"></span>
+        <button class="btn chip" type="button" id="parar">Parar</button>
+      </div>
+      <form class="c-escrever" id="form-msg">
+        <div class="c-anexados" id="anexados"></div>
+        <div class="c-escrever-linha">
+          <button class="btn c-redondo" type="button" id="btn-anexo" aria-label="Anexar arquivo">+</button>
+          <input type="file" id="arquivo" multiple hidden>
+          <textarea class="entrada" id="texto" rows="1" maxlength="8000" placeholder="Escreva para o Claude, cole um link ou grave um áudio" aria-label="Mensagem para o Claude"></textarea>
+          <button class="btn c-redondo" type="button" id="btn-audio" aria-label="Gravar áudio" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </button>
+          <button class="btn btn-principal" type="submit" id="enviar">Enviar</button>
+        </div>
+        <div class="c-ajuda-linha">
+          <p class="t-peq c-ajuda-env" id="ajuda-env">Enter manda · Shift+Enter pula linha · Antes de algo arriscado, o Claude pede licença aqui no chat.</p>
+          <button class="btn chip c-autonomo" type="button" id="btn-autonomo" aria-pressed="false" hidden><i aria-hidden="true"></i><span>Trabalhar sozinho</span></button>
+        </div>
+      </form>
+    </main>
+
+    <aside class="c-etapas" aria-label="Andamento do vídeo">
+      <div class="c-previa" id="previa"><p class="t-peq">A prévia aparece aqui quando o Claude tiver o primeiro quadro.</p></div>
+      <ol class="c-lista-etapas" id="etapas"></ol>
+    </aside>
+  </section>
+</div>
+
+<dialog class="c-modal" id="modal-novo" aria-labelledby="t-novo">
+  <form method="dialog" class="campos" id="form-novo">
+    <h2 id="t-novo">Novo projeto</h2>
+    <p class="t-peq">O nome do cliente ou do canal. A marca (cor, @, logo) você cadastra logo depois.</p>
+    <div class="campo"><label for="novo-nome">Nome</label><input class="entrada" id="novo-nome" maxlength="60" autocomplete="off" placeholder="Ex.: Barbearia do Zé" required></div>
+    <div class="acoes-linha"><button class="btn btn-principal" type="submit" value="criar">Criar projeto</button><button class="btn" type="button" value="fechar" data-fecha>Cancelar</button></div>
+  </form>
+</dialog>
+<dialog class="c-modal" id="modal-escolhe" aria-labelledby="t-escolhe">
+  <h2 id="t-escolhe">Usar em qual projeto?</h2>
+  <p class="t-peq" id="escolhe-sub"></p>
+  <div class="c-escolhe-lista" id="escolhe-lista"></div>
+  <div class="acoes-linha"><button class="btn" type="button" data-novo>Novo projeto</button><button class="btn" type="button" data-fecha>Cancelar</button></div>
+</dialog>
+<dialog class="c-modal c-modal-largo c-assist" id="modal-video" aria-labelledby="t-video">
+  <form class="campos" id="form-video" novalidate>
+    <div class="c-assist-cab">
+      <h2 id="t-video">Novo vídeo</h2>
+      <ol class="c-passos" id="nv-passos" aria-label="Passos do pedido">
+        <li data-p="1">Tipo de vídeo</li><li data-p="2">O que o Claude vai usar</li><li data-p="3">Conferir e começar</li>
+      </ol>
+    </div>
+
+    <section class="c-assist-passo" id="nv-p1" aria-labelledby="nv-p1-t">
+      <p class="t-peq" id="nv-p1-t">Escolha o tipo de vídeo. Passe o mouse num cartão para ver o exemplo.</p>
+      <div id="nv-estilos"></div>
+    </section>
+
+    <section class="c-assist-passo campos" id="nv-p2" hidden aria-labelledby="nv-p2-t">
+      <p class="t-peq" id="nv-p2-t"></p>
+      <div class="campos" id="nv-campos"></div>
+      <div class="campo c-ja-tenho" id="nv-ja-tenho">
+        <span class="rotulo">Já tem algo pronto? <span class="t-peq">(opcional)</span></span>
+        <p class="t-peq">O que vier pronto, o Claude usa como está, sem pedir para aprovar de novo.</p>
+        <div class="filtros">
+          <button class="btn chip c-nv-chave" type="button" id="nv-tem-copy" aria-pressed="false">Já tenho o texto do vídeo</button>
+          <button class="btn chip c-nv-chave" type="button" id="nv-tem-sb" aria-pressed="false">Já tenho o desenho das cenas</button>
+        </div>
+        <div id="nv-copy-box" hidden>
+          <textarea class="entrada" id="nv-copy" rows="6" maxlength="8000" placeholder="Cole aqui o texto final (a copy). O Claude usa palavra por palavra, na narração e na tela." aria-label="Texto do vídeo"></textarea>
+        </div>
+        <div id="nv-sb-box" class="campos" hidden>
+          <div class="c-anexados" id="nv-sb-lista"></div>
+          <div class="acoes-linha"><button class="btn" type="button" id="nv-sb-btn">Escolher a imagem das cenas</button></div>
+          <input type="file" id="nv-sb" accept="image/png,image/jpeg,image/webp,application/pdf" multiple hidden>
+          <p class="t-peq">O storyboard: uma imagem com todos os quadros (o Claude separa sozinho), uma imagem por quadro ou um PDF.</p>
+          <div class="filtros" id="nv-animar" role="group" aria-label="Como animar as cenas">
+            <button type="button" class="btn chip" data-v="recriar" aria-pressed="true">Recriar cada quadro animado</button>
+            <button type="button" class="btn chip" data-v="imagem" aria-pressed="false">Animar a própria imagem</button>
+          </div>
+          <p class="t-peq" id="nv-animar-dica"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="c-assist-passo campos" id="nv-p3" hidden>
+      <div class="campo" id="nv-voz-box"><span class="rotulo" id="nv-voz-t">Voz da narração</span>
+        <div class="filtros" id="nv-voz" role="radiogroup" aria-labelledby="nv-voz-t"></div>
+        <p class="t-peq" id="nv-voz-dica"></p></div>
+      <div class="campo"><label for="nv-obs">Mais alguma coisa? <span class="t-peq">(opcional)</span></label>
+        <textarea class="entrada" id="nv-obs" rows="2" maxlength="2000" placeholder="Ex.: usar a cor da marca, fazer em uns 30 segundos"></textarea></div>
+      <div class="c-resumo" id="nv-resumo" aria-label="Resumo do pedido"></div>
+    </section>
+
+    <p class="t-peq salvo" id="nv-status" role="status" aria-live="polite"></p>
+    <div class="acoes-linha c-assist-acoes">
+      <button class="btn btn-principal" type="submit" id="nv-enviar">Continuar</button>
+      <button class="btn" type="button" id="nv-voltar" hidden>Voltar</button>
+      <button class="btn" type="button" data-fecha>Cancelar</button>
+    </div>
+  </form>
+</dialog>
+<dialog class="c-modal" id="modal-excluir" aria-labelledby="t-excluir">
+  <h2 id="t-excluir">Excluir este projeto?</h2>
+  <p class="t-peq" id="excluir-sub"></p>
+  <div class="acoes-linha"><button class="btn btn-perigo" type="button" id="excluir-sim">Excluir projeto</button><button class="btn" type="button" data-fecha autofocus>Cancelar</button></div>
+</dialog>
+<dialog class="c-modal c-player" id="modal-player" aria-labelledby="player-titulo">
+  <div class="c-galeria-cab"><h2 id="player-titulo">Vídeo</h2><div class="acoes-linha"><button class="btn" type="button" id="player-pasta" hidden>Mostrar na pasta</button><form method="dialog"><button class="btn" value="fechar">Fechar</button></form></div></div>
+  <video id="player-video" controls playsinline preload="metadata"></video>
+</dialog>
+<dialog class="c-modal" id="modal-marca" aria-labelledby="t-marca">
+  <form method="dialog" class="campos" id="form-marca">
+    <h2 id="t-marca">Marca do projeto</h2>
+    <div class="campo"><label for="mm-nome">Nome</label><input class="entrada" id="mm-nome" maxlength="60"></div>
+    <div class="campo"><label for="mm-handle">@</label><input class="entrada" id="mm-handle" maxlength="31" autocapitalize="off" spellcheck="false"></div>
+    <div class="campo"><label for="mm-cor">Cor da marca</label><div class="cor-linha"><input type="color" id="mm-cor"><input class="entrada" id="mm-cor-hex" maxlength="7" aria-label="Código da cor"></div></div>
+    <div class="campo"><span class="rotulo">Logo</span><div class="logo-linha"><div class="logo-mini" id="mm-logo-mini" role="img" aria-label="Logo"></div><button class="btn" type="button" id="mm-btn-logo">Escolher logo</button><input type="file" id="mm-logo" accept="image/png,image/jpeg,image/webp" hidden></div></div>
+    <div class="campo"><span class="rotulo">Capas que deram certo <span class="t-peq">(até 3)</span></span><p class="t-peq" id="mm-capas-ajuda">O Claude usa como modelo quando faz as suas capas: elas saem com a cara do seu perfil.</p><div class="capas-ref" id="mm-capas" aria-describedby="mm-capas-ajuda"></div><div class="logo-linha"><button class="btn" type="button" id="mm-btn-capa">Adicionar capa</button><input type="file" id="mm-capa" accept="image/png,image/jpeg,image/webp" hidden></div></div>
+    <p class="t-peq salvo" id="mm-status" role="status"></p>
+    <div class="acoes-linha"><button class="btn btn-principal" type="button" id="mm-salvar">Salvar a marca</button><button class="btn" value="fechar">Fechar</button></div>
+  </form>
+</dialog>
+
+<div class="trava" id="sem-chave" hidden>
+  <h1>Abra pelo link do Claude</h1>
+  <p class="t-peq">Por segurança, o painel só abre pelo link que o Claude mostrou, ou pelo atalho Abrir Painel da sua pasta.</p>
+</div>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+<script src="central.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="landscape">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" />
+<script src="assets/gsap.min.js"></script>
+<link rel="stylesheet" href="assets/kit.css" />
+<style>
+  /* Intro do patrocínio Higgsfield 2 (Shorts Studio). Tempo local = tempo da voz cortada (VT). Sem som dos shorts. */
+  .fone { position: absolute; width: 380px; height: 676px; border-radius: 46px; overflow: hidden; background: #000;
+    border: 10px solid #1d1d22; box-shadow: 0 50px 120px rgba(0,0,0,.85), 0 0 0 2px rgba(255,255,255,.08); opacity: 0; }
+  .fone video { width: 100%; height: 100%; object-fit: cover; }
+  .cartao3d { position: absolute; border-radius: 24px; overflow: hidden; border: 2px solid rgba(255,255,255,.16);
+    box-shadow: 0 60px 140px rgba(0,0,0,.85); background: #0b0b0c; opacity: 0; }
+  .cartao3d img { display: block; width: 100%; height: 104%; object-fit: cover; object-position: top; }
+  .tag { position: absolute; font-size: 52px; font-weight: 900; padding: 14px 32px; border-radius: 18px; background: var(--amarelo); color: #111; opacity: 0; white-space: nowrap; }
+  .tag-esc { position: absolute; font-size: 46px; font-weight: 800; padding: 14px 32px; border-radius: 999px; background: rgba(16,16,20,.92);
+    border: 3px solid var(--amarelo); color: #fff; opacity: 0; white-space: nowrap; }
+  .canal { position: absolute; left: 140px; top: 70px; font-size: 50px; font-weight: 900; letter-spacing: -.02em; }
+  .canal span { color: var(--amarelo); }
+  /* S1 */
+  #s1-pal { position: absolute; left: 120px; top: 120px; width: 900px; }
+  #s1-pal div { font-size: 118px; font-weight: 900; letter-spacing: -.045em; line-height: 1.02; }
+  #s1-pal div .am { text-shadow: var(--glow); }
+  #f1 { left: 1010px; top: 200px; } #f2 { left: 1260px; top: 170px; } #f3 { left: 1510px; top: 200px; }
+  /* S3 Claude */
+  #s3-logo { position: absolute; left: 820px; top: 210px; width: 280px; filter: drop-shadow(0 0 50px rgba(217,119,87,.6)); opacity: 0; }
+  #s3-rot { top: 560px; font-size: 76px; }
+  #s3-gig { top: 660px; font-size: 220px; }
+  /* S4 promessa */
+  #s4-rot { top: 120px; font-size: 80px; }
+  #s4-gig1 { top: 240px; font-size: 210px; }
+  #s4-gig2 { top: 470px; font-size: 150px; }
+  #s4-chips { position: absolute; left: 0; right: 0; top: 760px; display: flex; gap: 26px; justify-content: center; }
+  #s4-chips .chip { font-size: 38px; font-weight: 800; padding: 16px 34px; border-radius: 999px; background: var(--card);
+    border: 2px solid rgba(255,196,0,.6); opacity: 0; }
+  /* S6 3 coisas */
+  #s6-tit { position: absolute; left: 140px; top: 70px; font-size: 92px; font-weight: 900; letter-spacing: -.03em; }
+  .passo { position: absolute; top: 300px; width: 520px; opacity: 0; }
+  .passo .cartao3d { position: relative; width: 520px; height: 330px; opacity: 1; }
+  .passo .num { position: absolute; left: -24px; top: -30px; z-index: 3; width: 92px; height: 92px; font-size: 52px; }
+  .passo b { display: block; margin-top: 30px; font-size: 54px; font-weight: 900; letter-spacing: -.02em; }
+  .passo small { display: block; margin-top: 8px; font-size: 34px; font-weight: 600; color: var(--cinza); }
+  #ps1 { left: 120px; } #ps2 { left: 700px; } #ps3 { left: 1280px; }
+  /* S7 link */
+  #s7-gig { position: absolute; left: 120px; top: 560px; font-size: 150px; font-weight: 900; letter-spacing: -.045em; line-height: .95; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="43.3" data-width="1920" data-height="1080">
+
+  <!-- S1–S2: os 3 shorts em perspectiva; sem câmera / sem gravar / sem editar; depois cada um vem pra frente -->
+  <section id="s1" class="clip" data-start="0" data-duration="12.8" data-track-index="1">
+    <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+    <div id="s1-pal">
+      <div id="w1" class="letras">sem câmera</div>
+      <div id="w2" class="letras am">sem gravar</div>
+      <div id="w3" class="letras">sem editar</div>
+    </div>
+    <div class="palco" id="fila1">
+      <div id="f1" class="fone"><video src="assets/short1.mp4" data-start="0" data-duration="12.8" data-media-start="0" muted data-track-index="3"></video></div>
+      <div id="f2" class="fone"><video src="assets/short2.mp4" data-start="0" data-duration="12.8" data-media-start="0" muted data-track-index="4"></video></div>
+      <div id="f3" class="fone"><video src="assets/short3.mp4" data-start="0" data-duration="12.8" data-media-start="0" muted data-track-index="5"></video></div>
+    </div>
+    <div id="t1" class="tag-esc" style="left:1080px; top:880px">apresentador de IA</div>
+    <div id="t1b" class="tag" style="left:1100px; top:150px">sem eu aparecer</div>
+    <div id="t2" class="tag-esc" style="left:900px; top:880px">influenciadora que não existe</div>
+    <div id="t3" class="tag-esc" style="left:1060px; top:880px">anúncio de produto</div>
+  </section>
+
+  <!-- S3: conversando com o Claude -->
+  <section id="s3" class="clip" data-start="12.8" data-duration="2.77" data-track-index="1">
+    <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+    <img id="s3-logo" src="assets/claude-logo.png">
+    <div id="s3-rot" class="centro rot palavras">fiz os três conversando com o</div>
+    <div id="s3-gig" class="centro gig am letras">Claude</div>
+  </section>
+
+  <!-- S4: do zero, clique por clique -->
+  <section id="s4" class="clip" data-start="15.57" data-duration="8.56" data-track-index="1">
+    <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+    <div id="s4-rot" class="centro rot palavras">neste vídeo, do zero</div>
+    <div id="s4-gig1" class="centro gig letras">clique por clique</div>
+    <div id="s4-gig2" class="centro gig am letras">Shorts e Reels</div>
+    <div id="s4-chips"><div class="chip">pra crescer um perfil</div><div class="chip">com o seu conteúdo</div><div class="chip">ou um influenciador de IA</div></div>
+  </section>
+
+  <!-- S5: Shorts Studio da Higgsfield (patrocínio) -->
+  <section id="s5" class="clip" data-start="24.13" data-duration="5.1" data-track-index="1">
+    <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+    <div class="canal">Higgsfield · <span>Shorts Studio</span></div>
+    <div class="palco">
+      <div class="cartao3d" id="c5a" style="left:200px; top:200px; width:1520px; height:703px"><img src="assets/p-landing.png"></div>
+      <div class="cartao3d" id="c5b" style="left:120px; top:250px; width:820px; height:380px"><img src="assets/p-sale.png"></div>
+      <div class="cartao3d" id="c5c" style="left:1000px; top:430px; width:820px; height:389px"><img src="assets/p-planos.png"></div>
+    </div>
+    <div id="t5" class="tag" style="left:1180px; top:60px">#publi</div>
+    <div id="t5b" class="tag-esc" style="left:620px; top:930px">patrocinado pela Higgsfield</div>
+  </section>
+
+  <!-- S6: as 3 coisas -->
+  <section id="s6" class="clip" data-start="29.23" data-duration="8.17" data-track-index="1">
+    <div class="grade-escura"></div><div class="vinheta"></div>
+    <div id="s6-tit"><span class="am">3</span> <span class="palavras" id="s6-p">coisas e pronto</span></div>
+    <div class="palco">
+      <div class="passo" id="ps1"><div class="num">1</div><div class="cartao3d"><img src="assets/p-ref.png" style="object-position: 50% 70%"></div>
+        <b>vídeo de referência</b><small>dá o movimento</small></div>
+      <div class="passo" id="ps2"><div class="num">2</div><div class="cartao3d"><img src="assets/p-char.png" style="object-position: 60% 20%"></div>
+        <b>personagem e voz</b><small>criado lá dentro</small></div>
+      <div class="passo" id="ps3"><div class="num">3</div><div class="cartao3d"><img src="assets/p-roteiro.png" style="object-position: 60% 20%"></div>
+        <b>roteiro</b><small>a ferramenta escreve</small></div>
+    </div>
+  </section>
+
+  <!-- S7: primeiro passo, o link -->
+  <section id="s7" class="clip" data-start="37.4" data-duration="5.9" data-track-index="1">
+    <div class="grade-escura"></div><div class="brilho"></div><div class="vinheta"></div>
+    <div class="canal">1º passo · <span>entra pelo link</span></div>
+    <div class="palco">
+      <div class="cartao3d" id="c7" style="left:760px; top:170px; width:1000px; height:474px"><img src="assets/p-home.png"></div>
+    </div>
+    <div id="t7" class="tag" style="left:120px; top:300px">link na descrição ↓</div>
+    <div id="s7-gig"><span class="letras am" id="g7a">até 50%</span><br><span class="letras" id="g7b">de desconto</span></div>
+  </section>
+
+</div>
+<script src="assets/kit.js"></script>
+<script>
+  const entra = (sel, t, de) => tl.fromTo(sel, Object.assign({ opacity: 0, rotationY: -34, rotationX: 12, z: -900, x: 200 }, de || {}),
+    { opacity: 1, rotationY: -12, rotationX: 5, z: -120, x: 0, duration: 0.8, ease: "power3.out" }, t);
+  // S1: os 3 celulares chegam em leque e flutuam; as 3 frases batem com a fala
+  [["#f1", 0.05, -22], ["#f2", 0.18, 0], ["#f3", 0.31, 22]].forEach(([s, t, r]) => {
+    tl.fromTo(s, { opacity: 0, y: 260, rotationY: r * 2, z: -600 }, { opacity: 1, y: 0, rotationY: r, z: -200, duration: 0.8, ease: "power3.out" }, t);
+    tl.to(s, { y: "-=26", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, t + 0.8);
+  });
+  letrasSobe("#w1", 1.0, 0.035); letrasSobe("#w2", 2.25, 0.035); letrasSobe("#w3", 3.3, 0.035);
+  tl.to("#s1-pal", { opacity: 0, x: -120, filter: "blur(12px)", duration: 0.4, ease: "power2.in" }, 5.05);
+  // cada short vem pra frente na sua fala
+  const frente = (s, t, x) => { tl.to("#fila1 .fone", { opacity: 0.35, z: -420, duration: 0.4 }, t - 0.05);
+    tl.to(s, { opacity: 1, rotationY: 0, z: 140, x: x, duration: 0.55, ease: "power3.out" }, t); };
+  frente("#f1", 5.3, -380); pilula("#t1", 5.6); pilula("#t1b", 7.7);
+  tl.to("#f1", { x: 0, z: -420, rotationY: -22, duration: 0.45 }, 8.75); some("#t1", 8.75); some("#t1b", 8.75);
+  frente("#f2", 8.93, -630); pilula("#t2", 9.3);
+  tl.to("#f2", { x: 0, z: -420, rotationY: 0, duration: 0.45 }, 10.9); some("#t2", 10.9);
+  frente("#f3", 11.1, -880); pilula("#t3", 11.5);
+  // S3
+  tl.fromTo("#s3-logo", { scale: 0.2, opacity: 0, rotation: -90 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(1.6)" }, 12.85);
+  tl.to("#s3-logo", { rotation: 30, duration: 2.6, ease: "none" }, 13.4);
+  palavrasBlur("#s3-rot", 13.0, 0.08); letrasSobe("#s3-gig", 14.1, 0.05);
+  // S4
+  palavrasBlur("#s4-rot", 15.6, 0.1); letrasSobe("#s4-gig1", 17.2, 0.035); letrasSobe("#s4-gig2", 18.2, 0.04);
+  deriva("#s4", 15.57, 8.5, 1.04);
+  tl.fromTo("#s4-chips .chip", { y: 50, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.35, stagger: 1.2, ease: "power3.out" }, 20.0);
+  // S5: Shorts Studio em perspectiva, aproxima; depois as páginas da Higgsfield entram por trás
+  entra("#c5a", 24.15); tl.to("#c5a", { rotationY: -4, rotationX: 2, z: 220, duration: 3.0, ease: "power1.inOut" }, 24.9);
+  pop("#t5", 27.3); pilula("#t5b", 27.5);
+  tl.to("#c5a", { opacity: 0.25, z: -500, duration: 0.6 }, 27.6);
+  entra("#c5b", 27.7, { rotationY: 30 }); tl.to("#c5b", { rotationY: 10, z: 60, duration: 1.4, ease: "power1.out" }, 28.4);
+  entra("#c5c", 28.0); tl.to("#c5c", { rotationY: -10, z: 80, duration: 1.2, ease: "power1.out" }, 28.7);
+  // S6: as 3 coisas na fala
+  letrasSobe("#s6-tit", 29.25, 0.03); palavrasBlur("#s6-p", 29.5, 0.1);
+  const passo = (s, t) => { tl.fromTo(s, { opacity: 0, y: 140, rotationX: 35, z: -400 }, { opacity: 1, y: 0, rotationX: 8, z: 0, duration: 0.6, ease: "back.out(1.3)" }, t);
+    tl.to(s + " .num", { scale: 1.25, duration: 0.2, yoyo: true, repeat: 1 }, t + 0.5); };
+  passo("#ps1", 30.6); passo("#ps2", 32.5); passo("#ps3", 34.25);
+  tl.to(".passo", { rotationX: 0, y: -10, duration: 2.5, ease: "sine.inOut" }, 35.0);
+  // S7
+  entra("#c7", 37.45, { rotationY: 30 }); tl.to("#c7", { rotationY: -6, z: 120, duration: 3.5, ease: "power1.inOut" }, 38.2);
+  pilula("#t7", 38.9); letrasSobe("#g7a", 40.4, 0.05); letrasSobe("#g7b", 40.9, 0.04);
+  registra(43.3);
+</script>
+</body>
+</html>

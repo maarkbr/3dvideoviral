@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "LT Anton"; font-weight: 400; font-style: normal; src: url("lib/fonts/Anton-Regular.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: normal; src: url("lib/fonts/EBGaramond-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Garamond"; font-weight: 400 800; font-style: italic; src: url("lib/fonts/EBGaramond-Italic-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: normal; src: url("lib/fonts/Montserrat-VF.woff2") format("woff2"); }
+        @font-face { font-family: "LT Montserrat"; font-weight: 100 900; font-style: italic; src: url("lib/fonts/Montserrat-Italic-VF.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .vs-title { position: absolute; left: 50px; width: 980px; top: 92px; text-align: center; }
+        .vs-stage { position: absolute; left: 50px; top: 300px; width: 980px; height: 860px; display: flex; gap: 40px; transform-style: preserve-3d; perspective: 1600px; }
+        .vs-card { width: 470px; height: 860px; border-radius: 30px; background: #16161a; border: 3px solid #2a2a30; overflow: hidden;
+          transform-style: preserve-3d; will-change: transform; display: flex; flex-direction: column; align-items: center; }
+        .vs-band { width: 470px; height: 120px; display: flex; align-items: center; justify-content: center; flex: none;
+          font-family: "LT Anton", sans-serif; color: #ffffff; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+        .vs-flag { margin-top: 44px; filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5)); }
+        .vs-eyebrow { margin-top: 40px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.2em; color: #a9a6a0; text-transform: uppercase; }
+        .vs-head { margin-top: 18px; width: 400px; text-align: center; font-family: "LT Anton", sans-serif; line-height: 0.95; color: #f5f3ee; text-transform: uppercase; }
+        .vs-icon { margin-top: 36px; }
+        .vs-badge { position: absolute; left: 460px; top: 276px; width: 160px; height: 160px; border-radius: 50%; color: #0b0b0d;
+          display: flex; align-items: center; justify-content: center; font-family: "LT Anton", sans-serif; font-size: 82px;
+          box-shadow: 0 0 0 10px #0b0b0d, 0 20px 40px rgba(0, 0, 0, 0.6); }
+        .vs-foot { position: absolute; left: 0; width: 1080px; top: 1560px; text-align: center; }
+      </style>
+      <div id="root" data-composition-id="b11-versus" data-width="1080" data-height="1920">
+        <div class="bk-full" id="b11-versus-bg"></div>
+      </div>
+      <script>
+        (function () {
+          // VERSUS — dois cards inclinados frente a frente (regra split-tilt-cards) + selo VS; um lado ganha destaque num tempo.
+          const ID = "b11-versus";
+          const P = Object.assign({ dur: 3.9, titulo: "qual é *melhor*?", rodape: "", inclinacao: 14, destaque: null,
+            esq: { faixa: "A", cor: "verde", icone: "check", sobre: "", titulo: "", icone2: "" },
+            dir: { faixa: "B", cor: "vermelho", icone: "x", sobre: "", titulo: "", icone2: "" } }, /*PARAMS*/{"titulo": "qual é melhor?", "rodape": "você quer me convencer?", "esq": {"faixa": "BRASIL", "cor": "#13A05B", "icone": "bandeira-brasil", "sobre": "ESSE MODELO", "titulo": "qualquer um se candidata", "icone2": "urna", "icone2_tam": 330}, "dir": {"faixa": "CHINA", "cor": "#D7261E", "icone": "bandeira-china", "sobre": "O NOSSO", "titulo": "?", "icone2": "interrogacao", "icone2_tam": 200}, "destaque": {"lado": "dir", "em": 3.11}, "dur": 3.92}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const bg = document.querySelector("#" + ID + "-bg");
+          let title = null;
+          if (P.titulo) {
+            title = BK.el("div", "bk-title vs-title", bg, BK.rich(P.titulo));
+            title.style.fontSize = BK.cabe(P.titulo, 980, 120) + "px"; title.style.color = BK.cor("acento");
+            title.querySelectorAll("em").forEach((e) => (e.style.color = "#F5F3EE"));
+          }
+          const stage = BK.el("div", "vs-stage", bg);
+          const mk = (S) => {
+            const c = BK.el("div", "vs-card", stage);
+            const band = BK.el("div", "vs-band", c, BK.esc(S.faixa || ""));
+            band.style.background = BK.cor(S.cor, "cinza"); band.style.fontSize = BK.cabe(S.faixa || "", 430, 70) + "px";
+            if (S.icone) BK.el("div", "vs-flag", c, BK.icone(S.icone, S.icone_tam || 240));
+            if (S.sobre) BK.el("div", "vs-eyebrow", c, BK.esc(S.sobre));
+            if (S.titulo) { const h = BK.el("div", "vs-head", c, BK.rich(S.titulo)); h.style.fontSize = (S.titulo.length > 26 ? 62 : 78) + "px"; }
+            if (S.icone2) BK.el("div", "vs-icon", c, BK.icone(S.icone2, S.icone2_tam || 260, { label: false }));
+            return c;
+          };
+          const L = mk(P.esq || {}), R = mk(P.dir || {});
+          L.style.boxShadow = "18px 30px 60px rgba(0,0,0,.55)"; R.style.boxShadow = "-18px 30px 60px rgba(0,0,0,.55)";
+          const badge = BK.el("div", "vs-badge", bg, "VS");
+          badge.style.background = BK.cor("acento");
+          let foot = null;
+          if (P.rodape) foot = BK.el("div", "bk-label vs-foot", bg, BK.esc(P.rodape));
+          const T = P.inclinacao;
+          if (title) tl.fromTo(title, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.08);
+          tl.fromTo(L, { x: -620, rotationY: T + 22, opacity: 0 }, { x: 0, rotationY: T, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.18);
+          tl.fromTo(R, { x: 620, rotationY: -T - 22, opacity: 0 }, { x: 0, rotationY: -T, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.34);
+          tl.fromTo(badge, { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.36, ease: "back.out(1.8)" }, 0.7);
+          if (foot) tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.9);
+          const bob = Math.max(0.5, (P.dur - 1.2) / 2);
+          tl.fromTo(L, { y: 0 }, { y: -16, duration: bob, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 0.9);
+          tl.fromTo(R, { y: 0 }, { y: 16, duration: bob, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 0.9);
+          if (P.destaque) {
+            const win = P.destaque.lado === "esq" ? L : R, lose = win === L ? R : L;
+            const at = P.destaque.em == null ? P.dur - 0.8 : P.destaque.em;
+            tl.to(win, { scale: 1.06, rotationY: win === L ? 6 : -6, duration: 0.35, ease: "power3.out" }, at);
+            tl.to(lose, { opacity: 0.45, scale: 0.96, duration: 0.35, ease: "power3.out" }, at);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

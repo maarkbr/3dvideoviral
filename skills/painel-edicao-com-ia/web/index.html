@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>Painel Edição com IA</title>
+<link rel="preload" href="fonts/Montserrat-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="miolo">
+  <header class="topo">
+    <img src="logo.png" alt="Edição com IA" width="158" height="28">
+    <div class="topo-dir">
+      <span class="ouvindo t-peq" id="ouvindo" role="status" aria-live="polite"><i aria-hidden="true"></i><span></span></span>
+      <span class="t-peq" id="pasta"></span>
+    </div>
+  </header>
+</div>
+
+<main class="miolo" id="app" hidden>
+  <section class="abertura">
+    <h1>O que vamos editar hoje?</h1>
+    <p>Escolha o estilo, confira a sua marca e mande. O Claude edita, e o vídeo aparece aqui embaixo.</p>
+  </section>
+
+  <section class="etapa atual" id="etapa-estilo" aria-labelledby="t-estilo">
+    <div class="etapa-cab"><span class="num" aria-hidden="true">1</span><h2 id="t-estilo">Escolha o estilo</h2></div>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar estilos"></div>
+    <div class="galeria" id="galeria" role="radiogroup" aria-labelledby="t-estilo"></div>
+  </section>
+
+  <section class="etapa" id="etapa-marca" aria-labelledby="t-marca">
+    <div class="etapa-cab"><span class="num" aria-hidden="true">2</span><h2 id="t-marca">Sua marca</h2></div>
+    <p class="t-peq ajuda-etapa">O Claude usa isso em todo vídeo. Você preenche uma vez e muda quando quiser.</p>
+    <div class="marca-grade">
+      <div class="campos">
+        <div class="dupla">
+          <div class="campo">
+            <label for="m-nome">Nome do canal</label>
+            <input class="entrada" id="m-nome" maxlength="60" autocomplete="off" placeholder="Ex.: Lucas Editor">
+          </div>
+          <div class="campo">
+            <label for="m-handle">Seu @</label>
+            <div class="com-prefixo"><span aria-hidden="true">@</span><input class="entrada" id="m-handle" maxlength="31" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="seucanal"></div>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rotulo" id="r-cor">Cor da marca</span>
+          <div class="cor-linha">
+            <input type="color" id="m-cor" aria-labelledby="r-cor" value="#F2C200">
+            <input class="entrada" id="m-cor-hex" maxlength="7" spellcheck="false" aria-label="Código da cor" value="#F2C200">
+            <div class="amostras" id="amostras" aria-label="Cores do seu logo"></div>
+          </div>
+          <span class="t-peq" id="cor-ajuda">É a cor das palavras de destaque na legenda.</span>
+        </div>
+        <div class="campo">
+          <span class="rotulo" id="r-legenda">Estilo da legenda</span>
+          <div class="opcoes" id="legendas" role="radiogroup" aria-labelledby="r-legenda"></div>
+        </div>
+        <div class="campo">
+          <span class="rotulo">Logo</span>
+          <div class="logo-linha">
+            <div class="logo-mini" id="logo-mini" role="img" aria-label="Sem logo ainda"></div>
+            <button class="btn" type="button" id="btn-logo">Escolher logo</button>
+            <input type="file" id="m-logo" accept="image/png,image/jpeg,image/webp" hidden>
+            <span class="t-peq">PNG, JPG ou WEBP, até 5 MB.</span>
+          </div>
+        </div>
+        <div class="t-peq salvo" id="salvo" role="status" aria-live="polite"></div>
+      </div>
+      <div class="celular" aria-label="Prévia da legenda">
+        <div class="tela" id="tela">
+          <div class="silhueta" aria-hidden="true"></div>
+          <div class="logo-tela" id="logo-tela" hidden></div>
+          <div class="leg" id="leg-previa"></div>
+        </div>
+        <p class="t-peq">Assim fica a sua legenda.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="etapa" id="etapa-video" aria-labelledby="t-video">
+    <div class="etapa-cab"><span class="num" aria-hidden="true">3</span><h2 id="t-video">O vídeo</h2></div>
+    <p class="t-peq ajuda-etapa" id="video-ajuda">Escolha um estilo primeiro.</p>
+    <div class="campos" id="campos-video"></div>
+  </section>
+
+  <section class="etapa" id="etapa-pedidos" aria-labelledby="t-pedidos" hidden>
+    <div class="etapa-cab"><span class="num" aria-hidden="true">4</span><h2 id="t-pedidos">Seus pedidos</h2></div>
+    <div class="pedidos" id="pedidos"></div>
+  </section>
+</main>
+
+<div class="trava" id="sem-chave" hidden>
+  <h1>Abra pelo link do Claude</h1>
+  <p class="t-peq">Por segurança, o painel só abre pelo link que o Claude mostrou no chat. Peça a ele: "abre o painel de novo".</p>
+</div>
+
+<div class="barra" id="barra" hidden>
+  <div class="miolo">
+    <div class="resumo" aria-live="polite">
+      <div class="t-nome" id="resumo-1">Escolha o estilo</div>
+      <div class="t-peq" id="resumo-2">Depois confira a marca e o vídeo.</div>
+    </div>
+    <button class="btn btn-principal" id="mandar" disabled>Mandar para o Claude</button>
+  </div>
+</div>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

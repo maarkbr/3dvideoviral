@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Documentário 9:16</title>
+<style>
+  @font-face { font-family: "Playfair Display"; font-weight: 400; src: url("assets/fontes/PlayfairDisplay-Regular.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 400; font-style: italic; src: url("assets/fontes/PlayfairDisplay-Italic.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 700; src: url("assets/fontes/PlayfairDisplay-Bold.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 800; src: url("assets/fontes/PlayfairDisplay-ExtraBold.ttf"); }
+  @font-face { font-family: "Playfair Display"; font-weight: 900; src: url("assets/fontes/PlayfairDisplay-Black.ttf"); }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #cv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .pre { position: absolute; left: 0; top: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+  .fontes { position: absolute; left: -9999px; top: 0; font-family: "Playfair Display"; }
+  #cta { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 46px; color: #efe4cc; text-align: center; }
+  #cta .l1 { font-family: "American Typewriter", "Courier New", monospace; font-size: 80px; line-height: 1.22; }
+  #cta .l1 span { opacity: 0; }
+  #cta .l2 { font-family: "Playfair Display", serif; font-weight: 900; font-size: 128px; margin-top: 40px; opacity: 0; }
+  #cta .teclas { display: flex; gap: 26px; }
+  #cta .tecla { width: 186px; height: 196px; border-radius: 26px; background: linear-gradient(#f5ecd8, #d8caa9); color: #2a1d12; font-family: "Playfair Display", serif; font-weight: 900; font-size: 132px; display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 0 #7d6a4c, 0 34px 46px rgba(0,0,0,.7); opacity: 0; }
+  #cta .l3 { font-family: "Playfair Display", serif; font-style: italic; font-size: 66px; color: #d9c9a6; opacity: 0; margin-top: 14px; }
+</style>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/d3-array.min.js"></script>
+<script src="assets/d3-geo.min.js"></script>
+<script src="assets/topojson-client.min.js"></script>
+<script src="assets/topo.js"></script>
+<script src="assets/fotos.js"></script>
+<script src="cena.js"></script>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__DUR__" data-width="1080" data-height="1920">
+  <div class="fontes"><b style="font-weight:700">a</b><b style="font-weight:800">a</b><b style="font-weight:900">a</b><i>a</i></div>
+  <canvas id="cv" width="1080" height="1920"></canvas>
+  <img class="pre" id="i-manchas" src="assets/manchas.jpg" alt=""><img class="pre" id="i-fibra" src="assets/fibra.png" alt=""><img class="pre" id="i-ex" src="assets/exemplos.jpg" alt="">
+  <script>
+    // uma <img> para cada foto da cena (o render espera todas carregarem)
+    for (const o of (window.CENA.objetos || [])) if (o.tipo === 'foto' && !document.getElementById('i-' + o.img)) { const im = document.createElement('img'); im.className = 'pre'; im.id = 'i-' + o.img; im.src = 'assets/' + o.img + '-p.jpg'; im.alt = ''; document.currentScript.parentNode.appendChild(im); }
+  </script>
+  <div id="cta"><div class="l1" id="l1"></div><div class="l2" id="l2"></div><div class="teclas" id="teclas"></div><div class="l3" id="l3"></div></div>
+</div>
+<script src="assets/documentario.js"></script>
+<script>
+  // CTA do vertical (cena.js > cta): texto datilografado, "Comenta" e a palavra em teclas
+  (function () {
+    const C = window.CENA.cta; if (!C) return; const tl = window.__doc.tl, l1 = document.getElementById('l1');
+    C.texto.split('').forEach(ch => { if (ch === '\n') { l1.appendChild(document.createElement('br')); return; } const s = document.createElement('span'); s.textContent = ch; l1.appendChild(s); });
+    [...l1.querySelectorAll('span')].forEach((s, i) => tl.set(s, { opacity: 1 }, C.t0 + i * C.passo));
+    document.getElementById('l2').textContent = C.comenta_texto || 'Comenta'; document.getElementById('l3').textContent = C.final_texto || 'que eu te mando a skill';
+    const tk = document.getElementById('teclas'); C.palavra.split('').forEach(ch => { const d = document.createElement('div'); d.className = 'tecla'; d.textContent = ch; tk.appendChild(d); });
+    tl.fromTo('#l2', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', immediateRender: false }, C.comenta);
+    document.querySelectorAll('.tecla').forEach((k, i) => tl.fromTo(k, { opacity: 0, scale: 0.4, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.42, ease: 'back.out(2.2)', immediateRender: false }, C.comenta + 0.35 + i * 0.22));
+    tl.fromTo('#l3', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'sine.out', immediateRender: false }, C.comenta + 1.15);
+    tl.set({}, {}, C.fim);
+  })();
+</script>
+</body>
+</html>

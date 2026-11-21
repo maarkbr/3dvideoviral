@@ -1,0 +1,1091 @@
+{
+ "titulo": "Editei esse vídeo com o Claude",
+ "mensagem": "5 passos para editar Reels com o Claude, e a skill pronta no direct",
+ "corte": "corte_final.mp4",
+ "transcricao": "work/transcricao_corte.json",
+ "saida": "vertical",
+ "canal": {
+  "handle": "",
+  "acento": "#F2C200"
+ },
+ "camera": {
+  "auto_punch": false
+ },
+ "legenda": {
+  "estilo": "topo",
+  "y": 230,
+  "max_palavras": 3,
+  "substituir": {
+   "herramientas": "ferramentas",
+   "parte": "pasta",
+   "eles,": "ele,"
+  },
+  "corrigir": [
+   {
+    "i": 214,
+    "j": 216,
+    "texto": "é só"
+   },
+   {
+    "i": 181,
+    "j": 181,
+    "texto": "um"
+   }
+  ]
+ },
+ "cenas": [
+  {
+   "id": "c01-gancho",
+   "tipo": "colagem",
+   "inicio": 0,
+   "dur": 3.0,
+   "params": {
+    "foco": [
+     {
+      "em": 1.5,
+      "escala": 1.18,
+      "x": 540,
+      "y": 1070,
+      "dur": 1.2
+     }
+    ],
+    "itens": [
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto1.jpg",
+      "legenda": "a mesa de edição",
+      "x": 140,
+      "y": 640,
+      "w": 560,
+      "h": 420,
+      "em": 0.05,
+      "rot": -5,
+      "fita": true,
+      "verso": "vermelho"
+     },
+     {
+      "tipo": "janela",
+      "titulo": "Claude Code",
+      "x": 260,
+      "y": 1070,
+      "w": 720,
+      "em": 0.55,
+      "fita": true,
+      "de_onde": "direita",
+      "msgs": [
+       {
+        "lado": "eu",
+        "texto": "edita o vídeo da pasta Bruto",
+        "em": 0.9
+       },
+       {
+        "lado": "ia",
+        "texto": "Pronto: cortei, legendei e animei.",
+        "em": 1.7
+       }
+      ]
+     },
+     {
+      "tipo": "etiqueta",
+      "texto": "eu só gravei a voz",
+      "x": 150,
+      "y": 1500,
+      "em": 2.3,
+      "rot": -2
+     }
+    ]
+   }
+  },
+  {
+   "id": "c02-curso",
+   "tipo": "colagem",
+   "inicio": 3.0,
+   "dur": 3.0,
+   "params": {
+    "itens": [
+     {
+      "tipo": "papel",
+      "rotulo": "curso · edição com IA",
+      "titulo": "R$ 997",
+      "riscos": 3,
+      "x": 190,
+      "y": 690,
+      "w": 700,
+      "em": 0.1,
+      "fita": true,
+      "rot": 2,
+      "pilha": true
+     },
+     {
+      "tipo": "circulo",
+      "x": 220,
+      "y": 770,
+      "w": 380,
+      "h": 190,
+      "em": 1.4,
+      "duracao": 0.5
+     },
+     {
+      "tipo": "carimbo",
+      "texto": "não precisa",
+      "cor": "vermelho",
+      "x": 250,
+      "y": 1150,
+      "tam": 100,
+      "em": 2.6,
+      "rot": -10
+     }
+    ]
+   }
+  },
+  {
+   "id": "c03-cinco",
+   "tipo": "colagem",
+   "inicio": 6.0,
+   "dur": 3.5,
+   "params": {
+    "itens": [
+     {
+      "tipo": "regua",
+      "x": -40,
+      "y": 1070,
+      "w": 1160,
+      "em": 0.0
+     },
+     {
+      "tipo": "numero",
+      "texto": "5",
+      "de": 0,
+      "rolar": 0.5,
+      "x": 400,
+      "y": 510,
+      "tam": 600,
+      "em": 0.25
+     },
+     {
+      "tipo": "etiqueta",
+      "texto": "passos simples",
+      "x": 360,
+      "y": 1180,
+      "em": 0.9
+     },
+     {
+      "tipo": "rasgado",
+      "texto": "salva esse vídeo",
+      "cor": "vermelho",
+      "x": 210,
+      "y": 1300,
+      "tam": 70,
+      "em": 2.0,
+      "rot": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "c04-passo1",
+   "tipo": "colagem",
+   "inicio": 9.5,
+   "dur": 5.3,
+   "params": {
+    "foco": [
+     {
+      "em": 2.6,
+      "escala": 1.25,
+      "x": 540,
+      "y": 970,
+      "dur": 0.6
+     }
+    ],
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "passo 1",
+      "x": 400,
+      "y": 570,
+      "em": 0.0,
+      "rot": 0
+     },
+     {
+      "tipo": "papel",
+      "rotulo": "aplicativo do Claude",
+      "titulo": "baixa no *computador*",
+      "linhas": [
+       "Mac ou Windows",
+       "abre a aba *Code*"
+      ],
+      "marca_em": 2.6,
+      "x": 160,
+      "y": 690,
+      "w": 760,
+      "em": 0.4,
+      "fita": true,
+      "rot": -2,
+      "pilha": true,
+      "verso": "vermelho"
+     },
+     {
+      "tipo": "carimbo",
+      "texto": "não é o site",
+      "cor": "vermelho",
+      "x": 220,
+      "y": 1180,
+      "tam": 88,
+      "em": 3.7,
+      "rot": -8
+     }
+    ]
+   }
+  },
+  {
+   "id": "c05-passo2",
+   "tipo": "colagem",
+   "inicio": 14.8,
+   "dur": 5.1,
+   "params": {
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "passo 2",
+      "x": 400,
+      "y": 570,
+      "em": 0.0,
+      "rot": 0
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto3.jpg",
+      "x": 560,
+      "y": 640,
+      "w": 420,
+      "h": 315,
+      "em": 0.3,
+      "rot": 6,
+      "fita": true
+     },
+     {
+      "tipo": "pasta",
+      "texto": "Editor IA",
+      "x": 150,
+      "y": 730,
+      "w": 500,
+      "h": 380,
+      "em": 0.9,
+      "rot": -3
+     },
+     {
+      "tipo": "pasta",
+      "texto": "Bruto",
+      "x": 60,
+      "y": 1230,
+      "w": 300,
+      "h": 230,
+      "em": 3.4,
+      "rot": -4
+     },
+     {
+      "tipo": "pasta",
+      "texto": "Referências",
+      "x": 390,
+      "y": 1230,
+      "w": 300,
+      "h": 230,
+      "em": 3.8,
+      "rot": 2
+     },
+     {
+      "tipo": "pasta",
+      "texto": "Imagens",
+      "x": 720,
+      "y": 1230,
+      "w": 300,
+      "h": 230,
+      "em": 4.4,
+      "rot": -1
+     }
+    ]
+   }
+  },
+  {
+   "id": "c06-passo3",
+   "tipo": "colagem",
+   "inicio": 19.9,
+   "dur": 4.0,
+   "params": {
+    "foco": [
+     {
+      "em": 2.6,
+      "escala": 1.22,
+      "x": 540,
+      "y": 990,
+      "dur": 0.6
+     }
+    ],
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "passo 3",
+      "x": 400,
+      "y": 570,
+      "em": 0.0,
+      "rot": 0
+     },
+     {
+      "tipo": "janela",
+      "titulo": "Claude Code · nova sessão",
+      "x": 120,
+      "y": 710,
+      "w": 840,
+      "em": 0.3,
+      "fita": true,
+      "msgs": [
+       {
+        "lado": "arq",
+        "texto": "pasta aberta: Editor IA",
+        "em": 1.3
+       },
+       {
+        "lado": "ia",
+        "texto": "Agora eu enxergo os seus arquivos.",
+        "em": 2.7
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "c07-ferramentas",
+   "tipo": "colagem",
+   "inicio": 23.9,
+   "dur": 5.0,
+   "params": {
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "passo 4",
+      "x": 400,
+      "y": 570,
+      "em": 0.0,
+      "rot": 0
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto2.jpg",
+      "x": 600,
+      "y": 650,
+      "w": 400,
+      "h": 300,
+      "em": 0.4,
+      "rot": 7,
+      "fita": true,
+      "verso": "vermelho"
+     },
+     {
+      "tipo": "lista",
+      "rotulo": "ferramentas do editor",
+      "x": 110,
+      "y": 810,
+      "w": 640,
+      "em": 0.9,
+      "rot": -2,
+      "pilha": true,
+      "linhas": [
+       {
+        "texto": "cortar",
+        "em": 2.8
+       },
+       {
+        "texto": "legendar",
+        "em": 3.6
+       },
+       {
+        "texto": "animar",
+        "em": 4.4
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "c08-prompt",
+   "tipo": "colagem",
+   "inicio": 28.9,
+   "dur": 3.4,
+   "params": {
+    "itens": [
+     {
+      "tipo": "janela",
+      "titulo": "Claude Code",
+      "x": 120,
+      "y": 610,
+      "w": 840,
+      "em": 0.1,
+      "fita": true,
+      "msgs": [
+       {
+        "lado": "eu",
+        "texto": "instala o que precisa pra editar",
+        "em": 1.4
+       },
+       {
+        "lado": "ia",
+        "texto": "Instalado. Pode mandar o vídeo.",
+        "em": 2.4
+       }
+      ]
+     },
+     {
+      "tipo": "pontos",
+      "fundo": "amarelo",
+      "colunas": 12,
+      "linhas": 5,
+      "gap": 44,
+      "raio": 15,
+      "cores": [
+       "#2B2925"
+      ],
+      "trocar_em": 1.5,
+      "trocar_dur": 1.0,
+      "trocar_para": "vermelho",
+      "x": 255,
+      "y": 1070,
+      "em": 0.6
+     },
+     {
+      "tipo": "carimbo",
+      "texto": "sozinho",
+      "cor": "vermelho",
+      "x": 600,
+      "y": 1350,
+      "tam": 84,
+      "em": 2.8,
+      "rot": -10
+     }
+    ]
+   }
+  },
+  {
+   "id": "c09-passo5",
+   "tipo": "colagem",
+   "inicio": 32.3,
+   "dur": 7.5,
+   "params": {
+    "foco": [
+     {
+      "em": 6.0,
+      "escala": 1.15,
+      "x": 540,
+      "y": 1170,
+      "dur": 0.7
+     }
+    ],
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "passo 5",
+      "x": 400,
+      "y": 570,
+      "em": 0.0,
+      "rot": 0
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto4.jpg",
+      "legenda": "referência 1",
+      "x": 70,
+      "y": 690,
+      "w": 300,
+      "h": 380,
+      "em": 1.2,
+      "rot": -6,
+      "fita": true
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto1.jpg",
+      "legenda": "referência 2",
+      "x": 390,
+      "y": 670,
+      "w": 300,
+      "h": 380,
+      "em": 1.5,
+      "rot": 3,
+      "fita": true
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/foto2.jpg",
+      "legenda": "referência 3",
+      "x": 710,
+      "y": 700,
+      "w": 300,
+      "h": 380,
+      "em": 1.8,
+      "rot": -2,
+      "fita": true
+     },
+     {
+      "tipo": "pasta",
+      "texto": "Bruto",
+      "x": 390,
+      "y": 1180,
+      "w": 300,
+      "h": 230,
+      "em": 3.8,
+      "rot": 1
+     },
+     {
+      "tipo": "rasgado",
+      "texto": "edita igual às referências",
+      "cor": "amarelo",
+      "x": 110,
+      "y": 1460,
+      "tam": 56,
+      "em": 6.1,
+      "rot": -2
+     }
+    ]
+   }
+  },
+  {
+   "id": "c10-resultado",
+   "tipo": "colagem",
+   "inicio": 39.8,
+   "dur": 2.5,
+   "params": {
+    "itens": [
+     {
+      "tipo": "polaroide",
+      "texto": "bruto",
+      "legenda": "antes",
+      "fundo": "#55534D",
+      "x": 90,
+      "y": 690,
+      "w": 420,
+      "h": 600,
+      "em": 0.1,
+      "rot": -4
+     },
+     {
+      "tipo": "polaroide",
+      "arquivo": "../../Imagens/cenas/reels-editado.jpg",
+      "legenda": "depois",
+      "x": 560,
+      "y": 670,
+      "w": 430,
+      "h": 620,
+      "em": 0.8,
+      "rot": 3,
+      "verso": "vermelho",
+      "fita": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "c11-ajuste",
+   "tipo": "colagem",
+   "inicio": 42.3,
+   "dur": 3.5,
+   "params": {
+    "foco": [
+     {
+      "em": 2.3,
+      "escala": 1.2,
+      "x": 540,
+      "y": 990,
+      "dur": 0.6
+     }
+    ],
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "não gostou?",
+      "x": 380,
+      "y": 590,
+      "em": 0.0
+     },
+     {
+      "tipo": "janela",
+      "titulo": "Claude Code",
+      "x": 120,
+      "y": 730,
+      "w": 840,
+      "em": 0.2,
+      "fita": true,
+      "msgs": [
+       {
+        "lado": "eu",
+        "texto": "deixa o começo mais forte",
+        "em": 1.1
+       },
+       {
+        "lado": "ia",
+        "texto": "Feito. Olha agora.",
+        "em": 2.4
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "c12-skill",
+   "tipo": "colagem",
+   "inicio": 45.8,
+   "dur": 6.8,
+   "params": {
+    "itens": [
+     {
+      "tipo": "papel",
+      "rotulo": "editor IA · lucas editor",
+      "titulo": "a *skill* pronta",
+      "linhas": [
+       "passo a passo *detalhado*",
+       "prompt de *instalação*",
+       "*pronta pra usar*"
+      ],
+      "marca_em": 4.2,
+      "x": 150,
+      "y": 690,
+      "w": 780,
+      "em": 1.8,
+      "fita": true,
+      "rot": -1,
+      "pilha": true,
+      "verso": "vermelho"
+     },
+     {
+      "tipo": "infinito",
+      "x": 380,
+      "y": 1320,
+      "w": 320,
+      "h": 170,
+      "em": 5.0,
+      "duracao": 1.1
+     }
+    ]
+   }
+  },
+  {
+   "id": "c13-cta",
+   "tipo": "colagem",
+   "inicio": 52.6,
+   "dur": 2.35,
+   "params": {
+    "camera": {
+     "de": 1.0,
+     "para": 1.12
+    },
+    "itens": [
+     {
+      "tipo": "etiqueta",
+      "texto": "comenta",
+      "x": 410,
+      "y": 730,
+      "em": 0.0
+     },
+     {
+      "tipo": "rasgado",
+      "texto": "SKILL",
+      "cor": "amarelo",
+      "x": 250,
+      "y": 850,
+      "tam": 210,
+      "em": 0.45,
+      "rot": -3
+     },
+     {
+      "tipo": "etiqueta",
+      "texto": "te mando no direct",
+      "x": 300,
+      "y": 1230,
+      "em": 1.3
+     }
+    ]
+   }
+  }
+ ],
+ "som": {
+  "clima": "curioso",
+  "musica_lufs": -29,
+  "extra": [
+   {
+    "t": 0,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 0.1,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 0.6,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 0.9,
+    "s": "typing",
+    "db": -19
+   },
+   {
+    "t": 1.5,
+    "s": "whooshBig",
+    "db": -20
+   },
+   {
+    "t": 1.7,
+    "s": "notify",
+    "db": -19
+   },
+   {
+    "t": 2.35,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 3.0,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 3.15,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 4.45,
+    "s": "click",
+    "db": -16
+   },
+   {
+    "t": 5.65,
+    "s": "impact2",
+    "db": -12
+   },
+   {
+    "t": 6.0,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 6.05,
+    "s": "whoosh",
+    "db": -22
+   },
+   {
+    "t": 6.3,
+    "s": "impact",
+    "db": -12
+   },
+   {
+    "t": 6.95,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 8.05,
+    "s": "whoosh",
+    "db": -15
+   },
+   {
+    "t": 9.5,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 9.55,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 9.95,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 12.1,
+    "s": "whooshBig",
+    "db": -20
+   },
+   {
+    "t": 12.1,
+    "s": "click",
+    "db": -17
+   },
+   {
+    "t": 13.25,
+    "s": "impact2",
+    "db": -12
+   },
+   {
+    "t": 14.8,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 14.85,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 15.15,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 15.75,
+    "s": "pop",
+    "db": -16
+   },
+   {
+    "t": 18.25,
+    "s": "pop",
+    "db": -16
+   },
+   {
+    "t": 18.65,
+    "s": "pop",
+    "db": -16
+   },
+   {
+    "t": 19.25,
+    "s": "pop",
+    "db": -16
+   },
+   {
+    "t": 19.9,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 19.95,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 20.25,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 21.2,
+    "s": "notify",
+    "db": -19
+   },
+   {
+    "t": 22.5,
+    "s": "whooshBig",
+    "db": -20
+   },
+   {
+    "t": 22.6,
+    "s": "notify",
+    "db": -19
+   },
+   {
+    "t": 23.9,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 23.95,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 24.35,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 24.85,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 26.7,
+    "s": "click",
+    "db": -14
+   },
+   {
+    "t": 27.5,
+    "s": "click",
+    "db": -14
+   },
+   {
+    "t": 28.3,
+    "s": "click",
+    "db": -14
+   },
+   {
+    "t": 28.9,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 29.05,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 29.55,
+    "s": "pop",
+    "db": -20
+   },
+   {
+    "t": 30.3,
+    "s": "typing",
+    "db": -19
+   },
+   {
+    "t": 30.4,
+    "s": "sparkle",
+    "db": -18
+   },
+   {
+    "t": 31.3,
+    "s": "notify",
+    "db": -19
+   },
+   {
+    "t": 31.75,
+    "s": "impact2",
+    "db": -12
+   },
+   {
+    "t": 32.3,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 32.35,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 33.55,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 33.85,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 34.15,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 36.15,
+    "s": "pop",
+    "db": -16
+   },
+   {
+    "t": 38.3,
+    "s": "whooshBig",
+    "db": -20
+   },
+   {
+    "t": 38.45,
+    "s": "whoosh",
+    "db": -15
+   },
+   {
+    "t": 39.8,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 39.95,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 40.65,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 42.3,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 42.35,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 42.55,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 43.4,
+    "s": "typing",
+    "db": -19
+   },
+   {
+    "t": 44.6,
+    "s": "whooshBig",
+    "db": -20
+   },
+   {
+    "t": 44.7,
+    "s": "notify",
+    "db": -19
+   },
+   {
+    "t": 45.8,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 47.65,
+    "s": "whoosh",
+    "db": -19
+   },
+   {
+    "t": 50.0,
+    "s": "click",
+    "db": -17
+   },
+   {
+    "t": 50.85,
+    "s": "sparkle",
+    "db": -16
+   },
+   {
+    "t": 52.6,
+    "s": "whoosh",
+    "db": -21
+   },
+   {
+    "t": 52.65,
+    "s": "click",
+    "db": -18
+   },
+   {
+    "t": 53.1,
+    "s": "whoosh",
+    "db": -15
+   },
+   {
+    "t": 53.95,
+    "s": "click",
+    "db": -18
+   }
+  ]
+ },
+ "render": {
+  "fps": 30,
+  "crf": 16
+ }
+}

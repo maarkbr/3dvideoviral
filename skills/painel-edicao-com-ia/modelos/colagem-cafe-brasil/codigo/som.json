@@ -1,0 +1,32 @@
+{
+ "sfx_pasta": "auto",
+ "trilha": {
+  "arquivo": "som/pack/trilha/Better - Anno Domini Beats.mp3",
+  "inicio": 48.0,
+  "nivel": -16,
+  "credito": "Better · Anno Domini Beats (Biblioteca de Áudio do YouTube), do Pack Edit Pro"
+ },
+ "sons": {
+  "papel": [
+   "som/pack/papel/01-Paper Slide 03.wav",
+   "som/pack/papel/05-Page Turn.mp3"
+  ],
+  "papel-leve": [
+   "som/pack/pop/02-mixkit-hard-pop-click-2364.wav"
+  ],
+  "pop": [
+   "som/pack/pop/02-mixkit-hard-pop-click-2364.wav",
+   "som/pack/pop/06-01 Pop.mp3"
+  ],
+  "impacto": [
+   "som/pack/impacto/04-Punch 2.mp3"
+  ],
+  "carimbo": [
+   "impacts/impact-heavy-hard.wav"
+  ]
+ },
+ "niveis": {
+  "impacto": -17
+ },
+ "efeitos": []
+}

@@ -1,0 +1,320 @@
+{
+ "tema": "O logo da Caixa e o sistema por trás (texto longo)",
+ "fontes": "Agência Brasil, Itatiaia, Portal RBV, Letsmoney (Valor)",
+ "blocos": [
+  {
+   "fala": "Três milhões e meio de reais por um logo. Sendo que o ChatGPT faz um logo muito mais barato, e talvez com a mesma qualidade.",
+   "etapa": "gancho",
+   "etiquetas": [
+    {
+     "txt": "R$ 3,5 MILHÕES",
+     "p": [
+      -3.55,
+      3.4,
+      -1
+     ],
+     "de": 1.2,
+     "ate": 9.6
+    },
+    {
+     "txt": "LOGO NO CHATGPT",
+     "p": [
+      -3.55,
+      2.45,
+      -2.7
+     ],
+     "de": 4.2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Só que o que pouca gente sabe é que esse projeto não foi só um logo.",
+   "etapa": "virada",
+   "etiquetas": [
+    {
+     "txt": "NÃO FOI SÓ UM LOGO",
+     "p": [
+      0,
+      6.2,
+      -4
+     ],
+     "de": 1.2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Segundo o Valor, ele custou três milhões e meio e levou de dois mil e vinte e quatro a dois mil e vinte e seis.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "SEGUNDO O VALOR",
+     "p": [
+      0,
+      3.6,
+      -1.4
+     ],
+     "de": 0.6,
+     "ate": 3.4
+    },
+    {
+     "txt": "2024",
+     "p": [
+      -5,
+      2.2,
+      -1.4
+     ],
+     "de": 2.4,
+     "ate": 9.6
+    },
+    {
+     "txt": "2026",
+     "p": [
+      5,
+      2.2,
+      -1.4
+     ],
+     "de": 5.6,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Começou com pesquisas com o público, pra entender como as pessoas enxergam a marca.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "PESQUISA COM O PÚBLICO",
+     "p": [
+      0,
+      3.4,
+      9
+     ],
+     "de": 1.4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "No desenho, o nome Caixa passou a usar uma tipografia chamada unicase: todas as letras na mesma altura.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "UNICASE",
+     "p": [
+      -2,
+      3.2,
+      -1.2
+     ],
+     "de": 1.4,
+     "ate": 9.6
+    },
+    {
+     "txt": "MESMA ALTURA",
+     "p": [
+      -2,
+      2.4,
+      -1.2
+     ],
+     "de": 5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "O X azul e laranja, de mil novecentos e noventa e sete, ganhou novas proporções e mais profundidade.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "X DE 1997",
+     "p": [
+      3.2,
+      6,
+      -4
+     ],
+     "de": 0.8,
+     "ate": 9.6
+    },
+    {
+     "txt": "NOVAS PROPORÇÕES",
+     "p": [
+      3.2,
+      0.9,
+      -4
+     ],
+     "de": 4,
+     "ate": 9.6
+    },
+    {
+     "txt": "MAIS PROFUNDIDADE",
+     "p": [
+      3.2,
+      7,
+      -4
+     ],
+     "de": 7,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "E veio uma frase nova: Vem realizar.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "VEM REALIZAR",
+     "p": [
+      0,
+      8,
+      -5
+     ],
+     "de": 2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Só que marca não é só logo. Ela vai pro aplicativo, que vira um app único, o Novo App Caixa.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "NOVO APP CAIXA",
+     "p": [
+      0,
+      6.6,
+      -3
+     ],
+     "de": 1.5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "E vai pra fachada e pra sinalização de cada ponto de atendimento.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "FACHADA",
+     "p": [
+      -26.5,
+      3.4,
+      -8
+     ],
+     "de": 1.5,
+     "ate": 9.6
+    },
+    {
+     "txt": "SINALIZAÇÃO",
+     "p": [
+      -22.5,
+      3.4,
+      -8
+     ],
+     "de": 4.5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "São cerca de vinte e quatro mil e seiscentos pontos, até agência-barco.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "24,6 MIL PONTOS",
+     "p": [
+      -22,
+      3.6,
+      -14
+     ],
+     "de": 1,
+     "ate": 9.6
+    },
+    {
+     "txt": "AGÊNCIA-BARCO",
+     "p": [
+      -22,
+      2.6,
+      8
+     ],
+     "de": 6,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Por isso a troca é devagar: começa em onze agências e só termina em dois mil e trinta, aproveitando reformas.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "11 AGÊNCIAS",
+     "p": [
+      -26,
+      3.4,
+      -8
+     ],
+     "de": 0.8,
+     "ate": 4.6
+    },
+    {
+     "txt": "ATÉ 2030",
+     "p": [
+      -22,
+      3.4,
+      -12
+     ],
+     "de": 5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Pra ter escala: dividindo os três milhões e meio por esses pontos, dá uns cento e quarenta reais cada. Conta nossa, só pra comparar.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "÷ 24,6 MIL PONTOS",
+     "p": [
+      0,
+      9.4,
+      -3
+     ],
+     "de": 1,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "O caro de uma marca não é só o desenho. É o sistema que vem depois.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "O SISTEMA",
+     "p": [
+      0,
+      9.4,
+      -6
+     ],
+     "de": 1.4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Esse tipo de animação dá pra fazer com o Claude. Comenta três dê que eu te mando o passo a passo.",
+   "etapa": "cena independente de auditório/palco/cidade",
+   "etiquetas": [
+    {
+     "txt": "3D",
+     "p": [
+      0,
+      7.4,
+      -3
+     ],
+     "de": 5,
+     "ate": 10
+    }
+   ]
+  }
+ ]
+}

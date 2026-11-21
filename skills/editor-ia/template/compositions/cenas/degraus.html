@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .dg-steps { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }
+        .dg-step { position: absolute; bottom: 110px; border-radius: 18px 18px 6px 6px; transform-origin: 50% 100%;
+          box-shadow: inset 0 6px 0 rgba(255, 255, 255, 0.18), 0 18px 30px rgba(0, 0, 0, 0.45); }
+        .dg-step b { position: absolute; left: 0; width: 100%; top: 22px; text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 700;
+          line-height: 1.15; color: #ffffff; letter-spacing: 0.04em; text-transform: uppercase; padding: 0 10px; box-sizing: border-box; }
+        .dg-step i { position: absolute; left: 0; width: 100%; bottom: 14px; text-align: center; font-style: normal; font-family: "LT Anton", sans-serif;
+          font-size: 96px; color: rgba(255, 255, 255, 0.28); line-height: 1; }
+        .dg-ground { position: absolute; left: 60px; width: 960px; bottom: 104px; height: 6px; border-radius: 3px; background: #3a3a44; transform-origin: 50% 50%; }
+        .dg-token { position: absolute; left: 0; top: 0; }
+        .dg-org { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; opacity: 0; }
+        .dg-node { position: absolute; width: 200px; height: 96px; margin-left: -100px; border-radius: 16px; background: #1d1d24; border: 3px solid #3a3a44;
+          display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .dg-node span { display: block; width: 26px; height: 26px; border-radius: 50%; background: #a9a6a0; }
+        .dg-lines { position: absolute; left: 0; top: 0; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"></div>
+      </div>
+      <script>
+        (function () {
+          // DEGRAUS — etapas que crescem a cada fala (regra stat-bars-and-fills) e uma ficha que sobe pulando; opcional: organograma no fim.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 6, rotulo: "", entrada: "desce", saida: null, cor: "vermelho", ficha: "ficha",
+            degraus: [{ texto: "passo 1" }, { texto: "passo 2" }, { texto: "passo 3" }], fase2: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          BK.card(tl, card, P);
+          BK.rotulo(tl, card, P.rotulo);
+          const steps = BK.el("div", "dg-steps", card);
+          const ground = BK.el("div", "dg-ground", steps);
+          tl.fromTo(ground, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0.3);
+          const n = Math.max(1, Math.min(5, P.degraus.length)), GAP = 35;
+          const W = Math.floor((900 - (n - 1) * GAP) / n);
+          const c = BK.cor(P.cor, "vermelho");
+          const H0 = 200, H1 = 520;
+          const tops = [];
+          const ats = P.degraus.slice(0, n).map((d, i) => (d.em == null ? 1.0 + i * ((P.dur - 2) / n) : d.em));
+          P.degraus.slice(0, n).forEach((d, i) => {
+            const h = n === 1 ? H1 : H0 + ((H1 - H0) * i) / (n - 1);
+            const x = 90 + i * (W + GAP);
+            const s = BK.el("div", "dg-step", steps, `<b>${BK.esc(d.texto)}</b><i>${i + 1}</i>`);
+            s.style.left = x + "px"; s.style.width = W + "px"; s.style.height = h + "px";
+            s.style.background = `linear-gradient(180deg, ${c} 0%, ${c}99 100%)`;
+            s.querySelector("b").style.fontSize = (W < 220 ? 24 : 30) + "px";
+            tl.fromTo(s, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.42, ease: "power3.out" }, ats[i] - 0.25);
+            tops.push([x + W / 2, 960 - 110 - h]);
+          });
+          // a ficha pousa no 1º degrau e pula em arco para cada degrau novo
+          const TK = 96;
+          const token = BK.el("div", "dg-token", steps, BK.icone(P.ficha, TK));
+          token.setAttribute("data-layout-allow-overlap", "");
+          const tx = (x) => x - TK / 2, ty = (y) => y - TK - 4;
+          tl.fromTo(token, { x: tx(tops[0][0]), y: ty(tops[0][1]) - 40, scale: 0 }, { y: ty(tops[0][1]), scale: 1, duration: 0.32, ease: "back.out(2)" }, ats[0] + 0.15);
+          for (let i = 1; i < tops.length; i++) {
+            const a = tops[i - 1], b = tops[i], mid = [(a[0] + b[0]) / 2, Math.min(a[1], b[1]) - 120];
+            tl.to(token, { keyframes: [
+              { x: tx(mid[0]), y: ty(mid[1]), duration: 0.16, ease: "power2.out" },
+              { x: tx(b[0]), y: ty(b[1]), duration: 0.16, ease: "power2.in" },
+            ] }, ats[i] + 0.12);
+          }
+          tl.fromTo(token, { rotation: 0 }, { rotation: 360, duration: 0.5, ease: "power3.out", immediateRender: false }, ats[ats.length - 1] + 0.4);
+          const F = P.fase2;
+          if (F) {
+            const at = F.em == null ? P.dur - 2 : F.em;
+            tl.to(steps, { opacity: 0, y: 60, duration: 0.3, ease: "power3.in" }, at - 0.1);
+            const org = BK.el("div", "dg-org", card);
+            tl.fromTo(org, { opacity: 0 }, { opacity: 1, duration: 0.2 }, at);
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("class", "dg-lines"); svg.setAttribute("width", "1080"); svg.setAttribute("height", "960"); svg.setAttribute("viewBox", "0 0 1080 960");
+            org.appendChild(svg);
+            const ROWS = [[540], [330, 750], [180, 420, 660, 900]], ROWY = [150, 360, 570];
+            const nodes = [];
+            ROWS.forEach((xs, r) => xs.forEach((x) => {
+              const nd = BK.el("div", "dg-node", org, "<span></span><span></span>");
+              nd.style.left = x + "px"; nd.style.top = ROWY[r] + "px";
+              if (r === 0) { nd.style.borderColor = BK.cor("acento"); nd.querySelectorAll("span").forEach((s) => (s.style.background = BK.cor("acento"))); }
+              nodes.push({ el: nd, r, x });
+            }));
+            const lines = [];
+            const line = (x1, y1, x2, y2) => {
+              const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              p.setAttribute("d", `M ${x1} ${y1} L ${x1} ${(y1 + y2) / 2} L ${x2} ${(y1 + y2) / 2} L ${x2} ${y2}`);
+              p.setAttribute("stroke", "#3a3a44"); p.setAttribute("stroke-width", "6"); p.setAttribute("fill", "none");
+              svg.appendChild(p); lines.push(p);
+            };
+            ROWS[1].forEach((x) => line(540, ROWY[0] + 96, x, ROWY[1]));
+            ROWS[2].forEach((x, i) => line(ROWS[1][i < 2 ? 0 : 1], ROWY[1] + 96, x, ROWY[2]));
+            nodes.forEach((nd) => tl.fromTo(nd.el, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, at + 0.08 + nd.r * 0.22 + (nd.x / 1080) * 0.12));
+            lines.forEach((p, i) => {
+              const len = p.getTotalLength();
+              p.style.strokeDasharray = `${len}`;
+              tl.fromTo(p, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, at + 0.2 + (i < 2 ? 0 : 0.22));
+            });
+            if (F.titulo) {
+              const t = BK.titulo(org, null, F.titulo, { y: 770, tam: BK.cabe(F.titulo, 980, 104) });
+              BK.sobe(tl, t, F.titulo_em == null ? at + 0.9 : F.titulo_em);
+            }
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

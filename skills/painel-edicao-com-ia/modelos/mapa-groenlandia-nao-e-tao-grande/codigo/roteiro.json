@@ -1,0 +1,296 @@
+{
+ "titulo": "A Groenlândia não é tão grande quanto parece",
+ "fontes": "Área da Groenlândia 2.166.086 km² e do Brasil 8.515.767 km² (3,9 vezes; Wikipedia, IBGE). Manto de gelo cobre cerca de 80% da ilha e passa de 3 km de espessura (Wikipedia 'Greenland ice sheet', NSIDC). População cerca de 56,6 mil (2021, Statistics Greenland). Maracanã: capacidade de cerca de 78 mil. Hans Egede chegou em 1721 (missão luterana e comércio). Tratado de Kiel, 1814: a Noruega passa à Suécia e a Groenlândia fica com a Dinamarca. Governo próprio desde 21/06/2009, após o referendo de 2008; a lei prevê a independência por decisão do povo. Oferta dos EUA em 1946 (100 milhões de dólares) e o interesse de 2019.",
+ "blocos": [
+  {
+   "fala": "No mapa da escola, a Groenlândia parece do tamanho da África. Olha o que acontece quando ela vai pra cima do Brasil.",
+   "cena": {
+    "tipo": "abertura",
+    "pais": "Greenland",
+    "cor": "#EAF4FF",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "PARECE A ÁFRICA?",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "áfrica"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Cabem quase quatro Groenlândias dentro do Brasil.",
+   "cena": {
+    "tipo": "mover",
+    "pais": "Greenland",
+    "para": "Brazil",
+    "cor": "#EAF4FF",
+    "cor_para": "#2FA35B",
+    "palavra": "cabem",
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "2,1 MI DE KM²",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "quatro"
+     },
+     {
+      "emoji": "exploding_head",
+      "tela": [
+       540,
+       1100
+      ],
+      "palavra": "brasil",
+      "tam": 170
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E quase toda ela é gelo: uma camada que chega a três quilômetros de espessura.",
+   "cena": {
+    "tipo": "pais",
+    "pais": "Greenland",
+    "cor": "#EAF4FF",
+    "palavras": [
+     "gelo"
+    ],
+    "itens": [
+     {
+      "emoji": "ice",
+      "pais": "Greenland",
+      "palavra": "gelo",
+      "tam": 180
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "3 KM DE GELO",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "três"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Lá moram uns cinquenta e seis mil habitantes. Cabem todos no Maracanã.",
+   "cena": {
+    "tipo": "pais",
+    "pais": "Greenland",
+    "cor": "#EAF4FF",
+    "palavras": [
+     "moram"
+    ],
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "56 MIL HABITANTES",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "cinquenta"
+     },
+     {
+      "emoji": "stadium",
+      "pais": "Greenland",
+      "palavra": "maracanã",
+      "tam": 190
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E por que ela é da Dinamarca, que fica lá longe? Em mil setecentos e vinte e um, um missionário chegou para converter o povo e abrir comércio.",
+   "cena": {
+    "tipo": "rota",
+    "de": [
+     12.57,
+     55.68
+    ],
+    "para": [
+     -51.72,
+     64.18
+    ],
+    "cor": "#D8433B",
+    "emoji": "ship",
+    "palavra": "missionário",
+    "duracao_movimento": 3.0,
+    "itens": [
+     {
+      "tipo": "selo",
+      "texto": "DINAMARCA",
+      "lon": 10.5,
+      "lat": 56.2,
+      "palavra": "dinamarca"
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "1721",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "mil"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "A Dinamarca e a Noruega eram um reino só. Quando se separaram, em mil oitocentos e catorze, a Groenlândia ficou com a Dinamarca.",
+   "cena": {
+    "tipo": "pais",
+    "paises": [
+     "Denmark",
+     "Norway",
+     "Greenland"
+    ],
+    "cores": [
+     "#D8433B",
+     "#D8433B",
+     "#EAF4FF"
+    ],
+    "palavras": [
+     "dinamarca",
+     "noruega",
+     "groenlândia"
+    ],
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "1814",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "mil"
+     },
+     {
+      "emoji": "scroll",
+      "lon": 10.0,
+      "lat": 62.0,
+      "palavra": "separaram",
+      "tam": 160
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Desde o ano de dois mil e nove, ela tem governo próprio, e pode virar independente se o povo votar.",
+   "cena": {
+    "tipo": "pais",
+    "pais": "Greenland",
+    "cor": "#EAF4FF",
+    "palavras": [
+     "governo"
+    ],
+    "itens": [
+     {
+      "tipo": "selo grande",
+      "texto": "2009",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "dois"
+     },
+     {
+      "tipo": "selo vermelho",
+      "texto": "AUTONOMIA",
+      "pais": "Greenland",
+      "palavra": "próprio"
+     },
+     {
+      "emoji": "ballot_box_with_ballot",
+      "pais": "Greenland",
+      "dy": 160,
+      "palavra": "votar",
+      "tam": 160
+     }
+    ]
+   }
+  },
+  {
+   "fala": "E os Estados Unidos já tentaram comprar a Groenlândia mais de uma vez.",
+   "cena": {
+    "tipo": "pais",
+    "paises": [
+     "United States of America",
+     "Greenland"
+    ],
+    "cores": [
+     "#3E7FD8",
+     "#EAF4FF"
+    ],
+    "palavras": [
+     "estados",
+     "groenlândia"
+    ],
+    "itens": [
+     {
+      "emoji": "money_bag",
+      "pais": "Greenland",
+      "palavra": "comprar",
+      "tam": 180
+     },
+     {
+      "tipo": "selo grande",
+      "texto": "1946 E 2019",
+      "tela": [
+       540,
+       330
+      ],
+      "palavra": "vez"
+     }
+    ]
+   }
+  },
+  {
+   "fala": "Esse vídeo foi feito inteiro com inteligência artificial, no Claude. Se você quer criar vídeos assim, comenta mapa que eu te mando a skill.",
+   "cena": {
+    "tipo": "cta",
+    "palavra": "MAPA",
+    "selo": "Feito 100% com IA no Claude",
+    "logo": "claude",
+    "antes": "Comenta",
+    "depois": "que eu te mando a skill"
+   }
+  }
+ ],
+ "destaques": [
+  "Groenlândia",
+  "África",
+  "Brasil",
+  "quatro",
+  "gelo",
+  "três",
+  "quilômetros",
+  "cinquenta",
+  "Maracanã",
+  "Dinamarca",
+  "missionário",
+  "Noruega",
+  "catorze",
+  "governo",
+  "independente",
+  "Estados",
+  "Unidos",
+  "comprar",
+  "inteligência",
+  "Claude",
+  "mapa",
+  "skill"
+ ],
+ "trilha": {
+  "arquivo": "../19-mapa-chile/trilhas/01 Genesis - Tristan Barton (320 kbps).mp3",
+  "inicio": 64
+ }
+}

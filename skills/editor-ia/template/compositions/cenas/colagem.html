@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .cl-luz { position: absolute; inset: -20%; background: radial-gradient(42% 30% at 50% 45%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%); }
+        .cl-grao { position: absolute; inset: -60px; opacity: .16; mix-blend-mode: multiply; pointer-events: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .cl-risco { height: 14px; background: #D2CAB8; margin-top: 18px; border-radius: 2px; }
+        .cl-lista .row { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-family: "LT Montserrat", sans-serif; font-weight: 600; font-size: 38px; color: #2B2925; padding: 10px 0; border-bottom: 2px dashed #D2CAB8; }
+        .cl-lista .row svg { width: 52px; height: 52px; flex: none; }
+        .cl-etiqueta { background: #1C1B19; color: #F6F2E9; font-family: "LT Montserrat", sans-serif; font-weight: 800; font-size: 30px; letter-spacing: .16em; text-transform: uppercase; padding: 10px 18px; white-space: nowrap; }
+        .cl-regua { height: 70px; background: repeating-linear-gradient(90deg, #2B2925 0 3px, transparent 3px 40px) bottom/100% 34px no-repeat, repeating-linear-gradient(90deg, #2B2925 0 3px, transparent 3px 200px) bottom/100% 60px no-repeat; border-bottom: 3px solid #2B2925; }
+        .cl-cartao { padding: 34px; }
+        .cl-stage { position: absolute; inset: 0; transform-origin: 50% 45%; }
+        .cl-it { position: absolute; transform-origin: 50% 50%; opacity: 0; }
+        .cl-pilha { box-shadow: 10px 12px 0 -2px #E2D9C6, 20px 22px 0 -4px #D6CCB6, 0 26px 50px rgba(0,0,0,.32) !important; }
+        .cl-marca { background: linear-gradient(#F2C200, #F2C200) no-repeat 0 70% / 0% 80%; font-weight: 600; padding: 0 6px; }
+        .cl-papel { background: #EFE8D8; color: #1C1B19; box-shadow: 0 18px 40px rgba(0,0,0,.28), 0 2px 0 rgba(0,0,0,.08); padding: 48px 52px; }
+        .cl-papel .rot { font-family: "LT Montserrat", sans-serif; font-weight: 700; font-size: 28px; letter-spacing: .18em; text-transform: uppercase; color: #4A463F; border-bottom: 2px solid #1C1B19; padding-bottom: 10px; margin-bottom: 18px; }
+        .cl-papel .tit { font-family: "LT Garamond", serif; font-weight: 700; font-size: 84px; line-height: 1.02; }
+        .cl-papel .lin { font-family: "LT Garamond", serif; font-size: 50px; line-height: 1.3; margin-top: 10px; color: #2B2925; }
+        .cl-papel .lin b { background: #F2C200; font-weight: 600; padding: 0 6px; }
+        .cl-janela { background: #F6F2E9; box-shadow: 0 18px 40px rgba(0,0,0,.3); border-radius: 14px; overflow: hidden; }
+        .cl-janela .barra { height: 66px; background: #1C1B19; display: flex; align-items: center; gap: 12px; padding: 0 20px; font-family: "LT Montserrat", sans-serif; font-weight: 700; font-size: 28px; color: #EFE8D8; }
+        .cl-janela .barra i { width: 14px; height: 14px; border-radius: 50%; background: #6B665C; display: inline-block; }
+        .cl-janela .barra i.on { background: #D97A3C; }
+        .cl-janela .corpo { padding: 30px; display: flex; flex-direction: column; gap: 20px; min-height: 260px; }
+        .cl-msg { font-family: "LT Montserrat", sans-serif; font-weight: 600; font-size: 40px; line-height: 1.3; padding: 14px 18px; border-radius: 14px; max-width: 86%; opacity: 0; }
+        .cl-msg.eu { align-self: flex-end; background: #1C1B19; color: #F6F2E9; border-radius: 14px 14px 4px 14px; }
+        .cl-msg.ia { align-self: flex-start; background: #E4DCCB; color: #1C1B19; }
+        .cl-msg.arq { align-self: flex-start; background: #fff; border: 2px solid #1C1B19; font-family: "LT Montserrat", monospace; }
+        .cl-pasta { width: 300px; height: 230px; }
+        .cl-pasta .aba { position: absolute; left: 0; top: 0; width: 46%; height: 40px; background: #D9B45A; border-radius: 10px 10px 0 0; }
+        .cl-pasta .corpo { position: absolute; left: 0; top: 30px; right: 0; bottom: 0; background: #E9C66B; border-radius: 0 10px 10px 10px; box-shadow: 0 14px 30px rgba(0,0,0,.25); }
+        .cl-pasta .etq { position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%) rotate(-2deg); background: #F6F2E9; padding: 8px 18px; font-family: "LT Montserrat", sans-serif; font-weight: 800; font-size: 40px; letter-spacing: .06em; text-transform: uppercase; color: #1C1B19; white-space: nowrap; box-shadow: 0 2px 0 rgba(0,0,0,.15); }
+        .cl-rasgado { padding: 22px 46px; font-family: "LT Garamond", serif; font-style: italic; font-weight: 700; color: #1C1B19; white-space: nowrap; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+        .cl-numero { font-family: "LT Garamond", serif; font-weight: 600; line-height: .85; color: #1C1B19; }
+        .cl-texto { font-family: "LT Garamond", serif; font-style: italic; color: #1C1B19; white-space: nowrap; }
+        .cl-texto.caps { font-family: "LT Montserrat", sans-serif; font-style: normal; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+        .cl-polaroide { background: #FBF8F1; padding: 18px 18px 64px; box-shadow: 0 18px 40px rgba(0,0,0,.3); }
+        .cl-polaroide .foto { width: 100%; height: 100%; background: #2B2925 center/cover no-repeat; display: grid; place-items: center; font-family: "LT Garamond", serif; font-style: italic; font-size: 44px; color: #EFE8D8; text-align: center; }
+        .cl-polaroide .leg { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-family: "LT Garamond", serif; font-style: italic; font-size: 42px; color: #1C1B19; }
+        .cl-fita { position: absolute; top: -22px; left: 50%; width: 150px; height: 44px; margin-left: -75px; background: rgba(196, 182, 236, .72); box-shadow: 0 2px 4px rgba(0,0,0,.12); transform: rotate(-3deg); }
+        .cl-ponto { position: absolute; border-radius: 50%; }
+        svg.cl-traco { position: absolute; left: 0; top: 0; overflow: visible; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920"></div>
+      <script>
+        (function () {
+          // COLAGEM — papel, prints colados com fita, papel rasgado, números grandes, pastas, janela de app, polaroides,
+          // campo de pontos e traços desenhados à mão sobre fundo de papel. Cada item entra no seu tempo (`em`) e sai em `sai_em`.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 3, itens: [], saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const root0 = document.querySelector('[data-composition-id="' + ID + '"]');
+          // a câmera nunca fica parada: aproxima devagar a cena inteira e, se pedido, dá um zoom num detalhe (`foco`)
+          // fundo vivo: uma luz que passeia e o grão do papel tremendo (sem isso o fundo parece imagem parada)
+          const luz = BK.el("div", "cl-luz", root0);
+          tl.fromTo(luz, { x: -90, y: 40 }, { x: 110, y: -60, duration: P.dur, ease: "sine.inOut" }, 0);
+          const root = BK.el("div", "cl-stage", root0);
+          const grao = BK.el("div", "cl-grao", root0);
+          tl.to(grao, { x: 47, y: -31, duration: P.dur, ease: "steps(" + Math.max(4, Math.round(P.dur * 12)) + ")" }, 0);
+          const cam = Object.assign({ de: 1, para: 1.07 }, P.camera || {});
+          tl.fromTo(root, { scale: cam.de }, { scale: cam.para, duration: P.dur, ease: "none" }, 0);
+          (P.foco || []).forEach((f) => {
+            const k = f.escala || 1.45;
+            tl.to(root, { scale: k, x: (540 - (f.x || 540)) * (k - 1), y: (860 - (f.y || 860)) * (k - 1), duration: f.dur || 0.55, ease: "power3.inOut" }, f.em);
+          });
+          const COR = { tinta: "#1C1B19", papel: "#EFE8D8", vermelho: "#C8102E", amarelo: "#F2C200", azul: "#1F4FBF", branco: "#FBF8F1", cinza: "#6B665C" };
+          const cor = (v, d) => COR[v] || v || d;
+          const rasgo = (seed) => {
+            // borda rasgada determinística em cima e embaixo
+            const pts = [];
+            for (let i = 0; i <= 20; i++) pts.push((i * 5) + "% " + (BK.hash(seed * 31 + i) * 9).toFixed(1) + "%");
+            for (let i = 20; i >= 0; i--) pts.push((i * 5) + "% " + (100 - BK.hash(seed * 17 + i) * 9).toFixed(1) + "%");
+            return "polygon(" + pts.join(",") + ")";
+          };
+          const fim = P.saida == null ? P.dur - 0.2 : P.saida;
+
+          P.itens.forEach((it, n) => {
+            const t = it.tipo || "papel";
+            const em = it.em == null ? 0.05 + n * 0.12 : it.em;
+            const sai = it.sai_em == null ? fim : it.sai_em;
+            const el = BK.el("div", "cl-it", root);
+            el.style.left = (it.x || 0) + "px";
+            el.style.top = (it.y || 0) + "px";
+            if (it.w) el.style.width = it.w + "px";
+            if (it.h) el.style.height = it.h + "px";
+            const rot = it.rot == null ? (BK.hash(n + 7) - 0.5) * 6 : it.rot;
+            let entra = "cola";
+
+            if (t === "papel") {
+              el.classList.add("cl-papel");
+              if (it.rotulo) BK.el("div", "rot", el, BK.esc(it.rotulo));
+              if (it.titulo) BK.el("div", "tit", el, BK.rich(it.titulo, COR.vermelho));
+              (it.linhas || []).forEach((l) => BK.el("div", "lin", el, BK.esc(l).replace(/\*(.+?)\*/g, '<b class="cl-marca">$1</b>')));
+              for (let k = 0; k < (it.riscos || 0); k++) { const b = BK.el("div", "cl-risco", el); b.style.width = (60 + BK.hash(n * 9 + k) * 40) + "%"; }
+              const marcas = el.querySelectorAll(".cl-marca");
+              if (marcas.length) tl.to(marcas, { backgroundSize: "100% 80%", duration: 0.45, ease: "power2.out", stagger: 0.25 }, it.marca_em == null ? em + 0.7 : it.marca_em);
+            } else if (t === "lista") {
+              // checklist: cada linha ganha um check vermelho desenhado à mão no seu tempo
+              el.classList.add("cl-papel", "cl-lista");
+              if (it.rotulo) BK.el("div", "rot", el, BK.esc(it.rotulo));
+              (it.linhas || []).forEach((l, k) => {
+                const row = BK.el("div", "row", el, "<span>" + BK.esc(l.texto || l) + "</span>");
+                const ns = "http://www.w3.org/2000/svg", sv = document.createElementNS(ns, "svg"), pa = document.createElementNS(ns, "path");
+                sv.setAttribute("viewBox", "0 0 52 52"); pa.setAttribute("d", "M 6 28 L 20 42 L 46 8"); pa.setAttribute("fill", "none");
+                pa.setAttribute("stroke", COR.vermelho); pa.setAttribute("stroke-width", "7"); pa.setAttribute("stroke-linecap", "round"); pa.setAttribute("stroke-linejoin", "round");
+                pa.style.strokeDasharray = 80; pa.style.strokeDashoffset = 80; sv.appendChild(pa); row.appendChild(sv);
+                tl.to(pa, { strokeDashoffset: 0, duration: 0.22, ease: "power2.out" }, l.em == null ? em + 0.6 + k * 0.35 : l.em);
+              });
+            } else if (t === "etiqueta") {
+              el.classList.add("cl-etiqueta");
+              el.innerHTML = BK.esc(it.texto || "");
+              entra = "surge";
+            } else if (t === "regua") {
+              el.classList.add("cl-regua");
+              entra = "surge";
+            } else if (t === "janela") {
+              el.classList.add("cl-janela");
+              BK.el("div", "barra", el, '<i class="on"></i><i></i><i></i>&nbsp;' + BK.esc(it.titulo || ""));
+              const corpo = BK.el("div", "corpo", el);
+              (it.msgs || []).forEach((m) => {
+                const b = BK.el("div", "cl-msg " + (m.lado || "eu"), corpo, BK.esc(m.texto));
+                tl.fromTo(b, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, m.em == null ? em + 0.35 : m.em);
+              });
+            } else if (t === "pasta") {
+              el.classList.add("cl-pasta");
+              BK.el("div", "aba", el); BK.el("div", "corpo", el); BK.el("div", "etq", el, BK.esc(it.texto || ""));
+            } else if (t === "rasgado") {
+              el.classList.add("cl-rasgado");
+              el.style.background = cor(it.cor, COR.amarelo);
+              el.style.color = it.cor === "vermelho" ? COR.branco : COR.tinta;
+              el.style.fontSize = (it.tam || 64) + "px";
+              el.style.clipPath = rasgo(n + 3);
+              el.innerHTML = BK.esc(it.texto || "");
+              entra = "rasga";
+            } else if (t === "numero") {
+              el.classList.add("cl-numero");
+              el.style.fontSize = (it.tam || 420) + "px";
+              el.style.color = cor(it.cor, COR.tinta);
+              el.innerHTML = BK.esc(it.texto || "");
+              if (it.de != null && !isNaN(Number(it.texto))) {
+                // número que rola até o valor (como o 1990 → 2026 da referência)
+                const o = { v: Number(it.de) };
+                el.innerHTML = String(it.de);
+                tl.to(o, { v: Number(it.texto), duration: it.rolar || 0.8, ease: "power2.out", onUpdate: () => { el.innerHTML = String(Math.round(o.v)); } }, em + 0.1);
+              }
+              entra = "bate";
+            } else if (t === "texto") {
+              el.classList.add("cl-texto");
+              if (it.estilo === "caps") el.classList.add("caps");
+              el.style.fontSize = (it.tam || 56) + "px";
+              el.style.color = cor(it.cor, COR.tinta);
+              el.innerHTML = BK.esc(it.texto || "").replace(/\*(.+?)\*/g, '<span style="color:' + COR.vermelho + '">$1</span>');
+              entra = "surge";
+            } else if (t === "polaroide") {
+              el.classList.add("cl-polaroide");
+              const f = BK.el("div", "foto", el, it.arquivo ? "" : BK.esc(it.texto || ""));
+              if (it.arquivo) f.style.backgroundImage = 'url("' + it.arquivo + '")';
+              if (it.fundo) f.style.background = cor(it.fundo);
+              if (it.legenda) BK.el("div", "leg", el, BK.esc(it.legenda));
+            } else if (t === "carimbo") {
+              BK.stamp(el, it.texto || "", cor(it.cor, COR.vermelho), it.tam || 90);
+              entra = "carimbo";
+            } else if (t === "pontos") {
+              const cols = it.colunas || 10, lins = it.linhas || 8, gap = it.gap || 46, r = it.raio || 16;
+              if (it.fundo) { el.classList.add("cl-cartao"); el.style.background = cor(it.fundo); el.style.boxShadow = "0 18px 40px rgba(0,0,0,.3)"; el.style.width = cols * gap + 40 + "px"; el.style.height = lins * gap + 40 + "px"; }
+              const total = cols * lins, nTroca = Math.round(total * (it.porcento == null ? 1 : it.porcento / 100));
+              const cores = (it.cores || ["vermelho", "azul"]).map((c) => cor(c));
+              for (let i = 0; i < cols * lins; i++) {
+                const d = BK.el("div", "cl-ponto", el);
+                d.style.width = d.style.height = r * 2 + "px";
+                d.style.left = (i % cols) * gap + (BK.hash(i * 3) - 0.5) * 10 + "px";
+                d.style.top = Math.floor(i / cols) * gap + (BK.hash(i * 5) - 0.5) * 10 + "px";
+                d.style.background = cores[Math.floor(BK.hash(i * 11) * cores.length)];
+                tl.fromTo(d, { scale: 0 }, { scale: 1, duration: 0.18, ease: "back.out(2)" }, em + 0.1 + BK.hash(i * 7) * 0.5);
+                if (it.fundo) { d.style.left = 20 + (i % cols) * gap + "px"; d.style.top = 20 + Math.floor(i / cols) * gap + "px"; }
+                if (it.trocar_em != null && i < nTroca) tl.to(d, { background: cor(it.trocar_para, COR.vermelho), duration: 0.12 }, it.trocar_em + (it.fundo ? (i / total) * (it.trocar_dur || 1.2) : BK.hash(i * 13) * 0.4));
+              }
+              entra = "nenhuma";
+            } else if (t === "seta" || t === "infinito" || t === "linha" || t === "circulo") {
+              const ns = "http://www.w3.org/2000/svg";
+              const svg = document.createElementNS(ns, "svg");
+              svg.setAttribute("class", "cl-traco");
+              svg.setAttribute("width", it.w || 400); svg.setAttribute("height", it.h || 300);
+              const p = document.createElementNS(ns, "path");
+              let d = it.d;
+              if (!d && t === "infinito") { const s = (it.w || 360) / 4; d = `M ${2*s} ${s} C ${3*s} 0, ${4*s} 0, ${4*s} ${s} S ${3*s} ${2*s}, ${2*s} ${s} S ${s} 0, 0 ${s} S ${s} ${2*s}, ${2*s} ${s}`; }
+              if (!d && t === "circulo") { const W = it.w || 400, H = it.h || 200; d = `M ${W * 0.12} ${H * 0.2} C ${W * 0.4} ${-H * 0.05}, ${W * 1.02} ${H * 0.05}, ${W * 0.98} ${H * 0.5} S ${W * 0.4} ${H * 1.05}, ${W * 0.04} ${H * 0.62} S ${W * 0.25} ${H * 0.02}, ${W * 0.62} ${H * 0.06}`; }
+              if (!d && t === "seta") { const W = it.w || 400, H = it.h || 200; d = `M 10 ${H - 20} C ${W * 0.35} ${H * 0.1}, ${W * 0.65} ${H * 0.1}, ${W - 20} ${H * 0.35} M ${W - 20} ${H * 0.35} l -48 -6 M ${W - 20} ${H * 0.35} l -22 40`; }
+              p.setAttribute("d", d); p.setAttribute("fill", "none");
+              p.setAttribute("stroke", cor(it.cor, t === "infinito" ? COR.vermelho : COR.tinta));
+              p.setAttribute("stroke-width", it.espessura || 9); p.setAttribute("stroke-linecap", "round"); p.setAttribute("stroke-linejoin", "round");
+              svg.appendChild(p); el.appendChild(svg);
+              const L = 4000;
+              p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+              tl.set(el, { opacity: 1 }, em);
+              tl.to(p, { strokeDashoffset: 0, duration: it.duracao || 0.7, ease: "power2.inOut" }, em);
+              entra = "nenhuma";
+            }
+            if (it.fita) BK.el("div", "cl-fita", el);
+            if (it.pilha) el.classList.add("cl-pilha");
+            if (it.verso) el.style.boxShadow = "-22px 18px 0 0 " + cor(it.verso) + ", 0 22px 46px rgba(0,0,0,.32)";
+
+            // entrada
+            const lado = it.de_onde || ["baixo", "esquerda", "direita", "cima"][n % 4];
+            const dx = lado === "esquerda" ? -260 : lado === "direita" ? 260 : 0, dy = lado === "baixo" ? 320 : lado === "cima" ? -320 : 0;
+            if (entra === "cola") tl.fromTo(el, { opacity: 0, x: dx, y: dy, scale: 1.12, rotation: rot + (dx ? Math.sign(dx) * 9 : 6), filter: "blur(14px)" },
+              { opacity: 1, x: 0, y: 0, scale: 1, rotation: rot, filter: "blur(0px)", duration: 0.42, ease: "back.out(1.35)" }, em);
+            else if (entra === "rasga") tl.fromTo(el, { opacity: 0, scaleX: 0.2, rotation: rot }, { opacity: 1, scaleX: 1, rotation: rot, duration: 0.28, ease: "power4.out" }, em);
+            else if (entra === "bate") tl.fromTo(el, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.26, ease: "power4.out" }, em);
+            else if (entra === "surge") tl.fromTo(el, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, em);
+            else if (entra === "carimbo") BK.stampIn(tl, el.firstChild || el, em, rot), tl.set(el, { opacity: 1 }, em);
+            else if (entra === "nenhuma") tl.set(el, { opacity: 1 }, em);
+            // nada fica parado: depois de entrar, o item flutua devagar até sair
+            const vive = sai - em - 0.45;
+            if (vive > 0.3 && entra !== "nenhuma") tl.to(el, { y: "-=14", rotation: rot + (n % 2 ? 1.1 : -1.1), duration: vive, ease: "sine.inOut" }, em + 0.45);
+            // saída: desliza para o lado oposto, com desfoque
+            tl.to(el, { opacity: 0, x: -dx * 0.6 || (n % 2 ? 180 : -180), y: "-=40", filter: "blur(10px)", duration: 0.24, ease: "power2.in" }, sai);
+          });
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

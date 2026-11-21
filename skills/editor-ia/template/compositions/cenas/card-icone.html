@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /*FONTES*/
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        .ci-glow { position: absolute; left: 190px; top: 130px; width: 700px; height: 560px; border-radius: 50%; }
+        .ci-iconbox { position: absolute; left: 0; width: 1080px; top: 130px; height: 500px; display: flex; align-items: center; justify-content: center; }
+        .ci-icon { transform-origin: 50% 50%; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.55)); }
+        .ci-chip { position: absolute; left: 0; width: 1080px; top: 660px; display: flex; justify-content: center; }
+        .ci-chip span { display: inline-block; padding: 18px 34px 14px; border-radius: 16px; font-family: "LT Anton", sans-serif; line-height: 1;
+          text-transform: uppercase; letter-spacing: 0.01em; white-space: nowrap; }
+      </style>
+      <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920">
+        <div class="bk-top" id="__ID__-card"></div>
+      </div>
+      <script>
+        (function () {
+          // CARD-ICONE — card dividido com um ícone grande, um chip de texto e (opcional) um carimbo.
+          const ID = "__ID__";
+          const P = Object.assign({ dur: 3.5, rotulo: "", icone: "estrela", icone_tam: 420, fantasma: "", brilho: "acento", chip: null,
+            carimbo: null, apagar_no_carimbo: true, entrada: "desce", saida: null }, /*PARAMS*/{}/*/PARAMS*/);
+          const tl = gsap.timeline({ paused: true });
+          const card = document.querySelector("#" + ID + "-card");
+          if (P.fantasma) {
+            const gh = BK.el("div", "bk-ghost", card, BK.esc(P.fantasma));
+            gh.style.left = "-40px"; gh.style.top = "150px"; gh.style.fontSize = BK.cabe(P.fantasma, 1400, 520) + "px";
+            tl.fromTo(gh, { x: 0 }, { x: -70, duration: P.dur, ease: "none" }, 0);
+          }
+          const glow = BK.el("div", "ci-glow", card);
+          glow.style.background = `radial-gradient(closest-side, ${BK.cor(P.brilho)}6B, rgba(0, 0, 0, 0) 100%)`;
+          BK.rotulo(tl, card, P.rotulo);
+          const box = BK.el("div", "ci-iconbox", card);
+          const icon = BK.el("div", "ci-icon", box, BK.icone(P.icone, P.icone_tam));
+          BK.card(tl, card, P);
+          tl.fromTo(glow, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }, 0.15);
+          tl.fromTo(icon, { scale: 0, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.45, ease: "power3.out" }, 0.12);
+          const breath = Math.max(0.4, (P.dur - 0.6) / 2);
+          tl.fromTo(icon, { rotation: 0, scale: 1 }, { rotation: 1.6, scale: 1.025, duration: breath, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 0.6);
+          if (P.chip && P.chip.texto) {
+            const c = BK.el("div", "ci-chip", card);
+            const s = BK.el("span", "", c, BK.rich(P.chip.texto, P.chip.enfase || "vermelho"));
+            s.style.background = BK.cor(P.chip.fundo, "branco");
+            s.style.color = BK.cor(P.chip.cor, "#B8160F");
+            s.style.fontSize = BK.cabe(P.chip.texto, 900, P.chip.tam || 84, "anton", 0.6) + "px";
+            tl.fromTo(s, { scale: 0, opacity: 0, y: 30 }, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, P.chip.em == null ? 0.22 : P.chip.em);
+          }
+          if (P.carimbo && P.carimbo.texto) {
+            const w = BK.el("div", "bk-center", card);
+            w.style.top = "300px"; w.style.height = "240px";
+            w.setAttribute("data-layout-allow-overlap", "");
+            const st = BK.stamp(w, P.carimbo.texto, P.carimbo.cor || "vermelho", BK.cabe(P.carimbo.texto, 900, P.carimbo.tam || 190, "anton", 0.75));
+            const at = P.carimbo.em == null ? P.dur - 0.9 : P.carimbo.em;
+            BK.stampIn(tl, st, at, P.carimbo.rot == null ? -9 : P.carimbo.rot);
+            if (P.apagar_no_carimbo) tl.to(icon, { filter: "grayscale(0.85) brightness(0.7)", duration: 0.2, ease: "power2.out" }, at + 0.12);
+          }
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
