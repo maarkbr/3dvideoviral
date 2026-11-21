@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+    <script src="vendor/gsap/dist/gsap.min.js"></script>
+    <script src="vendor/three/build/three.min.js"></script>
+    <script src="vendor/three/examples/js/shaders/CopyShader.js"></script>
+    <script src="vendor/three/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/Pass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="personagem.js"></script>
+    <script src="personagens-extra.js"></script>
+    <script src="objetos.js"></script>
+    <script src="objetos-extra.js"></script>
+    <script src="cidade3d.js"></script>
+    <script src="montagem.js"></script>
+    <script src="audio/palavras.js"></script>
+    <style>
+      :root { --ink: #17121d; --font-display: "Baloo 2", system-ui, sans-serif; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #8fb8ff; font-family: var(--font-display); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      #tres { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; }
+      #camada2d, #camadaTela, #legendas, #flash { position: absolute; inset: 0; }
+      #camada2d { z-index: 1; } #camadaTela { z-index: 2; } #legendas { z-index: 3; }
+      #flash { z-index: 4; background: #fff; opacity: 0; pointer-events: none; }
+      .ator { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+      .legenda {
+        position: absolute; left: 50px; right: 50px; top: 1350px;
+        text-align: center; font-weight: 800; font-size: 82px; line-height: 1.04; color: #fff;
+      }
+      .legenda span {
+        display: inline-block; margin: 0 .11em;
+        -webkit-text-stroke: 17px var(--ink); paint-order: stroke fill;
+        text-shadow: 0 9px 0 var(--ink);
+      }
+      .marca { position: absolute; left: 0; right: 0; top: 1515px; text-align: center; z-index: 5; font-weight: 800; font-size: 42px; color: #fff;
+        -webkit-text-stroke: 8px rgba(23,18,29,.6); paint-order: stroke fill; opacity: .5; letter-spacing: 1px; }
+      #fimCard { position: absolute; inset: 0; z-index: 6; opacity: 0; background: radial-gradient(circle at 50% 40%, #4f8dff 0%, #2350d8 55%, #142c86 100%); }
+      #fimCard .raios { position: absolute; left: 50%; top: 40%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px;
+        background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.10) 0 9deg, rgba(255,255,255,0) 9deg 18deg); }
+      #fimCard .logo { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-weight: 800; font-size: 150px; line-height: .95; color: #FFD93D;
+        -webkit-text-stroke: 26px var(--ink); paint-order: stroke fill; text-shadow: 0 14px 0 var(--ink); }
+      #fimCard .logo small { display: block; font-size: 96px; color: #fff; }
+      #fimCard .segue { position: absolute; left: 90px; right: 90px; top: 1330px; text-align: center; font-weight: 800; font-size: 80px; color: #17121d;
+        background: #FFD93D; border: 12px solid #17121d; border-radius: 40px; padding: 18px 10px 8px; box-shadow: 0 16px 0 #17121d; }
+      #fimPj { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="82.8" data-width="1080" data-height="1920">
+      <div id="palco" class="clip" data-start="0" data-duration="82.8" data-track-index="0">
+        <canvas id="tres" width="1080" height="1920"></canvas>
+        <div id="camada2d"></div>
+        <div id="camadaTela"></div>
+        <div id="legendas"></div>
+        <div id="flash"></div>
+        <div class="marca">@_tudoem3d</div>
+        <div id="fimCard"><div class="raios"></div><div class="logo"><small>TUDO EM</small>3D</div><div id="fimPj"></div><div class="segue">Segue o @_tudoem3d</div></div>
+      </div>
+      <audio id="som" src="audio/mix.wav" data-start="0" data-duration="82.8" data-track-index="1"></audio>
+    </div>
+
+    <script>
+      (function () {
+        // =====================================================================
+        //  LAVAGEM DE DINHEIRO — cenas presas às palavras da narração (roteiro.md)
+        // =====================================================================
+        const DURACAO = 82.8; const FIM_FALA = 80.8;
+        const tl = gsap.timeline({ paused: true });
+        const M = Montagem.criar({
+          tl, dur: DURACAO, fala: window.PALAVRAS, cenario: Cidade3D,
+          canvas: '#tres', camada2d: '#camada2d', camadaTela: '#camadaTela', legendas: '#legendas',
+          filtro: (luz) => `brightness(${Math.min(1.04, luz + 0.06).toFixed(3)}) saturate(1.06) drop-shadow(-7px 2px 0 rgba(255,214,160,.55))`,
+        });
+        const { t, W, B, DUR, THREE, cena } = M;
+        const Z = Cidade3D.Z;
+        const suave = M.suave, lerp = M.lerp;
+        const em = (palavra, bloco) => t(palavra, bloco);
+        const W2 = (txt, bloco, n) => window.PALAVRAS.filter((p) => p.bloco === bloco && p.texto.toLowerCase().replace(/[^a-zà-ú0-9]/g, '') === txt.toLowerCase())[n];
+
+        // ---------- tempos-chave ----------
+        const T = {
+          lava1: em('Lava', 1), nao: em('não', 1),
+          mas: B(2), banco: em('banco', 2), seu: em('seu', 2), proibido: em('proibido', 2), ja: em('Já', 2),
+          prim: B(3), mito: em('mito.', 3), al: em('Al', 3), lavanderia: em('lavanderia.', 3), expressao: em('expressão', 3),
+          jornais: em('jornais', 3), ano: em('1973,', 3), watergate: em('Watergate.', 3), capone2: W2('Capone', 3, 1).inicio,
+          preso: em('preso', 3), sonegar: em('sonegar', 3),
+          lavar: B(4), tres: em('três', 4), molho: em('Molho.', 4), sujo: em('sujo', 4), limpo: em('limpo,', 4), vivo: em('vivo.', 4),
+          centrif: B(5), conta: em('conta', 5), empresa1: em('empresa', 5), ninguem: em('ninguém', 5), secagem: em('Secagem.', 5),
+          limpinho: em('limpinho.', 5), imovel: em('imóvel,', 5), carro: em('carro,', 5), empresa2: W2('empresa', 5, 2).inicio,
+          so: B(6), sensor: em('sensor.', 6), estranho: em('estranho,', 6), banco6: em('banco', 6), h24: em('24', 6), coaf: em('Coaf.', 6), proibe: em('proíbe', 6),
+          em2014: B(7), invest: em('investigação', 7), doleiros: em('doleiros', 7), posto: em('posto', 7), brasilia: em('Brasília.', 7),
+          lavajatos: em('lava', 7), ilegal: em('ilegal.', 7), nome: em('nome', 7), lava7: W2('Lava', 7, 1).inicio,
+          pena: B(8), tres8: em('três', 8), mancha: em('mancha,', 8), nenhum: em('nenhum', 8), tira: em('tira.', 8),
+        };
+        const P = (z0, x, y, z) => [x, y, z0 + z];
+        const LONGE = [0, -120, -900];
+
+        // ---------- câmera: [tempo, posição, alvo, fov, roll] (corte = chave nula) ----------
+        const chaves = [];
+        const K = (tt, pos, alvo, fov = 50, roll = 0) => chaves.push([tt, pos, alvo, fov, roll]);
+        const CORTE = (tt, pos, alvo, fov = 50, roll = 0) => { K(tt - 0.001, null, null); K(tt, pos, alvo, fov, roll); };
+        const zP = Z.POSTO, zB = Z.BANCO, zL = Z.LAVAND, zM = Z.MAQ;
+
+        // 1 — voo rápido pela cidade até o LAVA JATO
+        K(0.0, [-15, 11, 52], [-7, 3, 4], 58);
+        K(1.6, [-7, 5.5, 22], [1, 4.5, -6], 54, -0.05);
+        K(T.lava1, [1.6, 3.0, 7.2], [4.8, 7.6, -6.2], 50, 0.03);
+        K(T.lava1 + 0.7, [2.0, 2.8, 6.6], [4.8, 7.8, -6.2], 48);
+        K(T.nao - 0.15, [0.9, 1.55, 4.2], [0.7, 1.0, -3.2], 50);
+        K(B(2) - 0.05, [0.7, 1.5, 3.5], [0.7, 1.0, -3.2], 46);
+        // 2 — BANCO
+        CORTE(T.mas, [-2.5, 4.5, zB + 17], [0, 5.5, zB - 7], 52);
+        K(T.banco + 0.2, [-1.2, 2.6, zB + 8.5], [0.2, 3.2, zB - 6], 50);
+        K(T.seu, [-0.6, 1.75, zB + 5.2], [-0.2, 1.05, zB - 2.2], 48);
+        K(T.proibido - 0.1, [-0.2, 1.7, zB + 4.6], [0.2, 1.05, zB - 2.4], 46);
+        K(T.proibido + 0.35, [1.0, 1.75, zB + 2.4], [1.5, 1.2, zB - 3.4], 40);
+        K(T.ja - 0.1, [1.0, 1.75, zB + 2.3], [1.5, 1.2, zB - 3.4], 40);
+        K(B(3) - 0.05, [-0.8, 1.6, zB + 4.0], [-1.3, 1.0, zB - 2.2], 46);
+        // 3 — LAVANDERIA / Al Capone
+        CORTE(T.prim, [0.0, 2.0, zL + 10], [0, 2.4, zL - 6], 50);
+        K(T.al - 0.05, [0.2, 1.8, zL + 6.0], [0.2, 1.4, zL - 3], 50);
+        K(T.lavanderia, [0.4, 1.9, zL + 5.2], [0.2, 2.2, zL - 4], 48);
+        K(T.lavanderia + 0.9, [0.6, 2.6, zL + 6.4], [0.0, 5.4, zL - 6.5], 50);
+        K(T.expressao + 0.2, [0.6, 2.4, zL + 6.0], [0.0, 5.2, zL - 6.5], 50);
+        K(T.jornais - 0.1, [0.5, 1.7, zL + 4.5], [0.6, 1.25, zL - 2.5], 48);
+        K(T.watergate, [0.7, 1.7, zL + 4.0], [0.8, 1.3, zL - 2.5], 46);
+        K(T.preso - 0.1, [0.3, 1.7, zL + 4.3], [0.3, 1.15, zL - 2.5], 48);
+        K(T.preso + 0.2, [0.3, 1.6, zL + 3.4], [0.3, 1.1, zL - 2.5], 44, 0.04);
+        K(B(4) - 0.05, [0.3, 1.6, zL + 3.2], [0.3, 1.1, zL - 2.5], 44);
+        // 4 — MÁQUINA GIGANTE: revelação de baixo para cima, molho
+        CORTE(T.lavar, [-1.0, 0.7, zM + 9], [0, 6.5, zM - 6.5], 56, 0.02);
+        K(T.tres, [-2.6, 2.4, zM + 9.5], [-0.6, 3.6, zM - 6.5], 54);
+        K(T.molho, [-2.4, 2.9, zM + 7.2], [-0.4, 3.4, zM - 5], 50);
+        K(T.sujo, [-1.6, 3.2, zM + 4.6], [0, 3.35, zM - 5], 48);
+        K(T.limpo + 0.5, [-0.8, 3.3, zM + 3.6], [0, 3.35, zM - 5], 46);
+        K(T.vivo - 0.4, [-3.4, 2.0, zM + 6.5], [-2.0, 1.8, zM - 4], 50);
+        K(B(5) - 0.05, [-3.6, 2.0, zM + 6.2], [-2.0, 1.9, zM - 4], 50);
+        // 5 — centrifugação (órbita com inclinação), secagem
+        CORTE(T.centrif, [3.4, 3.4, zM + 5.4], [0, 3.3, zM - 5], 52, -0.12);
+        K(T.conta, [0.8, 3.0, zM + 3.8], [0, 3.35, zM - 5], 48, 0.1);
+        K(T.empresa1, [-2.2, 3.2, zM + 4.2], [0, 3.35, zM - 5], 50, -0.1);
+        K(T.ninguem, [-3.2, 2.2, zM + 6.4], [-2.4, 1.7, zM - 4], 48, 0);
+        K(T.secagem, [-0.6, 3.0, zM + 6.8], [0, 3.3, zM - 5], 50);
+        K(T.limpinho, [-0.4, 3.0, zM + 4.4], [0, 3.2, zM - 5], 46);
+        K(T.imovel - 0.2, [-3.0, 2.1, zM + 7.4], [-2.0, 2.1, zM - 4], 50);
+        K(B(6) - 0.05, [-3.2, 2.1, zM + 7.0], [-2.0, 2.1, zM - 4], 50);
+        // 6 — o sensor (sirene) e o banco calado
+        K(T.sensor - 0.1, [0.6, 3.6, zM + 10.5], [0.2, 6.2, zM - 6.5], 52);
+        K(T.sensor + 0.6, [0.4, 6.0, zM + 6.4], [0, 8.4, zM - 6.3], 46, 0.03);
+        K(T.estranho, [0.4, 3.6, zM + 9.0], [0.3, 4.4, zM - 6.5], 54, -0.04);
+        K(T.banco6 - 0.05, [0.4, 3.6, zM + 9.4], [0.3, 4.4, zM - 6.5], 54);
+        CORTE(T.banco6, [0.2, 1.8, zB + 5.0], [0.9, 1.2, zB - 2.6], 48);
+        K(T.coaf, [0.6, 1.75, zB + 3.6], [1.3, 1.2, zB - 3.0], 44);
+        K(T.proibe, [1.1, 1.75, zB + 2.4], [1.6, 1.25, zB - 3.4], 38);
+        K(B(7) - 0.05, [1.1, 1.75, zB + 2.2], [1.6, 1.25, zB - 3.4], 38);
+        // 7 — posto LAVA JATO ao pôr do sol
+        CORTE(T.em2014, [-1.0, 2.2, zP + 9.5], [0, 2.4, zP - 5], 52);
+        K(T.invest + 0.3, [-1.6, 1.8, zP + 5.6], [-0.6, 1.1, zP - 3], 48);
+        K(T.posto, [-3.0, 2.4, zP + 6.4], [-5.2, 2.2, zP - 6], 50);
+        K(T.brasilia + 0.4, [-3.4, 2.6, zP + 5.8], [-5.2, 3.4, zP - 6], 48);
+        K(T.lavajatos + 0.2, [3.2, 2.2, zP + 5.0], [5.0, 2.4, zP - 9.0], 50, 0.03);
+        K(T.ilegal, [3.6, 2.0, zP + 3.8], [5.0, 2.0, zP - 9.0], 46);
+        K(T.lava7 - 0.3, [2.6, 2.6, zP + 7.2], [4.8, 6.6, zP - 6.2], 50);
+        K(T.lava7 + 0.4, [2.4, 3.4, zP + 6.2], [4.8, 7.8, zP - 6.2], 46, -0.03);
+        K(B(8) - 0.05, [2.4, 3.4, zP + 6.0], [4.8, 7.8, zP - 6.2], 46);
+        // 8 — a pena e a mancha
+        CORTE(T.pena, [0, 3.2, zM + 8.6], [0, 3.4, zM - 6.5], 50);
+        K(T.mancha, [0, 3.3, zM + 6.4], [0, 3.35, zM - 6.5], 46);
+        K(DUR, [0, 3.35, zM + 5.0], [0, 3.35, zM - 6.5], 42);
+
+        const lerp3 = (a, b, e) => [lerp(a[0], b[0], e), lerp(a[1], b[1], e), lerp(a[2], b[2], e)];
+        const eio = (x) => (x < 0 ? 0 : x > 1 ? 1 : x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+        cena.cam.quadro = (tt) => {
+          let i = 0;
+          while (i < chaves.length - 2 && tt >= chaves[i + 1][0]) i++;
+          let a = chaves[i], b = chaves[i + 1];
+          if (!a[1]) a = b;
+          if (!b[1]) b = a;
+          const e = eio((tt - a[0]) / Math.max(0.001, b[0] - a[0]));
+          const pos = lerp3(a[1], b[1], e), alvo = lerp3(a[2], b[2], e);
+          pos[1] += Math.sin(tt * 0.9) * 0.018; pos[0] += Math.sin(tt * 0.61) * 0.025; alvo[0] += Math.sin(tt * 0.47) * 0.02;
+          return { pos, alvo, fov: lerp(a[3], b[3], e), roll: lerp(a[4], b[4], e) };
+        };
+        // corte com desfoque + clarão
+        gsap.set('#tres', { filter: 'blur(0px) brightness(1)' });
+        [T.mas, T.prim, T.lavar, T.centrif, T.banco6, T.em2014, T.pena].forEach((tc) => {
+          tl.fromTo('#tres', { filter: 'blur(18px) brightness(1.3)' }, { filter: 'blur(0px) brightness(1)', duration: 0.3, ease: 'power2.out', immediateRender: false }, tc);
+          tl.fromTo('#flash', { opacity: 0.35 }, { opacity: 0, duration: 0.22, ease: 'power2.out', immediateRender: false }, tc);
+        });
+        tl.set('#flash', { opacity: 0 }, 0);
+
+        // ---------- cor do céu e tinta da imagem (muda a cada ideia) ----------
+        const C = (h) => new THREE.Color(h);
+        const ceus = [
+          [0, C('#ffffff'), C('#ffffff')],
+          [T.mas, C('#c9fff4'), C('#fbfffd')],
+          [T.prim, C('#ffc98a'), C('#fff1dc')],
+          [T.lavar, C('#bcd9ff'), C('#f6fbff')],
+          [T.centrif, C('#d9b8ff'), C('#fbf4ff')],
+          [T.secagem, C('#ffe08a'), C('#fff8e6')],
+          [T.sensor, C('#ff8a7a'), C('#fff0ee')],
+          [T.banco6, C('#ffb3a6'), C('#fff3f0')],
+          [T.em2014, C('#ffa860'), C('#fff0dc')],
+          [T.pena, C('#ff6b5e'), C('#f2dede')],
+        ];
+        const corEm = (tt, k) => {
+          let i = 0; while (i < ceus.length - 1 && tt >= ceus[i + 1][0]) i++;
+          if (i === 0) return ceus[0][k].clone();
+          const e = suave((tt - ceus[i][0]) / 0.5);
+          return ceus[i - 1][k].clone().lerp(ceus[i][k], e);
+        };
+        cena.ceu = (tt) => corEm(tt, 1);
+        cena.tinta = (tt) => corEm(tt, 2);
+        cena.lavaJato = (tt) => (tt > T.lavajatos - 0.2 && tt < B(8) ? 1 : 0.35);
+
+        // ---------- a máquina: água, tambor, notas, sirene, visor, tremedeira ----------
+        const maq = cena.maq;
+        const velTambor = (tt) => {
+          if (tt < T.lavar) return 0;
+          if (tt < T.molho) return 0.5;
+          if (tt < T.centrif) return 1.6;
+          if (tt < T.secagem) return lerp(1.6, 15, suave((tt - T.centrif) / 0.9));
+          if (tt < T.so) return lerp(15, 0.8, suave((tt - T.secagem) / 1.2));
+          if (tt < T.pena) return 0.8;
+          return 5.5;
+        };
+        const anguloTambor = (tt) => { let a = 0; const dt = 1 / 60; for (let s = 0; s < tt; s += dt) a += velTambor(s) * dt; return a; };
+        const nivelAgua = (tt) => {
+          if (tt < T.molho) return 0;
+          if (tt < T.secagem) return 0.62 * suave((tt - T.molho) / 1.6);
+          if (tt < T.pena) return 0.62 * (1 - suave((tt - T.secagem) / 1.1));
+          return 0.42 * suave((tt - T.pena) / 1.0);
+        };
+        const sujas = maq.notas.filter((n) => n.userData.suja), limpas = maq.notas.filter((n) => !n.userData.suja);
+        sujas.forEach((n, i) => { n.userData.t0 = T.sujo + i * 0.11; });
+        limpas.forEach((n, i) => { n.userData.t0 = T.limpo + i * 0.11; });
+        const texSujaOrig = sujas[0].material.map;
+        const visor = (tt) => tt < T.molho ? 'PRONTA' : tt < T.centrif ? 'MOLHO' : tt < T.ninguem ? 'GIRANDO' : tt < T.secagem ? '???' : tt < T.sensor ? 'SECAGEM' : tt < T.pena ? 'ALERTA!' : tt < T.nenhum ? 'LAVAR?' : 'ERRO';
+        M.aCadaQuadro((tt) => {
+          const ang = anguloTambor(tt);
+          maq.tambor.rotation.z = -ang;
+          maq.nivel(nivelAgua(tt));
+          maq.texVisor.set(visor(tt));
+          const DY = maq.porta.y, DZ = maq.porta.z;
+          const centri = tt > T.centrif && tt < T.secagem;
+          maq.notas.forEach((n) => {
+            const d = n.userData;
+            n.visible = tt >= T.lavar && tt >= d.t0 && (tt < T.so || tt >= T.pena);
+            if (!n.visible) return;
+            const k = suave((tt - d.t0) / 0.55);
+            const a = d.a0 - ang * (0.85 + (d.r - 0.5) * 0.15);
+            const fx = Math.cos(a) * d.r;
+            const fy = centri ? DY + Math.sin(a) * d.r : DY - 0.75 + Math.sin(a) * d.r * 0.5;
+            const sx = (d.r - 0.9) * 0.8, sy = DY + 3.6, sz = DZ + 2.0;
+            n.position.set(lerp(sx, fx, k), lerp(sy, fy, k), lerp(sz, DZ + d.z, k));
+            n.rotation.set(Math.sin(tt * 3 + d.giro) * 0.8, Math.cos(tt * 2 + d.giro) * 0.6, a + d.giro);
+            if (d.suja) n.material.map = tt >= T.limpinho && tt < T.pena ? maq.texLimpa : texSujaOrig;
+          });
+          let amp = 0;
+          if (tt > T.centrif + 0.6 && tt < T.secagem) amp = 0.06;
+          if (tt > T.estranho && tt < T.banco6) amp = 0.09;
+          if (tt > T.nenhum) amp = 0.05;
+          maq.corpo.position.x = Math.sin(tt * 47) * amp; maq.corpo.rotation.z = Math.sin(tt * 31) * amp * 0.08;
+          const alerta = (tt > T.sensor && tt < T.banco6) || tt > T.nenhum;
+          const pisca = alerta ? 0.5 + 0.5 * Math.sin(tt * 14) : 0;
+          maq.sirene.material.emissiveIntensity = 0.15 + pisca * 0.75;
+          maq.luzSirene.intensity = pisca * 3.2;
+          maq.haloSirene.material.opacity = pisca * 0.9;
+          maq.bolhas.forEach((b) => {
+            const dd = b.userData, on = tt > T.molho && tt < T.secagem + 1;
+            b.visible = on; if (!on) return;
+            const y = (dd.y0 + tt * dd.v + dd.f) % 8;
+            const k = suave((tt - T.molho) / 1) * (1 - suave((tt - T.secagem) / 1));
+            b.position.set(dd.x + Math.sin(tt + dd.f) * 0.4, y, dd.z);
+            b.scale.setScalar(Math.max(0.001, k * (1 - Math.max(0, (y - 6.5) / 1.5))));
+          });
+        });
+
+        // ---------- personagens (aparecem só no palco certo) ----------
+        const janelas = (lista) => (tt) => { for (const [a, b, f] of lista) if (tt >= a && tt < b) return typeof f === 'function' ? f(tt) : f; return LONGE; };
+        const visivel = (pj, lista) => { gsap.set(pj.el, { opacity: 0 }); tl.set(pj.el, { opacity: 0 }, 0); lista.forEach(([a, b]) => { tl.set(pj.el, { opacity: 1 }, a); tl.set(pj.el, { opacity: 0 }, b); }); };
+
+        const jNarr = [
+          [0, T.mas, P(zP, 0.7, 0, -1.0)],
+          [T.mas, T.prim, P(zB, -1.4, 0, -1.2)],
+          [T.lavar, T.banco6, P(zM, -3.0, 0, -0.6)],
+          [T.em2014, T.pena, P(zP, 0.5, 0, -1.4)],
+        ];
+        const narrador = M.ator('narrador', 'narrador', 1.0, janelas(jNarr));
+        visivel(narrador, jNarr);
+        const jBanq = [[T.banco, T.prim, P(zB, 1.5, 0, -2.6)], [T.banco6, T.em2014, P(zB, 1.5, 0, -2.6)]];
+        const banqueiro = M.ator('banqueiro', 'banqueiro', 1.08, janelas(jBanq));
+        visivel(banqueiro, jBanq);
+        const jCap = [[T.al, T.lavar, P(zL, 0.3, 0, -1.3)]];
+        const capone = M.ator('capone', 'capone', 1.05, janelas(jCap));
+        visivel(capone, jCap);
+        const xPol = (tt) => lerp(-5.5, -1.1, suave((tt - T.invest) / 1.1));
+        const jPol = [[T.invest, T.pena, (tt) => P(zP, xPol(tt), 0, -1.6)]];
+        const policial = M.ator('policial', 'policial', 1.06, janelas(jPol));
+        visivel(policial, jPol);
+
+        // ---------- objetos no mundo (REGRA: entram na palavra) ----------
+        const notaSeu = M.objeto('nota', -0.5, 1.75, zB - 0.9, { id: 'seu' });
+        Objetos.naPalavra(tl, notaSeu, W('dinheiro', 2));
+        Objetos.sair(tl, notaSeu, T.proibido - 0.1);
+        const shhh = M.objeto('balao', 1.8, 2.0, zB - 2.5, { texto: 'Shhh!', lado: 'dir', id: 'shhh1' });
+        Objetos.naPalavra(tl, shhh, W('proibido', 2));
+        Objetos.sair(tl, shhh, B(3) - 0.3);
+        const jornal = M.objeto('jornal', 1.25, 1.55, zL - 1.0);
+        Objetos.naPalavra(tl, jornal, W('jornais', 3));
+        Objetos.sair(tl, jornal, T.capone2 - 0.2);
+        const grade = M.objeto('grade', 0.3, 0, zL - 0.6, { sombraL: 0.9, sombraP: 0.2 });
+        Objetos.naPalavra(tl, grade, W('preso', 3));
+        const maco1 = M.objeto('maco', -2.0, 1.6, zM - 0.4, { id: 'vivo' });
+        Objetos.naPalavra(tl, maco1, W('vivo.', 4));
+        Objetos.sair(tl, maco1, B(5) - 0.25);
+        const notaLimpa = M.objeto('nota', 0, 3.4, zM - 2.6, { id: 'limpinha' });
+        Objetos.naPalavra(tl, notaLimpa, W('limpinho.', 5));
+        Objetos.sair(tl, notaLimpa, T.imovel - 0.1);
+        const brilhos = [[-0.9, 4.2], [0.9, 3.9], [0.2, 2.6]].map(([x, y], i) => M.objeto('brilho', x, y, zM - 2.4, { id: 'b' + i }));
+        brilhos.forEach((b, i) => { Objetos.naPalavra(tl, b, W('limpinho.', 5), { atraso: 0.1 + i * 0.12 }); Objetos.sair(tl, b, T.imovel - 0.1); });
+        const shhh2 = M.objeto('balao', 1.8, 2.0, zB - 2.5, { texto: 'Shhh!', lado: 'dir', id: 'shhh2' });
+        Objetos.naPalavra(tl, shhh2, W('proíbe', 6));
+        Objetos.sair(tl, shhh2, B(7) - 0.3);
+        const macoDol = M.objeto('maco', -0.2, 1.55, zP - 1.4, { id: 'dol' });
+        Objetos.naPalavra(tl, macoDol, W('doleiros', 7));
+        Objetos.sair(tl, macoDol, T.posto - 0.1);
+        const notasIleg = [[3.4, 2.4, -4.6], [5.6, 3.0, -4.2], [4.4, 1.5, -3.8]].map(([x, y, z], i) => M.objeto('nota', x, y, zP + z, { suja: true, id: 'il' + i }));
+        notasIleg.forEach((n, i) => { Objetos.naPalavra(tl, n, W('dinheiro', 7), { atraso: i * 0.15 }); Objetos.sair(tl, n, T.nome - 0.1); });
+
+        // ---------- na tela: etiquetas amarelas, carimbo, ícones ----------
+        const tag = (id, texto, x, y, palavra, ate, opts = {}) => {
+          const o = M.naTela('etiqueta', x, y, opts.esc || 1, Object.assign({ texto, id }, opts));
+          Objetos.naPalavra(tl, o, palavra, { atraso: opts.atraso || 0 });
+          if (ate) Objetos.sair(tl, o, ate);
+          return o;
+        };
+        tag('t-lj', 'LAVA JATO', 540, 300, W('Lava', 1), B(2) - 0.25, { fs: 120 });
+        const mito = M.naTela('carimbo', 540, 330, 1, { texto: 'MITO', id: 'mito' });
+        Objetos.naPalavra(tl, mito, W('mito.', 3)); Objetos.sair(tl, mito, T.al + 0.5);
+        tag('t-1973', '1973', 540, 300, W('1973,', 3), T.capone2 - 0.2, { fs: 130 });
+        tag('t-sone', 'SONEGAÇÃO DE IMPOSTO', 540, 300, W('sonegar', 3), B(4) - 0.2, { fs: 84, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        tag('t-3c', '3 CICLOS', 540, 290, W('três', 4), T.molho - 0.05, { fs: 110 });
+        tag('t-molho', '1 · MOLHO', 540, 290, W('Molho.', 4), B(5) - 0.2, { fs: 110, cor: '#7FD4FF' });
+        tag('t-cent', '2 · CENTRIFUGAÇÃO', 540, 290, W('Centrifugação.', 5), T.secagem - 0.05, { fs: 92, cor: '#C9A2FF' });
+        tag('t-conta', 'CONTA → CONTA', 540, 470, W('conta', 5), T.empresa1 - 0.05, { fs: 74, esc: 0.95 });
+        tag('t-emp', 'EMPRESA → EMPRESA', 540, 470, W('empresa', 5), T.ninguem - 0.05, { fs: 74, esc: 0.95 });
+        tag('t-orig', 'ORIGEM: ???', 540, 470, W('ninguém', 5), T.secagem - 0.05, { fs: 74, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        tag('t-sec', '3 · SECAGEM', 540, 290, W('Secagem.', 5), B(6) - 0.2, { fs: 110, cor: '#FFB547' });
+        [['casa', 230, 'imóvel,'], ['carro', 540, 'carro,'], ['predio', 850, 'empresa.']].forEach(([n, x, p]) => {
+          const o = M.naTela(n, x, 560, n === 'predio' ? 0.42 : 0.5, { id: 'ic-' + n });
+          Objetos.naPalavra(tl, o, p === 'empresa.' ? W2('empresa', 5, 2) : W(p, 5)); Objetos.sair(tl, o, B(6) - 0.2);
+        });
+        tag('t-sensor', 'SENSOR', 540, 290, W('sensor.', 6), T.banco6 - 0.05, { fs: 120, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+        const rel = M.naTela('relogio', 210, 300, 0.55, { id: 'rel24', hora: '0:00' });
+        Objetos.naPalavra(tl, rel, W('24', 6)); Objetos.sair(tl, rel, T.proibe - 0.1);
+        tag('t-24', '24 HORAS', 650, 300, W('24', 6), T.coaf - 0.05, { fs: 110 });
+        tag('t-coaf', 'AVISA O COAF', 650, 300, W('Coaf.', 6), T.proibe - 0.1, { fs: 92 });
+        tag('t-2014', '2014', 540, 300, W('2014,', 7), T.invest - 0.05, { fs: 140 });
+        tag('t-dol', 'DOLEIROS', 540, 300, W('doleiros', 7), T.posto - 0.05, { fs: 110 });
+        tag('t-bsb', 'POSTO EM BRASÍLIA', 540, 300, W('Brasília.', 7), T.lavajatos - 0.05, { fs: 92 });
+        tag('t-lj2', 'LAVA JATO', 540, 300, W2('Lava', 7, 1), B(8) - 0.2, { fs: 130, cor: '#7FD4FF' });
+        const gradeTela = M.naTela('grade', 540, 1640, 1.05, { id: 'gradeTela' });
+        Objetos.naPalavra(tl, gradeTela, W('pena:', 8));
+        Objetos.sair(tl, gradeTela, T.mancha - 0.15);
+        tag('t-pena', '3 A 10 ANOS DE PRISÃO', 540, 300, W('três', 8), T.mancha - 0.15, { fs: 84, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+        const notaM = M.naTela('nota', 540, 860, 1.25, { mancha: true, id: 'notaM' });
+        Objetos.naPalavra(tl, notaM, W('mancha,', 8));
+        tl.to(notaM.dentro, { rotation: 360, duration: 1.1, ease: 'power2.inOut' }, T.nenhum);
+        tl.fromTo(notaM.svg, { '--mancha': 1 }, { '--mancha': 1.18, duration: 0.18, yoyo: true, repeat: 5, ease: 'sine.inOut', immediateRender: false }, T.tira);
+        tag('t-fim', 'NÃO SAI.', 540, 1130, W('tira.', 8), null, { fs: 110, cor: '#FF4B3E', corTexto: '#FFFFFF', atraso: 0.25 });
+
+        // ---------- poses (presas às palavras) ----------
+        M.pose(narrador, 'parado', 0, T.nao);
+        M.pose(narrador, 'pensando', T.nao, T.mas);
+        M.pose(narrador, 'parado', T.mas, T.seu);
+        M.pose(narrador, 'apontando', T.seu, T.proibido);
+        M.pose(narrador, 'assustado', T.proibido, T.ja);
+        M.pose(narrador, 'acenando', T.ja, T.prim);
+        M.pose(narrador, 'parado', T.lavar, T.tres);
+        M.pose(narrador, 'apontando', T.tres, T.vivo);
+        M.pose(narrador, 'comemorando', T.vivo, T.centrif);
+        M.pose(narrador, 'assustado', T.centrif, T.ninguem);
+        M.pose(narrador, 'pensando', T.ninguem, T.limpinho);
+        M.pose(narrador, 'comemorando', T.limpinho, T.sensor);
+        M.pose(narrador, 'assustado', T.sensor, T.banco6);
+        M.pose(narrador, 'parado', T.em2014, T.invest);
+        M.pose(narrador, 'assustado', T.invest, T.posto);
+        M.pose(narrador, 'pensando', T.posto, T.lavajatos);
+        M.pose(narrador, 'apontando', T.lavajatos, DUR);
+        M.pose(banqueiro, 'desconfiado', T.banco, T.proibido);
+        M.pose(banqueiro, 'segredo', T.proibido, T.prim);
+        M.pose(banqueiro, 'apontando', T.banco6, T.proibe);
+        M.pose(banqueiro, 'segredo', T.proibe, T.em2014);
+        M.pose(capone, 'desconfiado', T.al, T.jornais);
+        M.pose(capone, 'pensando', T.jornais, T.preso);
+        M.pose(capone, 'assustado', T.preso, T.lavar);
+        M.pose(policial, 'correndo', T.invest, T.invest + 1.1);
+        M.pose(policial, 'apontando', T.invest + 1.1, T.lavajatos);
+        M.pose(policial, 'desconfiado', T.lavajatos, T.pena);
+
+
+        // ---------- cartão final: segue o @_tudoem3d ----------
+        const fimPj = Personagem.criar(document.getElementById('fimPj'), { id: 'fimNarr', visual: 'narrador', x: 540, y: 1250, escala: 1.25 });
+        tl.set('#fimCard', { opacity: 0 }, 0);
+        tl.fromTo('#fimCard', { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out', immediateRender: false }, FIM_FALA);
+        tl.fromTo('#fimCard .raios', { rotation: 0 }, { rotation: 40, duration: DURACAO - FIM_FALA, ease: 'none', immediateRender: false }, FIM_FALA);
+        tl.fromTo('#fimCard .logo', { scale: 0.3 }, { scale: 1, duration: 0.45, ease: 'back.out(2.5)', immediateRender: false }, FIM_FALA + 0.1);
+        tl.fromTo('#fimCard .segue', { y: 400 }, { y: 0, duration: 0.45, ease: 'back.out(1.8)', immediateRender: false }, FIM_FALA + 0.3);
+        Personagem.pose(tl, fimPj, 'acenando', FIM_FALA, DURACAO - FIM_FALA);
+        tl.set('.marca', { opacity: 0 }, FIM_FALA);
+        M.legenda();
+        M.iniciar();
+        window.__timelines = window.__timelines || {};
+        window.__timelines['main'] = tl;
+      })();
+    </script>
+  </body>
+</html>

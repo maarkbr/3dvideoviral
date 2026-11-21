@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+<script src="vendor/gsap/dist/gsap.min.js"></script>
+<script src="personagem.js"></script><script src="personagens-extra.js"></script>
+<script src="objetos.js"></script><script src="objetos-extra.js"></script>
+<style>
+  :root { --ink: #17121d; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Baloo 2", system-ui, sans-serif; background: #000; }
+  .tela { position: relative; overflow: hidden; }
+  .contorno { -webkit-text-stroke: var(--sw, 24px) var(--ink); paint-order: stroke fill; text-shadow: 0 var(--sh, 14px) 0 var(--ink); }
+  /* CAPA 1080x1920 */
+  #capa { width: 1080px; height: 1920px; background: url(arte/fundo-capa.png) center/cover; }
+  #capa::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,60,.55) 0%, rgba(10,20,60,0) 34%, rgba(10,20,60,0) 62%, rgba(10,20,60,.6) 100%); }
+  #capa .t1 { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-weight: 800; font-size: 104px; color: #fff; line-height: 1; }
+  #capa .t2 { position: absolute; left: 0; right: 0; top: 440px; text-align: center; font-weight: 800; font-size: 205px; color: #FFD93D; line-height: .95; --sw: 34px; --sh: 18px; transform: rotate(-3deg); }
+  #capa .selo { position: absolute; left: 445px; top: 1250px; white-space: nowrap; background: #FF4B3E; color: #fff; font-weight: 800; font-size: 54px; padding: 14px 28px 4px; border: 11px solid var(--ink); border-radius: 30px; box-shadow: 0 12px 0 var(--ink); transform: rotate(6deg); --sw: 12px; --sh: 0; }
+  #capa .arroba { position: absolute; left: 0; right: 0; bottom: 330px; text-align: center; font-weight: 800; font-size: 54px; color: #fff; --sw: 12px; --sh: 6px; }
+  #capa .pj, #perfil .pj { position: absolute; }
+  /* PERFIL 1080x1080 */
+  #perfil { width: 1080px; height: 1080px; background: radial-gradient(circle at 50% 42%, #5a98ff 0%, #2350d8 55%, #142c86 100%); }
+  #perfil .raios { position: absolute; left: 50%; top: 42%; width: 2400px; height: 2400px; margin: -1200px 0 0 -1200px; background: repeating-conic-gradient(from 4deg, rgba(255,255,255,.11) 0 9deg, rgba(255,255,255,0) 9deg 18deg); }
+  #perfil .tag { position: absolute; left: 50%; top: 820px; transform: translateX(-50%) rotate(-3deg); white-space: nowrap; background: #FFD93D; color: var(--ink); font-weight: 800; font-size: 92px; line-height: 1; padding: 20px 40px 6px; border: 14px solid var(--ink); border-radius: 40px; box-shadow: 0 16px 0 var(--ink); }
+</style></head>
+<body>
+<div id="capa" class="tela">
+  <div class="t1 contorno">POR QUE SE CHAMA</div>
+  <div class="t2 contorno">LAVA JATO?</div>
+  <div id="capaPj"></div>
+  <div class="selo contorno">NÃO FOI POR ACASO</div>
+  <div class="arroba contorno">@_tudoem3d</div>
+</div>
+<div id="perfil" class="tela">
+  <div class="raios"></div>
+  <div id="perfilPj"></div>
+  <div class="tag">TUDO EM 3D</div>
+</div>
+<script>
+  const modo = location.hash.slice(1) || 'capa';
+  document.getElementById(modo === 'capa' ? 'perfil' : 'capa').style.display = 'none';
+  const tl = gsap.timeline({ paused: true });
+  if (modo === 'capa') {
+    const pj = Personagem.criar(document.getElementById('capaPj'), { id: 'c1', visual: 'narrador', x: 300, y: 1560, escala: 1.15 });
+    Personagem.pose(tl, pj, 'assustado', 0, 5);
+    const nota = Objetos.criar(document.getElementById('capa'), 'nota', { id: 'nc', suja: true });
+    nota.el.style.transform = 'translate(800px, 1060px) scale(.8) rotate(-14deg)'; nota.el.style.zIndex = 3;
+    nota.dentro.style.opacity = 1;
+  } else {
+    const pj = Personagem.criar(document.getElementById('perfilPj'), { id: 'p1', visual: 'narrador', x: 540, y: 1000, escala: 1.12 });
+    Personagem.pose(tl, pj, 'acenando', 0, 5);
+  }
+  tl.seek(0.62);
+  window.pronto = document.fonts.load("800 100px 'Baloo 2'");
+</script>
+</body></html>
