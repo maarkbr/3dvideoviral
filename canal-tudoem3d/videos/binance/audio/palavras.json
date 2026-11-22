@@ -1,0 +1,950 @@
+[
+ {
+  "bloco": 1,
+  "texto": "Um",
+  "inicio": 0.0,
+  "fim": 0.16
+ },
+ {
+  "bloco": 1,
+  "texto": "engenheiro",
+  "inicio": 0.16,
+  "fim": 0.6
+ },
+ {
+  "bloco": 1,
+  "texto": "da",
+  "inicio": 0.6,
+  "fim": 0.76
+ },
+ {
+  "bloco": 1,
+  "texto": "Binance",
+  "inicio": 0.76,
+  "fim": 1.24
+ },
+ {
+  "bloco": 1,
+  "texto": "faz",
+  "inicio": 1.24,
+  "fim": 1.48
+ },
+ {
+  "bloco": 1,
+  "texto": "um",
+  "inicio": 1.48,
+  "fim": 1.68
+ },
+ {
+  "bloco": 1,
+  "texto": "teste",
+  "inicio": 1.68,
+  "fim": 1.94
+ },
+ {
+  "bloco": 1,
+  "texto": "de",
+  "inicio": 1.94,
+  "fim": 2.14
+ },
+ {
+  "bloco": 1,
+  "texto": "emprego",
+  "inicio": 2.14,
+  "fim": 2.44
+ },
+ {
+  "bloco": 1,
+  "texto": "falso",
+  "inicio": 2.44,
+  "fim": 3.02
+ },
+ {
+  "bloco": 1,
+  "texto": "e",
+  "inicio": 3.02,
+  "fim": 3.32
+ },
+ {
+  "bloco": 1,
+  "texto": "abre",
+  "inicio": 3.32,
+  "fim": 3.5
+ },
+ {
+  "bloco": 1,
+  "texto": "a",
+  "inicio": 3.5,
+  "fim": 3.62
+ },
+ {
+  "bloco": 1,
+  "texto": "porta",
+  "inicio": 3.62,
+  "fim": 3.86
+ },
+ {
+  "bloco": 1,
+  "texto": "para",
+  "inicio": 3.86,
+  "fim": 4.06
+ },
+ {
+  "bloco": 1,
+  "texto": "seis",
+  "inicio": 4.06,
+  "fim": 4.54
+ },
+ {
+  "bloco": 1,
+  "texto": "bilhões.",
+  "inicio": 4.54,
+  "fim": 5.08
+ },
+ {
+  "bloco": 2,
+  "texto": "A",
+  "inicio": 5.7,
+  "fim": 5.82
+ },
+ {
+  "bloco": 2,
+  "texto": "maior",
+  "inicio": 5.82,
+  "fim": 6.12
+ },
+ {
+  "bloco": 2,
+  "texto": "corretora",
+  "inicio": 6.12,
+  "fim": 6.64
+ },
+ {
+  "bloco": 2,
+  "texto": "do",
+  "inicio": 6.64,
+  "fim": 6.84
+ },
+ {
+  "bloco": 2,
+  "texto": "mundo",
+  "inicio": 6.84,
+  "fim": 7.18
+ },
+ {
+  "bloco": 2,
+  "texto": "contra",
+  "inicio": 7.18,
+  "fim": 7.54
+ },
+ {
+  "bloco": 2,
+  "texto": "hackers",
+  "inicio": 7.54,
+  "fim": 7.96
+ },
+ {
+  "bloco": 2,
+  "texto": "que",
+  "inicio": 7.96,
+  "fim": 8.22
+ },
+ {
+  "bloco": 2,
+  "texto": "querem",
+  "inicio": 8.22,
+  "fim": 8.44
+ },
+ {
+  "bloco": 2,
+  "texto": "o",
+  "inicio": 8.44,
+  "fim": 8.62
+ },
+ {
+  "bloco": 2,
+  "texto": "cofre",
+  "inicio": 8.62,
+  "fim": 8.94
+ },
+ {
+  "bloco": 2,
+  "texto": "ligado",
+  "inicio": 8.94,
+  "fim": 9.46
+ },
+ {
+  "bloco": 2,
+  "texto": "na",
+  "inicio": 9.46,
+  "fim": 9.62
+ },
+ {
+  "bloco": 2,
+  "texto": "internet.",
+  "inicio": 9.62,
+  "fim": 10.04
+ },
+ {
+  "bloco": 3,
+  "texto": "O",
+  "inicio": 10.6,
+  "fim": 10.68
+ },
+ {
+  "bloco": 3,
+  "texto": "chefe",
+  "inicio": 10.68,
+  "fim": 10.98
+ },
+ {
+  "bloco": 3,
+  "texto": "dos",
+  "inicio": 10.98,
+  "fim": 11.14
+ },
+ {
+  "bloco": 3,
+  "texto": "hackers",
+  "inicio": 11.14,
+  "fim": 11.48
+ },
+ {
+  "bloco": 3,
+  "texto": "monta",
+  "inicio": 11.48,
+  "fim": 11.9
+ },
+ {
+  "bloco": 3,
+  "texto": "uma",
+  "inicio": 11.9,
+  "fim": 12.02
+ },
+ {
+  "bloco": 3,
+  "texto": "empresa",
+  "inicio": 12.02,
+  "fim": 12.24
+ },
+ {
+  "bloco": 3,
+  "texto": "falsa,",
+  "inicio": 12.24,
+  "fim": 12.92
+ },
+ {
+  "bloco": 3,
+  "texto": "com",
+  "inicio": 13.08,
+  "fim": 13.18
+ },
+ {
+  "bloco": 3,
+  "texto": "RH",
+  "inicio": 13.18,
+  "fim": 13.46
+ },
+ {
+  "bloco": 3,
+  "texto": "falso",
+  "inicio": 13.46,
+  "fim": 14.24
+ },
+ {
+  "bloco": 3,
+  "texto": "e",
+  "inicio": 14.24,
+  "fim": 14.48
+ },
+ {
+  "bloco": 3,
+  "texto": "até",
+  "inicio": 14.48,
+  "fim": 14.68
+ },
+ {
+  "bloco": 3,
+  "texto": "CEO",
+  "inicio": 14.68,
+  "fim": 15.14
+ },
+ {
+  "bloco": 3,
+  "texto": "falso.",
+  "inicio": 15.14,
+  "fim": 15.8
+ },
+ {
+  "bloco": 4,
+  "texto": "Um",
+  "inicio": 16.14,
+  "fim": 16.28
+ },
+ {
+  "bloco": 4,
+  "texto": "comparsa",
+  "inicio": 16.28,
+  "fim": 16.66
+ },
+ {
+  "bloco": 4,
+  "texto": "ri:",
+  "inicio": 16.66,
+  "fim": 16.98
+ },
+ {
+  "bloco": 4,
+  "texto": "\"Entrevista",
+  "inicio": 17.76,
+  "fim": 18.36
+ },
+ {
+  "bloco": 4,
+  "texto": "de",
+  "inicio": 18.36,
+  "fim": 18.52
+ },
+ {
+  "bloco": 4,
+  "texto": "emprego?",
+  "inicio": 18.52,
+  "fim": 18.98
+ },
+ {
+  "bloco": 4,
+  "texto": "A",
+  "inicio": 19.3,
+  "fim": 19.44
+ },
+ {
+  "bloco": 4,
+  "texto": "gente",
+  "inicio": 19.44,
+  "fim": 19.58
+ },
+ {
+  "bloco": 4,
+  "texto": "vai",
+  "inicio": 19.58,
+  "fim": 19.74
+ },
+ {
+  "bloco": 4,
+  "texto": "roubar",
+  "inicio": 19.74,
+  "fim": 20.16
+ },
+ {
+  "bloco": 4,
+  "texto": "ou",
+  "inicio": 20.16,
+  "fim": 20.36
+ },
+ {
+  "bloco": 4,
+  "texto": "contratar",
+  "inicio": 20.36,
+  "fim": 20.88
+ },
+ {
+  "bloco": 4,
+  "texto": "estagiário?\"",
+  "inicio": 20.88,
+  "fim": 21.46
+ },
+ {
+  "bloco": 5,
+  "texto": "O",
+  "inicio": 21.94,
+  "fim": 22.06
+ },
+ {
+  "bloco": 5,
+  "texto": "chefe",
+  "inicio": 22.06,
+  "fim": 22.42
+ },
+ {
+  "bloco": 5,
+  "texto": "só",
+  "inicio": 22.42,
+  "fim": 22.7
+ },
+ {
+  "bloco": 5,
+  "texto": "sorri.",
+  "inicio": 22.7,
+  "fim": 23.14
+ },
+ {
+  "bloco": 6,
+  "texto": "Ele",
+  "inicio": 23.64,
+  "fim": 23.82
+ },
+ {
+  "bloco": 6,
+  "texto": "recebe",
+  "inicio": 23.82,
+  "fim": 24.2
+ },
+ {
+  "bloco": 6,
+  "texto": "uma",
+  "inicio": 24.2,
+  "fim": 24.32
+ },
+ {
+  "bloco": 6,
+  "texto": "tarefa",
+  "inicio": 24.32,
+  "fim": 24.66
+ },
+ {
+  "bloco": 6,
+  "texto": "de",
+  "inicio": 24.66,
+  "fim": 24.82
+ },
+ {
+  "bloco": 6,
+  "texto": "casa,",
+  "inicio": 24.82,
+  "fim": 25.16
+ },
+ {
+  "bloco": 6,
+  "texto": "roda",
+  "inicio": 25.58,
+  "fim": 25.78
+ },
+ {
+  "bloco": 6,
+  "texto": "o",
+  "inicio": 25.78,
+  "fim": 25.9
+ },
+ {
+  "bloco": 6,
+  "texto": "código",
+  "inicio": 25.9,
+  "fim": 26.2
+ },
+ {
+  "bloco": 6,
+  "texto": "e",
+  "inicio": 26.2,
+  "fim": 26.56
+ },
+ {
+  "bloco": 6,
+  "texto": "uma",
+  "inicio": 26.56,
+  "fim": 26.7
+ },
+ {
+  "bloco": 6,
+  "texto": "luzinha",
+  "inicio": 26.7,
+  "fim": 27.22
+ },
+ {
+  "bloco": 6,
+  "texto": "acende",
+  "inicio": 27.22,
+  "fim": 27.5
+ },
+ {
+  "bloco": 6,
+  "texto": "escondida.",
+  "inicio": 27.5,
+  "fim": 28.16
+ },
+ {
+  "bloco": 7,
+  "texto": "Por",
+  "inicio": 28.16,
+  "fim": 28.62
+ },
+ {
+  "bloco": 7,
+  "texto": "semanas,",
+  "inicio": 28.62,
+  "fim": 29.14
+ },
+ {
+  "bloco": 7,
+  "texto": "eles",
+  "inicio": 29.14,
+  "fim": 29.48
+ },
+ {
+  "bloco": 7,
+  "texto": "pulam",
+  "inicio": 29.48,
+  "fim": 29.94
+ },
+ {
+  "bloco": 7,
+  "texto": "de",
+  "inicio": 29.94,
+  "fim": 30.06
+ },
+ {
+  "bloco": 7,
+  "texto": "computador",
+  "inicio": 30.06,
+  "fim": 30.64
+ },
+ {
+  "bloco": 7,
+  "texto": "em",
+  "inicio": 30.64,
+  "fim": 30.74
+ },
+ {
+  "bloco": 7,
+  "texto": "computador",
+  "inicio": 30.74,
+  "fim": 31.3
+ },
+ {
+  "bloco": 7,
+  "texto": "até",
+  "inicio": 31.3,
+  "fim": 31.64
+ },
+ {
+  "bloco": 7,
+  "texto": "a",
+  "inicio": 31.64,
+  "fim": 31.8
+ },
+ {
+  "bloco": 7,
+  "texto": "máquina",
+  "inicio": 31.8,
+  "fim": 32.14
+ },
+ {
+  "bloco": 7,
+  "texto": "que",
+  "inicio": 32.14,
+  "fim": 32.32
+ },
+ {
+  "bloco": 7,
+  "texto": "assina",
+  "inicio": 32.32,
+  "fim": 32.6
+ },
+ {
+  "bloco": 7,
+  "texto": "os",
+  "inicio": 32.6,
+  "fim": 32.78
+ },
+ {
+  "bloco": 7,
+  "texto": "saques.",
+  "inicio": 32.78,
+  "fim": 33.1
+ },
+ {
+  "bloco": 8,
+  "texto": "Numa",
+  "inicio": 33.46,
+  "fim": 33.66
+ },
+ {
+  "bloco": 8,
+  "texto": "quinta",
+  "inicio": 33.66,
+  "fim": 33.98
+ },
+ {
+  "bloco": 8,
+  "texto": "à",
+  "inicio": 33.98,
+  "fim": 34.18
+ },
+ {
+  "bloco": 8,
+  "texto": "noite,",
+  "inicio": 33.98,
+  "fim": 34.44
+ },
+ {
+  "bloco": 8,
+  "texto": "em",
+  "inicio": 34.6,
+  "fim": 34.7
+ },
+ {
+  "bloco": 8,
+  "texto": "vinte",
+  "inicio": 34.7,
+  "fim": 35.0
+ },
+ {
+  "bloco": 8,
+  "texto": "minutos,",
+  "inicio": 35.0,
+  "fim": 35.44
+ },
+ {
+  "bloco": 8,
+  "texto": "seis",
+  "inicio": 35.74,
+  "fim": 36.02
+ },
+ {
+  "bloco": 8,
+  "texto": "bilhões",
+  "inicio": 36.02,
+  "fim": 36.62
+ },
+ {
+  "bloco": 8,
+  "texto": "saem",
+  "inicio": 36.62,
+  "fim": 37.08
+ },
+ {
+  "bloco": 8,
+  "texto": "por",
+  "inicio": 37.08,
+  "fim": 37.26
+ },
+ {
+  "bloco": 8,
+  "texto": "dez",
+  "inicio": 37.26,
+  "fim": 37.56
+ },
+ {
+  "bloco": 8,
+  "texto": "blockchains.",
+  "inicio": 37.56,
+  "fim": 38.2
+ },
+ {
+  "bloco": 9,
+  "texto": "No",
+  "inicio": 38.7,
+  "fim": 38.82
+ },
+ {
+  "bloco": 9,
+  "texto": "esconderijo,",
+  "inicio": 38.82,
+  "fim": 39.44
+ },
+ {
+  "bloco": 9,
+  "texto": "o",
+  "inicio": 39.64,
+  "fim": 39.74
+ },
+ {
+  "bloco": 9,
+  "texto": "comparsa",
+  "inicio": 39.74,
+  "fim": 40.1
+ },
+ {
+  "bloco": 9,
+  "texto": "debocha:",
+  "inicio": 40.1,
+  "fim": 40.7
+ },
+ {
+  "bloco": 9,
+  "texto": "\"Relaxa,",
+  "inicio": 41.14,
+  "fim": 41.78
+ },
+ {
+  "bloco": 9,
+  "texto": "ninguém",
+  "inicio": 41.92,
+  "fim": 42.18
+ },
+ {
+  "bloco": 9,
+  "texto": "no",
+  "inicio": 42.18,
+  "fim": 42.48
+ },
+ {
+  "bloco": 9,
+  "texto": "mundo",
+  "inicio": 42.48,
+  "fim": 42.78
+ },
+ {
+  "bloco": 9,
+  "texto": "congela",
+  "inicio": 42.78,
+  "fim": 43.28
+ },
+ {
+  "bloco": 9,
+  "texto": "blockchain.\"",
+  "inicio": 43.28,
+  "fim": 43.7
+ },
+ {
+  "bloco": 10,
+  "texto": "Em",
+  "inicio": 44.28,
+  "fim": 44.46
+ },
+ {
+  "bloco": 10,
+  "texto": "uma",
+  "inicio": 44.46,
+  "fim": 44.64
+ },
+ {
+  "bloco": 10,
+  "texto": "hora,",
+  "inicio": 44.64,
+  "fim": 44.96
+ },
+ {
+  "bloco": 10,
+  "texto": "Tether",
+  "inicio": 45.26,
+  "fim": 45.5
+ },
+ {
+  "bloco": 10,
+  "texto": "e",
+  "inicio": 45.5,
+  "fim": 45.72
+ },
+ {
+  "bloco": 10,
+  "texto": "Circle",
+  "inicio": 45.72,
+  "fim": 46.02
+ },
+ {
+  "bloco": 10,
+  "texto": "congelam",
+  "inicio": 46.02,
+  "fim": 46.58
+ },
+ {
+  "bloco": 10,
+  "texto": "quase",
+  "inicio": 46.58,
+  "fim": 46.84
+ },
+ {
+  "bloco": 10,
+  "texto": "dois",
+  "inicio": 46.84,
+  "fim": 47.24
+ },
+ {
+  "bloco": 10,
+  "texto": "bilhões",
+  "inicio": 47.24,
+  "fim": 47.9
+ },
+ {
+  "bloco": 10,
+  "texto": "em",
+  "inicio": 47.9,
+  "fim": 48.14
+ },
+ {
+  "bloco": 10,
+  "texto": "moedas",
+  "inicio": 48.14,
+  "fim": 48.52
+ },
+ {
+  "bloco": 10,
+  "texto": "digitais.",
+  "inicio": 48.52,
+  "fim": 49.1
+ },
+ {
+  "bloco": 11,
+  "texto": "Veja",
+  "inicio": 49.44,
+  "fim": 49.72
+ },
+ {
+  "bloco": 11,
+  "texto": "só:",
+  "inicio": 49.72,
+  "fim": 49.96
+ },
+ {
+  "bloco": 11,
+  "texto": "eles",
+  "inicio": 50.32,
+  "fim": 50.44
+ },
+ {
+  "bloco": 11,
+  "texto": "nunca",
+  "inicio": 50.44,
+  "fim": 50.9
+ },
+ {
+  "bloco": 11,
+  "texto": "arrombaram",
+  "inicio": 50.9,
+  "fim": 51.38
+ },
+ {
+  "bloco": 11,
+  "texto": "o",
+  "inicio": 51.38,
+  "fim": 51.56
+ },
+ {
+  "bloco": 11,
+  "texto": "cofre,",
+  "inicio": 51.56,
+  "fim": 51.88
+ },
+ {
+  "bloco": 11,
+  "texto": "fizeram",
+  "inicio": 52.04,
+  "fim": 52.44
+ },
+ {
+  "bloco": 11,
+  "texto": "a",
+  "inicio": 52.44,
+  "fim": 52.54
+ },
+ {
+  "bloco": 11,
+  "texto": "Binance",
+  "inicio": 52.54,
+  "fim": 52.94
+ },
+ {
+  "bloco": 11,
+  "texto": "assinar",
+  "inicio": 52.94,
+  "fim": 53.28
+ },
+ {
+  "bloco": 11,
+  "texto": "os",
+  "inicio": 53.28,
+  "fim": 53.48
+ },
+ {
+  "bloco": 11,
+  "texto": "próprios",
+  "inicio": 53.48,
+  "fim": 53.92
+ },
+ {
+  "bloco": 11,
+  "texto": "saques.",
+  "inicio": 53.92,
+  "fim": 54.38
+ },
+ {
+  "bloco": 12,
+  "texto": "No",
+  "inicio": 54.38,
+  "fim": 55.4
+ },
+ {
+  "bloco": 12,
+  "texto": "fim,",
+  "inicio": 55.4,
+  "fim": 55.7
+ },
+ {
+  "bloco": 12,
+  "texto": "dois",
+  "inicio": 55.94,
+  "fim": 56.24
+ },
+ {
+  "bloco": 12,
+  "texto": "bilhões",
+  "inicio": 56.24,
+  "fim": 56.88
+ },
+ {
+  "bloco": 12,
+  "texto": "e",
+  "inicio": 56.88,
+  "fim": 57.0
+ },
+ {
+  "bloco": 12,
+  "texto": "oitocentos",
+  "inicio": 57.0,
+  "fim": 57.62
+ },
+ {
+  "bloco": 12,
+  "texto": "milhões",
+  "inicio": 57.62,
+  "fim": 57.94
+ },
+ {
+  "bloco": 12,
+  "texto": "viram",
+  "inicio": 57.94,
+  "fim": 58.46
+ },
+ {
+  "bloco": 12,
+  "texto": "gelo",
+  "inicio": 58.46,
+  "fim": 58.96
+ },
+ {
+  "bloco": 12,
+  "texto": "na",
+  "inicio": 58.96,
+  "fim": 59.06
+ },
+ {
+  "bloco": 12,
+  "texto": "frente",
+  "inicio": 59.06,
+  "fim": 59.3
+ },
+ {
+  "bloco": 12,
+  "texto": "do",
+  "inicio": 59.3,
+  "fim": 59.48
+ },
+ {
+  "bloco": 12,
+  "texto": "comparsa",
+  "inicio": 59.48,
+  "fim": 59.98
+ },
+ {
+  "bloco": 12,
+  "texto": "que",
+  "inicio": 59.98,
+  "fim": 60.18
+ },
+ {
+  "bloco": 12,
+  "texto": "riu.",
+  "inicio": 60.18,
+  "fim": 60.46
+ }
+]

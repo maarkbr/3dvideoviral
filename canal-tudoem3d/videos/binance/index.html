@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+<script src="vendor/gsap/dist/gsap.min.js"></script>
+<script src="vendor/three/build/three.min.js"></script>
+<script src="vendor/three/examples/js/loaders/GLTFLoader.js"></script>
+<script src="vendor/three/examples/js/environments/RoomEnvironment.js"></script>
+<script src="vendor/three/examples/js/shaders/CopyShader.js"></script>
+<script src="vendor/three/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="vendor/three/examples/js/shaders/BokehShader.js"></script>
+<script src="vendor/three/examples/js/shaders/FXAAShader.js"></script>
+<script src="vendor/three/examples/js/postprocessing/Pass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="vendor/three/examples/js/postprocessing/RenderPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/BokehPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="personagem.js"></script><script src="personagens-extra.js"></script>
+<script src="objetos.js"></script><script src="objetos-extra.js"></script>
+<script src="binance3d.js"></script><script src="montagem.js"></script><script src="audio/palavras.js"></script>
+<style>
+  :root { --ink: #17121d; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "Baloo 2", system-ui, sans-serif; }
+  #root, .clip { position: absolute; inset: 0; overflow: hidden; }
+  #cenaW { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  #tres { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; }
+  #camada2d, #camadaTela, #legendas, #flash { position: absolute; inset: 0; }
+  #camada2d { z-index: 1; } #camadaTela { z-index: 3; } #legendas { z-index: 4; }
+  #flash { z-index: 6; background: #fff; opacity: 0; }
+  .ator { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+  .legenda { position: absolute; left: 40px; right: 40px; top: 1350px; text-align: center; font-weight: 800; font-size: 86px; line-height: 1.04; color: #fff; }
+  .legenda span { display: inline-block; margin: 0 .2em; -webkit-text-stroke: 16px var(--ink); paint-order: stroke fill; text-shadow: 0 8px 0 var(--ink); }
+  .marca { position: absolute; left: 0; right: 0; top: 1515px; text-align: center; z-index: 5; font-weight: 800; font-size: 42px; color: #fff; -webkit-text-stroke: 8px rgba(23,18,29,.6); paint-order: stroke fill; opacity: .5; letter-spacing: 1px; }
+  #fimCard { position: absolute; inset: 0; z-index: 7; opacity: 0; background: radial-gradient(circle at 50% 40%, #4f8dff 0%, #2350d8 55%, #142c86 100%); }
+  #fimCard .raios { position: absolute; left: 50%; top: 40%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.10) 0 9deg, rgba(255,255,255,0) 9deg 18deg); }
+  #fimCard .logo { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-weight: 800; font-size: 150px; line-height: .95; color: #FFD93D; -webkit-text-stroke: 26px var(--ink); paint-order: stroke fill; text-shadow: 0 14px 0 var(--ink); }
+  #fimCard .logo small { display: block; font-size: 96px; color: #fff; }
+  #fimCard .segue { position: absolute; left: 90px; right: 90px; top: 1330px; text-align: center; font-weight: 800; font-size: 80px; color: #17121d; background: #FFD93D; border: 12px solid #17121d; border-radius: 40px; padding: 18px 10px 8px; box-shadow: 0 16px 0 #17121d; }
+  #fimPj { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="63.8" data-width="1080" data-height="1920">
+  <div class="clip">
+    <div id="cenaW"><canvas id="tres" width="1080" height="1920"></canvas><div id="camada2d"></div></div>
+    <div id="camadaTela"></div><div id="legendas"></div>
+    <div class="marca">@_tudoem3d</div>
+    <div id="fimCard"><div class="raios"></div><div class="logo"><small>TUDO EM</small>3D</div><div id="fimPj"></div><div class="segue">Segue o @_tudoem3d</div></div>
+    <div id="flash"></div>
+  </div>
+  <audio id="som" src="audio/mix.wav" data-start="0" data-duration="63.8" data-track-index="1"></audio>
+</div>
+<script>
+(function () {
+  const DUR = 63.8, FIM_FALA = 62.3;
+  const tl = gsap.timeline({ paused: true });
+  const M = Montagem.criar({ tl, dur: DUR, fala: window.PALAVRAS, cenario: Binance3D, canvas: '#tres', camada2d: '#camada2d', camadaTela: '#camadaTela', legendas: '#legendas',
+    filtro: () => `brightness(${cena.luz2d ? cena.luz2d(cena.t) : 1}) saturate(1.05) drop-shadow(-6px 2px 0 rgba(255,214,160,.35))` });
+  const { t, W, B, THREE, cena } = M;
+  const P = cena.P, Z = Binance3D.Z, suave = M.suave, lerp = M.lerp;
+  const Wn = (txt, bl, n) => window.PALAVRAS.filter((p) => p.bloco === bl && p.texto.toLowerCase().replace(/[^a-zà-ú0-9]/g, '') === txt)[n];
+  const T = {
+    b1: 0, seis1: t('seis', 1), abre: t('abre', 1),
+    b2: B(2), hackers2: t('hackers', 2), cofre2: t('cofre', 2),
+    b3: B(3), falsa: t('falsa,', 3), rh: t('RH', 3), ceo: t('CEO', 3),
+    b4: B(4), ri: t('ri:', 4), emprego4: t('emprego?', 4), estag: t('estagiário?"', 4),
+    b5: B(5), sorri: t('sorri.', 5),
+    b6: B(6), tarefa: t('tarefa', 6), roda: t('roda', 6), luzinha: t('luzinha', 6),
+    b7: B(7), comp: t('computador', 7), maquina: t('máquina', 7), assina: t('assina', 7),
+    b8: B(8), vinte: t('vinte', 8), seis8: t('seis', 8), dez: t('dez', 8),
+    b9: B(9), comparsa9: t('comparsa', 9), relaxa: t('"Relaxa,', 9), congela: t('congela', 9),
+    b10: B(10), tether: t('Tether', 10), congelam: t('congelam', 10), circle: t('Circle', 10),
+    b11: B(11), arrombaram: t('arrombaram', 11), cofre11: t('cofre,', 11), assinar: t('assinar', 11),
+    b12: B(12), dois12: t('dois', 12), gelo: t('gelo', 12), riu: t('riu.', 12),
+  };
+  const zA = Z.APTO, zC = Z.CIDADE, zE = Z.ESCONDE, zD = Z.DIGITAL, zK = Z.COFRE, zS = Z.ESTUDIO;
+  const palco = (tt) => tt < T.b2 ? 'A' : tt < T.b3 ? 'C' : tt < T.b6 ? 'E' : tt < T.b7 ? 'A' : tt < T.b8 ? 'D' : tt < T.b9 ? 'K' : tt < T.b10 ? 'E' : tt < T.b11 ? 'K' : tt < T.b12 ? 'S' : 'E';
+
+  // ---------- câmera: chaves e cortes internos ----------
+  const ch = [];
+  const K = (tt, pos, alvo, fov = 40, foco = 4, roll = 0) => ch.push([tt, pos, alvo, fov, foco, roll]);
+  const C = (tt, pos, alvo, fov = 40, foco = 4, roll = 0) => { ch.push([tt - 0.001, null]); K(tt, pos, alvo, fov, foco, roll); };
+  // 1 apartamento
+  K(0, [0.25, 1.45, zA + 1.0], [0.05, 1.32, zA - 1.3], 32, 2.2);
+  K(1.6, [0.15, 1.42, zA + 0.7], [0.0, 1.35, zA - 1.3], 30, 1.9);
+  C(1.75, [1.8, 1.75, zA + 2.8], [-1.0, 1.3, zA - 3.5], 46, 4.5);
+  K(T.abre + 0.25, [1.6, 1.7, zA + 2.5], [-1.4, 1.3, zA - 3.6], 44, 4.6);
+  C(T.abre + 0.3, [0.3, 1.4, zA + 0.4], [-2.0, 1.25, zA - 4.0], 38, 4.9);
+  K(T.b2 - 0.05, [-0.4, 1.35, zA - 0.4], [-2.0, 1.25, zA - 4.0], 30, 4.0);
+  // 2 cidade
+  C(T.b2, [0, 24, zC + 100], [0, 42, zC - 10], 50, 100);
+  K(T.hackers2 - 0.05, [0, 34, zC + 72], [0, 50, zC - 10], 48, 80);
+  C(T.hackers2, [-10.4, 19.7, zC + 26.5], [-10.2, 19.2, zC + 20.5], 40, 6);
+  K(T.cofre2 - 0.05, [-10.3, 19.8, zC + 25.8], [-10.2, 19.2, zC + 20.5], 38, 5.4);
+  C(T.cofre2, [-12, 66, zC + 24], [0, 59, zC - 10], 42, 36);
+  K(T.b3 - 0.05, [-7, 65, zC + 16], [0, 59.5, zC - 10], 38, 28);
+  // 3 esconderijo: o plano
+  C(T.b3, [0.6, 1.6, zE + 3.4], [0.25, 1.3, zE - 1.4], 40, 4.6);
+  K(T.falsa, [0.45, 1.55, zE + 2.6], [0.25, 1.3, zE - 1.4], 36, 3.9);
+  C(T.rh - 0.05, [-2.0, 1.8, zE + 0.8], [-4.2, 2.0, zE - 4.3], 42, 5.4);
+  K(T.ceo - 0.1, [-1.4, 1.8, zE + 0.6], [-3.4, 1.9, zE - 4.3], 40, 5.2);
+  C(T.ceo, [2.6, 1.6, zE + 2.2], [2.45, 1.4, zE - 1.4], 38, 3.5);
+  K(T.b4 - 0.05, [2.55, 1.6, zE + 1.7], [2.45, 1.4, zE - 1.4], 34, 3.0);
+  // 4 comparsa ri
+  C(T.b4, [-1.3, 1.45, zE + 2.4], [-1.6, 1.2, zE - 1.0], 40, 3.3);
+  K(T.emprego4, [-1.4, 1.5, zE + 1.7], [-1.6, 1.25, zE - 1.0], 36, 2.6);
+  C(T.emprego4 + 0.6, [-1.5, 1.65, zE + 1.0], [-1.6, 1.4, zE - 1.0], 32, 1.9);
+  C(T.estag, [-1.2, 1.2, zE + 2.6], [-1.6, 0.8, zE - 1.0], 42, 3.6, 0.05);
+  K(T.b5 - 0.05, [-1.2, 1.15, zE + 2.4], [-1.6, 0.7, zE - 1.0], 42, 3.4, 0.05);
+  // 5 o chefe só sorri
+  C(T.b5, [2.45, 1.08, zE + 0.4], [2.45, 1.0, zE - 1.4], 32, 1.75);
+  K(T.b6 - 0.05, [2.45, 1.06, zE + 0.15], [2.45, 1.0, zE - 1.4], 30, 1.55);
+  // 6 apartamento: a tarefa
+  C(T.b6, [0.9, 1.7, zA + 1.6], [0.0, 1.2, zA - 1.2], 40, 3.0);
+  K(T.roda - 0.05, [0.7, 1.6, zA + 1.2], [0.1, 1.2, zA - 1.0], 36, 2.4);
+  C(T.roda, [0.55, 1.35, zA + 0.15], [0.15, 1.2, zA - 0.85], 34, 1.1);
+  C(T.luzinha, [0.75, 1.95, zA + 0.7], [0.3, 1.2, zA - 0.75], 36, 1.4);
+  K(T.b7 - 0.05, [0.62, 1.8, zA + 0.35], [0.36, 1.15, zA - 0.6], 30, 1.1);
+  // 7 labirinto digital
+  C(T.b7, [0, 13, zD + 8], [0, 0, zD - 8], 48, 14);
+  K(T.comp, [-2, 9, zD + 2], [0, 2, zD - 10], 46, 11);
+  C(T.comp + 1.2, [3.5, 5.5, zD - 9], [0, 3, zD - 16], 44, 7);
+  C(T.maquina, [2, 4.5, zD - 6], [0, 3.6, zD - 21], 46, 15);
+  K(T.b8 - 0.05, [1, 4.2, zD - 9], [0, 3.8, zD - 21], 44, 12);
+  // 8 o cofre e os canos
+  C(T.b8, [0, 2.2, zK + 14], [0, 8, zK - 7], 50, 21);
+  K(T.seis8 - 0.05, [2, 3, zK + 11], [0, 9, zK - 7], 48, 18);
+  C(T.seis8, [26, 30, zK + 30], [0, 16, zK - 12], 52, 45);
+  C(T.dez, [-30, 20, zK + 10], [0, 22, zK - 12], 54, 40, -0.04);
+  K(T.b9 - 0.05, [-34, 24, zK + 4], [0, 22, zK - 12], 54, 40, 0.03);
+  // 9 esconderijo: o deboche
+  C(T.b9, [1.6, 1.7, zE + 3.6], [-0.1, 1.05, zE + 0.2], 42, 3.7);
+  K(T.relaxa - 0.05, [0.4, 1.7, zE + 3.8], [-0.2, 1.05, zE + 0.2], 42, 3.6);
+  C(T.relaxa, [-0.3, 1.55, zE + 1.9], [-0.4, 1.35, zE + 0.6], 34, 1.4);
+  C(T.congela, [0.6, 1.3, zE + 2.6], [-0.4, 1.15, zE + 0.6], 40, 2.2, -0.06);
+  K(T.b10 - 0.05, [0.4, 1.3, zE + 2.2], [-0.4, 1.15, zE + 0.6], 36, 1.8, -0.06);
+  // 10 o congelamento
+  C(T.b10, [30, 36, zK + 34], [0, 18, zK - 12], 52, 50);
+  K(T.congelam - 0.05, [24, 32, zK + 28], [0, 18, zK - 12], 50, 44);
+  C(T.congelam, P.canos[2].cur.getPoint(0.42).clone().add(new THREE.Vector3(9, 4, 12 + zK)).toArray(), P.canos[2].cur.getPoint(0.42).clone().add(new THREE.Vector3(0, 0, zK)).toArray(), 42, 15);
+  C(T.congelam + 1.8, P.canos[7].cur.getPoint(0.42).clone().add(new THREE.Vector3(-9, 4, 12 + zK)).toArray(), P.canos[7].cur.getPoint(0.42).clone().add(new THREE.Vector3(0, 0, zK)).toArray(), 42, 15);
+  K(T.b11 - 0.05, P.canos[7].cur.getPoint(0.42).clone().add(new THREE.Vector3(-7, 3, 9 + zK)).toArray(), P.canos[7].cur.getPoint(0.42).clone().add(new THREE.Vector3(0, 0, zK)).toArray(), 40, 11.5);
+  // 11 estúdio da revelação
+  C(T.b11, [-0.5, 2.4, zS + 6.5], [-2.6, 2.7, zS - 4.3], 42, 11);
+  K(T.arrombaram, [-1.2, 2.6, zS + 4.0], [-2.6, 2.7, zS - 4.3], 40, 8.5);
+  C(T.cofre11, [-2.6, 2.8, zS + 0.2], [-2.6, 2.7, zS - 4.3], 36, 4.5);
+  C(T.assinar - 0.4, [1.4, 2.4, zS + 3.0], [2.8, 2.0, zS - 3.6], 42, 7);
+  K(T.b12 - 0.05, [1.8, 2.3, zS + 2.4], [2.8, 2.1, zS - 3.6], 38, 6.2);
+  // 12 o fecho: vira gelo
+  C(T.b12, [-0.2, 1.55, zE + 2.0], [-0.4, 1.35, zE + 0.6], 34, 1.5);
+  K(T.dois12, [0.1, 1.7, zE + 3.2], [-0.2, 1.2, zE + 0.2], 40, 3.0);
+  C(T.gelo, [-0.3, 1.5, zE + 2.5], [-0.4, 1.3, zE + 0.6], 38, 2.0);
+  K(FIM_FALA, [-0.3, 1.6, zE + 3.6], [-0.4, 1.3, zE + 0.6], 42, 3.1);
+  K(DUR, [-0.3, 1.6, zE + 3.8], [-0.4, 1.3, zE + 0.6], 42, 3.3);
+  const lerp3 = (a, b, e) => [lerp(a[0], b[0], e), lerp(a[1], b[1], e), lerp(a[2], b[2], e)];
+  const eio = (x) => (x < 0 ? 0 : x > 1 ? 1 : x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+  const chaveEm = (tt) => { let i = 0; while (i < ch.length - 2 && tt >= ch[i + 1][0]) i++; let a = ch[i], b = ch[i + 1]; if (!a[1]) a = b; if (!b[1]) b = a; return [a, b, eio((tt - a[0]) / Math.max(0.001, b[0] - a[0]))]; };
+  const tremidas = [[T.abre + 0.3, 0.4], [T.estag, 0.5], [T.seis8, 0.6], [T.dez, 0.6], [T.congelam, 0.5], [T.gelo, 0.4]];
+  cena.cam.quadro = (tt) => {
+    const [a, b, e] = chaveEm(tt);
+    const pos = lerp3(a[1], b[1], e), alvo = lerp3(a[2], b[2], e);
+    pos[0] += Math.sin(tt * 0.9) * 0.012; pos[1] += Math.sin(tt * 0.7) * 0.01;
+    let tr = 0; tremidas.forEach(([t0, d]) => { if (tt >= t0 && tt < t0 + d) tr += 1 - (tt - t0) / d; });
+    const k = palco(tt) === 'K' || palco(tt) === 'C' ? 0.35 : 0.04;
+    pos[0] += Math.sin(tt * 61) * k * tr; pos[1] += Math.cos(tt * 53) * k * tr;
+    return { pos, alvo, fov: lerp(a[3], b[3], e), roll: lerp(a[5] || 0, b[5] || 0, e) };
+  };
+  cena.foco = (tt) => { const [a, b, e] = chaveEm(tt); return lerp(a[4], b[4], e); };
+  // cortes de lugar: desfoque + clarão
+  gsap.set('#cenaW', { filter: 'blur(0px)', scale: 1 }); tl.set('#flash', { opacity: 0 }, 0);
+  [T.b2, T.b3, T.b6, T.b7, T.b8, T.b9, T.b10, T.b11, T.b12].forEach((tc) => {
+    tl.fromTo('#cenaW', { filter: 'blur(14px)', scale: 1.06 }, { filter: 'blur(0px)', scale: 1, duration: 0.28, ease: 'power2.out', immediateRender: false }, tc);
+    tl.fromTo('#flash', { opacity: 0.25 }, { opacity: 0, duration: 0.2, immediateRender: false }, tc);
+  });
+  tl.fromTo('#flash', { opacity: 0.0 }, { opacity: 0.55, duration: 0.08, yoyo: true, repeat: 1, immediateRender: false }, T.ceo);
+  tl.fromTo('#flash', { opacity: 0.0 }, { opacity: 0.6, duration: 0.1, yoyo: true, repeat: 1, immediateRender: false }, T.congelam);
+
+  // ---------- luz e cor por lugar (roteiro de cor) ----------
+  const LUZ = {
+    A: { sol: 0.12, corSol: '#8fa8ff', hemi: 0.35, corHemi: '#6a7ab0', ceu: '#0c1030', nevoa: '#0c1030', exp: 1.15, nuvens: 0 },
+    C: { sol: 1.8, corSol: '#ff9a5a', hemi: 0.7, corHemi: '#ffa0b8', ceu: '#ff9a7a', nevoa: '#d07a90', exp: 1.0, nuvens: 0.85, near: 80, far: 380 },
+    E: { sol: 0, corSol: '#ffffff', hemi: 0.22, corHemi: '#7a60b0', ceu: '#000000', nevoa: '#100c18', exp: 1.2, nuvens: 0, near: 30, far: 120 },
+    D: { sol: 0, corSol: '#ffffff', hemi: 0.3, corHemi: '#3050ff', ceu: '#020414', nevoa: '#020414', exp: 1.25, nuvens: 0, near: 20, far: 70 },
+    K: { sol: 0.35, corSol: '#7a8aff', hemi: 0.35, corHemi: '#5a6aa0', ceu: '#141444', nevoa: '#141444', exp: 1.1, nuvens: 0.15, near: 60, far: 300 },
+    KF: { sol: 1.0, corSol: '#cfe6ff', hemi: 0.75, corHemi: '#bfe0ff', ceu: '#7aa0d0', nevoa: '#9ab8d8', exp: 1.05, nuvens: 0.5, near: 50, far: 260 },
+    S: { sol: 2.2, corSol: '#ffffff', hemi: 1.0, corHemi: '#ffffff', ceu: '#dfe3ee', nevoa: '#dfe3ee', exp: 1.0, nuvens: 0, near: 60, far: 300 },
+    EF: { sol: 0, corSol: '#ffffff', hemi: 0.6, corHemi: '#9fd0ff', ceu: '#000000', nevoa: '#0c1830', exp: 1.15, nuvens: 0, near: 30, far: 120 },
+  };
+  cena.luz = (tt) => { let p = palco(tt); if (p === 'K' && tt >= T.b10) p = 'KF'; if (p === 'E' && tt >= T.dois12) p = 'EF'; return LUZ[p]; };
+  cena.luz2d = (tt) => ({ A: 0.85, C: 0.95, E: 0.9, D: 1, K: 0.9, S: 1 })[palco(tt)] || 1;
+
+  // ---------- animação das peças 3D ----------
+  const luzinha = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color('#ff2a1a').multiplyScalar(4), toneMapped: false }));
+  luzinha.position.set(0.45, 1.14, zA - 0.8); cena.scene.add(luzinha);
+  const haloL = new THREE.PointLight('#ff2a1a', 0, 2.0, 2); haloL.position.copy(luzinha.position); cena.scene.add(haloL);
+  P.rastro.visible = false;
+  const linhaPts = new Float32Array(3 * 64); const geoLinha = new THREE.BufferGeometry(); geoLinha.setAttribute('position', new THREE.BufferAttribute(linhaPts, 3));
+  const linhaR = new THREE.Line(geoLinha, new THREE.LineBasicMaterial({ color: new THREE.Color('#ff3b2a').multiplyScalar(3), toneMapped: false })); linhaR.frustumCulled = false; cena.scene.add(linhaR);
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), eu = new THREE.Euler(), sc = new THREE.Vector3(1, 1, 1), vv = new THREE.Vector3();
+  const geloCor = new THREE.Color('#cdeeff'), geloEm = new THREE.Color('#5ab8ff'), ouroCor = new THREE.Color('#ffcf3d'), ouroEm = new THREE.Color('#5a3a00');
+  M.aCadaQuadro((tt) => {
+    // porta do cofre do apartamento abre em "abre"
+    const ab = suave((tt - T.abre) / 1.2);
+    P.portaApto.dob.rotation.y = -1.7 * ab; P.portaApto.roda.rotation.z = tt > T.abre - 0.5 ? (Math.min(tt, T.abre + 0.5) - T.abre + 0.5) * 4 : 0;
+    P.brilhoCofreApto.material.opacity = ab; P.luzCofreApto.intensity = 26 * ab;
+    // luzinha vermelha
+    const on = tt >= T.luzinha && palco(tt) === 'A'; luzinha.visible = false; haloL.intensity = on ? 3 + Math.sin(tt * 9) * 1.5 : 0;
+    // ponto vermelho pulando de computador em computador
+    const sal = P.saltos, t0 = T.b7 + 0.3, t1 = T.assina, f = Math.min(0.9999, Math.max(0, (tt - t0) / (t1 - t0))) * (sal.length - 1);
+    const i0 = Math.floor(f), fr = f - i0, a = sal[i0], b = sal[Math.min(i0 + 1, sal.length - 1)];
+    P.ponto.position.set(lerp(a.x, b.x, fr), lerp(a.y, b.y, fr) + Math.sin(Math.PI * fr) * 2.2, lerp(a.z, b.z, fr));
+    const npts = Math.min(64, Math.floor(f * 10) + 1); for (let k = 0; k < 64; k++) { const ff = Math.min(f, k / 10), j = Math.floor(ff), r = ff - j, A = sal[j], Bp = sal[Math.min(j + 1, sal.length - 1)]; linhaPts[k * 3] = lerp(A.x, Bp.x, r); linhaPts[k * 3 + 1] = lerp(A.y, Bp.y, r) + Math.sin(Math.PI * r) * 2.2; linhaPts[k * 3 + 2] = lerp(A.z, Bp.z, r) + zD; }
+    geoLinha.setDrawRange(0, npts); geoLinha.attributes.position.needsUpdate = true; linhaR.visible = palco(tt) === 'D';
+    // carimbos das máquinas
+    const carimba = (m, ini) => { const k = tt > ini ? Math.abs(Math.sin((tt - ini) * 6)) : 0; m.braco.position.y = 2.8 - k * 0.55; };
+    carimba(P.maqDig, T.assina); carimba(P.maqEst, T.assinar - 0.4);
+    P.papeis.forEach((p, i) => { const ti = T.assinar - 0.2 + i * 0.22, k = tt - ti; p.visible = k > 0 && palco(tt) === 'S'; if (!p.visible) return; p.position.set(2.8 + 0.6 + k * 2.2, 1.9 + k * 1.6 - k * k * 0.9, zS - 3.0 + k * 1.2); p.rotation.set(k * 3, k * 2 + i, k); });
+    // relógio do roubo e canos de moedas
+    const dren = tt >= T.b8 && tt < T.b11; const rel = Math.min(20, Math.max(0, (tt - T.b8) / (T.b9 - T.b8) * 20));
+    P.relogio(String(Math.floor(rel)).padStart(2, '0') + ':' + String(Math.floor((rel % 1) * 60)).padStart(2, '0'));
+    P.luzOuro5.intensity = dren ? 40 : 0;
+    P.canos.forEach((c, ci) => {
+      const congela = (ci === 2 || ci === 7) && tt >= T.congelam + (ci === 7 ? 1.8 : 0);
+      const kg = congela ? suave((tt - T.congelam - (ci === 7 ? 1.8 : 0)) / 0.9) : 0;
+      c.mat.color.set('#ffd27a').lerp(geloCor, kg); c.mat.emissive.set('#ffb02e').lerp(geloEm, kg); c.mat.opacity = 0.45 + 0.4 * kg;
+      c.mo.material.color.copy(ouroCor).lerp(geloCor, kg); c.mo.material.emissive.copy(ouroEm).lerp(geloEm, kg);
+      c.mo.visible = dren;
+      if (!dren) return;
+      const vel = congela ? 0.35 * (1 - kg) : 0.35;
+      c.fluxo = (c.fluxo || 0); const u0 = c.fase + (tt - T.b8) * vel * (congela ? 1 : 1);
+      for (let i = 0; i < c.Nm; i++) { const u = ((congela ? c.fase + (T.congelam - T.b8) * 0.35 : u0) + i / c.Nm) % 1; const p = c.cur.getPoint(u); eu.set(tt * 4 + i, i, 0); q.setFromEuler(eu); m4.compose(vv.copy(p).divideScalar(2.4), q, sc); c.mo.setMatrixAt(i, m4); }
+      c.mo.instanceMatrix.needsUpdate = true;
+    });
+    P.neve(tt, tt >= T.congelam && palco(tt) === 'K');
+    // moedas do esconderijo: crescem na cena 9; viram gelo na 12
+    let km = 0; if (tt >= T.b9 && tt < T.b10) km = suave((tt - T.b9) / 1.4); if (tt >= T.b12) km = 1;
+    P.moedasEsc.count = Math.floor(km * P.moedasEscN); P.moedasEsc.visible = km > 0;
+    const kg2 = tt >= T.b12 ? suave((tt - T.dois12) / 1.6) : 0;
+    P.moedasEsc.material.color.copy(ouroCor).lerp(geloCor, kg2); P.moedasEsc.material.emissive.copy(ouroEm).lerp(geloEm, kg2);
+    P.geloEsc.forEach((g, i) => { const k = tt >= T.b12 ? suave((tt - T.dois12 - 0.3 - i * 0.15) / 0.5) : 0; g.visible = k > 0.01; g.scale.setScalar(Math.max(0.01, k)); });
+  });
+
+  // ---------- personagens ----------
+  const LONGE = [0, -120, -900];
+  const jan = (lista) => (tt) => { for (const [a, b, f] of lista) if (tt >= a && tt < b) return typeof f === 'function' ? f(tt) : f; return LONGE; };
+  const vis = (pj, lista) => { gsap.set(pj.el, { opacity: 0 }); tl.set(pj.el, { opacity: 0 }, 0); lista.forEach(([a, b]) => { tl.set(pj.el, { opacity: 1 }, a); tl.set(pj.el, { opacity: 0 }, b); }); };
+  const ator = (id, v, e, lista) => { const pj = M.ator(id, v, e, jan(lista)); vis(pj, lista); return pj; };
+  const eng = ator('eng', 'engenheiro', 1.0, [[0, T.b2, [0.0, 0, zA - 1.3]], [T.b6, T.b7, [0.0, 0, zA - 1.3]]]);
+  const chefe = ator('chefe', 'chefe', 1.05, [[T.hackers2, T.cofre2, [-10.7, 18.5, zC + 21.0]], [T.b3, T.ceo, (tt) => (tt < T.rh - 0.05 ? [0.25, 0, zE - 1.4] : [-3.0, 0, zE - 3.0])]]);
+  const ceo = ator('ceo', 'chefeCeo', 1.05, [[T.ceo, T.b4, [2.45, 0, zE - 1.4]], [T.b5, T.b6, [2.45, 0, zE - 1.4]]]);
+  const comp = ator('comp', 'comparsa', 1.0, [[T.hackers2, T.cofre2, [-9.6, 18.5, zC + 21.4]], [T.b4, T.b5, [-1.6, 0, zE - 1.0]], [T.b9, T.b10, [-0.4, 0, zE + 0.6]], [T.b12, DUR, [-0.4, 0, zE + 0.6]]]);
+  M.pose(eng, 'pensando', 0, T.abre); M.pose(eng, 'assustado', T.abre, T.b2);
+  M.pose(eng, 'parado', T.b6, T.roda); M.pose(eng, 'apontando', T.roda, T.luzinha); M.pose(eng, 'parado', T.luzinha, T.b7);
+  M.pose(chefe, 'convencido', T.hackers2, T.cofre2); M.pose(comp, 'apontando', T.hackers2, T.cofre2);
+  M.pose(chefe, 'desconfiado', T.b3, T.rh); M.pose(chefe, 'apontando', T.rh, T.ceo);
+  M.pose(ceo, 'acenando', T.ceo, T.b4); M.pose(ceo, 'sorriso', T.b5, T.b6);
+  M.pose(comp, 'rindo', T.b4, T.estag); M.pose(comp, 'assustado', T.estag, T.b5);
+  tl.to(comp.el, { rotation: 28, y: 60, duration: 0.25, ease: 'power2.in' }, T.estag + 0.15); tl.set(comp.el, { rotation: 0, y: 0 }, T.b5);
+  M.pose(comp, 'convencido', T.b9, T.relaxa); M.pose(comp, 'desconfiado', T.relaxa, T.b10);
+  M.pose(comp, 'rindo', T.b12, T.gelo); M.pose(comp, 'parado', T.gelo, DUR);
+  // congela a pose: trava o personagem no meio da risada
+  tl.to(comp.el, { '--happy': 1, '--ms': 1.1, duration: 0.05 }, T.gelo + 0.3);
+  tl.set(comp.el, { filter: 'hue-rotate(160deg) saturate(.5) brightness(1.15)' }, T.gelo + 0.2);
+  tl.set(comp.el, { filter: 'none' }, 0);
+
+  // ---------- objetos 2D ----------
+  const pizza = M.objeto('pizza', -1.25, 1.05, zE - 0.95, { id: 'pizza' }); Objetos.naPalavra(tl, pizza, W('ri:', 4)); Objetos.sair(tl, pizza, T.b5 - 0.1);
+  const gelo = M.objeto('gelo', -0.4, 0, zE + 0.68, { id: 'gelo', sombraL: 0.6, sombraP: 0.3 }); Objetos.naPalavra(tl, gelo, W('gelo', 12));
+  const luzV = M.objeto('luzVermelha', 0.42, 1.16, zA - 0.5, { id: 'luzV' }); Objetos.naPalavra(tl, luzV, W('luzinha', 6)); Objetos.sair(tl, luzV, T.b7 - 0.02);
+  tl.to(luzV.dentro, { scale: 1.35, duration: 0.25, yoyo: true, repeat: 5, ease: 'sine.inOut' }, T.luzinha + 0.3);
+  const email = M.naTela('email', 540, 760, 0.95, { id: 'email' }); Objetos.naPalavra(tl, email, W('tarefa', 6)); Objetos.sair(tl, email, T.roda + 0.2);
+  tl.to(email.dentro, { scale: 0.9, duration: 0.08, yoyo: true, repeat: 1 }, T.roda);
+  const tag = (id, txt, x, y, pal, ate, op = {}) => { const o = M.naTela('etiqueta', x, y, op.esc || 1, Object.assign({ texto: txt, id }, op)); Objetos.naPalavra(tl, o, pal, { atraso: op.atraso || 0 }); if (ate) Objetos.sair(tl, o, ate); return o; };
+  tag('t1', 'US$ 6,34 BI', 540, 300, W('seis', 1), T.b2 - 0.1, { fs: 120 });
+  tag('t2', 'HOT WALLET: O COFRE ONLINE', 540, 300, W('cofre', 2), T.b3 - 0.1, { fs: 74 });
+  tag('t3', 'EMPRESA FALSA', 540, 300, W('falsa,', 3), T.ceo - 0.05, { fs: 104, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+  tag('t4', 'CEO FALSO', 540, 300, W('CEO', 3), T.b4 - 0.1, { fs: 120, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+  tag('t5', 'CÓDIGO MALICIOSO', 540, 300, W('luzinha', 6), T.b7 - 0.1, { fs: 92, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+  tag('t6', 'O SERVIÇO QUE ASSINA OS SAQUES', 540, 300, W('assina', 7), T.b8 - 0.1, { fs: 62 });
+  tag('t7', '20 MINUTOS', 540, 300, W('vinte', 8), T.b9 - 0.1, { fs: 120 });
+  tag('t8', '10 BLOCKCHAINS', 540, 470, W('dez', 8), T.b9 - 0.1, { fs: 92, cor: '#7FD4FF' });
+  tag('t9', 'QUASE US$ 1,8 BI CONGELADOS', 540, 300, W('congelam', 10), T.b11 - 0.1, { fs: 70, cor: '#BFE6FF' });
+  tag('t10', 'NINGUÉM ARROMBOU O COFRE', 540, 300, W('arrombaram', 11), T.b12 - 0.1, { fs: 76 });
+  tag('t10b', 'SEGUNDO O RELATÓRIO DA BINANCE', 540, 450, W('Veja', 11), T.b12 - 0.1, { fs: 50, cor: '#FFFFFF' });
+  tag('t11', 'US$ 2,85 BI CONGELADOS OU INTERCEPTADOS', 540, 300, W('dois', 12), null, { fs: 52, cor: '#BFE6FF' });
+
+  // ---------- cartão final ----------
+  const fimPj = Personagem.criar(document.getElementById('fimPj'), { id: 'fimMasc', visual: 'mascote', x: 540, y: 1250, escala: 1.25 });
+  tl.set('#fimCard', { opacity: 0 }, 0);
+  tl.fromTo('#fimCard', { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'power3.out', immediateRender: false }, FIM_FALA);
+  tl.fromTo('#fimCard .raios', { rotation: 0 }, { rotation: 30, duration: DUR - FIM_FALA, ease: 'none', immediateRender: false }, FIM_FALA);
+  tl.fromTo('#fimCard .logo', { scale: 0.3 }, { scale: 1, duration: 0.4, ease: 'back.out(2.5)', immediateRender: false }, FIM_FALA + 0.05);
+  tl.fromTo('#fimCard .segue', { y: 400 }, { y: 0, duration: 0.4, ease: 'back.out(1.8)', immediateRender: false }, FIM_FALA + 0.15);
+  Personagem.pose(tl, fimPj, 'acenando', FIM_FALA, DUR - FIM_FALA);
+  tl.set('.marca', { opacity: 0 }, FIM_FALA);
+
+  M.legenda({ max: 2, corDestaque: '#FFFFFF' });
+  window.__pronto = cena.pronto;
+  M.iniciar();
+})();
+</script>
+</body>
+</html>

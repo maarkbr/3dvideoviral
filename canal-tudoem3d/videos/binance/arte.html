@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+<script src="vendor/gsap/dist/gsap.min.js"></script>
+<script src="personagem.js"></script><script src="personagens-extra.js"></script>
+<script src="objetos.js"></script><script src="objetos-extra.js"></script>
+<style>
+  :root { --ink: #17121d; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Baloo 2", system-ui, sans-serif; background: #000; }
+  .k { -webkit-text-stroke: var(--sw, 24px) var(--ink); paint-order: stroke fill; text-shadow: 0 var(--sh, 14px) 0 var(--ink); }
+  #capa { position: relative; overflow: hidden; width: 1080px; height: 1920px; background: url(arte/fundo-capa.png) center/cover; }
+  #capa::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,30,.62) 0%, rgba(10,10,30,0) 36%, rgba(10,10,30,0) 62%, rgba(10,10,30,.62) 100%); }
+  .t1 { position: absolute; left: 0; right: 0; top: 320px; text-align: center; font-weight: 800; font-size: 98px; color: #fff; line-height: 1; }
+  .t2 { position: absolute; left: 0; right: 0; top: 420px; text-align: center; font-weight: 800; font-size: 200px; color: #FFD93D; line-height: .95; --sw: 34px; --sh: 18px; transform: rotate(-3deg); }
+  .t3 { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-weight: 800; font-size: 92px; color: #fff; line-height: 1; }
+  .selo { position: absolute; left: 430px; top: 1300px; white-space: nowrap; background: #FF4B3E; color: #fff; font-weight: 800; font-size: 56px; padding: 14px 28px 4px; border: 11px solid var(--ink); border-radius: 30px; box-shadow: 0 12px 0 var(--ink); transform: rotate(5deg); --sw: 12px; --sh: 0; }
+  .arroba { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; font-weight: 800; font-size: 54px; color: #fff; --sw: 12px; --sh: 6px; }
+</style></head>
+<body>
+<div id="capa">
+  <div class="t1 k">ENTREVISTA FALSA</div>
+  <div class="t2 k">US$ 6,3 BI</div>
+  <div class="t3 k">SAEM EM 20 MINUTOS</div>
+  <div id="pj"></div>
+  <div class="selo k">ATAQUE À BINANCE</div>
+  <div class="arroba k">@_tudoem3d</div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  const pj = Personagem.criar(document.getElementById('pj'), { id: 'v', visual: 'chefeCeo', x: 330, y: 1580, escala: 1.25 });
+  Personagem.pose(tl, pj, 'sorriso', 0, 5);
+  tl.seek(0.62);
+  window.pronto = document.fonts.load("800 100px 'Baloo 2'");
+</script>
+</body></html>
