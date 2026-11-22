@@ -1,120 +1,148 @@
-# Método de produção do Tudo em 3D (inspirado no formato "história narrada em cartum", referência: Rick's Clips 3000)
+# Método oficial de produção — Tudo em 3D (@_tudoem3d)
 
-Base fixa para todo vídeo do canal. Fontes do estudo: o documento "Rick's Clips Master Prompt (v3)", os vídeos
-"Why Perfect Railroads Don't Work" e "Why Drivers Started Filming The Road" (quadro a quadro, transcrição e ritmo)
-e os dois vídeos que já produzimos (Lavagem de dinheiro, Banco Master). O canal no YouTube não pôde ser aberto
-deste ambiente (YouTube bloqueado na rede); os números do canal não foram verificados.
+Versão 2 (custo zero). Substitui a v1 deste arquivo, preservando o estudo do formato (seções 9 a 12).
+Documentos irmãos: `ROTEIRO-PADRAO.md` (modelo de roteiro e direção de voz), `PADRAO.md` (identidade e postagem),
+`roteiros/` (roteiros prontos), `motor-v2/` (código do motor de cenas).
 
-## 1. O que é o formato
-- Uma história **verdadeira** contada como mini-filme, em 45 a 60 s, por um narrador rápido (cerca de 3,3 palavras/s).
-- Personagens de **desenho 2D chapado** (cabeça redonda branca, olhos de ponto ou simples, contorno preto grosso,
-  cores lisas, membros finos) atuando **dentro de cenários 3D estilizados e ricos** (luz de dia suave, cores quentes
-  e saturadas, profundidade de campo rasa). O contraste 2D x 3D é a assinatura visual.
-- **Um plano por frase**: cada frase da narração = um lugar, um ângulo de câmera, uma ação clara, 4 a 6 s.
-- A imagem **atua literalmente** o que a frase diz. Nada é abstrato: toda frase tem algo visível (pessoa, objeto,
-  lugar ou um número escrito num objeto da cena).
+---
 
-## 2. Como o canal produz (segundo o documento)
-1. Roteiro na fórmula (abaixo), com contagem de palavras.
-2. Folha de estilo escrita uma vez + uma frase fixa por personagem (corpo, roupa, uma cor que o identifica).
-3. Uma **imagem de referência** 9:16 com todos os personagens lado a lado no cenário principal (gerada em
-   Nano Banana / Google Flow).
-4. Um **prompt de vídeo por plano** (imagem de referência anexada), 4 a 6 s, só som ambiente, sem texto na imagem
-   (exceto um número num objeto). Gerado por IA de vídeo.
-5. Edição: junta os planos na narração, legenda de 1 a 2 palavras, efeitos.
-Conclusão: a qualidade "de jogo 3D" vem de **IA de vídeo por plano**, não de animação feita à mão.
+## 1. Decisão de pipeline (fase atual: investimento zero)
 
-## 3. A fórmula do roteiro (documento + o que os vídeos confirmam)
-- **Gancho**: 5 a 18 palavras, uma AFIRMAÇÃO (nunca pergunta), já no meio da ação, com uma pessoa pelo papel
-  ("um engenheiro jovem", "esse homem") e **um número estranho e específico** ("a cada 39 pés", "12 bilhões").
+**Escolha: motor próprio v2 (código) como espinha de toda a produção.** Sem IA de vídeo paga nem gratuita no fluxo.
+
+| Opção avaliada | Qualidade | Consistência | Custo real | Veredito |
+|---|---|---|---|---|
+| **Motor próprio v2** (Three.js + peças 3D Kenney CC0 + personagens 2D vetoriais + pós-processamento) | Boa e subindo; cenário 3D real com luz física e fundo desfocado | **Total** (o personagem é o mesmo desenho em todo vídeo) | **R$ 0**, sem limite de quantidade | **Escolhido** |
+| Google Flow grátis (Veo 3.1) | Muito alta | Fraca (personagem muda entre planos) | 50 créditos/dia ≈ 5 clipes "Lite"; marca d'água visível "Veo" nos planos grátis (segundo várias fontes) | Fora do fluxo; teste futuro |
+| Kling / Hailuo grátis | Alta | Fraca | Marca d'água + **sem licença comercial** no grátis | Descartado |
+| Blender (grátis) | Altíssima | Total | Grátis, mas exige computador com placa de vídeo e muitas horas de modelagem/animação por vídeo | Futuro, quando houver máquina e tempo |
+| CapCut | — | — | Recursos Pro geram marca d'água; termos de uso dão licença ampla do conteúdo à ByteDance | Não usar |
+| DaVinci Resolve grátis | — | — | Grátis de verdade (exporta até 4K/60, sem marca d'água) | Opcional para ajustes manuais; não é necessário |
+
+Por quê: o motor próprio é o único caminho que entrega **consistência total, quantidade ilimitada e direito comercial
+limpo** a custo zero. A distância de qualidade para a referência (que usa IA de vídeo) é reduzida com o motor v2:
+peças 3D reais, luz PBR, profundidade de campo, câmera cinematográfica e edição dinâmica.
+
+## 2. Ferramentas (verificadas em 22/11/2026)
+
+| Etapa | Ferramenta | Situação gratuita |
+|---|---|---|
+| Cenários 3D | Three.js r147 (MIT) + **741 peças Kenney CC0** já baixadas (cidade, subúrbio, comércio, estradas, carros, natureza, trem, barcos) | Grátis, uso comercial liberado, sem crédito obrigatório |
+| Personagens | Rig 2D em SVG próprio (`personagem.js` + `personagens-extra.js`), 10 poses | Nosso código |
+| Objetos 2D, etiquetas, gráficos, cartelas | `objetos.js` / `objetos-extra.js` + HTML/CSS + GSAP | Grátis |
+| Legenda palavra a palavra | Montagem própria + Whisper local (faster-whisper) | Grátis |
+| Efeitos sonoros | SFX Kit (320 efeitos CC0) | Grátis, comercial |
+| Trilha embutida | Trilha original gerada em código (`som.mjs`) | Nossa |
+| Música em alta | Biblioteca de sons **dentro de cada app** (TikTok, Reels, Shorts) | Licenciada pela plataforma; nunca embutir no arquivo |
+| Render | Chromium headless (Playwright) + ffmpeg, 3 processos em paralelo | Grátis |
+| Voz | Ver seção 3 | — |
+
+Registradas como **possibilidades futuras** (nunca dependência): ElevenLabs Starter (US$ 6/mês, licença comercial),
+Google AI Pro/Flow (planos de destaque em IA), Blender + máquina com GPU, Higgsfield.
+
+## 3. Voz (decisão importante)
+
+Fato verificado: **o plano grátis da ElevenLabs não tem licença comercial** e exige atribuição ao publicar
+(central de ajuda oficial: "The free plan does not include a commercial license and cannot be used for any commercial
+purpose"). Como o objetivo do canal é monetizar, narração feita no plano grátis não serve para vídeo monetizado.
+
+Decisão:
+1. **Agora (R$ 0): a narração é gravada com a voz do dono do canal**, seguindo a direção de voz do roteiro
+   (celular perto da boca, ambiente quieto; eu limpo, corto silêncios e nivelo). É grátis, 100% comercial e conta
+   como conteúdo original para as políticas de monetização.
+2. **Primeiro investimento quando entrar receita: ElevenLabs Starter (US$ 6/mês)** com o modelo **Eleven v3** (ou v4),
+   que entende as tags de emoção. O roteiro já sai pronto para isso.
+3. Alternativa grátis com licença comercial a avaliar: **Kokoro-82M** (Apache-2.0, tem vozes pt-BR, sem tags de emoção).
+4. Os dois vídeos já publicados: se a narração foi gerada no plano grátis, colocar o crédito exigido pela ElevenLabs e
+   não contá-los para monetização.
+
+O roteiro oficial tem **duas camadas**: as tags do ElevenLabs v3 (para a voz de IA) e a direção de atuação
+(para quem grava a própria voz). As duas descrevem a mesma interpretação.
+
+## 4. Identidade visual
+
+- **Mascote do canal** (novo, identidade própria): cabeça redonda branca, **boné amarelo com "3D"** (aba para a direita),
+  **jaqueta laranja** com zíper, camiseta branca, calça azul-marinho, tênis branco. Substitui o narrador antigo
+  (boina listrada + colete), que lembrava demais um personagem da referência.
+- Personagens: desenho 2D chapado, contorno preto grosso (10), sombra de um lado só, olhos grandes expressivos,
+  **uma cor que identifica cada personagem**. Elenco fixo do canal em `motor-v2/personagens-extra.js`.
+- Cenários: 3D estilizado com peças Kenney, luz de dia quente (sol com sombra suave + céu azul com nuvens),
+  fundo desfocado nos planos fechados, noite/chuva/pôr do sol quando a história pede.
+- Paleta da marca: azul #2350D8 (raios), amarelo #FFD93D (etiquetas, contorno preto), vermelho #FF4B3E (alerta),
+  verde #7CFF9A (dinheiro/sucesso).
+- Assinatura: marca "@_tudoem3d" transparente (50%) centralizada embaixo; cartão final ≤ 1,5 s.
+
+## 5. Garantia de consistência visual
+
+1. Personagens são **código**, não geração: o mesmo desenho em todo plano e em todo vídeo.
+2. Cada personagem tem uma **ficha** (seção "Elenco" do `ROTEIRO-PADRAO.md`) com a frase fixa de aparência.
+3. Cenários reutilizáveis por "palco" (rua do subúrbio, centro comercial, estrada, interior), sempre com a mesma luz base.
+4. Pós-processamento fixo (cor, vinheta, grão, desfoque) igual em todos os vídeos.
+5. Conferência de quadros antes de todo render: nada cortado na borda, nada fora de hora, rostos visíveis.
+
+## 6. Processo de produção (cada vídeo)
+
+1. **Pauta**: fato verdadeiro com fonte; tipo de história (seção 10). Eu proponho 3 ideias; o dono escolhe.
+2. **Roteiro oficial** (`ROTEIRO-PADRAO.md`): narração com tags + direção de voz + storyboard + especificação de cena
+   + direção de edição. Aprovação do dono.
+3. **Narração**: o dono grava (ou ElevenLabs v3 na fase paga). Arquivo único.
+4. **Transcrição e tempos** (Whisper local) → cada palavra com seu tempo.
+5. **Montagem das cenas** no motor v2, presas às palavras; poses, objetos, etiquetas, câmera.
+6. **Conferência** com quadros parados (folha de contato).
+7. **Som**: efeitos do SFX Kit em cada deixa; trilha original baixa (ou nenhuma, se a música entrar pelo app); −14 LUFS.
+8. **Render** 1080x1920, 30 fps, H.264 CRF 17, AAC 192 kbps, `+faststart`.
+9. **Kit de postagem**: capa 1080x1920, legenda por plataforma, 3–5 hashtags, comentário fixado.
+10. **Arquivar** a base do vídeo no repositório.
+
+## 7. Padrões de edição
+
+- Um plano por frase (4 a 6 s); corte seco ou chicote com desfoque nas mudanças de lugar; zoom de 4–8% nas ênfases.
+- Legenda: 1 a 2 palavras, branca, contorno preto 16, Baloo 2 800, 86 px, topo em y=1350 (área segura).
+- Etiquetas amarelas só para números e nomes; entram na palavra dita, saem antes da próxima ideia.
+- Efeito sonoro só onde a imagem pede (objeto entrando, corte, impacto, número); silêncio de 0,3–0,6 s antes da revelação.
+- Câmera sempre em movimento leve; nada parado por mais de 2 s.
+
+## 8. Exportação
+
+| Item | Valor |
+|---|---|
+| Vídeo | 1080x1920, 30 fps, H.264 High, CRF 17, yuv420p, `-movflags +faststart` |
+| Áudio | AAC 192 kbps estéreo, −14 LUFS integrado, pico ≤ −1,5 dBTP |
+| Capa | PNG 1080x1920, título no centro (área 4:5) |
+| Duração | Shorts/TikTok/Reels: 45–75 s (TikTok paga só acima de 60 s; Shorts até 3 min) |
+
+---
+(Estudo do formato de referência — v1, preservado)
+
+## 9. O formato estudado
+- História **verdadeira** contada como mini-filme, 45–60 s, narrador rápido; personagens 2D chapados em cenários 3D ricos.
+- **Um plano por frase**; a imagem atua literalmente a frase; toda frase tem algo visível (pessoa, objeto, lugar, número).
+- A referência produz cada plano com IA de vídeo (Google Flow/Veo) a partir de uma imagem de referência dos personagens
+  (fonte: documento "Rick's Clips Master Prompt v3").
+
+## 10. A fórmula do roteiro
+- **Gancho**: 5 a 18 palavras, afirmação (nunca pergunta), no meio da ação, pessoa pelo papel e **um número estranho**.
   Nunca começar com Como, O que, Por que, Você sabia, Imagine.
-- Depois do gancho, **tempo presente**.
-- Frase 2: os dois lados e o prêmio (quem contra quem, onde, pelo quê).
-- **Batidas, nesta ordem**: GANCHO → PREPARO → DÚVIDA (o chefe/rival zomba; uma fala curta de até 14 palavras; o herói
-  não explica) → ESCALADA (2 ou 3 passos no tempo; o rival parece ganhar; uma pista visível de que o herói está certo)
-  → VIRADA (a grande ameaça chega) → REVELAÇÃO (o narrador diz "Acontece que…"/"É que…" + o mecanismo real numa frase
-  simples; o herói nunca explica) → FECHO (a imagem final: quem duvidou recebe exatamente o que zombou).
-- Conectores só quando a ligação é real: "Então" (resultado), "Mas" (virada), "Aí/Depois" (próximo passo).
-- Pelo menos **duas piadas, ditas por quem duvida**; pelo menos **dois números específicos e estranhos** que o público
-  entende o que contam (39 pés, 300 soldados, 3 da manhã).
-- Frases de 10 a 17 palavras, com uma punchline curta de 3 a 6 palavras em algum ponto.
-- **Sem** introdução, nome do canal, moral, pergunta ao público ou chamada para ação **dentro da narração**.
-  A última frase é a imagem de fecho (até 25 palavras).
-- Tamanhos: 30 s ≈ 100 palavras (7–8 planos); 45 s ≈ 150 (10–12); 60 s ≈ 205 (14–16).
-- Títulos: "Por que [coisa normal] [é secretamente estranha]" ou "O [objeto] que [coisa impossível]", 4 a 8 palavras.
+- Tempo presente depois do gancho. Frase 2: os dois lados e o prêmio.
+- Batidas: GANCHO → PREPARO → DÚVIDA (zombaria de até 14 palavras; o herói não explica) → ESCALADA (2–3 passos; rival
+  parece ganhar; pista visível) → VIRADA → REVELAÇÃO ("Acontece que…" + mecanismo numa frase) → FECHO (imagem final:
+  quem duvidou recebe o que zombou).
+- Pelo menos duas piadas (ditas por quem duvida) e dois números específicos. Frases de 10 a 17 palavras com uma
+  punchline de 3 a 6. Sem introdução, nome do canal, moral, pergunta ou chamada para ação na narração.
+- Tipos de história (ordem de força): A) herói azarão provado certo por um princípio físico real; B) experimento ou
+  instituição real esquisita; C) esquema esperto ou brecha, com virada. Rivais e duvidadores podem ser inventados;
+  fatos, nunca.
+- Tamanhos **em português** (ritmo medido nas nossas narrações ≈ 2,5 palavras/s): 45 s ≈ 115 palavras (10–12 planos);
+  60 s ≈ 150 palavras (13–15 planos); 75 s ≈ 185 palavras.
 
-### O que observei nos vídeos (confirma e completa)
-- Railroads: gancho "Ele serra frestas no trilho a cada 39 pés"; zombaria do chefe ("Você está destruindo minha
-  ferrovia!"); escalada por meses ("em maio cabe uma moeda; em julho, uma folha"); fecho visual (o trilho perfeito
-  entorta como uma cobra quando o trem entra).
-- Drivers (dashcam): golpe do seguro contado em presente; escalada (escolhe vítimas, traz um comparsa, compra carro
-  melhor só para bater); humor na fala da seguradora ("é sua quinta lesão no pescoço este ano"); virada (um cara quieto
-  num carro velho); revelação ("é uma câmera"); fecho ("e foi assim que a dashcam foi inventada").
-- Planos: POV de dentro do carro, sobreposição de dashcam com "REC" e velocidade, contra-plongée de herói,
-  close de rosto reagindo, plano geral de cenário, noite, chuva, pôr do sol. Câmera sempre em movimento lento;
-  transições com desfoque/dissolve e chicote de câmera. Exagero visual na hora do sucesso (montanhas de dinheiro,
-  carro novo, festa na piscina).
-- Legenda: 1 a 2 palavras por vez, branca, contorno preto, centralizada a ~70% da altura, sem cor de destaque.
+## 11. Estratégias de retenção
+1. Começar no meio da ação com número estranho. 2. Imagem nova a cada ~4 s. 3. Tudo visível. 4. Zombaria cria torcida.
+5. Escalada com pista. 6. Humor nas falas dos outros. 7. Revelação curta e fecho em imagem (favorece o replay).
 
-## 4. Estratégias de retenção
-1. **Começa no meio da ação** com um número estranho: o cérebro quer saber "por que alguém faria isso?".
-2. **Imagem nova a cada 4 s** (um plano por frase): o olho nunca fica sem estímulo.
-3. **Tudo é visível**: quem ouve uma vez sempre sabe onde está, quem é quem e o que está em jogo.
-4. **Torcida e expectativa**: a zombaria cria um "vilão"; o público fica para ver o duvidador pagar.
-5. **Escalada com pista**: o rival parece ganhar, mas uma pista visual diz que a virada vem.
-6. **Humor nas falas dos outros**, nunca do narrador.
-7. **Revelação curta e o fecho como imagem**: o vídeo termina no auge, o que favorece o replay (loop).
-
-## 5. Diferenças entre o documento e os vídeos, e como usamos cada um
-| Ponto | Documento | Vídeos | Nossa decisão |
+## 12. Diferenças documento x vídeos e decisões
+| Ponto | Documento | Vídeos | Decisão |
 |---|---|---|---|
-| Texto na tela | Nenhum (só número em objeto) | Legenda de 1–2 palavras + sobreposições (REC, mph) | Legenda e sobreposições entram **na edição**, nunca no prompt de vídeo |
-| Anos | "Não diga anos, diga 'naquela época'" | Datas exibidas em props (dashcam) | Histórias atemporais: sem anos. Casos de notícia: data só quando é essencial |
-| Chamada para ação | Proibida | Não há | A narração termina na imagem de fecho; nosso cartão "Segue o @_tudoem3d" fica curto (≤ 1,5 s) e separado |
-| Moral | Proibida | Não há | Nada de moral na narração (o "desconfie" do Banco Master sai nas próximas) |
-| Gancho | Afirmação com número | Confirmado | Igual |
-
-## 6. Identidade própria (sem copiar)
-- Personagens **nossos**. Atenção: o narrador atual (boina listrada azul + colete verde-água + lenço) ficou parecido
-  demais com o engenheiro do vídeo das ferrovias. Para ter identidade própria, trocar a boina por algo nosso
-  (ex.: boné amarelo com "3D" e jaqueta laranja), mantendo o rosto redondo branco.
-- Cores da marca: azul dos raios, amarelo #FFD93D com contorno preto, vermelho #FF4B3E para alerta.
-- Assinatura: marca d'água "@_tudoem3d" transparente embaixo; etiquetas amarelas com números (nosso diferencial
-  para temas de dinheiro/notícia).
-
-## 7. Os dois caminhos de produção
-**A. Motor próprio (código, grátis)** — o que fizemos até agora: cenários em Three.js, personagens 2D com rig em SVG,
-motion graphics, legenda e sons em código, render quadro a quadro. Pontos fortes: custo zero, controle total,
-infográficos e etiquetas perfeitos. Limite: o 3D fica mais simples que o de IA (geometria básica, sem a riqueza de
-um motor de jogo).
-
-**B. Padrão do formato (IA de vídeo por plano)** — o que dá a qualidade da referência:
-1. Roteiro na fórmula + lista de planos (1 frase = 1 plano).
-2. Folha de estilo + frase fixa de cada personagem nosso.
-3. Imagem de referência dos personagens (gerador de imagem; ~1 crédito no Higgsfield).
-4. Um vídeo por plano com a referência anexada (Seedance 2.5 pelo Higgsfield: ~35 créditos por plano de 5 s em
-   720p, ~80 em 1080p; ou Google Flow/Veo, como no documento).
-5. Eu monto: corte nos tempos da narração, legenda de 1–2 palavras, etiquetas, sons do SFX Kit, −14 LUFS, marca.
-Custo estimado por vídeo de 60 s (15 planos): ~525 créditos em 720p ou ~1.200 em 1080p, mais refações.
-
-**C. Híbrido (recomendado quando houver crédito)**: IA nos planos de ação/emoção; motor próprio nos planos de
-dados (gráficos, números, cartelas, câmera de segurança) e em toda a edição.
-
-## 8. Checklist de cada vídeo
-1. Tema verdadeiro; fatos com fonte (caso real: "segundo a PF", "nega", "não julgado").
-2. Roteiro na fórmula; contar palavras; mostrar ao dono do canal antes de gravar.
-3. Narração (ElevenLabs, voz Roger, arquivo único).
-4. Transcrever, casar palavras, lista de planos com tempo real.
-5. Gerar/montar os planos; conferir quadros (nada cortado na borda, nada fora de hora, rostos e mãos ok).
-6. Legenda, etiquetas, sons, marca; mix −14 LUFS; render.
-7. Kit de postagem: capa, legenda para TikTok/Instagram/Shorts, 3–5 hashtags, comentário fixado; música só pelo app.
-8. Guardar a base no repositório.
-
-## 9. Limitações
-- O YouTube não abre deste ambiente: a análise usa os vídeos enviados e o documento.
-- IA de vídeo: personagens podem mudar entre planos, mãos e texto podem sair errados; há refações e custo.
-  Conta do Higgsfield hoje: 0 créditos (plano grátis).
-- Pessoas reais: só cartum genérico, sem semelhança real; modelos de IA podem recusar nomes reais.
-- Eu não ouço o áudio: o volume é medido; a escuta é do dono do canal.
-- Motor próprio: render de ~20–25 min por vídeo neste computador; cenários novos levam tempo para construir.
-- Esta sessão é apagada ao fechar: tudo o que importa vai para o repositório.
+| Texto na tela | Nenhum (só número em objeto) | Legenda 1–2 palavras + sobreposições | Legenda e sobreposições entram na edição |
+| Anos | Proibidos | Datas em objetos | Histórias atemporais: sem anos; notícia: só se essencial |
+| Chamada para ação | Proibida | Não há | Narração termina no fecho; cartão "Segue" ≤ 1,5 s, separado |
+| Moral | Proibida | Não há | Nada de moral na narração |

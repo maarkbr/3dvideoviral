@@ -6,7 +6,8 @@ Instruções para o Claude: todo vídeo novo do canal segue este padrão.
 - **Nome:** Tudo em 3D · **@:** @_tudoem3d (TikTok, Instagram e YouTube)
 - **Bio:** 🎬 Tudo que viraliza, explicado em 3D / 🤯 Dinheiro, crime, ciência e curiosidades em 1 minuto / 👇 Segue que amanhã tem mais
 - **Conteúdo:** qualquer assunto viral, explicado em 60 a 90 s.
-- **Narrador fixo:** cabeça branca e redonda, boina listrada azul, colete verde-água e lenço vermelho (visual `narrador` em `personagens-extra.js`).
+- **Mascote fixo (desde 22/11/2026):** cabeça branca e redonda, boné amarelo com "3D", jaqueta laranja com zíper, camiseta branca (visual `mascote` em `motor-v2/personagens-extra.js`). O narrador antigo (boina listrada + colete) foi aposentado por lembrar um personagem da referência.
+- **Método completo:** `METODO.md` (pipeline de custo zero) e `ROTEIRO-PADRAO.md` (padrão de roteiro com direção de voz).
 
 ## Visual
 - Estilo do vídeo de referência ("Why Perfect Railroads Don't Work"): personagens de desenho 2D com cabeça branca dentro de um cenário 3D ensolarado e saturado, com a câmera sempre em movimento.
