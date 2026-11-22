@@ -20,7 +20,7 @@ retratado como vítima, sem nome. A autoria (a Binance diz que informações do 
 nega) fica fora da narração e entra só na descrição.
 **Fora do vídeo (para não virar tutorial):** nenhum detalhe técnico de como reproduzir o ataque.
 
-## Narração (bloco limpo para o gerador de voz) — 160 palavras
+## Narração (bloco limpo para o gerador de voz) — 158 palavras
 ```
 Um engenheiro da Binance faz um teste de emprego falso e abre a porta pra seis bilhões.
 A maior corretora do mundo contra hackers que querem o cofre ligado na internet.
@@ -47,11 +47,11 @@ No fim, dois bilhões e oitocentos milhões viram gelo na frente do comparsa que
 | SHOT 6 | Ele recebe uma tarefa de casa, roda o código e uma luzinha acende escondida. | 14 | 5,6 s | ESCALADA 1 (pista visível) |
 | SHOT 7 | Por semanas, eles pulam de computador em computador até a máquina que assina os saques. | 15 | 6,0 s | ESCALADA 2 (no tempo) |
 | SHOT 8 | Numa quinta à noite, em vinte minutos, seis bilhões saem por dez blockchains. | 13 | 5,2 s | ESCALADA 3 (o esquema "ganha") |
-| SHOT 9 | No esconderijo, o comparsa debocha: "Relaxa, ninguém no mundo congela blockchain." | 13 | 5,2 s | ESCALADA (piada 2) |
+| SHOT 9 | No esconderijo, o comparsa debocha: "Relaxa, ninguém no mundo congela blockchain." | 11 | 4,4 s | ESCALADA (piada 2) |
 | SHOT 10 | Em uma hora, Tether e Circle congelam quase dois bilhões em moedas digitais. | 13 | 5,2 s | VIRADA |
 | SHOT 11 | Veja só: eles nunca arrombaram o cofre, fizeram a Binance assinar os próprios saques. | 14 | 5,6 s | REVELAÇÃO |
 | SHOT 12 | No fim, dois bilhões e oitocentos milhões viram gelo na frente do comparsa que riu. | 15 | 6,0 s | FECHO |
-Total ≈ 64 s (+1,5 s de cartão final).
+Total ≈ 63 s (+1,5 s de cartão final).
 
 ## Narração com tags — ElevenLabs (modelo Eleven v3 ou v4; voz Roger; estabilidade "Creative" ou "Natural")
 Colar exatamente assim. Sem reticências de pausa: o ritmo é rápido do começo ao fim; o único respiro é a punchline.
@@ -280,9 +280,9 @@ dramatização. #binance #cripto #golpe"
 | ≥ 2 piadas ditas pelos duvidadores | ✅ "estagiário" e "ninguém congela blockchain" |
 | ≥ 2 números específicos e o público sabe o que contam | ✅ 6 bilhões (dólares levados), 20 minutos, 10 blockchains, 2,8 bilhões congelados |
 | Sem anos | ✅ ("numa quinta à noite") |
-| Frases de 10–17 palavras + 1 punchline de 3–6 | ✅ 13–17; punchline "O chefe só sorri." (4) |
+| Frases de 10–17 palavras + 1 punchline de 3–6 | ✅ 11–17; punchline "O chefe só sorri." (4) |
 | Sem introdução, canal, moral, pergunta ao público, chamada para ação | ✅ |
-| Contagem (60 s, adaptação pt-BR 150 ±10) | ✅ 160 |
+| Contagem (60 s, adaptação pt-BR 150 ±10) | ✅ 158 |
 | Passo 3 (verdade x inventado), 5, 6, 7, 8 | ✅ |
 Adaptação específica do tipo C: o "herói" é o lado do esquema (como no vídeo de referência da dashcam, em que o golpista é
 o protagonista); a virada é a ameaça que chega contra o esquema.
