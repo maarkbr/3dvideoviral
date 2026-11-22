@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=JetBrains+Mono:wght@700&display=block" rel="stylesheet" />
+    <script src="vendor/gsap/dist/gsap.min.js"></script>
+    <script src="vendor/three/build/three.min.js"></script>
+    <script src="vendor/three/examples/js/shaders/CopyShader.js"></script>
+    <script src="vendor/three/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/Pass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="vendor/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="personagem.js"></script>
+    <script src="personagens-extra.js"></script>
+    <script src="objetos.js"></script>
+    <script src="objetos-extra.js"></script>
+    <script src="master3d.js"></script>
+    <script src="montagem.js"></script>
+    <script src="audio/palavras.js"></script>
+    <style>
+      :root { --ink: #17121d; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "Baloo 2", system-ui, sans-serif; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      #tres { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; }
+      #cenaW { position: absolute; inset: 0; transform-origin: 50% 50%; }
+      #camada2d, #camadaTela, #legendas, #flash, #motion { position: absolute; inset: 0; }
+      #camada2d { z-index: 1; } #motion { z-index: 2; } #camadaTela { z-index: 3; } #legendas { z-index: 4; }
+      #flash { z-index: 6; background: #fff; opacity: 0; }
+      .ator { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+      .legenda { position: absolute; left: 40px; right: 40px; top: 1350px; text-align: center; font-weight: 800; font-size: 86px; line-height: 1.04; color: #fff; }
+      .legenda span { display: inline-block; margin: 0 .2em; -webkit-text-stroke: 16px var(--ink); paint-order: stroke fill; text-shadow: 0 8px 0 var(--ink); }
+      .marca { position: absolute; left: 0; right: 0; top: 1515px; text-align: center; z-index: 5; font-weight: 800; font-size: 42px; color: #fff;
+        -webkit-text-stroke: 8px rgba(23,18,29,.6); paint-order: stroke fill; opacity: .5; letter-spacing: 1px; }
+      .k { -webkit-text-stroke: 14px var(--ink); paint-order: stroke fill; }
+      /* cartela do nome */
+      #nome { position: absolute; left: 70px; top: 300px; opacity: 0; }
+      #nome .a { display: inline-block; background: #FFD93D; color: var(--ink); font-weight: 800; font-size: 74px; line-height: 1; padding: 20px 34px 8px; border: 10px solid var(--ink); border-radius: 26px; box-shadow: 0 12px 0 var(--ink); }
+      #nome .b { display: inline-block; margin-top: 18px; background: #fff; color: var(--ink); font-weight: 800; font-size: 46px; line-height: 1; padding: 14px 26px 6px; border: 8px solid var(--ink); border-radius: 20px; box-shadow: 0 9px 0 var(--ink); }
+      #nome .c { margin-top: 12px; font-weight: 700; font-size: 30px; color: #fff; -webkit-text-stroke: 7px var(--ink); paint-order: stroke fill; }
+      /* gráfico de barras */
+      #grafico { position: absolute; left: 90px; right: 90px; top: 250px; height: 760px; background: rgba(16,14,30,.86); border: 10px solid var(--ink); border-radius: 46px; box-shadow: 0 16px 0 var(--ink); opacity: 0; overflow: hidden; }
+      #grafico .tit { position: absolute; left: 0; right: 0; top: 34px; text-align: center; color: #fff; font-weight: 800; font-size: 58px; }
+      #grafico .eixo { position: absolute; left: 60px; right: 60px; bottom: 120px; height: 8px; background: #fff; border-radius: 4px; }
+      #grafico .barra { position: absolute; bottom: 128px; width: 280px; height: 0; border: 9px solid var(--ink); border-bottom: 0; border-radius: 26px 26px 0 0; }
+      #grafico .b1 { left: 110px; background: linear-gradient(180deg, #7fb2ff, #2f6bdc); }
+      #grafico .b2 { right: 110px; background: linear-gradient(180deg, #ffe066, #e0a210); }
+      #grafico .val { position: absolute; left: -40px; right: -40px; top: -100px; text-align: center; color: #fff; font-weight: 800; font-size: 76px; }
+      #grafico .rot { position: absolute; bottom: 30px; width: 280px; text-align: center; color: #fff; font-weight: 800; font-size: 50px; }
+      #grafico .r1 { left: 110px; } #grafico .r2 { right: 110px; color: #FFD93D; }
+      #grafico .regua { position: absolute; left: 50px; right: 50px; height: 0; border-top: 8px dashed #FF6B5E; opacity: 0; }
+      #grafico .regua span { position: absolute; right: 0; top: -62px; color: #FF6B5E; font-weight: 800; font-size: 42px; }
+      /* conta: paga x ganha */
+      #conta { position: absolute; left: 80px; right: 80px; top: 280px; opacity: 0; text-align: center; }
+      #conta .l { display: block; margin: 0 auto 22px; width: fit-content; font-weight: 800; font-size: 70px; padding: 16px 36px 4px; border: 10px solid var(--ink); border-radius: 28px; box-shadow: 0 12px 0 var(--ink); }
+      #conta .l1 { background: #FFD93D; } #conta .l2 { background: #7CFF9A; } #conta .l3 { background: #FF4B3E; color: #fff; }
+      /* câmera de segurança */
+      #cctv { position: absolute; inset: 0; opacity: 0; pointer-events: none; font-family: "JetBrains Mono", monospace; color: #fff; }
+      #cctv .bordas { position: absolute; inset: 60px; border: 6px solid rgba(255,255,255,.85); border-radius: 8px;
+        -webkit-mask: linear-gradient(#000 0 0) top left/120px 120px no-repeat, linear-gradient(#000 0 0) top right/120px 120px no-repeat, linear-gradient(#000 0 0) bottom left/120px 120px no-repeat, linear-gradient(#000 0 0) bottom right/120px 120px no-repeat; }
+      #cctv .rec { position: absolute; left: 100px; top: 230px; font-size: 44px; text-shadow: 0 3px 6px #000; }
+      #cctv .rec i { display: inline-block; width: 30px; height: 30px; border-radius: 50%; background: #ff2a1a; margin-right: 14px; vertical-align: -3px; }
+      #cctv .data { position: absolute; right: 100px; top: 230px; font-size: 40px; text-align: right; text-shadow: 0 3px 6px #000; }
+      #cctv .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,0) 2px 6px); }
+      #vinheta { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; box-shadow: inset 0 0 260px 80px rgba(220,20,20,.75); }
+      /* cartão final */
+      #fimCard { position: absolute; inset: 0; z-index: 7; opacity: 0; background: radial-gradient(circle at 50% 40%, #4f8dff 0%, #2350d8 55%, #142c86 100%); }
+      #fimCard .raios { position: absolute; left: 50%; top: 40%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.10) 0 9deg, rgba(255,255,255,0) 9deg 18deg); }
+      #fimCard .logo { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-weight: 800; font-size: 150px; line-height: .95; color: #FFD93D; -webkit-text-stroke: 26px var(--ink); paint-order: stroke fill; text-shadow: 0 14px 0 var(--ink); }
+      #fimCard .logo small { display: block; font-size: 96px; color: #fff; }
+      #fimCard .segue { position: absolute; left: 90px; right: 90px; top: 1330px; text-align: center; font-weight: 800; font-size: 80px; color: #17121d; background: #FFD93D; border: 12px solid #17121d; border-radius: 40px; padding: 18px 10px 8px; box-shadow: 0 16px 0 #17121d; }
+      #fimPj { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="112.1" data-width="1080" data-height="1920">
+      <div id="palco" class="clip" data-start="0" data-duration="112.1" data-track-index="0">
+        <div id="cenaW"><canvas id="tres" width="1080" height="1920"></canvas>
+        <div id="camada2d"></div></div>
+        <div id="vinheta"></div>
+        <div id="motion">
+          <div id="nome"><div class="a">DANIEL VORCARO</div><br><div class="b">dono do Banco Master</div><div class="c">ilustração</div></div>
+          <div id="grafico"><div class="tit">QUANTO O CDB RENDE</div>
+            <div class="regua"><span>A RÉGUA</span></div>
+            <div class="barra b1"><div class="val v1">0%</div></div><div class="barra b2"><div class="val v2">0%</div></div>
+            <div class="eixo"></div><div class="rot r1">BANCÃO</div><div class="rot r2">MASTER</div></div>
+          <div id="conta"><span class="l l1 k1">PAGA MUITO</span><span class="l l2 k2">PRECISA GANHAR MAIS</span><span class="l l3 k3">NÃO ESTAVA GANHANDO</span></div>
+          <div id="cctv"><div class="scan"></div><div class="bordas"></div><div class="rec"><i></i>REC · CAM 04</div><div class="data">17/11/2025<br>AEROPORTO</div></div>
+        </div>
+        <div id="camadaTela"></div>
+        <div id="legendas"></div>
+        <div class="marca">@_tudoem3d</div>
+        <div id="fimCard"><div class="raios"></div><div class="logo"><small>TUDO EM</small>3D</div><div id="fimPj"></div><div class="segue">Segue o @_tudoem3d</div></div>
+        <div id="flash"></div>
+      </div>
+      <audio id="som" src="audio/mix.wav" data-start="0" data-duration="112.1" data-track-index="1"></audio>
+    </div>
+
+    <script>
+      (function () {
+        // =====================================================================
+        //  BANCO MASTER — cenas presas às palavras da narração (roteiro.md)
+        // =====================================================================
+        const DURACAO = 112.1, FIM_FALA = 110.1;
+        const tl = gsap.timeline({ paused: true });
+        const M = Montagem.criar({
+          tl, dur: DURACAO, fala: window.PALAVRAS, cenario: Master3D,
+          canvas: '#tres', camada2d: '#camada2d', camadaTela: '#camadaTela', legendas: '#legendas',
+          filtro: (luz) => `brightness(${(cena.luz2d ? cena.luz2d(cena.t) : 1) * Math.min(1.04, luz + 0.06)}) saturate(1.06) drop-shadow(-6px 2px 0 rgba(255,214,160,.45))`,
+        });
+        const { t, W, B, DUR, THREE, cena } = M;
+        const Z = Master3D.Z, suave = M.suave, lerp = M.lerp;
+        const Wn = (txt, bloco, n) => window.PALAVRAS.filter((p) => p.bloco === bloco && p.texto.toLowerCase().replace(/[^a-zà-ú0-9%]/g, '') === txt.toLowerCase())[n];
+        const zT = Z.TORRE, zF = Z.FGC, zR = Z.BRB, zC = Z.BC, zA = Z.AERO;
+        const P = (z0, x, y, z) => [x, y, z0 + z];
+        const LONGE = [0, -120, -900];
+
+        const T = {
+          emprest: t('empréstimos', 1), nunca: t('nunca', 1), banco1: t('banco', 1),
+          b2: B(2), milhao: t('milhão', 2), mil: t('mil', 2),
+          b3: B(3), fica: t('fica', 3), celular: t('celular', 3), um6: t('1', 3), talvez: t('Talvez', 3),
+          b4: B(4), daniel: t('Daniel', 4), master4: t('Master.', 4), quando: t('Quando', 4), rend: t('rendimento.', 4),
+          b5: B(5), cem: t('100%', 5), regua: t('régua', 5), master5: t('Master', 5), c140: t('140.', 5),
+          b6: B(6), propag: t('propaganda', 6), garant: t('garantido', 6), fgc: t('FGC.', 6), seguro: t('seguro.', 6), quebra: t('quebra,', 6), ate: t('até', 6), c250: t('250', 6),
+          b7: B(7), dinheiro7: t('dinheiro', 7), mas: t('Mas', 7), promete: t('promete', 7), ganhar: t('ganhar', 7), master7: t('Master', 7), parte: t('parte', 7),
+          b8: B(8), fabricou: t('fabricou', 8), nunca8: t('nunca', 8), vendeu: t('vendeu', 8), brb: t('BRB,', 8), brasilia: t('Brasília.', 8), caixa: t('caixa', 8), clientes: t('clientes', 8), existem: t('existem.', 8),
+          b9: B(9), c12: t('12', 9), tentou: t('tentou', 9), bc: Wn('banco', 9, 1).inicio, nao9: t('não.', 9),
+          b10: B(10), vorc10: t('Vorcaro', 10), preso: t('preso', 10), manha: t('Na', 10), fecha: t('fecha', 10),
+          b11: B(11), c50: t('50', 11), vorc11: t('Vorcaro', 11), indic: t('indiciado', 11), nega: t('nega', 11),
+          b12: B(12), banco12: t('Banco', 12), presente: t('presente.', 12), esta2: Wn('está', 12, 1).inicio, socorro: t('socorro.', 12),
+        };
+
+        // ---------- câmera ----------
+        const chaves = [];
+        const K = (tt, pos, alvo, fov = 48, roll = 0) => chaves.push([tt, pos, alvo, fov, roll]);
+        const CORTE = (tt, pos, alvo, fov = 48, roll = 0) => { K(tt - 0.001, null, null); K(tt, pos, alvo, fov, roll); };
+        // 1 gancho: torre gigante e mergulho até o banqueiro; corte para o BRB
+        K(0, [-5, 0.8, zT + 16], [0, 22, zT - 14], 58, 0.04);
+        K(1.1, [0.4, 1.5, zT + 6.2], [0.1, 1.6, zT - 6], 50);
+        K(T.emprest, [0.6, 1.6, zT + 5.2], [0.2, 1.3, zT - 4], 50);
+        K(T.banco1 - 0.05, [0.2, 1.65, zT + 4.0], [0.1, 1.25, zT - 4], 44);
+        CORTE(T.banco1, [-2, 3, zR + 17], [-1, 8, zR - 8], 52);
+        K(T.b2 - 0.05, [-1.2, 2.4, zR + 13.5], [-1, 8.5, zR - 8], 50);
+        // 2 a montanha de dinheiro
+        CORTE(T.b2, [0.2, 1.4, zT + 7.5], [4.6, 2.2, zT - 2], 50, -0.03);
+        K(T.milhao, [1.2, 2.2, zT + 6.6], [4.2, 1.6, zT - 2], 48);
+        K(T.b3, [1.6, 1.8, zT + 5.4], [2.6, 1.1, zT - 1], 46);
+        // 3 fica até o final / celular
+        K(T.celular, [1.8, 1.7, zT + 4.6], [2.5, 1.1, zT - 1], 44);
+        K(T.b4 - 0.05, [1.8, 1.7, zT + 4.2], [2.5, 1.1, zT - 1], 42);
+        // 4 Daniel Vorcaro: contra-plongée com a torre atrás
+        CORTE(T.b4, [0.7, 0.7, zT + 4.6], [0.1, 2.6, zT - 6], 50, 0.02);
+        K(T.master4 - 0.1, [0.5, 0.75, zT + 3.9], [0.1, 3.0, zT - 6], 48);
+        K(T.master4 + 0.7, [0.2, 1.6, zT + 9], [0, 4.5, zT - 6], 50);
+        K(T.rend, [-1.6, 1.6, zT + 7.0], [-1.2, 1.3, zT - 3], 46);
+        K(T.b5 - 0.05, [-1.6, 1.6, zT + 6.6], [-1.2, 1.3, zT - 3], 46);
+        // 5 gráfico (fundo: órbita lenta na torre)
+        K(T.b5, [-6, 2.5, zT + 12], [0, 6, zT - 10], 54);
+        K(T.b6 - 0.05, [6, 3.0, zT + 12], [0, 7, zT - 10], 54);
+        // 6 FGC
+        CORTE(T.b6, [-1.5, 2.4, zF + 12], [0, 6.5, zF - 8], 52);
+        K(T.fgc, [-0.6, 3.6, zF + 8.5], [0, 8.6, zF - 8], 48);
+        K(T.seguro, [-0.4, 3.0, zF + 9.5], [0, 5.2, zF - 8], 50);
+        K(T.quebra, [-0.2, 2.6, zF + 8.5], [0, 4.8, zF - 8], 48, 0.03);
+        K(T.ate, [-2.0, 2.2, zF + 8.0], [-0.5, 3.4, zF - 8], 48);
+        K(T.b7 - 0.05, [-2.4, 2.0, zF + 6.5], [-1.0, 2.6, zF - 8], 46);
+        // 7 dinheiro entrando que nem água / pensa comigo
+        CORTE(T.b7, [-4, 1.2, zT + 14], [1, 8, zT - 10], 56, -0.04);
+        K(T.mas - 0.1, [-2, 1.4, zT + 10], [1, 6, zT - 10], 52);
+        K(T.mas + 0.4, [-2.2, 1.6, zT + 5.6], [-2.4, 1.1, zT - 1], 44);
+        K(T.parte, [-2.2, 1.6, zT + 5.0], [-2.4, 1.1, zT - 1], 42);
+        K(T.b8 - 0.05, [-2.2, 1.7, zT + 3.8], [-2.4, 1.2, zT - 1], 36);
+        // 8 PF / contratos / BRB
+        CORTE(T.b8, [0.5, 1.5, zT + 6.4], [0.1, 1.5, zT - 4], 50);
+        K(T.fabricou, [0.6, 1.6, zT + 5.6], [0.1, 1.5, zT - 4], 48);
+        K(T.vendeu - 0.05, [0.3, 1.65, zT + 4.6], [0.1, 1.4, zT - 4], 44);
+        CORTE(T.vendeu, [-8, 2.6, zR + 12], [-1, 3.0, zR - 6], 52);
+        K(T.brasilia, [-4, 2.2, zR + 9], [1.5, 2.6, zR - 6], 50);
+        K(T.caixa, [1.4, 1.8, zR + 6.5], [3.4, 1.0, zR - 2.5], 46);
+        K(T.existem + 0.4, [1.0, 1.8, zR + 5.6], [3.2, 1.1, zR - 2.5], 44);
+        // 9 BRB pagou / Banco Central disse não
+        K(T.c12, [-1.5, 2.6, zR + 11], [-1, 7.5, zR - 8], 50);
+        K(T.bc - 0.05, [1.0, 2.6, zR + 9.5], [-1, 8, zR - 8], 50);
+        CORTE(T.bc, [0, 1.2, zC + 14], [0, 16, zC - 15], 56);
+        K(T.b10 - 0.05, [0, 1.6, zC + 11], [0, 12, zC - 15], 52);
+        // 10 aeroporto à noite (câmera de segurança) e manhã seguinte
+        CORTE(T.b10, [7, 6.5, zA + 9], [-1, 0.8, zA - 3], 50, 0);
+        K(T.preso, [4.0, 3.8, zA + 5.4], [0.0, 0.9, zA - 1.2], 46);
+        K(T.manha - 0.05, [3.8, 3.6, zA + 5.0], [0.2, 0.9, zA - 1.2], 44);
+        CORTE(T.manha, [-3, 1.0, zT + 15], [0, 10, zT - 10], 56);
+        K(T.fecha, [-0.8, 1.6, zT + 9.5], [0, 3.2, zT - 6], 50);
+        K(T.b11 - 0.05, [-0.6, 1.6, zT + 8.4], [0, 3.0, zT - 6], 48);
+        // 11 cofre esvaziando / indiciado
+        CORTE(T.b11, [0, 3.0, zF + 7.5], [0, 3.6, zF - 10], 52);
+        K(T.vorc11 - 0.05, [0, 2.6, zF + 5.8], [0, 2.4, zF - 10], 48);
+        CORTE(T.vorc11, [0.2, 1.6, zC + 5.2], [0, 1.3, zC - 3], 46);
+        K(T.b12 - 0.05, [0.2, 1.6, zC + 3.8], [0, 1.3, zC - 3], 40);
+        // 12 o sinal
+        CORTE(T.b12, [3, 1.4, zT + 9], [1, 5, zT - 8], 52);
+        K(FIM_FALA, [1.5, 1.6, zT + 6], [0.5, 3, zT - 8], 46);
+        K(DUR, [1.5, 1.6, zT + 6], [0.5, 3, zT - 8], 46);
+
+        const lerp3 = (a, b, e) => [lerp(a[0], b[0], e), lerp(a[1], b[1], e), lerp(a[2], b[2], e)];
+        const eio = (x) => (x < 0 ? 0 : x > 1 ? 1 : x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+        cena.cam.quadro = (tt) => {
+          let i = 0; while (i < chaves.length - 2 && tt >= chaves[i + 1][0]) i++;
+          let a = chaves[i], b = chaves[i + 1]; if (!a[1]) a = b; if (!b[1]) b = a;
+          const e = eio((tt - a[0]) / Math.max(0.001, b[0] - a[0]));
+          const pos = lerp3(a[1], b[1], e), alvo = lerp3(a[2], b[2], e);
+          pos[1] += Math.sin(tt * 0.9) * 0.016; pos[0] += Math.sin(tt * 0.61) * 0.022; alvo[0] += Math.sin(tt * 0.47) * 0.018;
+          // tremida no "quebra" e no "não"
+          const tr = Math.max(0, 1 - Math.abs(tt - T.quebra - 0.15) / 0.35) + Math.max(0, 1 - Math.abs(tt - T.nao9 - 0.1) / 0.4) + Math.max(0, 1 - Math.abs(tt - T.preso - 0.1) / 0.35);
+          pos[0] += Math.sin(tt * 61) * 0.06 * tr; pos[1] += Math.cos(tt * 53) * 0.05 * tr;
+          return { pos, alvo, fov: lerp(a[3], b[3], e), roll: lerp(a[4], b[4], e) };
+        };
+        // cortes: desfoque + clarão com zoom de 7% (o desfoque nunca mostra a borda)
+        const cortes = [T.banco1, T.b2, T.b4, T.b6, T.b7, T.b8, T.vendeu, T.bc, T.b10, T.manha, T.b11, T.vorc11, T.b12];
+        gsap.set('#cenaW', { filter: 'blur(0px) brightness(1)', scale: 1 });
+        cortes.forEach((tc) => {
+          tl.fromTo('#cenaW', { filter: 'blur(16px) brightness(1.25)', scale: 1.07 }, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.3, ease: 'power2.out', immediateRender: false }, tc);
+          tl.fromTo('#flash', { opacity: 0.3 }, { opacity: 0, duration: 0.2, ease: 'power2.out', immediateRender: false }, tc);
+        });
+        tl.set('#flash', { opacity: 0 }, 0);
+
+        // ---------- céu, noite, tinta ----------
+        const C = (h) => new THREE.Color(h);
+        const ceus = [
+          [0, C('#ffffff'), C('#ffffff')], [T.banco1, C('#c9fff4'), C('#fbfffd')], [T.b2, C('#fff0b0'), C('#fffbee')],
+          [T.b4, C('#ffd9a0'), C('#fff6ea')], [T.b6, C('#bfe8ff'), C('#f6fbff')], [T.b7, C('#ffffff'), C('#ffffff')],
+          [T.parte, C('#c9a6ff'), C('#efe6ff')], [T.vendeu, C('#bfe0ff'), C('#f8fbff')], [T.bc, C('#ffb3a6'), C('#fff1ee')],
+          [T.b10, C('#141a3a'), C('#d6dcff')], [T.manha, C('#ffb27a'), C('#fff0e0')], [T.b11, C('#c8d6ff'), C('#f4f6ff')],
+          [T.vorc11, C('#ff8a7a'), C('#f6e2e2')], [T.b12, C('#ffffff'), C('#ffffff')], [T.socorro, C('#ff6b5e'), C('#ffe8e8')],
+        ];
+        const corEm = (tt, k) => { let i = 0; while (i < ceus.length - 1 && tt >= ceus[i + 1][0]) i++; if (i === 0) return ceus[0][k].clone();
+          const e = suave((tt - ceus[i][0]) / 0.45); return ceus[i - 1][k].clone().lerp(ceus[i][k], e); };
+        cena.ceu = (tt) => corEm(tt, 1);
+        cena.tinta = (tt) => corEm(tt, 2);
+        cena.noite = (tt) => (tt >= T.b10 && tt < T.manha ? 1 : 0);
+        cena.luz2d = (tt) => (tt >= T.b10 && tt < T.manha ? 0.72 : 1);
+
+        // ---------- animação das peças 3D ----------
+        const { torre, fgc, brb, aero } = cena;
+        const bcG = cena.bc;
+        M.aCadaQuadro((tt) => {
+          // pilha de dinheiro na torre
+          let kP = 0;
+          if (tt >= T.b2 && tt < T.b4) kP = 1;
+          if (tt >= T.b7 && tt < T.b8) kP = suave((tt - T.b7) / 3.2);
+          if (tt >= T.b12) kP = 0.6;
+          torre.pilha.set(kP);
+          torre.chuva.set(tt, tt >= T.b7 && tt < T.mas + 1 ? 1 : 0);
+          const fechado = tt >= T.fecha && tt < T.b11;
+          torre.faixas.forEach((f) => { f.visible = fechado; });
+          torre.letreiro.material.color.setScalar(fechado || (tt >= T.manha && tt < T.b11 && tt > T.fecha) ? 0.25 : 1.25);
+          // cofre do FGC: abre no "até 250 mil", fica aberto no bloco 11
+          let ab = 0;
+          if (tt >= T.ate && tt < T.b7) ab = suave((tt - T.ate) / 1.1);
+          if (tt >= T.b11 && tt < T.vorc11) ab = 1;
+          fgc.dobradica.rotation.y = -ab * 1.9;
+          fgc.roda.rotation.z = tt >= T.ate - 0.8 ? (Math.min(tt, T.ate + 0.4) - (T.ate - 0.8)) * 5 : 0;
+          let kF = 1; if (tt >= T.b11) kF = 1 - suave((tt - T.b11 - 0.3) / 2.6);
+          fgc.pilha.set(ab > 0.05 ? kF : 0);
+          // BRB: caminhão chega e as caixas aparecem
+          const cam = brb.caminhao; cam.visible = tt >= T.vendeu && tt < T.b10;
+          cam.position.set(lerp(-26, -3.5, suave((tt - T.vendeu) / 1.6)), 0, -2.0); cam.rotation.y = Math.PI / 2;
+          brb.caixas.forEach((c, i) => { c.visible = tt >= T.vendeu + 1.3 + i * 0.08 && tt < T.b10; });
+          // aeroporto: chuva e giroflex
+          aero.chuva.set(tt, tt >= T.b10 && tt < T.manha);
+          const gir = tt >= T.vorc10 ? 1 : 0, f1 = (Math.sin(tt * 18) > 0 ? 1 : 0) * gir;
+          aero.giro.az.material.color.setRGB(0.1, 0.3, 1).multiplyScalar(0.3 + 2.5 * f1);
+          aero.giro.vm.material.color.setRGB(1, 0.12, 0.05).multiplyScalar(0.3 + 2.5 * (gir - f1));
+          aero.giro.luzAz.intensity = 4 * f1; aero.giro.luzVm.intensity = 4 * (gir - f1);
+        });
+
+        // ---------- personagens ----------
+        const janelas = (lista) => (tt) => { for (const [a, b, f] of lista) if (tt >= a && tt < b) return typeof f === 'function' ? f(tt) : f; return LONGE; };
+        const visivel = (pj, lista) => { gsap.set(pj.el, { opacity: 0 }); tl.set(pj.el, { opacity: 0 }, 0); lista.forEach(([a, b, , op]) => { tl.set(pj.el, { opacity: op || 1 }, a); tl.set(pj.el, { opacity: 0 }, b); }); };
+        const ator = (id, vis, esc, lista) => { const pj = M.ator(id, vis, esc, janelas(lista)); visivel(pj, lista); return pj; };
+
+        const xV10 = (tt) => lerp(-5, -1.0, suave((tt - T.b10) / 2.4));
+        const vorc = ator('vorc', 'vorcaro', 1.05, [
+          [0, T.banco1, P(zT, 0.1, 0, 0.4)], [T.b4, T.quando, P(zT, 0.1, 0, 0.4)], [T.b8, T.vendeu, P(zT, 0.1, 0, 0.4)],
+          [T.b10, T.manha, (tt) => P(zA, xV10(tt), 0, -1.0)], [T.vorc11, T.b12, P(zC, 0, 0, -0.6)],
+        ]);
+        const xN4 = (tt) => lerp(-3.2, -1.2, suave((tt - T.quando) / 1.6));
+        const narr = ator('narr', 'narrador', 1.0, [
+          [T.b2, T.b4, P(zT, 1.9, 0, 0.6)], [T.quando, T.b5, (tt) => P(zT, xN4(tt), 0, 1.2)], [T.b6, T.b7, P(zF, -1.9, 0, 0.4)],
+          [T.mas, T.b8, P(zT, -2.4, 0, 0.8)], [T.caixa, T.bc, P(zR, 1.6, 0, -1.4)],
+        ]);
+        const corrida = (x0, x1, z) => (tt) => P(zT, lerp(x0, x1, suave((tt - T.b7) / 2.6)), 0, z);
+        const c1 = ator('c1', 'cliente1', 0.95, [[T.b7, T.mas, corrida(-9, -3.2, 3.5)], [T.clientes, T.b9, P(zR, 2.6, 0, -2.0), 0.38]]);
+        const c2 = ator('c2', 'cliente2', 0.95, [[T.b7, T.mas, corrida(9, 2.4, 4.2)], [T.clientes, T.b9, P(zR, 4.0, 0, -2.4), 0.38]]);
+        const c3 = ator('c3', 'cliente3', 0.95, [[T.b7, T.mas, corrida(-11, -0.8, 6.0)], [T.clientes, T.b9, P(zR, 5.2, 0, -1.8), 0.38]]);
+        const xPol = (tt) => lerp(6, 0.6, suave((tt - T.vorc10) / 1.2));
+        const pol = ator('pol', 'policial', 1.06, [[T.vorc10, T.manha, (tt) => P(zA, xPol(tt), 0, -0.6)]]);
+        // clientes fantasmas flutuam e somem no "existem"
+        [c1, c2, c3].forEach((c, i) => tl.fromTo(c.el, { '--by': 0 }, { '--by': -40, duration: 0.6, yoyo: true, repeat: 3, ease: 'sine.inOut', immediateRender: false }, T.clientes + i * 0.1));
+        [c1, c2, c3].forEach((c, i) => tl.to(c.el, { opacity: 0, duration: 0.35 }, T.existem + 0.2 + i * 0.1));
+
+        // ---------- objetos no mundo ----------
+        const contratos = [[-0.66, 2.15, -0.4, -8], [0.8, 2.3, -0.5, 6], [-0.72, 1.25, -0.2, 4], [0.86, 1.35, -0.2, -6]];
+        contratos.forEach(([x, y, z, g], i) => {
+          const o = M.objeto('contrato', x, y, zT + z, { id: 'ct' + i, falso: true, giro: g });
+          gsap.set(o.svg, { '--carimbo': 0 }); tl.set(o.svg, { '--carimbo': 0 }, 0);
+          Objetos.naPalavra(tl, o, W('empréstimos', 1), { atraso: i * 0.12 });
+          tl.fromTo(o.svg, { '--carimbo': 0 }, { '--carimbo': 1, duration: 0.12, immediateRender: false }, T.nunca + i * 0.1);
+          Objetos.sair(tl, o, T.banco1 - 0.15);
+        });
+        const contratos2 = [[-0.66, 2.15, -0.4, -8], [0.8, 2.3, -0.5, 6], [-0.72, 1.25, -0.2, 4], [0.86, 1.35, -0.2, -6], [0, 2.7, -0.7, 2]];
+        contratos2.forEach(([x, y, z, g], i) => {
+          const o = M.objeto('contrato', x, y, zT + z, { id: 'cu' + i, falso: true, giro: g });
+          tl.set(o.svg, { '--carimbo': 0 }, 0);
+          Objetos.naPalavra(tl, o, W('contratos', 8), { atraso: i * 0.13 });
+          tl.fromTo(o.svg, { '--carimbo': 0 }, { '--carimbo': 1, duration: 0.12, immediateRender: false }, T.nunca8 + i * 0.1);
+          Objetos.sair(tl, o, T.vendeu - 0.1);
+        });
+        const fiado = M.objeto('fiado', 3.2, 1.6, zR - 3.6, { id: 'fiado' });
+        Objetos.naPalavra(tl, fiado, W('caixa', 8)); Objetos.sair(tl, fiado, T.b9 - 0.1);
+        const notaN = M.objeto('nota', -0.4, 1.95, zT + 1.6, { id: 'nn' });
+        Objetos.naPalavra(tl, notaN, W('dinheiro', 4)); Objetos.sair(tl, notaN, T.rend + 0.6);
+        const grade = M.objeto('grade', 0, 0, zC - 0.1, { sombraL: 0.9, sombraP: 0.2 });
+        Objetos.naPalavra(tl, grade, W('indiciado', 11)); Objetos.sair(tl, grade, T.b12 - 0.05);
+
+        // ---------- na tela: etiquetas, celular, carimbos ----------
+        const tag = (id, texto, x, y, pal, ate, op = {}) => {
+          const o = M.naTela('etiqueta', x, y, op.esc || 1, Object.assign({ texto, id }, op));
+          Objetos.naPalavra(tl, o, pal, { atraso: op.atraso || 0 }); if (ate) Objetos.sair(tl, o, ate); return o;
+        };
+        tag('t12', 'R$ 12 BILHÕES', 540, 300, W('12', 1), T.banco1 - 0.15, { fs: 112 });
+        tag('tpf', 'SEGUNDO A PF', 540, 460, W('empréstimos', 1), T.banco1 - 0.15, { fs: 60, cor: '#FFFFFF' });
+        tag('tgov', 'BANCO PÚBLICO', 540, 300, W('governo.', 1), T.b2 - 0.15, { fs: 100, cor: '#7FD4FF' });
+        tag('t12b', 'R$ 12.000.000.000', 540, 300, W('12', 2), T.milhao - 0.05, { fs: 98 });
+        tag('t1m', 'R$ 1 MILHÃO / MÊS', 540, 300, W('milhão', 2), T.mil - 0.05, { fs: 92, cor: '#7CFF9A' });
+        tag('t1000', '1.000 ANOS', 540, 300, W('mil', 2), T.b3 - 0.1, { fs: 130 });
+        const rel = M.naTela('relogio', 540, 560, 0.5, { id: 'rel', hora: '11:55' }); Objetos.naPalavra(tl, rel, W('anos', 2)); Objetos.sair(tl, rel, T.b3 - 0.1);
+        tag('tfica', 'FICA ATÉ O FINAL', 540, 300, W('fica', 3), T.celular - 0.1, { fs: 92, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        const cel = M.naTela('celular', 540, 900, 0.82, { id: 'cel1', titulo: 'CDB 140% DO CDI', texto: 'Garantido pelo FGC!' });
+        Objetos.naPalavra(tl, cel, W('celular', 3));
+        tl.fromTo(cel.dentro, { y: 900 }, { y: 0, duration: 0.5, ease: 'back.out(1.4)', immediateRender: false }, T.celular);
+        tl.to(cel.dentro, { rotation: 4, duration: 0.05, yoyo: true, repeat: 9, ease: 'none' }, T.talvez);
+        Objetos.sair(tl, cel, T.b4 - 0.15);
+        tag('t16', '1,6 MILHÃO DE PESSOAS', 540, 250, W('1', 3), T.b4 - 0.15, { fs: 76 });
+        tag('trend', '+ RENDIMENTO', 540, 300, W('rendimento.', 4), T.b5 - 0.1, { fs: 104, cor: '#7CFF9A' });
+        tag('tgar', '✓ GARANTIDO PELO FGC', 540, 300, W('garantido', 6), T.seguro - 0.05, { fs: 80, cor: '#1FB5A2', corTexto: '#FFFFFF' });
+        tag('tseg', 'TIPO UM SEGURO', 540, 300, W('seguro.', 6), T.quebra - 0.05, { fs: 100 });
+        tag('tqueb', 'SE O BANCO QUEBRA...', 540, 300, W('quebra,', 6), T.c250 - 0.05, { fs: 86, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        tag('t250', 'ATÉ R$ 250 MIL DE VOLTA', 540, 300, W('250', 6), T.b7 - 0.1, { fs: 78, cor: '#7CFF9A' });
+        tag('tagua', 'DINHEIRO ENTRANDO', 540, 300, W('dinheiro', 7), T.mas - 0.1, { fs: 96, cor: '#7CFF9A' });
+        tag('tbiz', 'A PARTE BIZARRA', 540, 300, W('parte', 7), T.b8 - 0.1, { fs: 100, cor: '#C9A2FF' });
+        tag('tpf2', 'SEGUNDO A POLÍCIA FEDERAL', 540, 300, W('Segundo', 8), T.vendeu - 0.1, { fs: 66, cor: '#FFFFFF' });
+        tag('tbrb', 'BRB · BANCO DE BRASÍLIA', 540, 300, W('BRB,', 8), T.caixa - 0.1, { fs: 72, cor: '#7FD4FF' });
+        tag('tcli', 'CLIENTES: NÃO EXISTEM', 540, 300, W('clientes', 8), T.b9 - 0.1, { fs: 74, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        tag('tpag', 'BRB PAGOU + DE R$ 12 BI', 540, 300, W('12', 9), T.tentou - 0.05, { fs: 74 });
+        tag('tcomp', 'E QUIS COMPRAR O MASTER', 540, 300, W('tentou', 9), T.bc - 0.1, { fs: 74, cor: '#7FD4FF' });
+        const nao = M.naTela('carimbo', 540, 820, 1.25, { texto: 'NÃO', id: 'nao', fs: 220 });
+        Objetos.naPalavra(tl, nao, W('não.', 9)); tl.fromTo(nao.dentro, { scale: 2.6 }, { scale: 1, duration: 0.16, ease: 'power4.in', immediateRender: false }, T.nao9); Objetos.sair(tl, nao, T.b10 - 0.1);
+        tag('t17', '17 DE NOVEMBRO · NOITE', 540, 420, W('17', 10), T.vorc10 - 0.05, { fs: 74 });
+        tag('tpreso', 'PRESO NO AEROPORTO', 540, 420, W('preso', 10), T.manha - 0.1, { fs: 84, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+        tag('tliq', 'BANCO LIQUIDADO', 540, 300, W('fecha', 10), T.b11 - 0.1, { fs: 100, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+        tag('t50', 'CONTA: + DE R$ 50 BI', 540, 300, W('50', 11), T.vorc11 - 0.1, { fs: 86 });
+        tag('tind', 'INDICIADO PELA PF', 540, 300, W('indiciado', 11), T.b12 - 0.1, { fs: 92 });
+        tag('tnega', 'NEGA TUDO · AINDA NÃO JULGADO', 540, 450, W('nega', 11), T.b12 - 0.1, { fs: 58, cor: '#FFFFFF' });
+        tag('tsinal', 'O SINAL', 540, 300, W('sinal', 12), T.banco12 - 0.1, { fs: 130, cor: '#FF6B5E', corTexto: '#FFFFFF' });
+        const cel2 = M.naTela('celular', 540, 880, 0.82, { id: 'cel2', titulo: 'CDB 140% DO CDI', texto: 'Muito acima de todos!' });
+        Objetos.naPalavra(tl, cel2, W('Banco', 12));
+        tl.fromTo(cel2.dentro, { y: 900 }, { y: 0, duration: 0.5, ease: 'back.out(1.4)', immediateRender: false }, T.banco12);
+        Objetos.sair(tl, cel2, T.presente - 0.15);
+        const pres = M.naTela('presente', 540, 880, 1.1, { id: 'pres' });
+        Objetos.naPalavra(tl, pres, W('presente.', 12));
+        tl.fromTo(pres.svg, { '--tampa': 0 }, { '--tampa': 1, duration: 0.35, ease: 'back.out(2)', immediateRender: false }, T.esta2);
+        tl.to(pres.dentro, { opacity: 0, duration: 0.25 }, T.socorro - 0.1);
+        const sos = M.naTela('sos', 540, 840, 1.1, { id: 'sos' });
+        Objetos.naPalavra(tl, sos, W('socorro.', 12));
+        tl.to(sos.dentro, { rotation: 18, duration: 0.18, yoyo: true, repeat: 7, ease: 'sine.inOut' }, T.socorro + 0.5);
+        tag('tsoc', 'PEDINDO SOCORRO', 540, 300, Wn('está', 12, 1), null, { fs: 104, cor: '#FF4B3E', corTexto: '#FFFFFF' });
+        tl.fromTo('#vinheta', { opacity: 0 }, { opacity: 1, duration: 0.25, yoyo: true, repeat: 5, ease: 'sine.inOut', immediateRender: false }, T.socorro);
+        tl.set('#vinheta', { opacity: 0 }, 0);
+
+        // ---------- motion graphics ----------
+        // cartela do nome
+        tl.fromTo('#nome', { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.45, ease: 'back.out(1.6)', immediateRender: false }, T.daniel);
+        tl.to('#nome', { opacity: 0, x: -500, duration: 0.3, ease: 'power2.in' }, T.quando - 0.2);
+        tl.set('#nome', { opacity: 0 }, 0);
+        // gráfico
+        const ALT = 430;
+        tl.set('#grafico', { opacity: 0 }, 0);
+        tl.fromTo('#grafico', { opacity: 0, y: 60, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.6)', immediateRender: false }, T.b5);
+        const cont = (sel, alvo, t0, d) => { const o = { v: 0 }; tl.fromTo(o, { v: 0 }, { v: alvo, duration: d, ease: 'power2.out', immediateRender: false, onUpdate: () => { document.querySelector(sel).textContent = Math.round(o.v) + '%'; } }, t0); };
+        tl.fromTo('#grafico .b1', { height: 0 }, { height: ALT / 1.4, duration: 0.7, ease: 'power3.out', immediateRender: false }, T.cem);
+        cont('#grafico .v1', 100, T.cem, 0.7);
+        tl.fromTo('#grafico .regua', { opacity: 0, bottom: 128 + ALT / 1.4 }, { opacity: 1, duration: 0.3, immediateRender: false }, T.regua);
+        tl.set('#grafico .regua', { bottom: 128 + ALT / 1.4 }, 0);
+        tl.fromTo('#grafico .b2', { height: 0 }, { height: ALT, duration: 0.8, ease: 'back.out(1.3)', immediateRender: false }, T.c140);
+        cont('#grafico .v2', 140, T.c140, 0.8);
+        tl.to('#grafico', { opacity: 0, scale: 0.92, duration: 0.25 }, T.b6 - 0.2);
+        // conta: paga x precisa ganhar x não ganhava
+        tl.set('#conta, #conta .l', { opacity: 0 }, 0);
+        tl.set('#conta', { opacity: 1 }, T.promete);
+        [['.k1', T.promete], ['.k2', T.ganhar], ['.k3', T.master7]].forEach(([s, t0]) => tl.fromTo('#conta ' + s, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2.2)', immediateRender: false }, t0));
+        tl.to('#conta .k1, #conta .k2', { opacity: 0.35, duration: 0.2 }, T.master7);
+        tl.to('#conta', { opacity: 0, duration: 0.2 }, T.parte - 0.1);
+        // câmera de segurança
+        tl.set('#cctv', { opacity: 0 }, 0);
+        tl.set('#cctv', { opacity: 1 }, T.b10); tl.set('#cctv', { opacity: 0 }, T.manha);
+        tl.to('#cctv .rec i', { opacity: 0, duration: 0.01, repeat: 12, yoyo: true, repeatDelay: 0.45 }, T.b10);
+
+        // ---------- poses ----------
+        M.pose(vorc, 'desconfiado', 0, T.nunca); M.pose(vorc, 'apontando', T.nunca, T.banco1);
+        M.pose(vorc, 'acenando', T.b4, T.master4 + 0.6); M.pose(vorc, 'desconfiado', T.master4 + 0.6, T.quando);
+        M.pose(vorc, 'apontando', T.b8, T.nunca8); M.pose(vorc, 'segredo', T.nunca8, T.vendeu);
+        M.pose(vorc, 'correndo', T.b10, T.vorc10 + 0.4); M.pose(vorc, 'assustado', T.vorc10 + 0.4, T.manha);
+        M.pose(vorc, 'desconfiado', T.vorc11, T.nega); M.pose(vorc, 'negando', T.nega, T.b12);
+        M.pose(narr, 'assustado', T.b2, T.milhao); M.pose(narr, 'pensando', T.milhao, T.fica); M.pose(narr, 'apontando', T.fica, T.b4);
+        M.pose(narr, 'correndo', T.quando, T.quando + 1.6); M.pose(narr, 'comemorando', T.quando + 1.6, T.b5);
+        M.pose(narr, 'parado', T.b6, T.garant); M.pose(narr, 'comemorando', T.garant, T.quebra); M.pose(narr, 'assustado', T.quebra, T.ate); M.pose(narr, 'comemorando', T.ate, T.b7);
+        M.pose(narr, 'pensando', T.mas, T.master7); M.pose(narr, 'assustado', T.master7, T.b8);
+        M.pose(narr, 'pensando', T.caixa, T.clientes); M.pose(narr, 'assustado', T.clientes, T.bc);
+        [c1, c2, c3].forEach((c) => { M.pose(c, 'correndo', T.b7, T.mas); M.pose(c, 'parado', T.clientes, T.b9); });
+        M.pose(pol, 'correndo', T.vorc10, T.vorc10 + 1.2); M.pose(pol, 'apontando', T.vorc10 + 1.2, T.manha);
+
+        // ---------- cartão final ----------
+        const fimPj = Personagem.criar(document.getElementById('fimPj'), { id: 'fimNarr', visual: 'narrador', x: 540, y: 1250, escala: 1.25 });
+        tl.set('#fimCard', { opacity: 0 }, 0);
+        tl.fromTo('#fimCard', { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out', immediateRender: false }, FIM_FALA);
+        tl.fromTo('#fimCard .raios', { rotation: 0 }, { rotation: 40, duration: DURACAO - FIM_FALA, ease: 'none', immediateRender: false }, FIM_FALA);
+        tl.fromTo('#fimCard .logo', { scale: 0.3 }, { scale: 1, duration: 0.45, ease: 'back.out(2.5)', immediateRender: false }, FIM_FALA + 0.1);
+        tl.fromTo('#fimCard .segue', { y: 400 }, { y: 0, duration: 0.45, ease: 'back.out(1.8)', immediateRender: false }, FIM_FALA + 0.3);
+        Personagem.pose(tl, fimPj, 'acenando', FIM_FALA, DURACAO - FIM_FALA);
+        tl.set('.marca', { opacity: 0 }, FIM_FALA);
+
+        M.legenda({ max: 2, corDestaque: '#FFFFFF' });
+        M.iniciar();
+        window.__timelines = window.__timelines || {};
+        window.__timelines['main'] = tl;
+      })();
+    </script>
+  </body>
+</html>

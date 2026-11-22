@@ -33,3 +33,4 @@ Instruções para o Claude: todo vídeo novo do canal segue este padrão.
 
 ## Vídeos publicados
 1. Lavagem de dinheiro / Lava Jato (primeiro vídeo; postado sem a assinatura).
+2. Banco Master / Daniel Vorcaro (videos/banco-master: 5 palcos — torre, cofre do FGC, BRB, Banco Central, aeroporto à noite; sai sem trilha para a música entrar pelo app).
