@@ -8,6 +8,17 @@ Passo 3 (história; dizer o que é verdade e o que é inventado) → espera "GO"
 Passo 5 (folha de estilo + frase fixa por personagem) → Passo 6 (imagem de referência) → Passo 7 (um prompt por plano)
 → Passo 8 (títulos e descrição). Uma pergunta por vez, com opções numeradas.
 Referência de execução audiovisual: `LINGUAGEM-AUDIOVISUAL.md`.
+Crescimento e postagem: `CRESCIMENTO.md`.
+
+## Adaptações para vídeos em português (22/11/2026)
+Decididas por mim (Claude) com base na delegação do dono ("faça o que tenha que fazer para os meus vídeos se tornarem
+virais"), depois de apresentar a recomendação. O documento continua valendo em todo o resto; o dono pode reverter.
+1. **Palavras por duração (pt-BR ≈ 2,5 palavras/s):** 30 s ≈ 75 palavras (7–8 cenas), 45 s ≈ 115 (10–12 cenas),
+   60 s ≈ 150 (13–15 cenas); tolerância ±10. (O documento usa 100/150/205, calculadas para inglês.)
+2. **Cortes:** 1 frase = 1 cena (mesmo lugar e ação, como no documento), mas a edição troca de ângulo a cada 1,5–2,5 s,
+   na ordem estabelecer → reação → detalhe (ritmo medido nos vídeos de referência). Prompt de IA: 1 por frase.
+3. **Texto na imagem:** além de números em objetos, vale texto curto dentro da cena (manchete, placa, faixa, tela) e as
+   etiquetas amarelas de números do canal, além da legenda. Nos prompts de IA o texto segue restrito a números.
 
 Todo roteiro do canal tem 6 partes, nesta ordem. Exemplo completo: `roteiros/01-janela-redonda.md`.
 

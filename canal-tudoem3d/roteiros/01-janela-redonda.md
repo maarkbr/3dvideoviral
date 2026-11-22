@@ -9,7 +9,7 @@ cabine pressurizada infla e desinfla a cada voo e a tensão se acumula nos canto
 https://en.wikipedia.org/wiki/De_Havilland_Comet). Inventado: o engenheiro, o chefe, o dono da fábrica vizinha, as falas,
 as 32 janelas lixadas, os 300 voos e o "voo 301".
 
-## Narração (bloco limpo para o gerador de voz) — 161 palavras
+## Narração (bloco limpo para o gerador de voz) — 160 palavras
 ```
 Um engenheiro lixa os cantos de trinta e duas janelas de avião até ficarem redondas.
 A fábrica dele e a vizinha disputam quem leva os passageiros do primeiro jato do mundo.
@@ -17,7 +17,7 @@ O chefe dele pega uma janela redonda e grita: "Isso é avião ou máquina de lav
 Ele não responde.
 A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja.
 O dono da fábrica vizinha liga rindo: "Quer que eu mande o sabão em pó?"
-Nove meses depois, o jato vizinho já fez trezentos voos, e o dele ainda está no hangar.
+Nove meses depois, o jato vizinho fez trezentos voos, e o dele ainda está no hangar.
 Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo.
 No voo trezentos e um, a oito mil metros, o jato vizinho se parte no céu.
 Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos.
@@ -33,12 +33,12 @@ No dia seguinte, o dono da vizinha encomenda trinta e duas janelas redondas… e
 | SHOT 4 | Ele não responde. | 3 | 1,5 s (+0,5 s de pausa) | DÚVIDA (herói não explica; punchline) |
 | SHOT 5 | A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja. | 15 | 6,0 s | ESCALADA 1 (rival ganha) |
 | SHOT 6 | O dono da fábrica vizinha liga rindo: "Quer que eu mande o sabão em pó?" | 15 | 6,0 s | ESCALADA 2 (piada 2) |
-| SHOT 7 | Nove meses depois, o jato vizinho já fez trezentos voos, e o dele ainda está no hangar. | 17 | 6,8 s | ESCALADA 3 (no tempo) |
+| SHOT 7 | Nove meses depois, o jato vizinho fez trezentos voos, e o dele ainda está no hangar. | 16 | 6,4 s | ESCALADA 3 (no tempo) |
 | SHOT 8 | Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo. | 17 | 6,8 s | PISTA visível |
 | SHOT 9 | No voo trezentos e um, a oito mil metros, o jato vizinho se parte no céu. | 15 | 6,0 s | VIRADA |
 | SHOT 10 | Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos. | 16 | 6,4 s | REVELAÇÃO |
 | SHOT 11 | No dia seguinte, o dono da vizinha encomenda trinta e duas janelas redondas… e sabão em pó. | 17 | 6,8 s | FECHO |
-Total ≈ 65 s.
+Total ≈ 64 s.
 
 ## Narração com tags (ElevenLabs Eleven v3/v4, voz Roger, estabilidade Natural)
 ```
@@ -48,7 +48,7 @@ O chefe dele pega uma janela redonda e grita: [laughs] "Isso é avião… ou má
 [calm] Ele não responde.   (tag [calm] a testar; se não funcionar, sem tag)
 [excited] A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja.
 O dono da fábrica vizinha liga rindo: [sarcastic] "Quer que eu mande o sabão em pó?"
-Nove meses depois, o jato vizinho já fez trezentos voos… e o dele ainda está no hangar.
+Nove meses depois, o jato vizinho fez trezentos voos… e o dele ainda está no hangar.
 [whispers] Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo.
 [serious] No voo trezentos e um, a oito mil metros… o jato vizinho se parte no céu.
 [confident] Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos.
@@ -253,7 +253,7 @@ personagens são ilustrativos; o motivo é real. #aviao #curiosidades #engenhari
 | Frases de 10 a 17 palavras com uma punchline de 3 a 6 | ✅ 15–17 palavras; punchline "Ele não responde." (3) |
 | Sem introdução, nome do canal, moral, pergunta ao público, chamada para ação | ✅ |
 | Última frase é a imagem de fecho, ≤ 25 palavras | ✅ 17 |
-| Bater a contagem do Passo 1 (±10) | ✅ 161 palavras para a opção "45 s (150 palavras)" |
+| Bater a contagem do Passo 1 (±10) | ✅ 160 palavras para 60 s (adaptação pt-BR: 150 ±10) |
 | Passo 3: dizer o que é verdade e o que é inventado | ✅ |
 | Passo 5: folha de estilo DEFAULT + 1 frase fixa por personagem | ✅ |
 | Passo 6: prompt da imagem de referência | ✅ |
@@ -264,6 +264,6 @@ personagens são ilustrativos; o motivo é real. #aviao #curiosidades #engenhari
 1. **Passos 1, 2 e 4 são perguntas ao dono** (duração; tema/10 ideias; imagens de estilo ou DEFAULT). Neste piloto
    não foram feitas; a partir do próximo roteiro, sim.
 2. **Velocidade em português**: as contagens do documento (100/150/205 palavras) foram feitas para inglês (~3,3 pal/s).
-   Em português (~2,5 pal/s), 161 palavras dão ~65 s, não 45 s.
+   Em português (~2,5 pal/s), 160 palavras dão ~64 s. Resolvido: palavras por duração (ver ROTEIRO-PADRAO.md).
 3. **Duração do plano**: o documento pede planos de 4–6 s; em português, frases de 15–17 palavras duram 6–7 s, e os
    vídeos de referência trocam de ângulo a cada ~1,6 s dentro da frase.
