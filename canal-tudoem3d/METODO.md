@@ -125,7 +125,7 @@ O roteiro oficial tem **duas camadas**: as tags do ElevenLabs v3 (para a voz de 
   Nunca começar com Como, O que, Por que, Você sabia, Imagine.
 - Tempo presente depois do gancho. Frase 2: os dois lados e o prêmio.
 - Batidas: GANCHO → PREPARO → DÚVIDA (zombaria de até 14 palavras; o herói não explica) → ESCALADA (2–3 passos; rival
-  parece ganhar; pista visível) → VIRADA → REVELAÇÃO ("Acontece que…" + mecanismo numa frase) → FECHO (imagem final:
+  parece ganhar; pista visível) → VIRADA → REVELAÇÃO ("Veja só:" — tradução de "You see" — + mecanismo numa frase) → FECHO (imagem final:
   quem duvidou recebe o que zombou).
 - Pelo menos duas piadas (ditas por quem duvida) e dois números específicos. Frases de 10 a 17 palavras com uma
   punchline de 3 a 6. Sem introdução, nome do canal, moral, pergunta ou chamada para ação na narração.

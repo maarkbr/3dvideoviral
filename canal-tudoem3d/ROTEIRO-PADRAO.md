@@ -1,5 +1,14 @@
 # Padrão oficial de roteiro — Tudo em 3D
 
+**Regra-mãe:** todo roteiro segue RIGOROSAMENTE o documento "Rick's Clips Master Prompt (v3)" (fluxo de 8 passos e
+regras de narração). Nenhuma regra do documento é alterada, simplificada ou ignorada sem consultar o dono do canal.
+Antes de considerar um roteiro pronto, ele passa pela tabela "Conferência contra o documento" (modelo no roteiro 01),
+regra por regra. Fluxo: Passo 1 (perguntar duração) → Passo 2 (tema ou 10 ideias classificadas por tipo A/B/C) →
+Passo 3 (história; dizer o que é verdade e o que é inventado) → espera "GO" → Passo 4 (imagens de estilo ou DEFAULT) →
+Passo 5 (folha de estilo + frase fixa por personagem) → Passo 6 (imagem de referência) → Passo 7 (um prompt por plano)
+→ Passo 8 (títulos e descrição). Uma pergunta por vez, com opções numeradas.
+Referência de execução audiovisual: `LINGUAGEM-AUDIOVISUAL.md`.
+
 Todo roteiro do canal tem 6 partes, nesta ordem. Exemplo completo: `roteiros/01-janela-redonda.md`.
 
 1. **Ficha** (fato real e fonte; o que é inventado; tipo de história; duração; palavras)

@@ -1,146 +1,269 @@
-# Roteiro 01 — "Por que a janela do avião é redonda"
+# Roteiro 01 — "Por que a janela do avião é redonda" (v2, conferido contra o documento)
 
-## Parte 1 — Ficha
+Status: **piloto**. O tema foi escolhido por mim antes de o fluxo do documento ser aplicado (Passos 1 e 2 não foram
+perguntados). Fica como modelo; o próximo roteiro começa pelo Passo 1.
+
+## Passo 3 — O que é verdade e o que é inventado
+Verdade: o primeiro jato de passageiros teve janelas quase quadradas e se partiu em pleno voo por fadiga do metal: a
+cabine pressurizada infla e desinfla a cada voo e a tensão se acumula nos cantos retos (Fonte:
+https://en.wikipedia.org/wiki/De_Havilland_Comet). Inventado: o engenheiro, o chefe, o dono da fábrica vizinha, as falas,
+as 32 janelas lixadas, os 300 voos e o "voo 301".
+
+## Narração (bloco limpo para o gerador de voz) — 161 palavras
 ```
-Título: Por que a janela do avião é redonda
-Fato verdadeiro: o primeiro jato comercial de passageiros (de Havilland Comet) teve acidentes em voo nos anos 1950
-  causados por fadiga do metal: a cabine pressurizada "infla e desinfla" a cada voo e a tensão se concentra nos cantos
-  retos das aberturas da fuselagem, onde nascem trincas. Depois disso, as janelas de avião passaram a ter cantos
-  arredondados, que distribuem a tensão.
-  Fonte: https://en.wikipedia.org/wiki/De_Havilland_Comet (seção "Accidents and incidents" / "Investigation")
-Inventado para a história: o engenheiro, o chefe, a disputa entre as fábricas, as falas, o "mural da vergonha".
-  A fábrica rival não é nomeada. Os acidentes reais tiveram vítimas: a cena da virada é séria, sem humor.
-Tipo: A (herói azarão provado certo por um princípio físico real)
-Duração-alvo: ~70 s (TikTok paga a partir de 60 s) — Contagem: 183 palavras — Cenas: 13
+Um engenheiro lixa os cantos de trinta e duas janelas de avião até ficarem redondas.
+A fábrica dele e a vizinha disputam quem leva os passageiros do primeiro jato do mundo.
+O chefe dele pega uma janela redonda e grita: "Isso é avião ou máquina de lavar?"
+Ele não responde.
+A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja.
+O dono da fábrica vizinha liga rindo: "Quer que eu mande o sabão em pó?"
+Nove meses depois, o jato vizinho já fez trezentos voos, e o dele ainda está no hangar.
+Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo.
+No voo trezentos e um, a oito mil metros, o jato vizinho se parte no céu.
+Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos.
+No dia seguinte, o dono da vizinha encomenda trinta e duas janelas redondas… e sabão em pó.
 ```
 
-## Parte 2 — Narração com tags (colar inteira no ElevenLabs, modelo Eleven v3, voz Roger)
-```
-[confident] Um engenheiro desenha as janelas de um avião novo… redondinhas. E a fábrica inteira cai na gargalhada.
-Duas fábricas disputam quem lança o primeiro jato de passageiros, e quem chegar antes leva o céu inteiro.
-O chefe olha o desenho e solta: [sarcastic] "Redonda? Isso é avião ou máquina de lavar?"
-Mas ele não muda uma linha.
-[excited] A fábrica rival decola primeiro, com janelas quadradas, enormes, perfeitas pra foto.
-Os passageiros fazem fila só pra sentar na janelinha.
-E o avião dele atrasa nove meses… e o desenho vai parar no mural da vergonha.
-[whispers] Só que, a cada voo do avião rival, nasce um risquinho no canto da janela. Da grossura de um fio de cabelo.
-[serious] Até que, a oito mil metros de altura… o jato rival se parte no ar.
-Acontece que, a cada voo, a cabine infla e desinfla como um balão.
-Num canto reto, toda essa força se junta num ponto só. No redondo, ela escorrega… e se espalha.
-[mischievously] Hoje, toda janela de avião é redonda… e o chefe que riu dele só viaja olhando pela "máquina de lavar".
-```
-Se for gravar com a própria voz: ignore os colchetes e siga a tabela da Parte 3.
+## A mesma narração em planos (1 frase = 1 plano)
+| Plano | Frase | Palavras | Duração estimada (2,5 pal/s) | Batida |
+|---|---|---|---|---|
+| SHOT 1 | Um engenheiro lixa os cantos de trinta e duas janelas de avião até ficarem redondas. | 15 | 6,0 s | GANCHO |
+| SHOT 2 | A fábrica dele e a vizinha disputam quem leva os passageiros do primeiro jato do mundo. | 16 | 6,4 s | PREPARO |
+| SHOT 3 | O chefe dele pega uma janela redonda e grita: "Isso é avião ou máquina de lavar?" | 15 | 6,0 s | DÚVIDA (piada 1) |
+| SHOT 4 | Ele não responde. | 3 | 1,5 s (+0,5 s de pausa) | DÚVIDA (herói não explica; punchline) |
+| SHOT 5 | A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja. | 15 | 6,0 s | ESCALADA 1 (rival ganha) |
+| SHOT 6 | O dono da fábrica vizinha liga rindo: "Quer que eu mande o sabão em pó?" | 15 | 6,0 s | ESCALADA 2 (piada 2) |
+| SHOT 7 | Nove meses depois, o jato vizinho já fez trezentos voos, e o dele ainda está no hangar. | 17 | 6,8 s | ESCALADA 3 (no tempo) |
+| SHOT 8 | Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo. | 17 | 6,8 s | PISTA visível |
+| SHOT 9 | No voo trezentos e um, a oito mil metros, o jato vizinho se parte no céu. | 15 | 6,0 s | VIRADA |
+| SHOT 10 | Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos. | 16 | 6,4 s | REVELAÇÃO |
+| SHOT 11 | No dia seguinte, o dono da vizinha encomenda trinta e duas janelas redondas… e sabão em pó. | 17 | 6,8 s | FECHO |
+Total ≈ 65 s.
 
-## Parte 3 — Direção de voz
-| # | Trecho | Emoção | Int. | Velocidade | Entonação | Pausa | Ênfase | Intenção |
-|---|---|---|---|---|---|---|---|---|
-| 1 | "Um engenheiro desenha… redondinhas." | confiança divertida | 3 | rápida, freia em "redondinhas" | afirmativa; "redondinhas" com sorriso | 0,4 s antes de "redondinhas" | REDONDINHAS | plantar o absurdo |
-| 2 | "E a fábrica inteira cai na gargalhada." | diversão | 3 | rápida | sobe em "gargalhada" | — | GARGALHADA | criar o "nós contra eles" |
-| 3 | "Duas fábricas disputam… o céu inteiro." | neutro-tenso | 2 | rápida e fluida | narrativa, cai no fim | — | PRIMEIRO, CÉU | dar o prêmio da disputa |
-| 4 | "O chefe olha o desenho e solta:" | neutro | 2 | normal | preparo | 0,2 s depois de "solta" | — | entregar a deixa da piada |
-| 5 | "Redonda? Isso é avião ou máquina de lavar?" | deboche | 4 | um pouco mais lenta | pergunta exagerada, voz de chefe | — | MÁQUINA DE LAVAR | piada 1 |
-| 6 | "Mas ele não muda uma linha." | firmeza | 3 | lenta, seca | cai, sem emoção | 0,5 s depois (silêncio) | NÃO MUDA | o herói não explica |
-| 7 | "A fábrica rival decola primeiro… perfeitas pra foto." | empolgação | 4 | acelera | sobe em "enormes", ironia em "pra foto" | — | QUADRADAS | o rival parece ganhar |
-| 8 | "Os passageiros fazem fila só pra sentar na janelinha." | animação | 3 | rápida | leve | — | FILA | mostrar o sucesso do rival |
-| 9 | "E o avião dele atrasa nove meses… mural da vergonha." | pena cômica | 3 | normal, freia no fim | descendente | 0,4 s antes de "mural" | NOVE MESES, VERGONHA | piada 2 (do lado dos zombadores) |
-| 10 | "Só que, a cada voo… fio de cabelo." | segredo | 2 | lenta | sussurro, quase confidência | 0,3 s antes de "Da grossura" | RISQUINHO, CABELO | a pista: só o público percebe |
-| 11 | "Até que, a oito mil metros… se parte no ar." | gravidade | 4 | lenta | firme, sem drama exagerado | 0,6 s antes de "o jato" | OITO MIL, SE PARTE | a virada (respeito: houve vítimas) |
-| 12 | "Acontece que… como um balão." | explicação clara | 2 | normal | didática, calma | — | INFLA E DESINFLA | o mecanismo, parte 1 |
-| 13 | "Num canto reto… e se espalha." | clareza firme | 3 | normal; freia no fim | contraste RETO x REDONDO | 0,3 s antes de "e se espalha" | RETO, PONTO SÓ, REDONDO | o mecanismo, parte 2 |
-| 14 | "Hoje, toda janela… máquina de lavar." | malícia | 3 | normal, sorriso na voz | brincalhona; aspas em "máquina de lavar" | 0,4 s antes de "e o chefe" | REDONDA, MÁQUINA DE LAVAR | justiça cômica, convida ao replay |
+## Narração com tags (ElevenLabs Eleven v3/v4, voz Roger, estabilidade Natural)
+```
+[confident] Um engenheiro lixa os cantos de trinta e duas janelas de avião… até ficarem redondas.
+A fábrica dele e a vizinha disputam quem leva os passageiros do primeiro jato do mundo.
+O chefe dele pega uma janela redonda e grita: [laughs] "Isso é avião… ou máquina de lavar?"
+[calm] Ele não responde.   (tag [calm] a testar; se não funcionar, sem tag)
+[excited] A fábrica vizinha decola primeiro, com janelas quadradas tão grandes que parecem vitrines de loja.
+O dono da fábrica vizinha liga rindo: [sarcastic] "Quer que eu mande o sabão em pó?"
+Nove meses depois, o jato vizinho já fez trezentos voos… e o dele ainda está no hangar.
+[whispers] Só que, no canto de cada janela quadrada, aparece um risco fino como um fio de cabelo.
+[serious] No voo trezentos e um, a oito mil metros… o jato vizinho se parte no céu.
+[confident] Veja só: a cabine infla a cada voo, e a força se acumula nos cantos retos.
+[mischievously] No dia seguinte, o dono da vizinha encomenda trinta e duas janelas redondas… e sabão em pó.
+```
+Justificativa das tags: confiança no gancho (afirmação absurda dita com certeza); riso e deboche nas duas falas dos
+duvidadores (é a piada e cria torcida); calma no "Ele não responde" (o herói não se explica); empolgação na escalada
+(o rival parece ganhar); sussurro na pista (só o público percebe); seriedade na virada (acidente com vítimas reais,
+sem humor); confiança na revelação (clareza); malícia no fecho (justiça cômica).
 
-## Parte 4 — Storyboard
-| Cena | Trecho | Dur. | Ambiente | Personagens | Expressão | Ação | Enquadr. | Ângulo | Movimento | Luz | Elementos-chave | Transição |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | "Um engenheiro desenha… redondinhas." | 4,5 s | Escritório de projeto dentro do hangar | Engenheiro (jaleco verde-água) | concentrado → sorriso | desenha um círculo na prancheta | DT → PM | plongée sobre a prancheta, depois nível dos olhos | empurra lento | dia, luz de janela | prancheta com janela redonda desenhada | corte seco no "E" |
-| 2 | "E a fábrica inteira cai na gargalhada." | 2,5 s | Hangar com avião em construção | 6 operários + chefe (terno roxo) | risada | apontam e riem | GE | nível dos olhos | chicote lateral | dia | avião sem asas ao fundo | chicote |
-| 3 | "Duas fábricas disputam… céu inteiro." | 5 s | Pista com 2 hangares lado a lado | — | — | 2 aviões sendo empurrados para fora | GE | aéreo (plongée alto) | travelling sobre a pista | sol forte | placas "FÁBRICA A" e "FÁBRICA B" nos hangares | corte |
-| 4 | "O chefe olha o desenho e solta:" | 2 s | Escritório | Chefe + engenheiro | desconfiado | chefe segura a prancheta | PA | sobre o ombro do engenheiro | parado com respiração | dia | prancheta | — |
-| 5 | "Redonda? … máquina de lavar?" | 3 s | Escritório | Chefe | deboche, sobrancelha alta | balança a prancheta | CL | leve contra-plongée | empurra rápido no "máquina" | dia | balão de pensamento com máquina de lavar | corte |
-| 6 | "Mas ele não muda uma linha." | 2,5 s | Escritório | Engenheiro | sério, calmo | cruza os braços | CL | nível dos olhos | parado (silêncio) | dia | — | corte seco |
-| 7 | "A fábrica rival decola primeiro…" | 4,5 s | Pista, rival decolando | multidão | comemoração | avião de janelas quadradas decola | GE | baixo, atrás da multidão | segue o avião subindo | sol | janelas quadradas grandes visíveis | corte |
-| 8 | "Os passageiros fazem fila…" | 3 s | Portão de embarque | 5 passageiros | felizes | fila, um tira foto | PM | nível dos olhos | travelling lateral pela fila | dia | etiqueta "LOTADO" | corte |
-| 9 | "E o avião dele atrasa nove meses…" | 4,5 s | Hangar | Engenheiro, chefe | chefe bravo, engenheiro tranquilo | chefe prega o desenho no mural | PA | nível dos olhos | empurra até o mural | fim de tarde | calendário passando 9 meses; mural "VERGONHA" | dissolve rápido |
-| 10 | "Só que… fio de cabelo." | 5 s | Janela do avião rival (externo, em voo) | — | — | trinca fina cresce no canto | DT (macro) | frontal | empurra muito lento | céu azul frio | etiqueta "FIO DE CABELO" | corte seco + silêncio |
-| 11 | "Até que, a oito mil metros…" | 4 s | Céu | — | — | avião rival se parte (sem gráficos de vítimas; nuvens) | GE | de longe | tremida de impacto | céu escurece | etiqueta "8.000 m" | corte para branco 0,2 s |
-| 12 | "Acontece que… como um balão." | 3,5 s | Modelo explicativo (fuselagem em corte) | Mascote ao lado | explicando | aponta a cabine que infla/desinfla | PM | nível dos olhos | órbita lenta | luz de estúdio | fuselagem pulsando; setas | corte |
-| 13 | "Num canto reto… se espalha." | 5 s | Igual à 12 | Mascote | confiante | duas janelas lado a lado: setas vermelhas acumulam no canto reto; no redondo escorregam | CL nas janelas | frontal | empurra no "redondo" | estúdio | setas vermelhas x azuis | corte |
-| 14 | "Hoje, toda janela… máquina de lavar." | 5,5 s | Cabine de avião moderno, céu do pôr do sol | Chefe na poltrona da janela | emburrado → resignado | olha pela janela redonda | CL do chefe na janela | sobre o ombro | afasta revelando a janela redonda | pôr do sol | janela redonda emoldurando o chefe | cartão final |
+## Direção de voz
+| Plano | Emoção | Int. (1–5) | Velocidade | Entonação | Pausas | Ênfase | Intenção |
+|---|---|---|---|---|---|---|---|
+| 1 | confiança curiosa | 3 | rápida até "avião", freia | afirmativa, cai no fim | 0,3 s antes de "até ficarem" | TRINTA E DUAS, REDONDAS | plantar o absurdo com um número |
+| 2 | neutra, urgente | 2 | rápida, contínua | narrativa | — | PRIMEIRO JATO DO MUNDO | dar o prêmio e os lados |
+| 3 | narração neutra → fala do chefe em gargalhada | 4 na fala | normal; a fala mais lenta | pergunta exagerada | 0,2 s antes da fala; 0,2 s antes de "ou" | MÁQUINA DE LAVAR | piada 1 |
+| 4 | calma seca | 2 | lenta | descendente, final | 0,5 s de silêncio depois | NÃO | o herói não explica |
+| 5 | empolgação | 4 | acelera | ascendente em "tão grandes" | — | QUADRADAS, VITRINES | o rival parece ganhar |
+| 6 | narração leve → fala com deboche | 4 na fala | normal | fala com sorriso malicioso | 0,2 s antes da fala | SABÃO EM PÓ | piada 2 |
+| 7 | pena cômica | 3 | normal; freia no fim | descendente em "hangar" | 0,4 s antes de "e o dele" | NOVE MESES, TREZENTOS, HANGAR | passagem de tempo, herói perdendo |
+| 8 | segredo | 2 | lenta | sussurro confidente | 0,3 s antes de "aparece" | RISCO, FIO DE CABELO | a pista |
+| 9 | gravidade | 4 | lenta | firme, sem drama | 0,6 s antes de "o jato" | TREZENTOS E UM, OITO MIL, SE PARTE | a virada (respeitosa) |
+| 10 | clareza firme | 3 | normal | didática | 0,2 s depois de "Veja só" | INFLA, CANTOS RETOS | o mecanismo real |
+| 11 | malícia | 3 | normal; freia no fim | brincalhona | 0,5 s antes de "e sabão em pó" | TRINTA E DUAS, SABÃO EM PÓ | justiça cômica + replay |
 
-## Parte 5 — Especificação de cena (motor v2)
-Palcos a construir uma vez e reaproveitar no canal: **Hangar/fábrica**, **Pista de aeroporto** (já existe base no
-palco "aeroporto" do vídeo Banco Master), **Escritório**, **Estúdio explicativo** (fundo neutro com grade 3D),
-**Cabine de avião**. Personagens novos do elenco: **Engenheiro** (jaleco verde-água, óculos redondos) e **Chefe**
-(terno roxo, careca, bigode fino).
+## Passo 5 — Folha de estilo (DEFAULT do documento) e personagens
 ```
-CENA 1 — [0,0 → 4,5 s] (entra em "Um")
-PALCO: escritório no mezanino do hangar, manhã
-PEÇAS 3D: prancheta inclinada (caixa fina), luminária, janela grande com o hangar e o avião em construção desfocados
-PERSONAGENS: engenheiro em x=-0,2, pose "pensando" → "apontando" em "redondinhas"
-CÂMERA: pos [0,2.3,1.2] → alvo [0,1.0,0] (plongée sobre a prancheta), fov 40, foco 1,3 m; em "redondinhas" passa a
-        pos [0.4,1.5,2.4] → alvo [-0.2,1.2,0], fov 36
-OBJETOS/ETIQUETAS: desenho de janela REDONDA aparece riscado na prancheta em "redondinhas"
-LUZ/CLIMA: sol da manhã pela janela (luz quente lateral), poeira no ar
-CONTINUIDADE: jaleco verde-água e lápis na mão do engenheiro em todas as cenas
+Flat 2D cartoon characters with simple round heads, dot eyes, thick clean black outlines and flat colours, animated on a
+detailed stylised 3D-rendered background with soft daylight, warm saturated colours, shallow depth of field.
+Vertical 9:16. Smooth, expressive cartoon acting. No captions, no subtitles, no logos, no watermarks; the only writing
+allowed is a number on a prop.
 ```
-```
-CENA 5 — [~13,0 → 16,0 s] (entra em "Redonda")
-PALCO: escritório
-PERSONAGENS: chefe em x=0, pose "desconfiado" → "apontando" em "máquina"
-CÂMERA: close; pos [0.1,1.75,1.6] → alvo [0,1.6,0], fov 34; empurra 8% em "máquina de lavar"
-OBJETOS/ETIQUETAS: balão de pensamento com uma máquina de lavar (objeto 2D) entra em "máquina"
-LUZ/CLIMA: igual à cena 1
-CONTINUIDADE: prancheta na mão do chefe (veio da cena 4)
-```
-```
-CENA 10 — [~37 → 42 s] (entra em "Só")
-PALCO: céu em voo (sem chão), avião rival em close extremo
-PEÇAS 3D: fuselagem branca com janela QUADRADA; trinca fina (linha preta animada crescendo do canto)
-CÂMERA: macro frontal da janela, fov 30, foco 0,8 m; empurra 3% em 5 s
-OBJETOS/ETIQUETAS: etiqueta "FIO DE CABELO" em "cabelo"
-LUZ/CLIMA: céu azul frio, sol duro
-CONTINUIDADE: mesma janela quadrada da cena 7
-```
-(As demais cenas seguem o mesmo bloco; eu as escrevo direto no código na produção.)
+Personagens (frase fixa, igual em todo prompt):
+- ENGINEER: "A young engineer with a round white head, round black glasses, a mint-green lab coat over a white shirt and a pencil behind his ear."
+- BOSS: "His boss, bald with a round white head, a thin black moustache and a purple three-piece suit."
+- RIVAL: "The rival factory owner, round white head, slicked silver hair, a mustard-yellow suit and a red bow tie."
 
-Prompt de IA (fase futura) — exemplo da cena 5:
+## Passo 6 — Imagem de referência (9:16)
 ```
-Use the attached images as the character and style reference. Vertical 9:16. Flat 2D cartoon characters with round
-white heads, thick clean black outlines and flat colours, acting on a detailed stylised 3D-rendered background with
-soft daylight, warm saturated colours and shallow depth of field. The boss: bald round white head, thin black
-moustache, purple suit with a gold tie. Inside a drafting office on a mezzanine above an aircraft hangar, morning sun
-through a big window, an unfinished passenger jet blurred in the background. Close-up at eye level, slightly from
-below. The boss holds a drafting board towards the camera, raises one eyebrow and laughs mockingly while shaking the
-board left and right. No captions, no subtitles, no logos. Sound: ambient sound effects only. No dialogue, no
+Flat 2D cartoon characters with simple round heads, dot eyes, thick clean black outlines and flat colours, animated on a
+detailed stylised 3D-rendered background with soft daylight, warm saturated colours, shallow depth of field. Vertical
+9:16. Smooth, expressive cartoon acting. No captions, no subtitles, no logos, no watermarks; the only writing allowed is
+a number on a prop. A young engineer with a round white head, round black glasses, a mint-green lab coat over a white
+shirt and a pencil behind his ear. His boss, bald with a round white head, a thin black moustache and a purple
+three-piece suit. The rival factory owner, round white head, slicked silver hair, a mustard-yellow suit and a red bow
+tie. All three stand side by side, full body, facing the camera, inside a sunlit 1950s aircraft hangar with an
+unfinished silver passenger jet behind them. The engineer holds a round aircraft window, the boss holds a clipboard,
+the rival holds a telephone handset. No text in the image.
+```
+(Na fase grátis, esta imagem é a referência visual que eu sigo no motor; não é gerada por IA.)
+
+## Passo 7 — Um prompt por plano
+Cada bloco: 1) referência 2) folha de estilo + personagens do plano 3) cenário e câmera 4) ação literal 5) som.
+`[STYLE]` = o bloco da folha de estilo acima, palavra por palavra.
+
+**SHOT 1 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] A young engineer with a round white head, round
+black glasses, a mint-green lab coat over a white shirt and a pencil behind his ear. Inside a sunlit aircraft hangar,
+a workbench with a stack of square aircraft windows; camera low at bench height, slowly pushing in. The engineer sands
+the corner of a square window until it becomes round, blows the dust towards the camera and places it on a pile of
+round windows; a small tag on the pile reads "32". Sound: ambient sound effects only. No dialogue, no narration, no music.
+```
+**SHOT 2 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] Aerial view of two hangars side by side on a
+sunny airfield, a big silver passenger jet being pushed out of each one; drone camera flies forward between them. Tiny
+workers run around both jets; a runway stretches to the horizon towards the sea. Sound: ambient sound effects only. No
+dialogue, no narration, no music.
+```
+**SHOT 3 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] His boss, bald with a round white head, a thin
+black moustache and a purple three-piece suit. A young engineer with a round white head, round black glasses, a
+mint-green lab coat over a white shirt and a pencil behind his ear. At the hangar workbench; over-the-shoulder shot from
+behind the engineer, then the camera pushes in on the boss. The boss picks up a round window, holds it in front of his
+face like a porthole and bursts out laughing, his body shaking. Sound: ambient sound effects only. No dialogue, no
 narration, no music.
 ```
+**SHOT 4 — 4 s**
+```
+Use the attached images as the character and style reference. [STYLE] A young engineer with a round white head, round
+black glasses, a mint-green lab coat over a white shirt and a pencil behind his ear. Close-up at eye level at the
+workbench, static camera. The engineer says nothing, calmly picks up the next square window and keeps sanding its
+corner. Sound: ambient sound effects only. No dialogue, no narration, no music.
+```
+**SHOT 5 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] On the sunny airfield behind a cheering crowd,
+camera at ground level. A shiny passenger jet with very large square windows takes off from the left and climbs away
+from the camera into a blue sky; the crowd waves flags. Sound: ambient sound effects only. No dialogue, no narration,
+no music.
+```
+**SHOT 6 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] The rival factory owner, round white head,
+slicked silver hair, a mustard-yellow suit and a red bow tie. In a fancy office with a window showing the airfield,
+medium shot, slow push-in. The rival leans back in a leather chair with his feet on the desk, laughing into a
+telephone; a box of washing powder sits on the desk next to him. Sound: ambient sound effects only. No dialogue, no
+narration, no music.
+```
+**SHOT 7 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] A young engineer with a round white head, round
+black glasses, a mint-green lab coat over a white shirt and a pencil behind his ear. Inside the quiet hangar at dusk,
+wide shot from the doorway. His unfinished jet sits covered with dust; the engineer works alone under a lamp. Through
+the open door, the rival jet flies past again and again in the sky; a wall counter changes from "9" to "300". Sound:
+ambient sound effects only. No dialogue, no narration, no music.
+```
+**SHOT 8 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] Extreme close-up of the corner of a large square
+aircraft window on a jet flying above the clouds, cold blue light, very slow push-in. A crack as thin as a hair slowly
+grows from the sharp corner across the silver metal. Sound: ambient sound effects only. No dialogue, no narration, no
+music.
+```
+**SHOT 9 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] Wide shot of the sky high above the clouds, the
+rival jet with square windows flying from left to right; the camera shakes once. A small tag on the tail reads "301".
+The jet breaks apart into pieces that fall away below the clouds; no people are visible. Sound: ambient sound effects
+only. No dialogue, no narration, no music.
+```
+**SHOT 10 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] A clean studio cutaway model of a passenger jet
+cabin on a grey background, camera slowly orbiting. The cabin swells and shrinks like a balloon several times; glowing
+red arrows gather at the sharp corners of a square window, while on a round window blue arrows slide smoothly around
+the edge. Sound: ambient sound effects only. No dialogue, no narration, no music.
+```
+**SHOT 11 — 6 s**
+```
+Use the attached images as the character and style reference. [STYLE] The rival factory owner, round white head,
+slicked silver hair, a mustard-yellow suit and a red bow tie. A young engineer with a round white head, round black
+glasses, a mint-green lab coat over a white shirt and a pencil behind his ear. At the hangar door at golden hour,
+medium shot, camera slowly pulls back. The rival, embarrassed and sweating, hands over an order form and a box of
+washing powder; the engineer calmly passes him a stack of round windows with a tag that reads "32". Sound: ambient
+sound effects only. No dialogue, no narration, no music.
+```
 
-## Parte 6 — Direção de edição
-| Tempo | Evento | Legenda | SFX (SFX Kit) | Música | Zoom/corte | Efeito visual | Destaque |
-|---|---|---|---|---|---|---|---|
-| 0,0 | abertura no lápis | 1–2 palavras | writing-pencil-draw | trilha baixa (ou som do app) | empurra lento | — | — |
-| "redondinhas" | círculo desenhado | — | pop-medium-bubble | — | corte para PM | círculo brilha | etiqueta "REDONDA?" |
-| "gargalhada" | hangar rindo | — | celebration-applause-small (risadas) | — | chicote | — | — |
-| "máquina de lavar" | piada 1 | — | pop-large-in + move-spring | — | zoom 8% | balão com máquina | — |
-| "linha." | silêncio | — | — | **música corta 0,5 s** | corte seco | — | — |
-| "decola" | rival decola | — | whoosh-slow-hard | música volta mais alta | segue avião | — | etiqueta "JANELA QUADRADA" |
-| "nove meses" | calendário | — | time-clock-fast | — | dissolve | páginas voando | etiqueta "9 MESES" |
-| "risquinho" | trinca | — | writing-chalk-tick | música cai a 30% | empurra lento | trinca crescendo | — |
-| "oito mil" | virada | — | bass-rumble-medium → impact-deep-hard | **música corta** | tremida | flash branco 0,2 s | etiqueta "8.000 m" |
-| "Acontece" | revelação | — | riser-1s-soft | música volta suave | órbita | fuselagem pulsando | — |
-| "ponto só" | setas acumulam | — | impact-medium-hard | — | zoom no canto | setas vermelhas | — |
-| "espalha" | setas escorregam | — | shimmer-medium-soft | — | zoom no redondo | setas azuis | etiqueta "REDONDO = FORTE" |
-| "máquina de lavar" | fecho | — | pop-large-bubble | acorde final | afasta | — | — |
-| fim | cartão "Segue" 1,5 s | — | whoosh + sting-bright-short | — | — | — | — |
+## Storyboard técnico para o motor v2 (execução)
+| Plano | Palavra que abre | Ambiente / luz | Personagens e expressão | Câmera | Elementos | Transição |
+|---|---|---|---|---|---|---|
+| 1 | "Um" | hangar, manhã, sol pela porta (quente) | engenheiro concentrado → satisfeito | baixa, empurra | pilha de janelas, etiqueta "32" na palavra "trinta" | corte seco |
+| 2 | "A" | aeródromo aéreo, sol alto | figurantes | drone avançando | 2 hangares, 2 jatos | corte |
+| 3 | "O" | hangar | chefe gargalhando (pose rindo, a criar) | sobre o ombro → empurra | janela redonda na frente do rosto | corte |
+| 4 | "Ele" | hangar | engenheiro sereno | close parado | lixa | silêncio 0,5 s, corte seco |
+| 5 | "A" | pista, céu azul | multidão comemorando | chão, segue o jato | janelas quadradas grandes | corte |
+| 6 | "O" | escritório luxuoso | rival rindo ao telefone | plano médio, empurra | caixa de sabão em pó | corte |
+| 7 | "Nove" | hangar ao entardecer (cor quente → roxa) | engenheiro sozinho | geral pela porta | contador 9 → 300 | dissolve 0,4 s (passagem de tempo) |
+| 8 | "Só" | céu frio acima das nuvens (cor fria) | — | macro, empurra lento | trinca crescendo | corte seco |
+| 9 | "No" | céu alto, luz dura | — | geral, tremida | etiqueta "301" e "8.000 m" | corte para branco 0,2 s |
+| 10 | "Veja" | estúdio cinza | mascote do canal pode apontar (opcional) | órbita | setas vermelhas x azuis | corte |
+| 11 | "No" | porta do hangar, hora dourada | rival suando, engenheiro tranquilo | plano médio, afasta | pedido + sabão + "32" | fim em reação (1 s) |
 
-## Kit de postagem
-Títulos: "Por que a janela do avião é redonda" · "O desenho que salvou todos os aviões" · "A janela que a fábrica
-achou ridícula" · "O risco do tamanho de um fio de cabelo" · "Por que o avião não tem janela quadrada".
-TikTok: "A fábrica riu da janela redonda… até o avião rival se partir no ar ✈️ Você já tinha reparado que toda janela
-de avião é redonda? #aviao #curiosidades #engenharia #vocesabia"
-Instagram: história em 3 linhas + "A história é ilustrativa; o motivo é real: fadiga do metal nos cantos retos." +
-"Salva pra contar na próxima viagem ✈️" + #aviao #curiosidades #engenharia #fisica #vocesabia
-Shorts — título: "Por que a janela do avião é REDONDA (e não quadrada) ✈️" — descrição: "Os personagens são
-ilustrativos; o motivo é real: a cabine pressurizada infla e desinfla a cada voo e a tensão se concentra nos cantos
-retos. Por isso as janelas têm cantos arredondados. #shorts #aviao #curiosidades"
-Comentário fixado: "Bônus: é por isso que a janela tem um furinho embaixo. Quer o vídeo sobre ele? 👇"
+## Direção de edição
+| Momento | Legenda | Efeito sonoro (SFX Kit) | Colchão sonoro | Câmera/corte | Destaque |
+|---|---|---|---|---|---|
+| "trinta e duas" | 1–2 palavras | writing-pencil-draw (lixa) | ambiente de hangar contínuo | empurra 6% | etiqueta "32" |
+| "máquina de lavar" | — | celebration-applause-small (risadas) | — | zoom 8% | — |
+| "Ele não responde." | — | — | colchão cai a 40% por 0,5 s | corte seco | — |
+| "decola" | — | whoosh-slow-hard | sobe | segue o jato | — |
+| "sabão em pó" | — | phone-ring-classic → pop | — | — | — |
+| "Nove meses" | — | time-clock-fast | — | dissolve | contador |
+| "risco" | — | writing-chalk-tick | fica grave e baixo | empurra lento | — |
+| "se parte" | — | impact-deep-hard + bass-rumble-medium | some 0,3 s (nunca silêncio digital) | tremida + branco | "8.000 m" |
+| "Veja só" | — | riser-1s-soft | volta suave | órbita | setas |
+| "sabão em pó" (fim) | — | pop-large-bubble | acorde final | afasta | — |
+Volume final −14 LUFS, compressão forte (LRA ≤ 4 LU).
+
+## Passo 8 — Títulos e descrição
+Títulos (4 a 8 palavras, sem emoji):
+1. Por que a janela do avião é redonda
+2. A janela que salvou os aviões
+3. O engenheiro que lixava janelas de avião
+4. Por que avião não tem janela quadrada
+5. O risco do tamanho de um cabelo
+
+Descrição (2 a 3 frases + 3 hashtags):
+"O primeiro jato de passageiros tinha janelas quase quadradas e se partiu em pleno voo: a cabine infla e desinfla a
+cada voo e a força se acumula nos cantos retos. Por isso, hoje toda janela de avião tem cantos redondos. Os
+personagens são ilustrativos; o motivo é real. #aviao #curiosidades #engenharia"
+
+## Conferência contra o documento (regra por regra)
+| Regra do documento | Situação |
+|---|---|
+| Gancho: 1ª frase, 5–18 palavras, afirmação | ✅ 15 palavras, afirmação |
+| Gancho abre com uma pessoa pelo papel, fazendo a ação estranha, com um número específico | ✅ "Um engenheiro lixa… trinta e duas janelas" |
+| Não começar com Como/O que/Por que/Você sabia/Imagine/Já; nem com Então/Mas/Aí | ✅ |
+| Depois do gancho, tempo presente | ✅ |
+| Frase 2 nomeia os dois lados e o prêmio | ✅ as duas fábricas; os passageiros do primeiro jato |
+| Cada frase segue da anterior; sempre se sabe onde, quem e o quê | ✅ |
+| Batidas na ordem: gancho, preparo, dúvida, escalada (2–3 passos, rival ganha, pista visível), virada, revelação, fecho | ✅ planos 1 / 2 / 3–4 / 5–8 / 9 / 10 / 11 |
+| Dúvida: uma fala de deboche ≤ 14 palavras; o herói se recusa a explicar | ✅ 7 palavras; "Ele não responde." |
+| Revelação: o narrador diz "You see" + mecanismo numa frase simples; o herói nunca explica | ✅ "Veja só: …" (tradução de "You see"), uma frase |
+| Fecho: imagem final; quem duvidou recebe exatamente o que zombou | ✅ o rival compra as janelas redondas e o sabão |
+| Toda frase nomeia algo visível | ✅ |
+| Conectores só quando a ligação é real; muitas frases sem conector | ✅ só "Só que" (virada real) |
+| Pelo menos 2 piadas ditas pelos duvidadores | ✅ chefe e dono da vizinha |
+| Pelo menos 2 números específicos e estranhos, e o público sabe o que contam | ✅ 32 janelas, 300 voos (e 301, 8 mil metros, 9 meses) |
+| Sem anos | ✅ ("nove meses depois", "no dia seguinte") |
+| Frases de 10 a 17 palavras com uma punchline de 3 a 6 | ✅ 15–17 palavras; punchline "Ele não responde." (3) |
+| Sem introdução, nome do canal, moral, pergunta ao público, chamada para ação | ✅ |
+| Última frase é a imagem de fecho, ≤ 25 palavras | ✅ 17 |
+| Bater a contagem do Passo 1 (±10) | ✅ 161 palavras para a opção "45 s (150 palavras)" |
+| Passo 3: dizer o que é verdade e o que é inventado | ✅ |
+| Passo 5: folha de estilo DEFAULT + 1 frase fixa por personagem | ✅ |
+| Passo 6: prompt da imagem de referência | ✅ |
+| Passo 7: 1 prompt por plano, 5 partes, só o que a câmera vê, direções claras, número escrito num objeto | ✅ |
+| Passo 8: 5 títulos de 4–8 palavras sem emoji; descrição de 2–3 frases + 3 hashtags | ✅ |
+
+### Pontos que dependem do dono do canal (regras que eu NÃO mudei sozinho)
+1. **Passos 1, 2 e 4 são perguntas ao dono** (duração; tema/10 ideias; imagens de estilo ou DEFAULT). Neste piloto
+   não foram feitas; a partir do próximo roteiro, sim.
+2. **Velocidade em português**: as contagens do documento (100/150/205 palavras) foram feitas para inglês (~3,3 pal/s).
+   Em português (~2,5 pal/s), 161 palavras dão ~65 s, não 45 s.
+3. **Duração do plano**: o documento pede planos de 4–6 s; em português, frases de 15–17 palavras duram 6–7 s, e os
+   vídeos de referência trocam de ângulo a cada ~1,6 s dentro da frase.
