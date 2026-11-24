@@ -1,5 +1,12 @@
 # Linguagem audiovisual de referência (estudo quadro a quadro)
 
+> **Atualização de 24/11/2026:** este estudo foi refeito com medição de TODOS os quadros em
+> `ANALISE_FRAME_A_FRAME.md`. Alguns números abaixo estavam errados e ficam só como histórico: eram **17 e 19 planos
+> (mediana ≈2,8 s)**, não 42 e 35; a maioria das transições é **fusão curta (4–8 quadros)**, não corte seco; o vídeo
+> das ferrovias recebido é **720x1280**. O resto (roteiro de cor, câmera baixa, legenda a 70%, −14 LUFS, colchão
+> contínuo, fim em reação) foi confirmado. Ver a seção 8 da análise nova.
+
+
 Material analisado: "Why Perfect Railroads Don't Work" (65,3 s) e "Why Drivers Started Filming The Road" (62,3 s),
 1080x1920, 30 fps, quadro a quadro a cada 0,5 s (130 quadros por vídeo), transcrição completa, medição de cortes e de
 áudio (22/11/2026). Aprendemos a EXECUÇÃO; não usamos roteiros, falas, temas, histórias ou personagens da referência.
