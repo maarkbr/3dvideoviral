@@ -5,266 +5,47 @@
   {
    "fala": "Você recebeu o salário... e cinco dias depois ele já acabou. Calma: oitenta e dois por cento das famílias brasileiras estão endividadas. E o motivo não é o que você pensa.",
    "etapa": "gancho: maço de notas some da mesa",
-   "etiquetas": [
-    {
-     "txt": "SALÁRIO",
-     "p": [
-      -3.6,
-      3.3,
-      -1
-     ],
-     "de": 0.3,
-     "ate": 3.4
-    },
-    {
-     "txt": "82% DAS FAMÍLIAS",
-     "p": [
-      -3.6,
-      3.3,
-      -1
-     ],
-     "de": 5,
-     "ate": 9.6
-    },
-    {
-     "txt": "RECORDE",
-     "p": [
-      -3.6,
-      2.4,
-      -1
-     ],
-     "de": 7,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "Pra CNC, endividado NÃO é caloteiro. É quem tem qualquer conta pra pagar: cartão, carnê, financiamento. São sessenta milhões de lares. Recorde.",
    "etapa": "cidade: fachadas acendendo",
-   "etiquetas": [
-    {
-     "txt": "NÃO É CALOTEIRO",
-     "p": [
-      -23,
-      4.4,
-      -4
-     ],
-     "de": 0.6,
-     "ate": 3.4
-    },
-    {
-     "txt": "CARTÃO",
-     "p": [
-      -27,
-      5.6,
-      0.6
-     ],
-     "de": 3.6,
-     "ate": 6
-    },
-    {
-     "txt": "CARNÊ",
-     "p": [
-      -23,
-      5.6,
-      0.6
-     ],
-     "de": 4.3,
-     "ate": 6
-    },
-    {
-     "txt": "FINANCIAMENTO",
-     "p": [
-      -19,
-      5.6,
-      0.6
-     ],
-     "de": 5,
-     "ate": 6
-    },
-    {
-     "txt": "60 MILHÕES DE LARES",
-     "p": [
-      -24,
-      3,
-      -10
-     ],
-     "de": 6.4,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "Você parcelou a geladeira em dez vezes? Pronto, entrou na estatística. Só que é exatamente aí... que começa a armadilha.",
    "etapa": "celular: a compra vira 10 parcelas",
-   "etiquetas": [
-    {
-     "txt": "GELADEIRA EM 10X",
-     "p": [
-      -1.4,
-      4.9,
-      -2
-     ],
-     "de": 1.4,
-     "ate": 5
-    },
-    {
-     "txt": "PARCELOU? ENTROU",
-     "p": [
-      0,
-      4.9,
-      -2
-     ],
-     "de": 5.2,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "O cartão aparece em oitenta e cinco por cento das famílias endividadas. E o parcelado vira um salário extra... que não existe.",
    "etapa": "bolhas sobre a plateia",
-   "etiquetas": [
-    {
-     "txt": "85% NO CARTÃO",
-     "p": [
-      0,
-      3.9,
-      9
-     ],
-     "de": 2,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "E aqui a maioria erra. O mês aperta, você paga só o mínimo da fatura... e o resto vai pro rotativo.",
    "etapa": "virada: a cortina abre, placa PAGAR O MÍNIMO",
-   "etiquetas": [
-    {
-     "txt": "PAGAR O MÍNIMO",
-     "p": [
-      -1.8,
-      6.1,
-      -5
-     ],
-     "de": 2.4,
-     "ate": 9.6
-    },
-    {
-     "txt": "ROTATIVO",
-     "p": [
-      3.2,
-      2.9,
-      -4.6
-     ],
-     "de": 6,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "O rotativo cobra MAIS de quatrocentos por cento de juros ao ano, segundo o Banco Central. É uma das dívidas mais caras do país.",
    "etapa": "conta: número grande subindo",
-   "etiquetas": [
-    {
-     "txt": "BANCO CENTRAL",
-     "p": [
-      0,
-      1.6,
-      -2.2
-     ],
-     "de": 5,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "Desde dois mil e vinte e quatro existe um teto: os juros não passam do valor da dívida. Mesmo assim... mil reais podem virar dois mil.",
    "etapa": "linha do tempo + pilha que dobra",
-   "etiquetas": [
-    {
-     "txt": "R$ 1.000",
-     "p": [
-      -2.2,
-      2.4,
-      -2
-     ],
-     "de": 1,
-     "ate": 9.6
-    },
-    {
-     "txt": "TETO: 100%",
-     "p": [
-      2.2,
-      3.5,
-      -2
-     ],
-     "de": 3.2,
-     "ate": 9.6
-    },
-    {
-     "txt": "R$ 2.000",
-     "p": [
-      2.2,
-      4.3,
-      -2
-     ],
-     "de": 6.6,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "E aí a conta atrasa. Hoje, quase três em cada dez famílias brasileiras estão com alguma conta em atraso.",
    "etapa": "10 casinhas, 3 ficam vermelhas",
-   "etiquetas": [
-    {
-     "txt": "3 EM CADA 10",
-     "p": [
-      0,
-      2.6,
-      -2.4
-     ],
-     "de": 2.6,
-     "ate": 9.6
-    },
-    {
-     "txt": "COM CONTA ATRASADA",
-     "p": [
-      0,
-      0.4,
-      0.2
-     ],
-     "de": 5,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "Então não é que o brasileiro é gastão. É crédito fácil na entrada... e CARÍSSIMO na saída.",
    "etapa": "placa",
-   "etiquetas": [
-    {
-     "txt": "FÁCIL NA ENTRADA",
-     "p": [
-      -2.2,
-      5.2,
-      -3
-     ],
-     "de": 1.2,
-     "ate": 9.6
-    },
-    {
-     "txt": "CARO NA SAÍDA",
-     "p": [
-      2.2,
-      5.2,
-      -3
-     ],
-     "de": 5.2,
-     "ate": 9.6
-    }
-   ]
+   "etiquetas": []
   },
   {
    "fala": "Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.",

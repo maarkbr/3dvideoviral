@@ -156,8 +156,6 @@ cartao.position.set(0, 4.6, -3); cartao.castShadow = true; sc.add(cartao);
 // números grandes em HTML (b5 e b9)
 const camada = document.getElementById("etq");
 const big = (top, px, cor = "#FFD21F", st = 12) => { const d = document.createElement("div"); d.style.cssText = `position:absolute;left:0;width:1080px;top:${top}px;text-align:center;opacity:0;font:900 ${px}px "M", Arial;color:${cor};-webkit-text-stroke:${st}px #1A1A1A;paint-order:stroke fill;letter-spacing:-3px`; camada.appendChild(d); return d; };
-const num = big(470, 210), numSub = big(720, 52, "#fff", 7), cta = big(380, 120), cta2 = big(530, 190);
-cta.textContent = "COMENTA"; cta2.textContent = "3D"; numSub.textContent = "DE JUROS AO ANO";
 // ---------- tomadas ----------
 const B = D.blocos;
 const LB = B.map((b, i) => (i + 1 < B.length ? B[i + 1] : D.dur - 1.2) - b);
@@ -214,8 +212,6 @@ function renderAt(t) {
   resto.forEach((r, i) => { const s0 = bt(4, 6) + i * .14, u = io(fx(t, s0, s0 + .8)); r.visible = v4 && t > bt(4, 2.5) && u < .98; const x0 = -1.8, y0 = Y0 + .9 + i * .22; r.position.set(x0 + (3.2 - x0) * u, y0 + Math.sin(u * Math.PI) * 2 + (Y0 + 1.6 - y0) * u, -4.4 + (-4.6 + 4.4) * u); sc1(r, pop(fx(t, bt(4, 2.5) + i * .05, bt(4, 3) + i * .05))); });
   // b5: barra e número
   const k5 = io(fx(t, B[5] + .3, bt(5, 6.5))); barraJ.visible = seg(t, 5); barraJ.scale.y = Math.max(.001, .2 + k5 * 6.3);
-  const o5 = seg(t, 5) ? 1 : 0, kn = pop(fx(t, B[5] + .2, B[5] + .8)); num.style.opacity = o5 * kn; num.textContent = "+" + Math.round(400 * k5) + "%"; num.style.transform = `scale(${.6 + .4 * kn})`;
-  numSub.style.opacity = o5 * pop(fx(t, bt(5, 3), bt(5, 3.8)));
   // b6: pilhas e teto
   const v6 = seg(t, 6), kA = pop(fx(t, B[6] + .2, B[6] + .9));
   pilhaA.forEach((p, i) => { p.visible = v6 && i < 5; sc1(p, kA); });
@@ -228,7 +224,6 @@ function renderAt(t) {
   [arcoV, arcoR].forEach((a, i) => { a.visible = seg(t, 8); sc1(a, pop(fx(t, bt(8, 1 + i * 4), bt(8, 1.8 + i * 4)))); });
   // b9: cartão girando + comenta 3D
   cartao.visible = t >= B[9] - .1; sc1(cartao, pop(fx(t, B[9], B[9] + .8))); cartao.rotation.y = (t - B[9]) * 1.4; cartao.position.y = 4.2 + Math.sin(t * 1.5) * .15;
-  const o9 = t >= B[9] ? 1 : 0; cta.style.opacity = o9 * pop(fx(t, B[9] + .3, B[9] + .8)); cta2.style.opacity = o9 * pop(fx(t, B[9] + .6, B[9] + 1.2)); cta2.style.transform = `scale(${.6 + .4 * pop(fx(t, B[9] + .6, B[9] + 1.2))})`;
   // câmera contínua
   const k = tomada(t); let [p, tg] = poseShot(k, t);
   const BL = .9; if (k > 0 && t < T[k][0] + BL) { const [p0, t0] = poseShot(k - 1, T[k][0]); const w = io(fx(t, T[k][0], T[k][0] + BL)); p = p0.lerp(p, w); tg = t0.lerp(tg, w); }
@@ -241,7 +236,82 @@ function renderAt(t) {
     const hw = e.el.offsetWidth * .5 + 64, xs = Math.min(W - hw, Math.max(hw, x)), ys = Math.min(1180, Math.max(260, y));
     e.el.style.opacity = v3.z < 1 ? 1 : 0; e.el.style.transform = `translate(${xs}px, ${ys}px) translate(-50%, -100%) scale(${ap})`;
   });
-  const w = D.palavras.find((q) => t >= q.s && t < q.e); leg.textContent = w ? w.w : "";
+  ovRender(t);
+}
+
+// ================= LETRAS E GRÁFICOS (estilo: texto com brilho, botão azul, cartão de vidro com borda limão) =================
+const css = document.createElement("style");
+css.textContent = `@font-face{font-family:"I";font-weight:100 900;src:url("lib/fonts/Inter-VF.woff2") format("woff2");}
+#scrim{position:absolute;left:0;top:0;width:1080px;height:1100px;background:linear-gradient(rgba(4,8,20,.62),rgba(4,8,20,.35) 55%,rgba(4,8,20,0));pointer-events:none}
+.g{position:absolute;left:40px;right:40px;text-align:center;pointer-events:none}
+.l{display:block;margin:0 auto;will-change:transform,opacity,filter}
+.sm{font:500 56px/1.15 "I";color:#D6E6FF;letter-spacing:-.5px;text-shadow:0 0 28px rgba(120,170,255,.55),0 3px 12px rgba(0,0,0,.55)}
+.bg{font:900 140px/1.02 "I";color:#fff;letter-spacing:-5px;text-shadow:0 0 44px rgba(150,195,255,.6),0 8px 24px rgba(0,0,0,.55)}
+.pill{display:table;margin:14px auto 0;padding:10px 52px 22px;border-radius:30px;font:800 86px/1.1 "I";color:#fff;letter-spacing:-2.5px;white-space:nowrap;
+ background:linear-gradient(#4FA6FF,#1C6FE6);box-shadow:inset 0 3px 0 rgba(255,255,255,.4),inset 0 -6px 0 rgba(0,0,0,.15),0 14px 50px rgba(40,130,255,.6)}
+.pill.red{background:linear-gradient(#FF6A6E,#D92B3A);box-shadow:inset 0 3px 0 rgba(255,255,255,.4),inset 0 -6px 0 rgba(0,0,0,.15),0 14px 50px rgba(255,60,70,.55)}
+.card{display:table;margin:0 auto;padding:30px 64px 40px;border-radius:44px;background:rgba(16,18,24,.78);border:4px solid #D4FF3A;
+ box-shadow:0 0 46px rgba(212,255,58,.45),inset 0 0 34px rgba(212,255,58,.1)}
+.num{font:900 196px/1 "I";color:#D4FF3A;letter-spacing:-7px;white-space:nowrap;text-shadow:0 0 56px rgba(212,255,58,.6)}
+.num.br{color:#fff;text-shadow:0 0 40px rgba(255,255,255,.35)}
+.sub{font:600 58px/1.2 "I";color:#F1F4F8;letter-spacing:-.5px}
+.sub b{color:#D4FF3A;font-weight:800}
+#leg{top:1430px !important;font:800 84px "I" !important;letter-spacing:-1.5px;color:#fff !important;-webkit-text-stroke:0 !important;
+ text-shadow:0 0 3px #000,0 5px 20px rgba(0,0,0,.75) !important}`;
+document.head.appendChild(css);
+const root = document.getElementById("root"); const scrim = document.createElement("div"); scrim.id = "scrim"; root.insertBefore(scrim, document.getElementById("etq"));
+const nrm = (x) => x.normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+// tempo da n-ésima ocorrência de uma palavra dentro do bloco
+function wt(i, w, n = 1) { const a = B[i] - .2, b = (B[i + 1] ?? 1e9); let c = 0; for (const p of D.palavras) if (p.s >= a && p.s < b && nrm(p.w).startsWith(nrm(w))) { if (++c === n) return p.s; } return B[i] + .3; }
+const spr = (x) => x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.exp(-6.5 * x) * Math.cos(9.5 * x);
+const oC = (x) => 1 - Math.pow(1 - x, 3);
+const fmt = (v) => Math.round(v).toLocaleString("pt-BR");
+// grupos: cada linha entra na palavra; o grupo sai quando começa o próximo do mesmo lugar (ou no fim do bloco)
+const G = [
+  { b: 0, top: 330, ini: ["SALÁRIO"], L: [["sm", "você recebeu o", ["RECEBEU"]], ["bg", "salário", ["SALÁRIO"]]], ate: ["CALMA"] },
+  { b: 0, top: 300, L: [["card", [["num", 82, "", "%", ["OITENTA"]], ["sub", "das famílias brasileiras", ["FAMÍLIAS"]]]], ["pill red", "endividadas", ["ENDIVIDADAS"]]] },
+  { b: 1, top: 330, L: [["sm", "pra CNC, endividado", ["CNC"]], ["bg", "NÃO É", ["NÃO"]], ["pill red", "caloteiro", ["CALOTEIRO"]]], ate: ["SESSENTA"] },
+  { b: 1, top: 330, L: [["card", [["num", 60, "", " mi", ["SESSENTA"]], ["sub", "de lares · <b>recorde</b>", ["LARES"]]]]] },
+  { b: 2, top: 300, L: [["card", [["num", 10, "", "x", ["DEZ"]], ["sub", "e a geladeira é sua", ["VEZES"]]]]], ate: ["PRONTO"] },
+  { b: 2, top: 330, L: [["sm", "pronto,", ["PRONTO"]], ["bg", "entrou na", ["ENTROU"]], ["pill", "estatística", ["ESTATÍSTICA"]]], ate: ["ARMADILHA"] },
+  { b: 2, top: 360, L: [["sm", "e é aí que começa", ["COMEÇA"]], ["pill red", "a armadilha", ["ARMADILHA"]]] },
+  { b: 3, top: 300, L: [["card", [["num", 85, "", "%", ["OITENTA"]], ["sub", "das endividadas têm <b>cartão</b>", ["FAMÍLIAS"]]]]], ate: ["PARCELADO"] },
+  { b: 3, top: 330, L: [["sm", "o parcelado vira", ["PARCELADO"]], ["bg", "um salário", ["SALÁRIO"]], ["pill red", "que não existe", ["EXISTE"]]] },
+  { b: 4, top: 330, L: [["sm", "e aqui", ["AQUI"]], ["bg", "a maioria", ["MAIORIA"]], ["pill red", "erra", ["ERRA"]]], ate: ["APERTA"] },
+  { b: 4, top: 330, L: [["sm", "você paga só o", ["PAGA"]], ["bg", "mínimo", ["MÍNIMO"]], ["pill red", "o resto → rotativo", ["ROTATIVO"]]] },
+  { b: 5, top: 280, L: [["card", [["num", 400, "+", "%", ["QUATROCENTOS"]], ["sub", "de juros <b>ao ano</b>", ["JUROS"]]]], ["sm", "segundo o Banco Central", ["BANCO"]]] },
+  { b: 6, top: 330, L: [["sm", "desde 2024 existe um", ["DESDE"]], ["bg", "teto", ["TETO"]], ["pill", "100% da dívida", ["DÍVIDA"]]], ate: ["MESMO"] },
+  { b: 6, top: 300, L: [["card", [["num br", 1000, "R$ ", "", ["MIL", 2]], ["num", 2000, "R$ ", "", ["DOIS", 2]]]], ["sm", "mesmo com o teto", ["MESMO"]]] },
+  { b: 7, top: 300, L: [["card", [["num", 3, "", " em 10", ["TRÊS"]], ["sub", "famílias com <b>conta atrasada</b>", ["ATRASO"]]]]] },
+  { b: 8, top: 330, L: [["sm", "não é que o brasileiro é", ["BRASILEIRO"]], ["bg", "gastão", ["GASTÃO"]]], ate: ["CRÉDITO"] },
+  { b: 8, top: 330, L: [["sm", "é crédito", ["CRÉDITO"]], ["pill", "fácil na entrada", ["FÁCIL"]], ["pill red", "caríssimo na saída", ["CARÍSSIMO"]]] },
+  { b: 9, top: 330, L: [["sm", "quer aprender a fazer vídeos assim?", ["APRENDER"]], ["bg", "comenta", ["COMENTA"]], ["pill", "3D", ["TRÊS"]]] },
+];
+const tW = (b, k) => wt(b, k[0], k[1] || 1);
+const itens = [];   // {el, a (entrada), num?}
+G.forEach((g, gi) => {
+  const box = document.createElement("div"); box.className = "g"; box.style.top = g.top + "px"; camada.appendChild(box); g.el = box;
+  const mk = (cls, html, k, parent) => { const d = document.createElement("div"); d.className = "l " + cls; d.innerHTML = html; parent.appendChild(d); const it = { el: d, a: tW(g.b, k), g }; itens.push(it); return it; };
+  g.L.forEach((ln) => {
+    if (ln[0] === "card") { const c = mk("card", "", ln[1][0][4], box); c.card = true;
+      ln[1].forEach((x) => { if (x[0].startsWith("num")) { const it = mk(x[0], "", x[4], c.el); it.num = { v: x[1], pre: x[2], suf: x[3] }; } else mk(x[0], x[1], x[2], c.el); }); }
+    else mk(ln[0], ln[1], ln[2], box);
+  });
+});
+G.forEach((g, gi) => { g.a = Math.min(...itens.filter((i) => i.g === g).map((i) => i.a)); });
+G.forEach((g, gi) => { g.z = g.ate ? tW(g.b, g.ate) - .05 : (B[g.b + 1] ?? D.dur + 1) - .12; });
+function ovRender(t) {
+  G.forEach((g) => { const on = t >= g.a - .05 && t < g.z + .35; g.el.style.display = on ? "block" : "none";
+    const out = fx(t, g.z, g.z + .3); g.el.style.opacity = 1 - out; g.el.style.transform = `translateY(${-out * 40}px) scale(${1 - out * .06})`; });
+  itens.forEach((it) => { if (it.g.el.style.display === "none") return;
+    const k = fx(t, it.a, it.a + .55), s = spr(k), o = cl(k * 3.2), bl = (1 - cl(k * 2.6)) * 14;
+    const sc0 = it.card ? .82 : .7;
+    it.el.style.opacity = o; it.el.style.filter = bl > .2 ? `blur(${bl.toFixed(1)}px)` : "none";
+    it.el.style.transform = `translateY(${(1 - oC(k)) * 60}px) scale(${sc0 + (1 - sc0) * s})`;
+    if (it.num) { const u = oC(fx(t, it.a, it.a + 1.1)), punch = Math.sin(Math.PI * fx(t, it.a + 1.05, it.a + 1.4)) * .1;
+      it.el.textContent = it.num.pre + fmt(it.num.v * (it.num.v <= 10 ? Math.max(u, .1) : u)) + it.num.suf; it.el.style.transform += ` scale(${1 + punch})`; } });
+  const w = D.palavras.find((q) => t >= q.s && t < q.e);
+  leg.textContent = w ? w.w : ""; const kp = w ? fx(t, w.s, w.s + .16) : 1; leg.style.transform = `scale(${.86 + .14 * spr(kp)})`;
 }
 window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
 renderAt(0);
