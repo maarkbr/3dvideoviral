@@ -3,8 +3,8 @@
  "fontes": "Peic/CNC julho 2026 (Agência Brasil, Folha PE, Gazeta SP, NSC Total); rotativo (Banco Central via WSCOM, SulTV, SBT News); teto de 100% (Banco Central, Digio)",
  "blocos": [
   {
-   "fala": "Oitenta e dois por cento das famílias brasileiras estão endividadas. É recorde. Mas esse número não quer dizer o que você pensa.",
-   "etapa": "gancho: maço de notas sobe na mesa",
+   "fala": "Você recebeu o salário... e cinco dias depois ele já acabou. Calma: oitenta e dois por cento das famílias brasileiras estão endividadas. E o motivo não é o que você pensa.",
+   "etapa": "gancho: maço de notas some da mesa",
    "etiquetas": [
     {
      "txt": "82% DAS FAMÍLIAS",
@@ -13,7 +13,7 @@
       3.4,
       -1
      ],
-     "de": 1.2,
+     "de": 3,
      "ate": 9.6
     },
     {
@@ -23,17 +23,17 @@
       2.45,
       -2.7
      ],
-     "de": 4.2,
+     "de": 6,
      "ate": 9.6
     }
    ]
   },
   {
-   "fala": "São cerca de sessenta milhões de lares, segundo a pesquisa da CNC de julho.",
-   "etapa": "prédios/cidade: fachadas acendendo uma a uma",
+   "fala": "Pra CNC, endividado NÃO é caloteiro. É quem tem qualquer conta pra pagar: cartão, carnê, financiamento. São sessenta milhões de lares. Recorde.",
+   "etapa": "cidade: fachadas acendendo",
    "etiquetas": [
     {
-     "txt": "60 MILHÕES DE LARES",
+     "txt": "NÃO É CALOTEIRO",
      "p": [
       -22,
       3.6,
@@ -43,52 +43,20 @@
      "ate": 9.6
     },
     {
-     "txt": "PESQUISA CNC",
+     "txt": "60 MILHÕES DE LARES",
      "p": [
       -22,
       2.6,
       8
      ],
-     "de": 5,
+     "de": 6,
      "ate": 9.6
     }
    ]
   },
   {
-   "fala": "Só que, pra CNC, endividado não é quem está com conta atrasada.",
-   "etapa": "virada: a cortina abre",
-   "etiquetas": [
-    {
-     "txt": "NÃO É ATRASADO",
-     "p": [
-      0,
-      6.2,
-      -4
-     ],
-     "de": 1.2,
-     "ate": 9.6
-    }
-   ]
-  },
-  {
-   "fala": "É quem tem qualquer conta pra pagar: cartão, carnê, financiamento, empréstimo.",
-   "etapa": "cartões: pictogramas voam e formam uma parede",
-   "etiquetas": [
-    {
-     "txt": "QUALQUER CONTA A PAGAR",
-     "p": [
-      0,
-      9.4,
-      -6
-     ],
-     "de": 1.4,
-     "ate": 9.6
-    }
-   ]
-  },
-  {
-   "fala": "Parcelou a geladeira no cartão? Pronto, você entrou nos oitenta e dois por cento.",
-   "etapa": "celular + ícones: a compra parcelada vira uma fatura",
+   "fala": "Você parcelou a geladeira em dez vezes? Pronto, entrou na estatística. Só que é exatamente aí... que começa a armadilha.",
+   "etapa": "celular: a compra vira 10 parcelas",
    "etiquetas": [
     {
      "txt": "PARCELOU? ENTROU",
@@ -97,14 +65,14 @@
       6.6,
       -3
      ],
-     "de": 1.5,
+     "de": 2,
      "ate": 9.6
     }
    ]
   },
   {
-   "fala": "E o cartão aparece em oitenta e cinco por cento dessas famílias. É a dívida número um do país.",
-   "etapa": "pesquisa: bolhas sobre a plateia, a maioria com o cartão",
+   "fala": "O cartão aparece em oitenta e cinco por cento das famílias endividadas. E o parcelado vira um salário extra... que não existe.",
+   "etapa": "bolhas sobre a plateia",
    "etiquetas": [
     {
      "txt": "85% NO CARTÃO",
@@ -119,15 +87,15 @@
    ]
   },
   {
-   "fala": "No começo, o parcelado vira extensão do salário. O problema começa quando a fatura não fecha.",
-   "etapa": "placa: o texto troca de SALÁRIO para FATURA",
+   "fala": "E aqui a maioria erra. O mês aperta, você paga só o mínimo da fatura... e o resto vai pro rotativo.",
+   "etapa": "virada: a cortina abre, placa PAGAR O MÍNIMO",
    "etiquetas": [
     {
-     "txt": "FATURA NÃO FECHOU",
+     "txt": "PAGAR O MÍNIMO",
      "p": [
       0,
-      8,
-      -5
+      6.2,
+      -4
      ],
      "de": 2,
      "ate": 9.6
@@ -135,8 +103,8 @@
    ]
   },
   {
-   "fala": "Aí entra o rotativo, com juros de mais de quatrocentos por cento ao ano, segundo o Banco Central.",
-   "etapa": "conta: número grande 400% subindo",
+   "fala": "O rotativo cobra MAIS de quatrocentos por cento de juros ao ano, segundo o Banco Central. É uma das dívidas mais caras do país.",
+   "etapa": "conta: número grande subindo",
    "etiquetas": [
     {
      "txt": "+400% AO ANO",
@@ -145,7 +113,7 @@
       9.4,
       -3
      ],
-     "de": 1,
+     "de": 1.5,
      "ate": 9.6
     },
     {
@@ -161,8 +129,8 @@
    ]
   },
   {
-   "fala": "Desde dois mil e vinte e quatro existe um teto: os juros não podem passar do valor da dívida. Ou seja, mil reais ainda podem virar dois mil.",
-   "etapa": "linha do tempo: 2024 e a pilha que dobra",
+   "fala": "Desde dois mil e vinte e quatro existe um teto: os juros não passam do valor da dívida. Mesmo assim... mil reais podem virar dois mil.",
+   "etapa": "linha do tempo + pilha que dobra",
    "etiquetas": [
     {
      "txt": "2024",
@@ -197,8 +165,8 @@
    ]
   },
   {
-   "fala": "É assim que quase três em cada dez famílias acabam com conta atrasada.",
-   "etapa": "quadro + peças: 10 casinhas, 3 ficam vermelhas",
+   "fala": "E aí a conta atrasa. Hoje, quase três em cada dez famílias brasileiras estão com alguma conta em atraso.",
+   "etapa": "10 casinhas, 3 ficam vermelhas",
    "etiquetas": [
     {
      "txt": "3 EM CADA 10",
@@ -207,7 +175,7 @@
       6,
       -4
      ],
-     "de": 1,
+     "de": 2,
      "ate": 9.6
     },
     {
@@ -217,14 +185,14 @@
       0.9,
       -4
      ],
-     "de": 4,
+     "de": 5,
      "ate": 9.6
     }
    ]
   },
   {
-   "fala": "Então não é que o brasileiro é gastão. É crédito fácil na entrada e caríssimo na saída.",
-   "etapa": "placa: FÁCIL NA ENTRADA / CARO NA SAÍDA",
+   "fala": "Então não é que o brasileiro é gastão. É crédito fácil na entrada... e CARÍSSIMO na saída.",
+   "etapa": "placa",
    "etiquetas": [
     {
      "txt": "FÁCIL NA ENTRADA",
@@ -249,11 +217,11 @@
    ]
   },
   {
-   "fala": "Comenta FATURA que eu te mando o passo a passo pra sair do rotativo.",
-   "etapa": "símbolo girando (cartão) + comenta",
+   "fala": "Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.",
+   "etapa": "cartão girando + comenta",
    "etiquetas": [
     {
-     "txt": "FATURA",
+     "txt": "3D",
      "p": [
       0,
       7.4,

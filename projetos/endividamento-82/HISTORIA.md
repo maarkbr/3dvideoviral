@@ -1,6 +1,6 @@
 # Por que 82% das famílias brasileiras estão endividadas?
 
-Vídeo 3D explicativo, vertical 9:16, cerca de 75 s (198 palavras, 12 cenas). Skill `video-3d-explicativo`; pedido organizado com a skill `objetivo`.
+Vídeo 3D explicativo, vertical 9:16, cerca de 80 s (10 cenas). Skill `video-3d-explicativo`; pedido organizado com a skill `objetivo`.
 
 ## Pedido em 7 partes (skill objetivo)
 1. **O que eu quero e por quê:** um Reel/Short 3D que explique por que 82% das famílias (Peic/CNC, julho de 2026, recorde, cerca de 60 milhões de lares) estão endividadas, e que prenda até o fim com a virada "endividado não é caloteiro".
@@ -11,23 +11,8 @@ Vídeo 3D explicativo, vertical 9:16, cerca de 75 s (198 palavras, 12 cenas). Sk
 6. **Entrega:** `projetos/endividamento-82/` (roteiro agora; depois `work/video.mp4` e o master em −14 LUFS).
 7. **Fechamento:** explicar em 75 s por que 8 em cada 10 lares devem, de um jeito que surpreende e confere com as fontes. Trabalhe sozinho e só me chame quando estiver tudo pronto.
 
-## Roteiro (cena por cena)
-| # | Fala | Cena | Etiquetas |
-|---|---|---|---|
-| 1 | Oitenta e dois por cento das famílias brasileiras estão endividadas. É recorde. Mas esse número não quer dizer o que você pensa. | maço de notas sobe na mesa | 82% DAS FAMÍLIAS · RECORDE |
-| 2 | São cerca de sessenta milhões de lares, segundo a pesquisa da CNC de julho. | cidade, fachadas acendendo | 60 MILHÕES DE LARES · PESQUISA CNC |
-| 3 | Só que, pra CNC, endividado não é quem está com conta atrasada. | **virada:** a cortina abre | NÃO É ATRASADO |
-| 4 | É quem tem qualquer conta pra pagar: cartão, carnê, financiamento, empréstimo. | cartões com pictogramas formam uma parede | QUALQUER CONTA A PAGAR |
-| 5 | Parcelou a geladeira no cartão? Pronto, você entrou nos oitenta e dois por cento. | celular: a compra vira fatura | PARCELOU? ENTROU |
-| 6 | E o cartão aparece em oitenta e cinco por cento dessas famílias. É a dívida número um do país. | bolhas sobre a plateia | 85% NO CARTÃO |
-| 7 | No começo, o parcelado vira extensão do salário. O problema começa quando a fatura não fecha. | placa troca SALÁRIO → FATURA | FATURA NÃO FECHOU |
-| 8 | Aí entra o rotativo, com juros de mais de quatrocentos por cento ao ano, segundo o Banco Central. | número grande subindo | +400% AO ANO · BANCO CENTRAL |
-| 9 | Desde dois mil e vinte e quatro existe um teto: os juros não podem passar do valor da dívida. Ou seja, mil reais ainda podem virar dois mil. | linha do tempo + pilha que dobra | 2024 · TETO: 100% · R$ 1.000 → R$ 2.000 |
-| 10 | É assim que quase três em cada dez famílias acabam com conta atrasada. | 10 casinhas, 3 ficam vermelhas | 3 EM CADA 10 · COM CONTA ATRASADA |
-| 11 | Então não é que o brasileiro é gastão. É crédito fácil na entrada e caríssimo na saída. | placa | FÁCIL NA ENTRADA · CARO NA SAÍDA |
-| 12 | Comenta FATURA que eu te mando o passo a passo pra sair do rotativo. | cartão girando + comenta | FATURA |
-
-O cálculo "mil reais podem virar dois mil" é nosso, aplicando o teto de 100%.
+## Roteiro
+O texto final, com as tags do ElevenLabs, está em `NARRACAO-ELEVENLABS.md`. As cenas e as etiquetas estão em `roteiro.json`. A estrutura segue a da skill video-3d: gancho (situação + promessa), uma cadeia problema → consequência, virada no meio ("e aqui a maioria erra"), fecho que responde ao gancho e o CTA "comenta 3D". A conta "mil reais podem virar dois mil" é nossa, aplicando o teto de 100%.
 
 ## Fontes (cada fato com 2)
 - **82%, recorde, cerca de 60 milhões de lares (julho de 2026, Peic/CNC):** [Agência Brasil](https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/cnc-endividamento-das-familias-sobe-para-82-mas-inadimplencia-cai), [Folha PE](https://www.folhape.com.br/economia/percentual-de-brasileiros-endividados-atinge-82-em-julho-novo/505052/), [Gazeta SP](https://www.gazetasp.com.br/economia/endividamento-familiar-atinge-60-milhoes-de-lares-em-julho-e-bate-6o-recorde-seguido-no-pais-aponta-cnc/), [NSC Total](https://www.nsctotal.com.br/economia/endividamento-familias-recorde-julho-2026-brasil)

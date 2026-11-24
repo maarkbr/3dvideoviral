@@ -3,45 +3,29 @@
 **Como gerar**
 - Modelo: **Eleven v3**. As tags entre colchetes só funcionam nele; nos outros modelos são lidas em voz alta.
 - Stability: **Natural** (o Creative fica mais expressivo, mas erra mais).
-- Gere **uma fala por arquivo** e salve como `f1` … `f12` (MP3 ou WAV). A montagem do vídeo usa um arquivo por cena.
+- Pode gerar tudo de uma vez. Cada parágrafo é uma cena.
 - As tags ficam em inglês, que é como o v3 entende melhor. As palavras em MAIÚSCULAS recebem ênfase e as reticências viram pausa.
 - Se ele ler "CNC" em inglês, troque por "cê-ene-cê".
 - Duração esperada: entre 75 e 85 s (limite de 90 s).
 
 ---
 
-**f1**
-[confident] Oitenta e dois por cento das famílias brasileiras estão endividadas. [short pause] É RECORDE. [short pause] [mysterious] Mas esse número... não quer dizer o que você pensa.
+[tired] Você recebeu o salário... [short pause] e cinco dias depois ele já acabou. [short pause] [serious] Calma: oitenta e dois por cento das famílias brasileiras estão endividadas. [mysterious] E o motivo não é o que você pensa.
 
-**f2**
-[matter-of-fact] São cerca de sessenta milhões de lares, segundo a pesquisa da CNC de julho.
+[conspiratorial] Pra CNC, endividado NÃO é caloteiro. [short pause] [explaining] É quem tem qualquer conta pra pagar: cartão, carnê, financiamento. São sessenta milhões de lares. Recorde.
 
-**f3**
-[conspiratorial] Só que, pra CNC... endividado NÃO é quem está com conta atrasada.
+[playful] Você parcelou a geladeira em dez vezes? [chuckles] Pronto, entrou na estatística. [short pause] [tense] Só que é exatamente aí... que começa a armadilha.
 
-**f4**
-[explaining] É quem tem qualquer conta pra pagar: cartão, carnê, financiamento, empréstimo.
+[serious] O cartão aparece em oitenta e cinco por cento das famílias endividadas. [short pause] E o parcelado vira um salário extra... que não existe.
 
-**f5**
-[playful] Parcelou a geladeira no cartão? [short pause] [chuckles] Pronto. Você entrou nos oitenta e dois por cento.
+[whispers] E aqui a maioria erra. [short pause] [tense] O mês aperta, você paga só o mínimo da fatura... e o resto vai pro rotativo.
 
-**f6**
-[serious] E o cartão aparece em oitenta e cinco por cento dessas famílias. É a dívida número um do país.
+[dramatic] O rotativo cobra MAIS de quatrocentos por cento de juros ao ano, segundo o Banco Central. [short pause] É uma das dívidas mais caras do país.
 
-**f7**
-[calm] No começo, o parcelado vira extensão do salário. [short pause] [tense] O problema começa... quando a fatura não fecha.
+[explaining] Desde dois mil e vinte e quatro existe um teto: os juros não passam do valor da dívida. [sighs] Mesmo assim... mil reais podem virar dois mil.
 
-**f8**
-[dramatic] Aí entra o rotativo. [short pause] Com juros de MAIS de quatrocentos por cento ao ano, segundo o Banco Central.
+[serious] E aí a conta atrasa. [short pause] Hoje, quase três em cada dez famílias brasileiras estão com alguma conta em atraso.
 
-**f9**
-[explaining] Desde dois mil e vinte e quatro existe um teto: os juros não podem passar do valor da dívida. [short pause] [sighs] Ou seja... mil reais ainda podem virar dois mil.
-
-**f10**
-[serious] É assim que quase três em cada dez famílias acabam com conta atrasada.
-
-**f11**
 [firm] Então não é que o brasileiro é gastão. [short pause] É crédito fácil na entrada... [emphatic] e CARÍSSIMO na saída.
 
-**f12**
-[friendly] Comenta FATURA que eu te mando o passo a passo pra sair do rotativo.
+[friendly] Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.
