@@ -1,0 +1,12 @@
+{
+  "name": "endividamento-82",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.9.13 check",
+    "render": "npx --yes hyperframes@0.9.13 render"
+  },
+  "devDependencies": {
+    "@hyperframes/core": "^0.9.13"
+  }
+}

@@ -7,23 +7,33 @@
    "etapa": "gancho: maço de notas some da mesa",
    "etiquetas": [
     {
-     "txt": "82% DAS FAMÍLIAS",
+     "txt": "SALÁRIO",
      "p": [
-      -3.55,
-      3.4,
+      -3.6,
+      3.3,
       -1
      ],
-     "de": 3,
+     "de": 0.3,
+     "ate": 3.4
+    },
+    {
+     "txt": "82% DAS FAMÍLIAS",
+     "p": [
+      -3.6,
+      3.3,
+      -1
+     ],
+     "de": 5,
      "ate": 9.6
     },
     {
      "txt": "RECORDE",
      "p": [
-      -3.55,
-      2.45,
-      -2.7
+      -3.6,
+      2.4,
+      -1
      ],
-     "de": 6,
+     "de": 7,
      "ate": 9.6
     }
    ]
@@ -35,21 +45,51 @@
     {
      "txt": "NÃO É CALOTEIRO",
      "p": [
-      -22,
-      3.6,
-      -14
+      -23,
+      4.4,
+      -4
      ],
-     "de": 1,
-     "ate": 9.6
+     "de": 0.6,
+     "ate": 3.4
+    },
+    {
+     "txt": "CARTÃO",
+     "p": [
+      -27,
+      5.6,
+      0.6
+     ],
+     "de": 3.6,
+     "ate": 6
+    },
+    {
+     "txt": "CARNÊ",
+     "p": [
+      -23,
+      5.6,
+      0.6
+     ],
+     "de": 4.3,
+     "ate": 6
+    },
+    {
+     "txt": "FINANCIAMENTO",
+     "p": [
+      -19,
+      5.6,
+      0.6
+     ],
+     "de": 5,
+     "ate": 6
     },
     {
      "txt": "60 MILHÕES DE LARES",
      "p": [
-      -22,
-      2.6,
-      8
+      -24,
+      3,
+      -10
      ],
-     "de": 6,
+     "de": 6.4,
      "ate": 9.6
     }
    ]
@@ -59,13 +99,23 @@
    "etapa": "celular: a compra vira 10 parcelas",
    "etiquetas": [
     {
+     "txt": "GELADEIRA EM 10X",
+     "p": [
+      -1.4,
+      4.9,
+      -2
+     ],
+     "de": 1.4,
+     "ate": 5
+    },
+    {
      "txt": "PARCELOU? ENTROU",
      "p": [
       0,
-      6.6,
-      -3
+      4.9,
+      -2
      ],
-     "de": 2,
+     "de": 5.2,
      "ate": 9.6
     }
    ]
@@ -78,10 +128,10 @@
      "txt": "85% NO CARTÃO",
      "p": [
       0,
-      3.4,
+      3.9,
       9
      ],
-     "de": 1.4,
+     "de": 2,
      "ate": 9.6
     }
    ]
@@ -93,11 +143,21 @@
     {
      "txt": "PAGAR O MÍNIMO",
      "p": [
-      0,
-      6.2,
-      -4
+      -1.8,
+      6.1,
+      -5
      ],
-     "de": 2,
+     "de": 2.4,
+     "ate": 9.6
+    },
+    {
+     "txt": "ROTATIVO",
+     "p": [
+      3.2,
+      2.9,
+      -4.6
+     ],
+     "de": 6,
      "ate": 9.6
     }
    ]
@@ -107,21 +167,11 @@
    "etapa": "conta: número grande subindo",
    "etiquetas": [
     {
-     "txt": "+400% AO ANO",
-     "p": [
-      0,
-      9.4,
-      -3
-     ],
-     "de": 1.5,
-     "ate": 9.6
-    },
-    {
      "txt": "BANCO CENTRAL",
      "p": [
       0,
-      8.4,
-      -3
+      1.6,
+      -2.2
      ],
      "de": 5,
      "ate": 9.6
@@ -133,11 +183,11 @@
    "etapa": "linha do tempo + pilha que dobra",
    "etiquetas": [
     {
-     "txt": "2024",
+     "txt": "R$ 1.000",
      "p": [
-      -5,
-      2.2,
-      -1.4
+      -2.2,
+      2.4,
+      -2
      ],
      "de": 1,
      "ate": 9.6
@@ -145,21 +195,21 @@
     {
      "txt": "TETO: 100%",
      "p": [
-      0,
-      3.6,
-      -1.4
+      2.2,
+      3.5,
+      -2
      ],
-     "de": 3,
+     "de": 3.2,
      "ate": 9.6
     },
     {
-     "txt": "R$ 1.000 → R$ 2.000",
+     "txt": "R$ 2.000",
      "p": [
-      5,
       2.2,
-      -1.4
+      4.3,
+      -2
      ],
-     "de": 6.4,
+     "de": 6.6,
      "ate": 9.6
     }
    ]
@@ -171,19 +221,19 @@
     {
      "txt": "3 EM CADA 10",
      "p": [
-      3.2,
-      6,
-      -4
+      0,
+      2.6,
+      -2.4
      ],
-     "de": 2,
+     "de": 2.6,
      "ate": 9.6
     },
     {
      "txt": "COM CONTA ATRASADA",
      "p": [
-      3.2,
-      0.9,
-      -4
+      0,
+      0.4,
+      0.2
      ],
      "de": 5,
      "ate": 9.6
@@ -197,21 +247,21 @@
     {
      "txt": "FÁCIL NA ENTRADA",
      "p": [
-      0,
-      8,
-      -5
+      -2.2,
+      5.2,
+      -3
      ],
-     "de": 2.5,
+     "de": 1.2,
      "ate": 9.6
     },
     {
      "txt": "CARO NA SAÍDA",
      "p": [
-      0,
-      7,
-      -5
+      2.2,
+      5.2,
+      -3
      ],
-     "de": 6,
+     "de": 5.2,
      "ate": 9.6
     }
    ]
@@ -219,18 +269,7 @@
   {
    "fala": "Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.",
    "etapa": "cartão girando + comenta",
-   "etiquetas": [
-    {
-     "txt": "3D",
-     "p": [
-      0,
-      7.4,
-      -3
-     ],
-     "de": 4,
-     "ate": 10
-    }
-   ]
+   "etiquetas": []
   }
  ]
 }

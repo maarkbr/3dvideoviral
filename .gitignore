@@ -1,2 +1,8 @@
 __pycache__/
 *.pyc
+projetos/*/work/
+projetos/*/voz/*.wav
+projetos/*/voz/*.raw
+projetos/*/assets/*.wav
+node_modules/
+projetos/*/.hyperframes/
