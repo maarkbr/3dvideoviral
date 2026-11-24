@@ -16,7 +16,8 @@ if exist "out\%COMP%.mp4" del "out\%COMP%.mp4"
 rem navegador para renderizar: o do Remotion falha com Node novo, entao usamos o Edge, o Chrome ou o Brave que ja estao no PC
 set "NAV="
 for %%B in ("%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe" "%ProgramFiles%\Microsoft\Edge\Application\msedge.exe" "%ProgramFiles%\Google\Chrome\Application\chrome.exe" "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" "%LocalAppData%\Google\Chrome\Application\chrome.exe" "%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe" "%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe") do if not defined NAV if exist %%B set "NAV=%%~B"
-if defined NAV (echo Navegador: %NAV%) else (echo Nao achei Edge, Chrome nem Brave. Tentando o navegador do Remotion...)
+if defined NAV echo Navegador: "%NAV%"
+if not defined NAV echo Nao achei Edge, Chrome nem Brave. Tentando o navegador do Remotion...
 set "ARGNAV="
 if defined NAV set "ARGNAV=--browser-executable='%NAV%'"
 echo Renderizando %COMP% (quadros %QUADROS%). O registro fica em out\registro.txt
