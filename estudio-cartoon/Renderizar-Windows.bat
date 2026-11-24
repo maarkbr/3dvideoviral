@@ -9,9 +9,10 @@ if not exist node_modules (
 )
 if not exist out mkdir out
 set "COMP=%~1"
-if "%COMP%"=="" set "COMP=Dividas82"
+if "%COMP%"=="" set "COMP=Salario"
 set "QUADROS=%~2"
-if "%QUADROS%"=="" set "QUADROS=2025-2174"
+set "ARGQ="
+if not "%QUADROS%"=="" set "ARGQ=--frames=%QUADROS%"
 if exist "out\%COMP%.mp4" del "out\%COMP%.mp4"
 rem navegador para renderizar: o do Remotion falha com Node novo, entao usamos o Edge, o Chrome ou o Brave que ja estao no PC
 set "NAV="
@@ -20,8 +21,8 @@ if defined NAV echo Navegador: "%NAV%"
 if not defined NAV echo Nao achei Edge, Chrome nem Brave. Tentando o navegador do Remotion...
 set "ARGNAV="
 if defined NAV set "ARGNAV=--browser-executable='%NAV%'"
-echo Renderizando %COMP% (quadros %QUADROS%). O registro fica em out\registro.txt
-powershell -NoProfile -Command "npx remotion render src/index.ts %COMP% out/%COMP%.mp4 --frames=%QUADROS% --gl=angle --codec=h264 --crf=16 --log=verbose %ARGNAV% 2>&1 | Tee-Object -FilePath out/registro.txt"
+echo Renderizando %COMP%. O registro fica em out\registro.txt
+powershell -NoProfile -Command "npx remotion render src/index.ts %COMP% out/%COMP%.mp4 %ARGQ% --gl=angle --codec=h264 --crf=16 --log=verbose %ARGNAV% 2>&1 | Tee-Object -FilePath out/registro.txt"
 echo.
 if exist "out\%COMP%.mp4" (
   echo Pronto! O video esta em: %~dp0out\%COMP%.mp4

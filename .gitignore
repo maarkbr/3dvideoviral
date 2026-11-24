@@ -6,3 +6,4 @@ projetos/*/voz/*.raw
 projetos/*/assets/*.wav
 node_modules/
 projetos/*/.hyperframes/
+estudio-cartoon/producao/salario/stems/
