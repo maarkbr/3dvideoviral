@@ -1,0 +1,2 @@
+Modelos 3D da Kenney (kenney.nl): Nature Kit e Fantasy Town Kit. Licença CC0 (domínio público): uso comercial livre, sem crédito obrigatório.
+Baixados de cópias públicas no GitHub (BastiaanOlij/godot-vr-weapons e series-ai/jam-ready-assets), porque o kenney.nl é bloqueado na rede da nuvem.

@@ -1,0 +1,26 @@
+{
+  "name": "estudio-cartoon",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "stills": "node scripts/bridge-stills.mjs",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.3.0",
+    "@react-three/postprocessing": "^3.0.4",
+    "@remotion/bundler": "^4.0.380",
+    "@remotion/cli": "^4.0.380",
+    "@remotion/renderer": "^4.0.380",
+    "@remotion/three": "^4.0.380",
+    "@types/react": "^19.1.0",
+    "@types/three": "^0.170.0",
+    "postprocessing": "^6.37.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "^4.0.380",
+    "three": "^0.170.0",
+    "typescript": "^5.6.3"
+  }
+}
