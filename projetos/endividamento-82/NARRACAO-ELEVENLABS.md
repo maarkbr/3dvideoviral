@@ -4,28 +4,28 @@
 - Modelo: **Eleven v3**. As tags entre colchetes só funcionam nele; nos outros modelos são lidas em voz alta.
 - Stability: **Natural** (o Creative fica mais expressivo, mas erra mais).
 - Pode gerar tudo de uma vez. Cada parágrafo é uma cena.
-- As tags ficam em inglês, que é como o v3 entende melhor. As palavras em MAIÚSCULAS recebem ênfase e as reticências viram pausa.
+- Tags em português, da lista de tags do ElevenLabs. As palavras em MAIÚSCULAS recebem ênfase e as reticências viram pausa.
 - Se ele ler "CNC" em inglês, troque por "cê-ene-cê".
 - Duração esperada: entre 75 e 85 s (limite de 90 s).
 
 ---
 
-[tired] Você recebeu o salário... [short pause] e cinco dias depois ele já acabou. [short pause] [serious] Calma: oitenta e dois por cento das famílias brasileiras estão endividadas. [mysterious] E o motivo não é o que você pensa.
+[com voz cansada] Você recebeu o salário... [pausa] e cinco dias depois ele já acabou. [pausa] [devagar] Calma: oitenta e dois por cento das famílias brasileiras estão endividadas. [sussurrando] E o motivo não é o que você pensa.
 
-[conspiratorial] Pra CNC, endividado NÃO é caloteiro. [short pause] [explaining] É quem tem qualquer conta pra pagar: cartão, carnê, financiamento. São sessenta milhões de lares. Recorde.
+[sussurrando] Pra CNC, endividado NÃO é caloteiro. [pausa] É quem tem qualquer conta pra pagar: cartão, carnê, financiamento. São sessenta milhões de lares. [com empolgação] Recorde.
 
-[playful] Você parcelou a geladeira em dez vezes? [chuckles] Pronto, entrou na estatística. [short pause] [tense] Só que é exatamente aí... que começa a armadilha.
+[em tom brincalhão] Você parcelou a geladeira em dez vezes? [rindo baixinho] Pronto, entrou na estatística. [pausa] [em tom ameaçador] Só que é exatamente aí... que começa a armadilha.
 
-[serious] O cartão aparece em oitenta e cinco por cento das famílias endividadas. [short pause] E o parcelado vira um salário extra... que não existe.
+O cartão aparece em oitenta e cinco por cento das famílias endividadas. [pausa] [suavemente] E o parcelado vira um salário extra... que não existe.
 
-[whispers] E aqui a maioria erra. [short pause] [tense] O mês aperta, você paga só o mínimo da fatura... e o resto vai pro rotativo.
+[sussurrando] E aqui a maioria erra. [pausa] [batimentos cardíacos] O mês aperta, você paga só o mínimo da fatura... e o resto vai pro rotativo.
 
-[dramatic] O rotativo cobra MAIS de quatrocentos por cento de juros ao ano, segundo o Banco Central. [short pause] É uma das dívidas mais caras do país.
+[rufar de tambores] O rotativo cobra MAIS de quatrocentos por cento de juros ao ano, segundo o Banco Central. [pausa] [com raiva] É uma das dívidas mais caras do país.
 
-[explaining] Desde dois mil e vinte e quatro existe um teto: os juros não passam do valor da dívida. [sighs] Mesmo assim... mil reais podem virar dois mil.
+Desde dois mil e vinte e quatro existe um teto: os juros não passam do valor da dívida. [suspirando] Mesmo assim... mil reais podem virar dois mil.
 
-[serious] E aí a conta atrasa. [short pause] Hoje, quase três em cada dez famílias brasileiras estão com alguma conta em atraso.
+[devagar] E aí a conta atrasa. [pausa] Hoje, quase três em cada dez famílias brasileiras estão com alguma conta em atraso.
 
-[firm] Então não é que o brasileiro é gastão. [short pause] É crédito fácil na entrada... [emphatic] e CARÍSSIMO na saída.
+[com raiva] Então não é que o brasileiro é gastão. [pausa] É crédito fácil na entrada... e CARÍSSIMO na saída.
 
-[friendly] Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.
+[com empolgação] Se você quer aprender a fazer vídeos assim, comenta TRÊS DÊ.
