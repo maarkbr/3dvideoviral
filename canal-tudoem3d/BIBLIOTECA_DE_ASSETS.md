@@ -88,10 +88,14 @@ placa 3D com texto, mapa do Brasil extrudado, gráfico de linha que cresce, barr
 | 1 | CAM-CORE-EASE | Chaves de câmera com curva por trecho (expo.out, power2.out/in) | 65% dos planos de referência são "chega e assenta"; os nossos são simétricos |
 | 1 | CAM-01..CAM-10 | Presets de movimento (funções que geram chaves) | Câmera nossa mexe 40–70% menos por quadro |
 | 1 | TRN-01 | Fusão curta de 4–8 quadros (dois renders sobrepostos) | Transição padrão na referência; não temos |
-| 1 | PAL-01..05 + LUZ-01..05 | Horários de cor (dia, entardecer, noite prática, chuva, dourado) | Saturação nossa ≈30% menor; luminância alta demais |
+| 1 | PAL-01..05 + LUZ-01..05 | Horários de cor (dia, entardecer, noite prática, chuva, dourado) | Saturação nossa ≈30% menor (85 x 112–127 nos 4 vídeos) |
+| 1 | MAT-TOON + POS-CONTORNO | Materiais toon de 2–3 tons + passe de contorno (estilo "3D desenhado") | Estilo do vídeo C; o mais próximo do nosso traço e mais leve de renderizar |
+| 2 | LUZ-PALCO | Palco escuro de lâmpada única (cone visível, vinheta forte) | Estilo do vídeo D, para temas de mente e ciência |
 | 2 | CHR-02 / CHR-04 | Rim light colorido e grade de cor nos personagens 2D | É o que "cola" o 2D no 3D |
-| 2 | VFX-01, 02, 04, 05, 06, 07 | Faíscas, chuva de dinheiro, fumaça/vapor, chuva, explosão, calor | Picos de energia a cada 10–15 s |
-| 2 | TRN-05, TRN-06 | Transição temática e limpeza diegética | Transições com significado |
+| 2 | VFX-01, 02, 04, 05, 06, 07 | Faíscas, chuva de dinheiro, fumaça/vapor, chuva, explosão, calor | Picos de energia a cada 8–15 s |
+| 2 | TRN-05, TRN-06, TRN-11..14 | Temática, limpeza diegética, mergulho na íris/tela, fusão do branco, corte-relâmpago, volta ao início | Transições com significado; loop |
+| 2 | CAM-13 + GRA-ui | Mergulho em tela com interfaces prontas (celular: banco, e-mail, mensagem, notícia) | Inserto de prova sem corte (A, C) |
+| 2 | VFX-11..17 | Scanner de raio-X, arcos de som, calendário de destacar, luz que apaga, feixe chapado, rótulos de diagrama, contorno de ausência | Explicar mecanismo e passagem de tempo (C, D) |
 | 3 | GRA-overlay | Overlay de aparelho (REC, data, contador) | Prova/documento |
 | 3 | PER (poses novas) | bravo, envergonhado, caído, telefone, segurando objeto | Expressão nova a cada plano |
 | 3 | CHR-08 | Oclusão simples (o 2D atrás de objeto 3D por máscara de profundidade) | Limitação atual do motor |

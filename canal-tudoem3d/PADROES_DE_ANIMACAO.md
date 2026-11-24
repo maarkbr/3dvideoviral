@@ -1,17 +1,16 @@
 # Padrões de animação: câmera, transições, personagens e efeitos
 
-Base: medições de `ANALISE_FRAME_A_FRAME.md` (dois vídeos de referência, todos os quadros). Cada padrão tem um ID
+Base: medições de `ANALISE_FRAME_A_FRAME.md` (versão 2: quatro vídeos de referência, todos os quadros). Cada padrão tem um ID
 para virar asset na biblioteca (`BIBLIOTECA_DE_ASSETS.md`). Valores em segundos a 30 fps. "Velocidade" é a escala
 usada na análise (0 = parado, 1 = deriva lenta, 5 = rápido, >15 = chicote).
 
 ## 1. Princípios medidos
-1. **A câmera quase nunca para** (só 2 de 36 planos ficaram quase parados), mas **para quando o golpe precisa pesar**
-   (close de impacto, revelação com prova).
-2. **65% dos planos começam rápidos e assentam** (ease-out forte); 25% aceleram no fim e "entregam" o movimento ao
-   próximo plano. Movimento linear do começo ao fim quase não aparece.
-3. **Aproximar é 2x mais comum que afastar** (23 x 10). Afastar é usado para **revelar** algo que estava fora de quadro.
-4. Os planos longos (5–12 s) são **um único movimento contínuo** que passa por vários enquadramentos.
-5. **A fusão de 4–8 quadros é a transição padrão**; o corte seco fica para impacto e mudança brusca.
+1. **A câmera quase nunca para**, mas **para quando o golpe precisa pesar** (close de impacto, POV, revelação com prova).
+2. **59% dos planos começam rápidos e assentam** (ease-out forte; 52–65% por vídeo); cerca de 25% aceleram no fim e
+   "entregam" o movimento ao próximo plano. Movimento linear do começo ao fim quase não aparece.
+3. **Aproximar é cerca de 2x mais comum que afastar.** Afastar é usado para **revelar** o que estava fora de quadro.
+4. Todo vídeo tem **pelo menos um plano longo (8–13 s) de movimento contínuo** que passa por vários enquadramentos.
+5. **A fusão de 4–8 quadros é a transição padrão (71% das 62 transições)**; o corte seco fica para o gancho e o impacto.
 
 ## 2. Movimentos de câmera (presets)
 
@@ -29,6 +28,9 @@ usada na análise (0 = parado, 1 = deriva lenta, 5 = rápido, >15 = chicote).
 | CAM-10 | **Rente ao chão em perspectiva** | Trilho, estrada, linha de fuga até o assunto | 2–5 s | avança devagar (power1) | 5–15% | assenta | Profundidade e direção do olhar |
 | CAM-11 | **Tremida de impacto** | Batida, explosão, número grande | 0,3–0,5 s | decai linear | 0,02–0,35 m (mais forte em plano aberto) | some | Peso físico |
 | CAM-12 | **Deriva viva** | Por baixo de todo plano "parado" | contínua | senoide lenta | ≤0,012 m | — | Imagem nunca congela |
+| CAM-13 | **Mergulho em tela/objeto** | Celular, monitor, quadro, olho: a câmera entra até a imagem ocupar tudo | 1,5–4 s | aceleração crescente (power3.in) | 300–1000% | estoura em branco ou funde | Inserto de interface sem corte (C13) |
+| CAM-14 | **Revelação vertical** | Do objeto-gancho até quem está por trás dele | 1–2,5 s | ease-out | inclina 30–60° | assenta no rosto | Apresenta o personagem pelo objeto (C4) |
+| CAM-15 | **POV em primeira pessoa** | Instrução, perigo, "imagine que você…" | 1,5–3 s | parada ou respiração leve | 0 | funde | Coloca o espectador no lugar (A4, D3) |
 
 Já existem no motor: CAM-11 e CAM-12 (`cena.cam.quadro` nos vídeos 3 e 4). As chaves de câmera atuais (`K`/`C`) usam
 uma curva ease-in-out simétrica (`eio`); para CAM-01/02/03 a interpolação precisa aceitar **curva por trecho**
@@ -47,6 +49,10 @@ uma curva ease-in-out simétrica (`eio`); para CAM-01/02/03 a interpolação pre
 | TRN-07 | **Fusão estourada** | 6 quadros, clareando até quase branco | Antes de clímax ou de cena muito clara | B16 |
 | TRN-08 | **Flash de explosão** | 3–4 quadros brancos → fogo | Desastre/fecho | B17 |
 | TRN-09 | **Fusão "mesmo assunto"** | 5 quadros | O assunto continua no mesmo lugar da tela e o mundo muda (hora, clima) | A9 (carro vermelho, dia → entardecer) |
+| TRN-11 | **Mergulho na íris/objeto** | 8 quadros de zoom + corte | Entrar "na cabeça" ou "na tela" de alguém | D7 |
+| TRN-12 | **Fusão do branco** | 5 quadros | Depois de um mergulho que estoura em branco (CAM-13) | C14 |
+| TRN-13 | **Corte-relâmpago** | plano de 2–5 quadros | Só no gancho: 3–4 planos nos primeiros 2–3 s | C1–C4 |
+| TRN-14 | **Fusão de volta ao início** | 4 quadros | Último plano retoma a composição do primeiro (loop) | D9 |
 
 Hoje o nosso padrão é desfoque de 14 px + clarão de 0,28 s **em toda troca de lugar**. Vira TRN-10 ("desfoque e
 clarão", assinatura nossa) e passa a ser usado **só em mudança de lugar**; dentro do mesmo lugar, TRN-01.
@@ -80,6 +86,13 @@ clarão", assinatura nossa) e passa a ser usado **só em mudança de lugar**; de
 | VFX-08 | Overlay de dispositivo (REC, data, velocidade) | plano inteiro | prova/documento | número que conta |
 | VFX-09 | Placa com número que muda | 0,2 s por troca | gag/contagem | ex.: "dias desde…" |
 | VFX-10 | Gelo/congelar | 0,9 s | congelamento | já existe (vídeo 3) |
+| VFX-11 | **Scanner de raio-X** (linha que varre e deixa o personagem translúcido com órgão/mecanismo dentro) | 0,3–0,5 s de varredura | explicar mecanismo do corpo ou de máquina | D4 |
+| VFX-12 | **Arcos de onda sonora** | 0,5–1 s | barulho, alarme, impacto sonoro | D4, D8 |
+| VFX-13 | **Calendário de destacar** (folhas voando) | 0,3 s por folha | passagem de tempo | C15 |
+| VFX-14 | **Mudança de luz dentro do plano** (luz apaga, cor vira azul) | 0,4–0,8 s | virada de tom sem corte | C21 |
+| VFX-15 | **Feixe de luz chapado** (faixa amarela de sol) | contínuo | calma, preguiça, paraíso | C7, C12 |
+| VFX-16 | **Rótulos de diagrama no mundo** (camadas com nome, mostrador, gráfico de onda) | plano inteiro | explicar níveis ou escalas | D6, D8 |
+| VFX-17 | **Contorno de ausência** (fita marcando onde algo deveria estar) | estático | mostrar o que falta | C6 |
 
 ## 6. Gráficos e legenda
 - Na referência, **todo texto informativo está dentro do mundo** (jornal, faixa, placa, calendário, overlay).
@@ -88,6 +101,6 @@ clarão", assinatura nossa) e passa a ser usado **só em mudança de lugar**; de
 - Legenda: ver `IDENTIDADE_VISUAL.md` (a nossa especificação, diferente da referência).
 
 ## 7. Tempos de reação
-- Fala → imagem: a troca de plano cai a **±0,15 s do início de uma palavra** (75% dos cortes do A, 100% do B).
+- Fala → imagem: a troca de plano cai a **±0,15 s do início de uma palavra** (medido em A e B: 75% e 100%).
 - Objeto ou efeito ligado a uma palavra entra **na palavra** (o nosso `Objetos.naPalavra` já faz isso).
 - Reação final: **0,9–2,1 s** depois da última palavra, e acabou.

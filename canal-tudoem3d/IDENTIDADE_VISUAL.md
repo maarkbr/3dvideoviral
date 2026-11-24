@@ -13,19 +13,28 @@ O que já está em uso fica marcado como **[em uso]**; o que é proposta e depen
 | Abertura | Direto na ação | Direto na ação + selo "DRAMATIZAÇÃO COM FATOS REAIS" no 1º segundo **[em uso]** |
 | Assuntos | Curiosidades históricas e golpes | Notícias, dinheiro e crimes reais do Brasil, com fonte e números **[em uso]** |
 
-## 2. Personagens: ponto de atenção
-Os nossos personagens hoje têm **cabeça redonda branca, contorno preto grosso e corpo chapado**, o mesmo vocabulário
-visual da referência. A técnica (2D dentro do 3D) é genérica e pode continuar. Mas, para a identidade ser
-inconfundível, proponho mudar **a cara** do elenco **[proposta, decisão sua]**:
+## 2. Personagens: ponto de atenção (revisado com 4 vídeos)
+Comparação observada [O]:
+| Traço | Referência (4 vídeos) | Nosso elenco hoje |
+|---|---|---|
+| Cabeça | redonda, contorno preto grosso; **branca ou cor de pele** | redonda, contorno preto grosso, branca |
+| Olhos | pequenos (ponto, risco) ou grandes só no susto | **grandes, com branco do olho, pálpebra animada e brilho** |
+| Bochecha | às vezes | **sempre rosada** |
+| Braços e pernas | **uma linha fina** | **tubos grossos com roupa** |
+| Mãos | linha, sem luva | **luva branca de desenho animado** |
+| Corpo | feijão liso | tronco com roupa detalhada (gola, botões, crachá, gravata) |
 
-- **Opção A (recomendada): "cabeça com cor".** O rosto ganha tons de pele variados (5 tons) e bochechas fixas. A cor do
-  contorno passa a **azul-tinta `#1B1F3B`** em vez de preto. Olhos com íris colorida, e o elenco ganha um acessório-
-  assinatura do canal (crachá amarelo "3D" em todo personagem). Mantém tudo o que já funciona no motor.
-- **Opção B: "cabeça com formato".** Mantém o branco, mas cada papel ganha um formato de cabeça (oval, quadrada,
-  gota) e o contorno azul-tinta. Muda menos, diferencia menos.
-- **Opção C:** manter como está.
+Ou seja, o nosso elenco **já é diferente** em olhos, membros, mãos e roupa. A sobreposição está na cabeça redonda
+branca com contorno preto. A antiga "opção A" (rosto com cor de pele) **não diferencia**: a referência também usa.
 
-O mascote já é nosso (boné amarelo "3D", jaqueta laranja) e fica em todas as opções.
+Propostas **[decisão sua]**:
+- **Opção 1 (recomendada): reforçar o que já é nosso.** Manter o rig atual e tornar obrigatórios os traços
+  exclusivos: olhos grandes com **íris colorida** (cor por papel), bochecha rosada, luvas brancas, membros grossos,
+  e **contorno azul-tinta `#1B1F3B`** no lugar do preto. Nunca usar membros de linha fina.
+- **Opção 2:** manter exatamente como está (os diferenciais atuais já bastam).
+- **Opção 3:** redesenhar o elenco do zero (mais trabalho, risco de perder o que já funciona).
+
+O mascote (boné amarelo "3D", jaqueta laranja) fica em todas as opções.
 
 ## 3. Paleta oficial **[em uso, valores medidos no código]**
 | Uso | Cor | Hex |
@@ -54,16 +63,24 @@ O mascote já é nosso (boné amarelo "3D", jaqueta laranja) e fica em todas as 
 - Etiqueta: texto 50–140 px conforme o tamanho; caixa `#FFD93D` com contorno de 10 px, raio de 26 px e sombra sólida
   de 16 px.
 
-## 5. Assinatura de câmera e luz **[proposta]**
+## 5. Estilo de cenário por vídeo **[proposta]**
+A referência troca o estilo conforme o tema (ver análise §8). Nós teremos três estilos próprios, todos no motor v2:
+| Estilo | Quando | Como no nosso motor | Viabilidade |
+|---|---|---|---|
+| **3D realista estilizado** | mundo físico: cidade, banco, estrada, natureza | o atual (PBR, sombra, céu, bloom) com +30% de saturação | já existe |
+| **3D desenhado (toon com contorno)** | sátira, escritório, cotidiano, golpes | materiais toon (2–3 tons) + passe de contorno por profundidade/normal | **a construir; é o mais próximo do nosso traço 2D e o mais barato de renderizar** |
+| **Palco escuro de luz única** | mente, ciência, mistério, explicação de mecanismo | fundo quase preto, 1 luz pontual com cone visível, vinheta forte, diagramas no mundo | fácil com o motor atual |
+
+## 6. Assinatura de câmera e luz **[proposta]**
 - **"Chega e assenta"** (CAM-01) como movimento padrão, com **tremida de impacto** nos números grandes.
 - **Céu que muda de cor a cada trecho** (seção 3) e **bloom dourado** nos objetos de valor (ouro, dinheiro, placas).
 - **Grade:** saturação +25–35%, calor leve, vinheta suave e grão fino (já no `motor2.js`, a subir de ×1,16 para ×1,30).
 
-## 6. Capa **[em uso]**
+## 7. Capa **[em uso]**
 1080x1920, fundo = quadro do próprio vídeo sem legenda, título em 3 linhas (branco / **amarelo gigante** / branco),
 personagem do vídeo grande no canto inferior esquerdo, selo vermelho inclinado e o @ embaixo.
 
-## 7. O que nunca usar
+## 8. O que nunca usar
 Personagens, chapéus, roupas ou rostos que lembrem os da referência (boina listrada com colete, chapéu-coco com colete
-dourado, camisa amarela de cabelo castanho); a fonte e o estilo de legenda dela; as frases dela; os cenários icônicos
+dourado, camisa amarela de cabelo castanho, membros de linha fina, botão "FIRE", sala de "career development"); a fonte e o estilo de legenda dela; as frases dela; os cenários icônicos
 (cânion vermelho com trilho, dashcam de chuva) como cópia. Usamos as **técnicas**, não as imagens.
