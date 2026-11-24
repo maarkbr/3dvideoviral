@@ -1,0 +1,980 @@
+[
+ {
+  "bloco": 1,
+  "texto": "Um",
+  "inicio": 0.0,
+  "fim": 0.16
+ },
+ {
+  "bloco": 1,
+  "texto": "bilionário",
+  "inicio": 0.16,
+  "fim": 0.7
+ },
+ {
+  "bloco": 1,
+  "texto": "ganha",
+  "inicio": 0.7,
+  "fim": 1.0
+ },
+ {
+  "bloco": 1,
+  "texto": "salário",
+  "inicio": 1.0,
+  "fim": 1.4
+ },
+ {
+  "bloco": 1,
+  "texto": "de",
+  "inicio": 1.4,
+  "fim": 1.62
+ },
+ {
+  "bloco": 1,
+  "texto": "um",
+  "inicio": 1.62,
+  "fim": 1.94
+ },
+ {
+  "bloco": 1,
+  "texto": "real",
+  "inicio": 1.94,
+  "fim": 1.96
+ },
+ {
+  "bloco": 1,
+  "texto": "por",
+  "inicio": 1.96,
+  "fim": 2.5
+ },
+ {
+  "bloco": 1,
+  "texto": "ano",
+  "inicio": 2.5,
+  "fim": 2.78
+ },
+ {
+  "bloco": 1,
+  "texto": "e",
+  "inicio": 2.78,
+  "fim": 3.2
+ },
+ {
+  "bloco": 1,
+  "texto": "fica",
+  "inicio": 3.2,
+  "fim": 3.44
+ },
+ {
+  "bloco": 1,
+  "texto": "mais",
+  "inicio": 3.44,
+  "fim": 3.8
+ },
+ {
+  "bloco": 1,
+  "texto": "rico",
+  "inicio": 3.8,
+  "fim": 4.04
+ },
+ {
+  "bloco": 1,
+  "texto": "todo",
+  "inicio": 4.04,
+  "fim": 4.42
+ },
+ {
+  "bloco": 1,
+  "texto": "mês.",
+  "inicio": 4.42,
+  "fim": 4.76
+ },
+ {
+  "bloco": 2,
+  "texto": "O",
+  "inicio": 5.3,
+  "fim": 5.44
+ },
+ {
+  "bloco": 2,
+  "texto": "segredo:",
+  "inicio": 5.44,
+  "fim": 5.94
+ },
+ {
+  "bloco": 2,
+  "texto": "ele",
+  "inicio": 6.38,
+  "fim": 6.48
+ },
+ {
+  "bloco": 2,
+  "texto": "não",
+  "inicio": 6.48,
+  "fim": 6.62
+ },
+ {
+  "bloco": 2,
+  "texto": "vive",
+  "inicio": 6.62,
+  "fim": 6.94
+ },
+ {
+  "bloco": 2,
+  "texto": "de",
+  "inicio": 6.94,
+  "fim": 7.14
+ },
+ {
+  "bloco": 2,
+  "texto": "salário,",
+  "inicio": 7.14,
+  "fim": 7.62
+ },
+ {
+  "bloco": 2,
+  "texto": "ele",
+  "inicio": 7.92,
+  "fim": 8.0
+ },
+ {
+  "bloco": 2,
+  "texto": "é",
+  "inicio": 8.0,
+  "fim": 8.08
+ },
+ {
+  "bloco": 2,
+  "texto": "dono",
+  "inicio": 8.08,
+  "fim": 8.46
+ },
+ {
+  "bloco": 2,
+  "texto": "de",
+  "inicio": 8.46,
+  "fim": 8.58
+ },
+ {
+  "bloco": 2,
+  "texto": "pedaços",
+  "inicio": 8.58,
+  "fim": 9.06
+ },
+ {
+  "bloco": 2,
+  "texto": "de",
+  "inicio": 9.06,
+  "fim": 9.26
+ },
+ {
+  "bloco": 2,
+  "texto": "empresas,",
+  "inicio": 9.26,
+  "fim": 9.74
+ },
+ {
+  "bloco": 2,
+  "texto": "as",
+  "inicio": 10.12,
+  "fim": 10.28
+ },
+ {
+  "bloco": 2,
+  "texto": "ações.",
+  "inicio": 10.28,
+  "fim": 10.66
+ },
+ {
+  "bloco": 3,
+  "texto": "Na",
+  "inicio": 11.32,
+  "fim": 11.46
+ },
+ {
+  "bloco": 3,
+  "texto": "portaria,",
+  "inicio": 11.46,
+  "fim": 11.94
+ },
+ {
+  "bloco": 3,
+  "texto": "o",
+  "inicio": 12.28,
+  "fim": 12.34
+ },
+ {
+  "bloco": 3,
+  "texto": "Juninho",
+  "inicio": 12.34,
+  "fim": 12.64
+ },
+ {
+  "bloco": 3,
+  "texto": "debocha:",
+  "inicio": 12.64,
+  "fim": 13.153
+ },
+ {
+  "bloco": 3,
+  "texto": "\"Um",
+  "inicio": 13.153,
+  "fim": 13.667
+ },
+ {
+  "bloco": 3,
+  "texto": "real?",
+  "inicio": 13.667,
+  "fim": 14.18
+ },
+ {
+  "bloco": 3,
+  "texto": "Eu",
+  "inicio": 14.58,
+  "fim": 14.84
+ },
+ {
+  "bloco": 3,
+  "texto": "ganho",
+  "inicio": 14.84,
+  "fim": 15.06
+ },
+ {
+  "bloco": 3,
+  "texto": "mais",
+  "inicio": 15.06,
+  "fim": 15.36
+ },
+ {
+  "bloco": 3,
+  "texto": "que",
+  "inicio": 15.36,
+  "fim": 15.46
+ },
+ {
+  "bloco": 3,
+  "texto": "o",
+  "inicio": 15.46,
+  "fim": 15.54
+ },
+ {
+  "bloco": 3,
+  "texto": "patrão!\"",
+  "inicio": 15.54,
+  "fim": 15.94
+ },
+ {
+  "bloco": 4,
+  "texto": "Só",
+  "inicio": 16.42,
+  "fim": 16.74
+ },
+ {
+  "bloco": 4,
+  "texto": "que,",
+  "inicio": 16.74,
+  "fim": 16.98
+ },
+ {
+  "bloco": 4,
+  "texto": "quando",
+  "inicio": 17.14,
+  "fim": 17.38
+ },
+ {
+  "bloco": 4,
+  "texto": "a",
+  "inicio": 17.38,
+  "fim": 17.5
+ },
+ {
+  "bloco": 4,
+  "texto": "empresa",
+  "inicio": 17.5,
+  "fim": 17.72
+ },
+ {
+  "bloco": 4,
+  "texto": "cresce,",
+  "inicio": 17.72,
+  "fim": 18.36
+ },
+ {
+  "bloco": 4,
+  "texto": "as",
+  "inicio": 18.58,
+  "fim": 18.68
+ },
+ {
+  "bloco": 4,
+  "texto": "ações",
+  "inicio": 18.68,
+  "fim": 18.96
+ },
+ {
+  "bloco": 4,
+  "texto": "sobem,",
+  "inicio": 18.96,
+  "fim": 19.54
+ },
+ {
+  "bloco": 4,
+  "texto": "e",
+  "inicio": 19.54,
+  "fim": 19.8
+ },
+ {
+  "bloco": 4,
+  "texto": "a",
+  "inicio": 19.8,
+  "fim": 19.9
+ },
+ {
+  "bloco": 4,
+  "texto": "fortuna",
+  "inicio": 19.9,
+  "fim": 20.3
+ },
+ {
+  "bloco": 4,
+  "texto": "dele",
+  "inicio": 20.3,
+  "fim": 20.64
+ },
+ {
+  "bloco": 4,
+  "texto": "engorda",
+  "inicio": 20.64,
+  "fim": 21.14
+ },
+ {
+  "bloco": 4,
+  "texto": "bilhões.",
+  "inicio": 21.14,
+  "fim": 21.82
+ },
+ {
+  "bloco": 5,
+  "texto": "E",
+  "inicio": 22.4,
+  "fim": 22.58
+ },
+ {
+  "bloco": 5,
+  "texto": "ele",
+  "inicio": 22.58,
+  "fim": 22.74
+ },
+ {
+  "bloco": 5,
+  "texto": "quase",
+  "inicio": 22.74,
+  "fim": 23.02
+ },
+ {
+  "bloco": 5,
+  "texto": "nunca",
+  "inicio": 23.02,
+  "fim": 23.48
+ },
+ {
+  "bloco": 5,
+  "texto": "vende",
+  "inicio": 23.48,
+  "fim": 23.98
+ },
+ {
+  "bloco": 5,
+  "texto": "essas",
+  "inicio": 23.98,
+  "fim": 24.2
+ },
+ {
+  "bloco": 5,
+  "texto": "ações.",
+  "inicio": 24.2,
+  "fim": 24.66
+ },
+ {
+  "bloco": 6,
+  "texto": "Então,",
+  "inicio": 25.14,
+  "fim": 25.6
+ },
+ {
+  "bloco": 6,
+  "texto": "como",
+  "inicio": 26.02,
+  "fim": 26.26
+ },
+ {
+  "bloco": 6,
+  "texto": "ele",
+  "inicio": 26.26,
+  "fim": 26.38
+ },
+ {
+  "bloco": 6,
+  "texto": "paga",
+  "inicio": 26.38,
+  "fim": 26.72
+ },
+ {
+  "bloco": 6,
+  "texto": "o",
+  "inicio": 26.72,
+  "fim": 26.86
+ },
+ {
+  "bloco": 6,
+  "texto": "iate?",
+  "inicio": 26.86,
+  "fim": 27.16
+ },
+ {
+  "bloco": 7,
+  "texto": "Pega",
+  "inicio": 27.16,
+  "fim": 27.86
+ },
+ {
+  "bloco": 7,
+  "texto": "um",
+  "inicio": 27.86,
+  "fim": 27.98
+ },
+ {
+  "bloco": 7,
+  "texto": "empréstimo",
+  "inicio": 27.98,
+  "fim": 28.46
+ },
+ {
+  "bloco": 7,
+  "texto": "no",
+  "inicio": 28.46,
+  "fim": 28.58
+ },
+ {
+  "bloco": 7,
+  "texto": "banco",
+  "inicio": 28.58,
+  "fim": 28.96
+ },
+ {
+  "bloco": 7,
+  "texto": "e",
+  "inicio": 28.96,
+  "fim": 29.22
+ },
+ {
+  "bloco": 7,
+  "texto": "dá",
+  "inicio": 29.22,
+  "fim": 29.34
+ },
+ {
+  "bloco": 7,
+  "texto": "as",
+  "inicio": 29.34,
+  "fim": 29.52
+ },
+ {
+  "bloco": 7,
+  "texto": "ações",
+  "inicio": 29.52,
+  "fim": 29.84
+ },
+ {
+  "bloco": 7,
+  "texto": "como",
+  "inicio": 29.84,
+  "fim": 30.1
+ },
+ {
+  "bloco": 7,
+  "texto": "garantia.",
+  "inicio": 30.1,
+  "fim": 30.66
+ },
+ {
+  "bloco": 8,
+  "texto": "Empréstimo",
+  "inicio": 31.16,
+  "fim": 31.8
+ },
+ {
+  "bloco": 8,
+  "texto": "não",
+  "inicio": 31.8,
+  "fim": 32.06
+ },
+ {
+  "bloco": 8,
+  "texto": "é",
+  "inicio": 32.06,
+  "fim": 32.26
+ },
+ {
+  "bloco": 8,
+  "texto": "renda,",
+  "inicio": 32.26,
+  "fim": 32.66
+ },
+ {
+  "bloco": 8,
+  "texto": "e",
+  "inicio": 32.96,
+  "fim": 33.02
+ },
+ {
+  "bloco": 8,
+  "texto": "ação",
+  "inicio": 33.02,
+  "fim": 33.38
+ },
+ {
+  "bloco": 8,
+  "texto": "que",
+  "inicio": 33.38,
+  "fim": 33.54
+ },
+ {
+  "bloco": 8,
+  "texto": "sobe",
+  "inicio": 33.54,
+  "fim": 33.98
+ },
+ {
+  "bloco": 8,
+  "texto": "sem",
+  "inicio": 33.98,
+  "fim": 34.26
+ },
+ {
+  "bloco": 8,
+  "texto": "ser",
+  "inicio": 34.26,
+  "fim": 34.46
+ },
+ {
+  "bloco": 8,
+  "texto": "vendida",
+  "inicio": 34.46,
+  "fim": 34.96
+ },
+ {
+  "bloco": 8,
+  "texto": "não",
+  "inicio": 34.96,
+  "fim": 35.28
+ },
+ {
+  "bloco": 8,
+  "texto": "paga",
+  "inicio": 35.28,
+  "fim": 35.62
+ },
+ {
+  "bloco": 8,
+  "texto": "imposto.",
+  "inicio": 35.62,
+  "fim": 36.1
+ },
+ {
+  "bloco": 9,
+  "texto": "Assim,",
+  "inicio": 36.48,
+  "fim": 36.86
+ },
+ {
+  "bloco": 9,
+  "texto": "os",
+  "inicio": 37.22,
+  "fim": 37.36
+ },
+ {
+  "bloco": 9,
+  "texto": "vinte",
+  "inicio": 37.36,
+  "fim": 37.473
+ },
+ {
+  "bloco": 9,
+  "texto": "e",
+  "inicio": 37.473,
+  "fim": 37.587
+ },
+ {
+  "bloco": 9,
+  "texto": "cinco",
+  "inicio": 37.587,
+  "fim": 37.7
+ },
+ {
+  "bloco": 9,
+  "texto": "americanos",
+  "inicio": 37.7,
+  "fim": 38.58
+ },
+ {
+  "bloco": 9,
+  "texto": "mais",
+  "inicio": 38.58,
+  "fim": 38.84
+ },
+ {
+  "bloco": 9,
+  "texto": "ricos",
+  "inicio": 38.84,
+  "fim": 39.2
+ },
+ {
+  "bloco": 9,
+  "texto": "pagaram",
+  "inicio": 39.2,
+  "fim": 39.7
+ },
+ {
+  "bloco": 9,
+  "texto": "só",
+  "inicio": 39.7,
+  "fim": 39.94
+ },
+ {
+  "bloco": 9,
+  "texto": "três",
+  "inicio": 39.94,
+  "fim": 40.292
+ },
+ {
+  "bloco": 9,
+  "texto": "vírgula",
+  "inicio": 40.292,
+  "fim": 40.644
+ },
+ {
+  "bloco": 9,
+  "texto": "quatro",
+  "inicio": 40.644,
+  "fim": 40.996
+ },
+ {
+  "bloco": 9,
+  "texto": "por",
+  "inicio": 40.996,
+  "fim": 41.348
+ },
+ {
+  "bloco": 9,
+  "texto": "cento",
+  "inicio": 41.348,
+  "fim": 41.7
+ },
+ {
+  "bloco": 9,
+  "texto": "sobre",
+  "inicio": 41.7,
+  "fim": 42.08
+ },
+ {
+  "bloco": 9,
+  "texto": "o",
+  "inicio": 42.08,
+  "fim": 42.2
+ },
+ {
+  "bloco": 9,
+  "texto": "quanto",
+  "inicio": 42.2,
+  "fim": 42.44
+ },
+ {
+  "bloco": 9,
+  "texto": "enriqueceram.",
+  "inicio": 42.44,
+  "fim": 43.18
+ },
+ {
+  "bloco": 10,
+  "texto": "No",
+  "inicio": 43.52,
+  "fim": 43.66
+ },
+ {
+  "bloco": 10,
+  "texto": "Brasil,",
+  "inicio": 43.66,
+  "fim": 43.96
+ },
+ {
+  "bloco": 10,
+  "texto": "dividendo",
+  "inicio": 44.3,
+  "fim": 44.86
+ },
+ {
+  "bloco": 10,
+  "texto": "era",
+  "inicio": 44.86,
+  "fim": 45.04
+ },
+ {
+  "bloco": 10,
+  "texto": "isento",
+  "inicio": 45.04,
+  "fim": 45.5
+ },
+ {
+  "bloco": 10,
+  "texto": "até",
+  "inicio": 45.5,
+  "fim": 45.7
+ },
+ {
+  "bloco": 10,
+  "texto": "o",
+  "inicio": 45.7,
+  "fim": 45.84
+ },
+ {
+  "bloco": 10,
+  "texto": "ano",
+  "inicio": 45.84,
+  "fim": 45.94
+ },
+ {
+  "bloco": 10,
+  "texto": "passado;",
+  "inicio": 45.94,
+  "fim": 46.26
+ },
+ {
+  "bloco": 10,
+  "texto": "agora,",
+  "inicio": 46.74,
+  "fim": 47.12
+ },
+ {
+  "bloco": 10,
+  "texto": "acima",
+  "inicio": 47.38,
+  "fim": 47.76
+ },
+ {
+  "bloco": 10,
+  "texto": "de",
+  "inicio": 47.76,
+  "fim": 47.88
+ },
+ {
+  "bloco": 10,
+  "texto": "cinquenta",
+  "inicio": 47.88,
+  "fim": 48.28
+ },
+ {
+  "bloco": 10,
+  "texto": "mil",
+  "inicio": 48.28,
+  "fim": 48.64
+ },
+ {
+  "bloco": 10,
+  "texto": "por",
+  "inicio": 48.64,
+  "fim": 48.86
+ },
+ {
+  "bloco": 10,
+  "texto": "mês,",
+  "inicio": 48.86,
+  "fim": 49.18
+ },
+ {
+  "bloco": 10,
+  "texto": "paga",
+  "inicio": 49.38,
+  "fim": 49.58
+ },
+ {
+  "bloco": 10,
+  "texto": "dez",
+  "inicio": 49.58,
+  "fim": 49.96
+ },
+ {
+  "bloco": 10,
+  "texto": "por",
+  "inicio": 49.96,
+  "fim": 50.34
+ },
+ {
+  "bloco": 10,
+  "texto": "cento.",
+  "inicio": 50.34,
+  "fim": 50.72
+ },
+ {
+  "bloco": 11,
+  "texto": "Ou",
+  "inicio": 50.72,
+  "fim": 51.08
+ },
+ {
+  "bloco": 11,
+  "texto": "seja:",
+  "inicio": 51.08,
+  "fim": 51.36
+ },
+ {
+  "bloco": 11,
+  "texto": "salário",
+  "inicio": 51.84,
+  "fim": 52.3
+ },
+ {
+  "bloco": 11,
+  "texto": "paga",
+  "inicio": 52.3,
+  "fim": 52.6
+ },
+ {
+  "bloco": 11,
+  "texto": "as",
+  "inicio": 52.6,
+  "fim": 52.74
+ },
+ {
+  "bloco": 11,
+  "texto": "contas,",
+  "inicio": 52.74,
+  "fim": 53.22
+ },
+ {
+  "bloco": 11,
+  "texto": "mas",
+  "inicio": 53.42,
+  "fim": 53.62
+ },
+ {
+  "bloco": 11,
+  "texto": "quem",
+  "inicio": 53.62,
+  "fim": 53.86
+ },
+ {
+  "bloco": 11,
+  "texto": "fica",
+  "inicio": 53.86,
+  "fim": 54.1
+ },
+ {
+  "bloco": 11,
+  "texto": "rico",
+  "inicio": 54.1,
+  "fim": 54.5
+ },
+ {
+  "bloco": 11,
+  "texto": "é",
+  "inicio": 54.5,
+  "fim": 54.82
+ },
+ {
+  "bloco": 11,
+  "texto": "quem",
+  "inicio": 54.82,
+  "fim": 55.04
+ },
+ {
+  "bloco": 11,
+  "texto": "é",
+  "inicio": 55.04,
+  "fim": 55.16
+ },
+ {
+  "bloco": 11,
+  "texto": "dono.",
+  "inicio": 55.16,
+  "fim": 55.66
+ },
+ {
+  "bloco": 12,
+  "texto": "No",
+  "inicio": 55.66,
+  "fim": 56.34
+ },
+ {
+  "bloco": 12,
+  "texto": "fim,",
+  "inicio": 56.34,
+  "fim": 56.64
+ },
+ {
+  "bloco": 12,
+  "texto": "o",
+  "inicio": 56.9,
+  "fim": 57.0
+ },
+ {
+  "bloco": 12,
+  "texto": "Juninho",
+  "inicio": 57.0,
+  "fim": 57.36
+ },
+ {
+  "bloco": 12,
+  "texto": "compra",
+  "inicio": 57.36,
+  "fim": 57.74
+ },
+ {
+  "bloco": 12,
+  "texto": "uma",
+  "inicio": 57.74,
+  "fim": 57.94
+ },
+ {
+  "bloco": 12,
+  "texto": "ação",
+  "inicio": 57.94,
+  "fim": 58.36
+ },
+ {
+  "bloco": 12,
+  "texto": "e",
+  "inicio": 58.36,
+  "fim": 58.68
+ },
+ {
+  "bloco": 12,
+  "texto": "vira,",
+  "inicio": 58.68,
+  "fim": 59.1
+ },
+ {
+  "bloco": 12,
+  "texto": "oficialmente,",
+  "inicio": 59.1,
+  "fim": 60.1
+ },
+ {
+  "bloco": 12,
+  "texto": "sócio",
+  "inicio": 60.1,
+  "fim": 60.86
+ },
+ {
+  "bloco": 12,
+  "texto": "do",
+  "inicio": 60.86,
+  "fim": 60.98
+ },
+ {
+  "bloco": 12,
+  "texto": "patrão.",
+  "inicio": 60.98,
+  "fim": 61.4
+ }
+]

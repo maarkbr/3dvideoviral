@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=block" rel="stylesheet" />
+<script src="vendor/gsap/dist/gsap.min.js"></script>
+<script src="vendor/three/build/three.min.js"></script>
+<script src="vendor/three/examples/js/loaders/GLTFLoader.js"></script>
+<script src="vendor/three/examples/js/environments/RoomEnvironment.js"></script>
+<script src="vendor/three/examples/js/shaders/CopyShader.js"></script>
+<script src="vendor/three/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="vendor/three/examples/js/shaders/BokehShader.js"></script>
+<script src="vendor/three/examples/js/shaders/FXAAShader.js"></script>
+<script src="vendor/three/examples/js/postprocessing/Pass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="vendor/three/examples/js/postprocessing/RenderPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/BokehPass.js"></script>
+<script src="vendor/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="personagem.js"></script><script src="personagens-extra.js"></script>
+<script src="objetos.js"></script><script src="objetos-extra.js"></script>
+<script src="ricos3d.js"></script><script src="montagem.js"></script><script src="audio/palavras.js"></script>
+<style>
+  :root { --ink: #17121d; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "Baloo 2", system-ui, sans-serif; }
+  #root, .clip { position: absolute; inset: 0; overflow: hidden; }
+  #cenaW { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  #tres { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; }
+  #camada2d, #camadaTela, #legendas, #flash { position: absolute; inset: 0; }
+  #camada2d { z-index: 1; } #camadaTela { z-index: 3; } #legendas { z-index: 4; }
+  #flash { z-index: 6; background: #fff; opacity: 0; }
+  .ator { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+  .legenda { position: absolute; left: 40px; right: 40px; top: 1350px; text-align: center; font-weight: 800; font-size: 86px; line-height: 1.04; color: #fff; }
+  .legenda span { display: inline-block; margin: 0 .2em; -webkit-text-stroke: 16px var(--ink); paint-order: stroke fill; text-shadow: 0 8px 0 var(--ink); }
+  .marca { position: absolute; left: 0; right: 0; top: 1515px; text-align: center; z-index: 5; font-weight: 800; font-size: 42px; color: #fff; -webkit-text-stroke: 8px rgba(23,18,29,.6); paint-order: stroke fill; opacity: .5; letter-spacing: 1px; }
+  #fimCard { position: absolute; inset: 0; z-index: 7; opacity: 0; background: radial-gradient(circle at 50% 40%, #4f8dff 0%, #2350d8 55%, #142c86 100%); }
+  #fimCard .raios { position: absolute; left: 50%; top: 40%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.10) 0 9deg, rgba(255,255,255,0) 9deg 18deg); }
+  #fimCard .logo { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-weight: 800; font-size: 150px; line-height: .95; color: #FFD93D; -webkit-text-stroke: 26px var(--ink); paint-order: stroke fill; text-shadow: 0 14px 0 var(--ink); }
+  #fimCard .logo small { display: block; font-size: 96px; color: #fff; }
+  #fimCard .segue { position: absolute; left: 90px; right: 90px; top: 1330px; text-align: center; font-weight: 800; font-size: 80px; color: #17121d; background: #FFD93D; border: 12px solid #17121d; border-radius: 40px; padding: 18px 10px 8px; box-shadow: 0 16px 0 #17121d; }
+  #fimPj { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="63.4" data-width="1080" data-height="1920">
+  <div class="clip">
+    <div id="cenaW"><canvas id="tres" width="1080" height="1920"></canvas><div id="camada2d"></div></div>
+    <div id="camadaTela"></div><div id="legendas"></div>
+    <div class="marca">@_tudoem3d</div>
+    <div id="fimCard"><div class="raios"></div><div class="logo"><small>TUDO EM</small>3D</div><div id="fimPj"></div><div class="segue">Segue o @_tudoem3d</div></div>
+    <div id="flash"></div>
+  </div>
+  <audio id="som" src="audio/mix.wav" data-start="0" data-duration="63.4" data-track-index="1"></audio>
+</div>
+<script>
+(function () {
+  const DUR = 63.4, FIM_FALA = 61.9;
+  const tl = gsap.timeline({ paused: true });
+  const M = Montagem.criar({ tl, dur: DUR, fala: window.PALAVRAS, cenario: Ricos3D, canvas: '#tres', camada2d: '#camada2d', camadaTela: '#camadaTela', legendas: '#legendas',
+    filtro: () => `brightness(${cena.luz2d ? cena.luz2d(cena.t) : 1}) saturate(1.05) drop-shadow(-6px 2px 0 rgba(255,214,160,.35))` });
+  const { t, W, B, THREE, cena } = M;
+  const P = cena.P, Z = Ricos3D.Z, suave = M.suave, lerp = M.lerp;
+  const T = {
+    real: t('real', 1), rico1: t('rico', 1),
+    b2: B(2), dono2: t('dono', 2), empresas: t('empresas,', 2), acoes2: t('ações.', 2),
+    b3: B(3), um3: t('"Um', 3), ganho: t('ganho', 3),
+    b4: B(4), empresa4: t('empresa', 4), sobem: t('sobem,', 4), fortuna: t('fortuna', 4), bilhoes: t('bilhões.', 4),
+    b5: B(5), nunca: t('nunca', 5), vende: t('vende', 5),
+    b6: B(6), como6: t('como', 6), iate: t('iate?', 6),
+    b7: B(7), emprest7: t('empréstimo', 7), banco: t('banco', 7), acoes7: t('ações', 7), garantia: t('garantia.', 7),
+    b8: B(8), renda: t('renda,', 8), sobe8: t('sobe', 8), vendida: t('vendida', 8), imposto: t('imposto.', 8),
+    b9: B(9), vinte: t('vinte', 9), ricos9: t('ricos', 9), pagaram: t('pagaram', 9), tres: t('três', 9), enriq: t('enriqueceram.', 9),
+    b10: B(10), isento: t('isento', 10), agora: t('agora,', 10), cinquenta: t('cinquenta', 10), dez: t('dez', 10),
+    b11: B(11), mas: t('mas', 11), dono11: t('dono.', 11),
+    b12: B(12), acao12: t('ação', 12), socio: t('sócio', 12), patrao: t('patrão.', 12),
+  };
+  const zC = Z.COB, zP = Z.PORT, zB = Z.BOLSA, zM = Z.MARINA, zK = Z.BANCO, zS = Z.ESTUDIO;
+  const palco = (tt) => tt < T.b3 ? 'C' : tt < T.b4 ? 'P' : tt < T.b5 ? 'B' : tt < T.b6 ? 'K' : tt < T.b7 ? 'M' : tt < T.b9 ? 'K' : tt < T.b11 ? 'S' : tt < T.b12 ? 'C' : 'P';
+
+  // ---------- câmera ----------
+  const ch = [];
+  const K = (tt, pos, alvo, fov = 40, foco = 4, roll = 0) => ch.push([tt, pos, alvo, fov, foco, roll]);
+  const C = (tt, pos, alvo, fov = 40, foco = 4, roll = 0) => { ch.push([tt - 0.001, null]); K(tt, pos, alvo, fov, foco, roll); };
+  // 1 cobertura: o holerite de um real
+  K(0, [0.7, 1.45, zC + 1.0], [0.6, 1.35, zC - 1.4], 34, 2.4);
+  K(2.1, [0.6, 1.42, zC + 0.6], [0.6, 1.35, zC - 1.4], 30, 2.0);
+  C(2.2, [3.6, 2.2, zC + 5.6], [0, 3.0, zC - 5], 46, 7.5);
+  K(T.b2 - 0.05, [2.6, 2.5, zC + 3.8], [0, 4.0, zC - 6], 42, 6.5);
+  // 2 o segredo: dono de empresas
+  C(T.b2, [-1.6, 1.7, zC + 3.2], [0.5, 1.3, zC - 1.4], 40, 4.6);
+  K(T.dono2 - 0.05, [-1.2, 1.65, zC + 2.6], [0.5, 1.3, zC - 1.4], 38, 4.1);
+  C(T.dono2, [2.4, 1.55, zC + 1.0], [3.6, 1.05, zC - 1.8], 36, 3.0);
+  K(T.acoes2 - 0.05, [3.0, 1.45, zC + 0.5], [3.8, 1.05, zC - 1.8], 30, 2.5);
+  C(T.acoes2, [-0.6, 1.9, zC + 4.4], [1.6, 1.2, zC - 1.6], 44, 5.6);
+  K(T.b3 - 0.05, [-0.3, 1.9, zC + 4.0], [1.6, 1.2, zC - 1.6], 42, 5.2);
+  // 3 portaria: a piada do Juninho
+  C(T.b3, [-4.5, 2.6, zP + 6], [1.0, 1.4, zP - 2], 46, 8.6);
+  K(T.um3 - 0.05, [-1.6, 2.0, zP + 3.6], [1.5, 1.3, zP - 1.6], 42, 5.9);
+  C(T.um3, [1.6, 1.45, zP + 0.4], [1.6, 1.4, zP - 1.6], 34, 2.0);
+  C(T.ganho, [0.5, 1.6, zP + 1.8], [1.6, 1.3, zP - 1.6], 40, 3.6);
+  K(T.b4 - 0.05, [0.7, 1.6, zP + 1.4], [1.6, 1.3, zP - 1.6], 38, 3.2);
+  // 4 bolsa: as ações sobem
+  C(T.b4, [0, 4, zB + 16], [0, 6, zB - 10], 50, 24);
+  K(T.sobem - 0.05, [-4, 3, zB + 10], [0, 6, zB - 9], 48, 18);
+  C(T.sobem, [-14, 1.6, zB - 2], [0, 6, zB - 9], 46, 15);
+  C(T.fortuna, [13, 6, zB + 5], [10, 8, zB - 8], 44, 14);
+  K(T.b5 - 0.05, [11, 9, zB + 6], [11, 9.2, zB - 8], 40, 14);
+  // 5 cofre: quase nunca vende
+  C(T.b5, [3.6, 2.2, zK + 4.5], [4.8, 1.9, zK - 5.5], 46, 8.6);
+  C(T.vende, [4.3, 1.2, zK - 2.2], [4.2, 1.05, zK - 4.0], 34, 1.8);
+  K(T.b6 - 0.05, [4.25, 1.15, zK - 2.5], [4.2, 1.05, zK - 4.0], 30, 1.5);
+  // 6 marina: o iate
+  C(T.b6, [-4.4, 1.7, zM + 15.2], [-4.0, 1.5, zM + 12], 38, 3.3);
+  C(T.como6, [-13, 3, zM + 23], [8, 4, zM - 6], 48, 28);
+  K(T.b7 - 0.05, [-11, 2.6, zM + 19], [8, 5, zM - 6], 44, 24);
+  // 7 banco: empréstimo com garantia
+  C(T.b7, [-1.8, 1.9, zK + 3.8], [-1.8, 1.3, zK - 2.0], 46, 4.9);
+  C(T.banco, [-0.4, 1.6, zK + 1.6], [-1.6, 1.3, zK - 2.0], 38, 3.8);
+  C(T.acoes7, [-2.0, 1.75, zK - 0.4], [-2.2, 1.25, zK - 2.0], 34, 1.7);
+  K(T.b8 - 0.05, [-1.9, 1.8, zK - 0.1], [-2.2, 1.25, zK - 2.0], 32, 2.0);
+  // 8 não é renda / não paga imposto
+  C(T.b8, [3, 3.6, zK + 6], [0, 1.8, zK - 5], 46, 9.5);
+  C(T.sobe8, [-3.2, 1.45, zK + 1.8], [-2.6, 1.4, zK - 1.0], 36, 2.9);
+  C(T.vendida + 0.4, [5.5, 2.4, zK + 1.0], [5.5, 2.6, zK - 6.6], 40, 7.6);
+  K(T.b9 - 0.05, [5.5, 2.5, zK - 1.0], [5.5, 2.6, zK - 6.6], 36, 5.6);
+  // 9 estúdio: 3,4%
+  C(T.b9, [0, 2.2, zS + 9], [0, 3.0, zS - 6], 46, 15);
+  K(T.tres - 0.05, [0, 6.5, zS + 17], [0, 6.5, zS - 6], 48, 23);
+  C(T.tres, [5.5, 0.9, zS + 2.0], [0.4, 3.2, zS - 6], 52, 8.8);
+  K(T.enriq - 0.05, [5.0, 0.8, zS + 1.2], [0.4, 3.4, zS - 6], 50, 8.2);
+  C(T.enriq, [-6, 9, zS + 14], [0, 5, zS - 6], 48, 21);
+  K(T.b10 - 0.05, [-5, 9, zS + 13], [0, 5, zS - 6], 46, 20);
+  // 10 mapa do Brasil
+  C(T.b10, [15, 14, zS + 10], [15, 0, zS - 2], 46, 16.5);
+  C(T.isento, [16.3, 3.0, zS + 13], [16.3, 2.6, zS - 2.6], 42, 15.6);
+  K(T.cinquenta - 0.05, [16.0, 3.1, zS + 11.5], [16.3, 2.6, zS - 2.6], 40, 14);
+  C(T.cinquenta, [21, 5, zS + 7], [15.5, 2.2, zS - 2.5], 44, 10);
+  K(T.b11 - 0.05, [20, 5.5, zS + 6], [15.5, 2.2, zS - 2.5], 42, 9.6);
+  // 11 cobertura: quem fica rico é quem é dono
+  C(T.b11, [0.4, 1.5, zC + 1.6], [0.1, 1.35, zC - 1.4], 38, 3.0);
+  C(T.mas, [2.5, 0.6, zC + 5], [0, 3.5, zC - 4], 46, 6.4);
+  C(T.dono11, [0, 3.0, zC + 7], [0, 8.4, zC - 7.8], 46, 15);
+  K(T.b12 - 0.05, [0, 3.2, zC + 6.4], [0, 8.8, zC - 7.8], 44, 14.6);
+  // 12 portaria: o Juninho vira sócio
+  C(T.b12, [1.6, 1.7, zP + 5.0], [1.6, 1.3, zP - 1.0], 44, 6.0);
+  C(T.acao12, [0.6, 1.5, zP + 0.6], [0.6, 1.4, zP - 1.4], 34, 2.0);
+  C(T.socio, [2.6, 1.3, zP + 1.3], [2.6, 1.2, zP - 0.6], 36, 1.9);
+  K(FIM_FALA, [2.6, 1.3, zP + 1.7], [2.6, 1.2, zP - 0.6], 40, 2.3);
+  K(DUR, [2.6, 1.3, zP + 1.8], [2.6, 1.2, zP - 0.6], 40, 2.4);
+  const lerp3 = (a, b, e) => [lerp(a[0], b[0], e), lerp(a[1], b[1], e), lerp(a[2], b[2], e)];
+  const eio = (x) => (x < 0 ? 0 : x > 1 ? 1 : x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+  const chaveEm = (tt) => { let i = 0; while (i < ch.length - 2 && tt >= ch[i + 1][0]) i++; let a = ch[i], b = ch[i + 1]; if (!a[1]) a = b; if (!b[1]) b = a; return [a, b, eio((tt - a[0]) / Math.max(0.001, b[0] - a[0]))]; };
+  const tremidas = [[T.real, 0.35], [T.bilhoes, 0.5], [T.renda, 0.4], [T.tres, 0.45], [T.dono11, 0.4], [T.patrao, 0.4]];
+  cena.cam.quadro = (tt) => {
+    const [a, b, e] = chaveEm(tt);
+    const pos = lerp3(a[1], b[1], e), alvo = lerp3(a[2], b[2], e);
+    pos[0] += Math.sin(tt * 0.9) * 0.012; pos[1] += Math.sin(tt * 0.7) * 0.01;
+    let tr = 0; tremidas.forEach(([t0, d]) => { if (tt >= t0 && tt < t0 + d) tr += 1 - (tt - t0) / d; });
+    const k = palco(tt) === 'B' || palco(tt) === 'S' ? 0.3 : 0.04;
+    pos[0] += Math.sin(tt * 61) * k * tr; pos[1] += Math.cos(tt * 53) * k * tr;
+    return { pos, alvo, fov: lerp(a[3], b[3], e), roll: lerp(a[5] || 0, b[5] || 0, e) };
+  };
+  cena.foco = (tt) => { const [a, b, e] = chaveEm(tt); return lerp(a[4], b[4], e); };
+  gsap.set('#cenaW', { filter: 'blur(0px)', scale: 1 }); tl.set('#flash', { opacity: 0 }, 0);
+  [T.b3, T.b4, T.b5, T.b6, T.b7, T.b9, T.b10, T.b11, T.b12].forEach((tc) => {
+    tl.fromTo('#cenaW', { filter: 'blur(14px)', scale: 1.06 }, { filter: 'blur(0px)', scale: 1, duration: 0.28, ease: 'power2.out', immediateRender: false }, tc);
+    tl.fromTo('#flash', { opacity: 0.22 }, { opacity: 0, duration: 0.2, immediateRender: false }, tc);
+  });
+  tl.fromTo('#flash', { opacity: 0 }, { opacity: 0.55, duration: 0.08, yoyo: true, repeat: 1, immediateRender: false }, T.tres);
+  tl.fromTo('#flash', { opacity: 0 }, { opacity: 0.45, duration: 0.08, yoyo: true, repeat: 1, immediateRender: false }, T.dono11);
+
+  // ---------- luz por lugar ----------
+  const LUZ = {
+    C: { sol: 2.6, corSol: '#ffb46a', hemi: 0.85, corHemi: '#ffc9a0', ceu: '#ffb88a', nevoa: '#f2b89a', exp: 1.0, nuvens: 1, near: 80, far: 420 },
+    P: { sol: 0.7, corSol: '#fff1dc', hemi: 1.0, corHemi: '#fff4e0', ceu: '#cfe0ff', nevoa: '#e8e2d6', exp: 1.0, nuvens: 0.6, near: 40, far: 200 },
+    B: { sol: 0, corSol: '#ffffff', hemi: 0.35, corHemi: '#7affb8', ceu: '#03100a', nevoa: '#03100a', exp: 1.2, nuvens: 0, near: 30, far: 110 },
+    M: { sol: 3.2, corSol: '#fff1dc', hemi: 1.0, corHemi: '#bcd6ff', ceu: '#ffffff', nevoa: '#d9e6ff', exp: 1.0, nuvens: 1, near: 90, far: 420 },
+    K: { sol: 0.8, corSol: '#fff1dc', hemi: 1.0, corHemi: '#fff0d8', ceu: '#e8dcc4', nevoa: '#e8dcc4', exp: 1.0, nuvens: 0, near: 40, far: 200 },
+    S: { sol: 2.0, corSol: '#ffffff', hemi: 1.0, corHemi: '#ffffff', ceu: '#eef0f6', nevoa: '#eef0f6', exp: 1.0, nuvens: 0, near: 60, far: 300 },
+  };
+  cena.luz = (tt) => LUZ[palco(tt)];
+  cena.luz2d = (tt) => ({ C: 1, P: 1, B: 0.9, M: 1, K: 1, S: 1 })[palco(tt)] || 1;
+
+  // ---------- peças 3D animadas ----------
+  const vv = new THREE.Vector3(), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), eu = new THREE.Euler(), sc = new THREE.Vector3(1, 1, 1);
+  const fmt = (n) => 'US$ ' + Math.floor(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  M.aCadaQuadro((tt) => {
+    // painel da fortuna sobe sem parar (dramatização)
+    P.painelFortuna.set(fmt(41237000000 + tt * 183000000 + Math.floor(tt * 30) * 7919), 'FORTUNA');
+    // gráfico da bolsa
+    const kg = suave((tt - T.empresa4) / (T.bilhoes - T.empresa4 + 0.3));
+    P.grafico(kg); P.curvaGrafico.getPoint(Math.max(0.001, kg), vv); P.pontaGrafico.position.copy(vv); P.pontaGrafico.visible = kg > 0.01;
+    // moedas jorrando em "bilhões"
+    const km = tt - T.bilhoes; P.moedasB.count = km > 0 && palco(tt) === 'B' ? 260 : 0;
+    if (P.moedasB.count) { const o = P.curvaGrafico.getPoint(1); for (let i = 0; i < 260; i++) { const a = i * 2.39996, v = 3 + (i % 7) * 0.6, tt2 = Math.max(0, km - (i % 13) * 0.03);
+      vv.set(o.x / 3 + Math.cos(a) * tt2 * v * 0.35, o.y / 3 + tt2 * v * 0.9 - tt2 * tt2 * 3.2, (o.z) / 3 + Math.sin(a) * tt2 * v * 0.35); eu.set(tt * 5 + i, i, 0); q.setFromEuler(eu); m4.compose(vv, q, sc); P.moedasB.setMatrixAt(i, m4); }
+      P.moedasB.instanceMatrix.needsUpdate = true; }
+    // porta do cofre do banco: aberta até "vende", depois fecha
+    const fecha = suave((tt - T.vende) / 0.6);
+    P.portaBanco.dob.rotation.y = -1.5 * (1 - fecha); P.portaBanco.roda.rotation.z = fecha * 3;
+    // pilha de dinheiro do empréstimo
+    P.pilha.scale.setScalar(Math.max(0.001, tt < T.b7 ? 0 : suave((tt - T.banco) / 0.5)));
+    // barras 3,4%
+    P.barras(suave((tt - T.b9) / 2.2), suave((tt - T.pagaram) / 0.6));
+    // placa ISENTO -> 10%
+    P.placaVira.rotation.y = Math.PI * suave((tt - T.agora) / 0.6);
+    // placa DONO
+    const kd = tt >= T.dono11 ? Math.min(1, (tt - T.dono11) / 0.35) : 0; P.placaDono.scale.setScalar(Math.max(0.001, kd < 1 ? kd * 1.15 : 1));
+    P.maquetes.forEach((m, i) => { m.position.y = 0.9 + Math.max(0, Math.sin((tt - T.dono2) * 6 - i)) * (tt > T.dono2 && tt < T.dono2 + 1.4 ? 0.12 : 0); });
+  });
+
+  // ---------- personagens ----------
+  const LONGE = [0, -120, -900];
+  const jan = (lista) => (tt) => { for (const [a, b, f] of lista) if (tt >= a && tt < b) return typeof f === 'function' ? f(tt) : f; return LONGE; };
+  const vis = (pj, lista) => { gsap.set(pj.el, { opacity: 0 }); tl.set(pj.el, { opacity: 0 }, 0); lista.forEach(([a, b]) => { tl.set(pj.el, { opacity: 1 }, a); tl.set(pj.el, { opacity: 0 }, b); }); };
+  const ator = (id, v, e, lista) => { const pj = M.ator(id, v, e, jan(lista)); vis(pj, lista); return pj; };
+  const ota = ator('ota', 'otavio', 1.05, [[0, T.b3, [0.6, 0, zC - 1.4]], [T.b5, T.b6, [4.2, 0, zK - 4.0]], [T.b7, T.b9, [-2.4, 0, zK - 1.0]], [T.b11, T.b12, [0.1, 0, zC - 1.4]], [T.b12, DUR, (tt) => [lerp(4.5, 2.6, suave((tt - T.b12) / 1.2)), 0, zP - 0.6]]]);
+  const jun = ator('jun', 'juninho', 1.0, [[T.b3, T.b4, [1.6, 0, zP - 1.6]], [T.b6, T.b7, [-4.0, 0.15, zM + 12]], [T.b12, DUR, [0.6, 0, zP - 1.4]]]);
+  const ger = ator('ger', 'banqueiro', 1.0, [[T.b7, T.b8, [-1.2, 0, zK - 3.0]]]);
+  M.pose(ota, 'rindo', 0, 2.2); M.pose(ota, 'convencido', 2.2, T.b2); M.pose(ota, 'apontando', T.b2, T.b3);
+  M.pose(ota, 'convencido', T.b5, T.nunca); M.pose(ota, 'segredo', T.nunca, T.b6);
+  M.pose(ota, 'acenando', T.b7, T.garantia); M.pose(ota, 'apontando', T.garantia, T.b8); M.pose(ota, 'sorriso', T.b8, T.b9);
+  M.pose(ota, 'sorriso', T.b11, T.b12); M.pose(ota, 'parado', T.b12, T.socio); M.pose(ota, 'assustado', T.socio, DUR);
+  M.pose(jun, 'parado', T.b3, T.um3); M.pose(jun, 'rindo', T.um3, T.b4);
+  M.pose(jun, 'pensando', T.b6, T.iate); M.pose(jun, 'assustado', T.iate, T.b7);
+  M.pose(jun, 'parado', T.b12, T.acao12); M.pose(jun, 'comemorando', T.acao12, DUR);
+  M.pose(ger, 'acenando', T.b7, T.b8);
+
+  // ---------- objetos e etiquetas ----------
+  const hol = M.naTela('holerite', 540, 700, 0.85, { id: 'hol', valor: 'R$ 1,00', nome: 'Salário anual: Seu Otávio', fs: 150 }); Objetos.naPalavra(tl, hol, W('real', 1)); Objetos.sair(tl, hol, T.b2 - 0.1);
+  const holJ = M.naTela('holerite', 540, 680, 0.78, { id: 'holJ', valor: 'R$ 2.400', nome: 'Salário mensal: Juninho', cor: '#E8402F', corValor: '#2F6FD6', fs: 120, giro: 4 }); Objetos.naPalavra(tl, holJ, W('ganho', 3)); Objetos.sair(tl, holJ, T.b4 - 0.1);
+  const contr = M.naTela('contrato', 760, 760, 0.7, { id: 'contr', giro: 6 }); Objetos.naPalavra(tl, contr, W('empréstimo', 7)); Objetos.sair(tl, contr, T.acoes7 - 0.05);
+  const car = M.naTela('carimbo', 540, 760, 0.95, { id: 'car', texto: 'NÃO É RENDA', fs: 120 }); Objetos.naPalavra(tl, car, W('renda,', 8)); Objetos.sair(tl, car, T.sobe8 - 0.05);
+  const cert = M.naTela('certificado', 540, 760, 0.8, { id: 'cert' }); Objetos.naPalavra(tl, cert, W('ação', 12)); Objetos.sair(tl, cert, T.socio - 0.05);
+  const cafe = M.objeto('cafe', 2.95, 1.05, zP - 0.5, { id: 'cafe' }); Objetos.naPalavra(tl, cafe, W('No', 12)); Objetos.sair(tl, cafe, FIM_FALA);
+  tl.to(cafe.dentro, { y: 700, rotation: 120, duration: 0.45, ease: 'power2.in' }, T.socio + 0.25);
+  const tag = (id, txt, x, y, pal, ate, op = {}) => { const o = M.naTela('etiqueta', x, y, op.esc || 1, Object.assign({ texto: txt, id }, op)); Objetos.naPalavra(tl, o, pal, { atraso: op.atraso || 0 }); if (ate) Objetos.sair(tl, o, ate); return o; };
+  tag('t1', 'SALÁRIO: R$ 1 POR ANO', 540, 300, W('real', 1), T.b2 - 0.1, { fs: 76 });
+  tag('t2', 'DONO DE EMPRESAS', 540, 300, W('dono', 2), T.b3 - 0.1, { fs: 92 });
+  tag('t3', '= AÇÕES', 540, 460, W('ações.', 2), T.b3 - 0.1, { fs: 92, cor: '#7FD4FF' });
+  tag('t4', '+ US$ BILHÕES', 540, 300, W('bilhões.', 4), T.b5 - 0.1, { fs: 110, cor: '#2BE37A' });
+  tag('t5', 'QUASE NUNCA VENDE', 540, 300, W('nunca', 5), T.b6 - 0.1, { fs: 88 });
+  tag('t6', 'GARANTIA: AS AÇÕES', 540, 300, W('garantia.', 7), T.b8 - 0.1, { fs: 80 });
+  tag('t7', 'SEM VENDER = SEM IMPOSTO', 540, 300, W('imposto.', 8), T.b9 - 0.1, { fs: 66 });
+  tag('t8', '25 MAIS RICOS DOS EUA', 540, 300, W('vinte', 9), T.tres - 0.1, { fs: 76 });
+  tag('t9', 'FICARAM US$ 401 BI MAIS RICOS', 540, 450, W('ricos', 9), T.tres - 0.1, { fs: 58, cor: '#2BE37A' });
+  tag('t10', 'IMPOSTO: SÓ 3,4%', 540, 300, W('três', 9), T.b10 - 0.1, { fs: 104, cor: '#FF5A4E', corTexto: '#FFFFFF' });
+  tag('t11', 'PROPUBLICA · 2014–2018', 540, 450, W('três', 9), T.b10 - 0.1, { fs: 48, cor: '#FFFFFF', atraso: 0.3 });
+  tag('t12', 'ATÉ 2025: ISENTO', 540, 300, W('isento', 10), T.agora - 0.05, { fs: 92, cor: '#2BE37A' });
+  tag('t13', 'DESDE 2026: 10%', 540, 300, W('agora,', 10), T.b11 - 0.1, { fs: 100 });
+  tag('t14', 'ACIMA DE R$ 50 MIL/MÊS', 540, 460, W('cinquenta', 10), T.b11 - 0.1, { fs: 66, cor: '#FFFFFF' });
+  tag('t15', 'SÓCIO', 540, 300, W('sócio', 12), null, { fs: 140 });
+  tag('t0', 'DRAMATIZAÇÃO COM FATOS REAIS', 540, 190, W('Um', 1), T.real - 0.05, { fs: 40, cor: '#FFFFFF' });
+
+  // ---------- cartão final ----------
+  const fimPj = Personagem.criar(document.getElementById('fimPj'), { id: 'fimMasc', visual: 'mascote', x: 540, y: 1250, escala: 1.25 });
+  tl.set('#fimCard', { opacity: 0 }, 0);
+  tl.fromTo('#fimCard', { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'power3.out', immediateRender: false }, FIM_FALA);
+  tl.fromTo('#fimCard .raios', { rotation: 0 }, { rotation: 30, duration: DUR - FIM_FALA, ease: 'none', immediateRender: false }, FIM_FALA);
+  tl.fromTo('#fimCard .logo', { scale: 0.3 }, { scale: 1, duration: 0.4, ease: 'back.out(2.5)', immediateRender: false }, FIM_FALA + 0.05);
+  tl.fromTo('#fimCard .segue', { y: 400 }, { y: 0, duration: 0.4, ease: 'back.out(1.8)', immediateRender: false }, FIM_FALA + 0.15);
+  Personagem.pose(tl, fimPj, 'acenando', FIM_FALA, DUR - FIM_FALA);
+  tl.set('.marca', { opacity: 0 }, FIM_FALA);
+
+  M.legenda({ max: 2, corDestaque: '#FFFFFF' });
+  window.__pronto = cena.pronto;
+  M.iniciar();
+})();
+</script>
+</body>
+</html>
