@@ -1,0 +1,268 @@
+{
+ "tema": "Por que 82% das famílias brasileiras estão endividadas?",
+ "fontes": "Peic/CNC julho 2026 (Agência Brasil, Folha PE, Gazeta SP, NSC Total); rotativo (Banco Central via WSCOM, SulTV, SBT News); teto de 100% (Banco Central, Digio)",
+ "blocos": [
+  {
+   "fala": "Oitenta e dois por cento das famílias brasileiras estão endividadas. É recorde. Mas esse número não quer dizer o que você pensa.",
+   "etapa": "gancho: maço de notas sobe na mesa",
+   "etiquetas": [
+    {
+     "txt": "82% DAS FAMÍLIAS",
+     "p": [
+      -3.55,
+      3.4,
+      -1
+     ],
+     "de": 1.2,
+     "ate": 9.6
+    },
+    {
+     "txt": "RECORDE",
+     "p": [
+      -3.55,
+      2.45,
+      -2.7
+     ],
+     "de": 4.2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "São cerca de sessenta milhões de lares, segundo a pesquisa da CNC de julho.",
+   "etapa": "prédios/cidade: fachadas acendendo uma a uma",
+   "etiquetas": [
+    {
+     "txt": "60 MILHÕES DE LARES",
+     "p": [
+      -22,
+      3.6,
+      -14
+     ],
+     "de": 1,
+     "ate": 9.6
+    },
+    {
+     "txt": "PESQUISA CNC",
+     "p": [
+      -22,
+      2.6,
+      8
+     ],
+     "de": 5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Só que, pra CNC, endividado não é quem está com conta atrasada.",
+   "etapa": "virada: a cortina abre",
+   "etiquetas": [
+    {
+     "txt": "NÃO É ATRASADO",
+     "p": [
+      0,
+      6.2,
+      -4
+     ],
+     "de": 1.2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "É quem tem qualquer conta pra pagar: cartão, carnê, financiamento, empréstimo.",
+   "etapa": "cartões: pictogramas voam e formam uma parede",
+   "etiquetas": [
+    {
+     "txt": "QUALQUER CONTA A PAGAR",
+     "p": [
+      0,
+      9.4,
+      -6
+     ],
+     "de": 1.4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Parcelou a geladeira no cartão? Pronto, você entrou nos oitenta e dois por cento.",
+   "etapa": "celular + ícones: a compra parcelada vira uma fatura",
+   "etiquetas": [
+    {
+     "txt": "PARCELOU? ENTROU",
+     "p": [
+      0,
+      6.6,
+      -3
+     ],
+     "de": 1.5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "E o cartão aparece em oitenta e cinco por cento dessas famílias. É a dívida número um do país.",
+   "etapa": "pesquisa: bolhas sobre a plateia, a maioria com o cartão",
+   "etiquetas": [
+    {
+     "txt": "85% NO CARTÃO",
+     "p": [
+      0,
+      3.4,
+      9
+     ],
+     "de": 1.4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "No começo, o parcelado vira extensão do salário. O problema começa quando a fatura não fecha.",
+   "etapa": "placa: o texto troca de SALÁRIO para FATURA",
+   "etiquetas": [
+    {
+     "txt": "FATURA NÃO FECHOU",
+     "p": [
+      0,
+      8,
+      -5
+     ],
+     "de": 2,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Aí entra o rotativo, com juros de mais de quatrocentos por cento ao ano, segundo o Banco Central.",
+   "etapa": "conta: número grande 400% subindo",
+   "etiquetas": [
+    {
+     "txt": "+400% AO ANO",
+     "p": [
+      0,
+      9.4,
+      -3
+     ],
+     "de": 1,
+     "ate": 9.6
+    },
+    {
+     "txt": "BANCO CENTRAL",
+     "p": [
+      0,
+      8.4,
+      -3
+     ],
+     "de": 5,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Desde dois mil e vinte e quatro existe um teto: os juros não podem passar do valor da dívida. Ou seja, mil reais ainda podem virar dois mil.",
+   "etapa": "linha do tempo: 2024 e a pilha que dobra",
+   "etiquetas": [
+    {
+     "txt": "2024",
+     "p": [
+      -5,
+      2.2,
+      -1.4
+     ],
+     "de": 1,
+     "ate": 9.6
+    },
+    {
+     "txt": "TETO: 100%",
+     "p": [
+      0,
+      3.6,
+      -1.4
+     ],
+     "de": 3,
+     "ate": 9.6
+    },
+    {
+     "txt": "R$ 1.000 → R$ 2.000",
+     "p": [
+      5,
+      2.2,
+      -1.4
+     ],
+     "de": 6.4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "É assim que quase três em cada dez famílias acabam com conta atrasada.",
+   "etapa": "quadro + peças: 10 casinhas, 3 ficam vermelhas",
+   "etiquetas": [
+    {
+     "txt": "3 EM CADA 10",
+     "p": [
+      3.2,
+      6,
+      -4
+     ],
+     "de": 1,
+     "ate": 9.6
+    },
+    {
+     "txt": "COM CONTA ATRASADA",
+     "p": [
+      3.2,
+      0.9,
+      -4
+     ],
+     "de": 4,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Então não é que o brasileiro é gastão. É crédito fácil na entrada e caríssimo na saída.",
+   "etapa": "placa: FÁCIL NA ENTRADA / CARO NA SAÍDA",
+   "etiquetas": [
+    {
+     "txt": "FÁCIL NA ENTRADA",
+     "p": [
+      0,
+      8,
+      -5
+     ],
+     "de": 2.5,
+     "ate": 9.6
+    },
+    {
+     "txt": "CARO NA SAÍDA",
+     "p": [
+      0,
+      7,
+      -5
+     ],
+     "de": 6,
+     "ate": 9.6
+    }
+   ]
+  },
+  {
+   "fala": "Comenta FATURA que eu te mando o passo a passo pra sair do rotativo.",
+   "etapa": "símbolo girando (cartão) + comenta",
+   "etiquetas": [
+    {
+     "txt": "FATURA",
+     "p": [
+      0,
+      7.4,
+      -3
+     ],
+     "de": 4,
+     "ate": 10
+    }
+   ]
+  }
+ ]
+}
